@@ -45,6 +45,7 @@
     <script src="<?php bloginfo('template_url'); ?>/js/script.js?theme_path=<?php bloginfo('template_url'); ?>&amp;blog_name=<?php bloginfo('name'); ?>&baseurl=<?php echo get_option('home'); ?>" type="text/javascript"></script>
     <script src="<?php bloginfo('template_url'); ?>/js/selector.js" type="text/javascript"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jsonpath-0.8.0.js"></script>
+    <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/constants.js"></script>
 	<?php if(is_home()){?>
 	<script type="text/javascript" charset="utf-8">
 	<!--

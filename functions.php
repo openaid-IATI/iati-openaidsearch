@@ -231,7 +231,7 @@ function wp_get_regions() {
 }
 function wp_get_countries($region) {
 	
-	$search_url = SEARCH_URL . "country/?format=json&limit=10&region=".$region;
+	$search_url = SEARCH_URL . "country/?format=json&limit=250&region=".$region;
 	
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
@@ -249,21 +249,72 @@ function wp_get_cities($country) {
 	return objectToArray($objects);
 
 }
-function wp_get_indicator_results($year = 2000){
-        $search_url = SEARCH_URL . "indicators-country/?format=json&limit=20&year=".$year;
+function wp_get_indicator_results($region = '', $country = '', $year = ''){
+    //        $search_url = SEARCH_URL . "indicators-country/?format=json&limit=6000&year=".$year."&region=".$region."&country=".$country;
+        if (strlen($region)>0){
+            $region = 'regions='.$region.'&';
+        }else{
+            $region = '';
+        }
+        if (strlen($country)>0){
+            $country = 'iso='.$country.'&';
+        }else{
+            $country = '';
+        }
+        if (strlen($year)>0){
+            $year = 'year='.$year.'&';
+        }else{
+            $year = '';
+        }
+        $search_url = SEARCH_URL . "indicators-country/?format=json&limit=600&".$region.$country.$year;
 	
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
 	$objects = $result->objects;
 	return objectToArray($objects);
 }
+function wp_get_relevant_results($indicator = ''){
+    //        $search_url = SEARCH_URL . "indicators-country/?format=json&limit=6000&year=".$year."&region=".$region."&country=".$country;
+        if (strlen($region)>0){
+            $region = 'regions='.$region.'&';
+        }else{
+            $region = '';
+        }
+        if (strlen($country)>0){
+            $country = 'iso='.$country.'&';
+        }else{
+            $country = '';
+        }
+        if (strlen($indicator)>0){
+            $indicator = $indicator;
+        }else{
+            $indicator = '';
+        }
+       
+        $search_url = SEARCH_URL . "indicators-country/?format=json&limit=600";
+	
+	$content = file_get_contents($search_url);
+	$result = json_decode($content);
+	$objects = $result->objects;
+	$all_objects = objectToArray($objects);
+        
+        $return_objs = array();
+        foreach ($all_objects as $obj){
+            
+            if (strlen($obj[$indicator]>0)){
+                array_push($return_objs, $obj);
+            }
+        }
+//        print_r($return_objs);
+        return $return_objs;
+}   
 function wp_get_unique_result($array, $value){
     $temp = array();
     foreach($array as $a){
         
         array_push($temp, $a[$value]);
     }
-    return array_unique($temp);
+    return array_unique($temp, 1);
 }
 
 function wp_generate_filter_html( $filter, $limit = 4 ) {
