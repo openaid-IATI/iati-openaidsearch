@@ -376,33 +376,7 @@ legend.onAdd = function (map) {
 //}).addTo(map);
 //legend.addTo(map);
 
- <?php foreach($indicator_results as $i) :?>
-    
-    <?php if (strlen($i[$selected_indicator])>0) :?>
-    
-    try
-      {
-//        jsonPath(countryData, "$..features[?(@.id=='<?php echo $i['country_iso3'] ?>')]")[0].properties.projects = '<?php echo $i[$selected_indicator] ?>';//Run some code here
-      }
-    catch(err)
-      {
-        console.log('<?php echo $i['country_iso3'] ?>'+err);
-      }
-          try{
-            var circle = L.circle(new L.LatLng(countryloc['<?php echo $i['country_iso'] ?>'].longitude, countryloc['<?php echo $i['country_iso'] ?>'].latitude), <?php echo sqrt(($factor * $i[$selected_indicator])/pi()); //echo round($factor * $i['population']);  ?>, {
-              color: 'red',
-             weight: '0',
-              fillColor: '#f03',
-              fillOpacity: 0.5
-             }).addTo(map);
-             circle.bindPopup('yeahhahahahahah');
-            }catch(err){
-                console.log(err);
-            }
-        
-    
-    <?php endif ?>
-<?php endforeach; ?>
+
  </script>
 
 	
