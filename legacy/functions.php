@@ -1,48 +1,4 @@
-<?php 
-
-// WORDPRESS THEME FUNCTIONS
-add_theme_support( 'menus' );
-
-
-function register_my_menus() {
-  register_nav_menus(
-    array(
-      'header-menu' => __( 'Header Menu' ),
-      'footer-menu' => __( 'Footer Menu' )
-    )
-  );
-}
-add_action( 'init', 'register_my_menus' );
-
-
-
-
-function get_items_by_type_and_row($type, $row){
-	echo 'test';
-	$cat_obj = get_category_by_slug($row); 
-	$cat_id = $cat_obj->term_id;
-	$args = array(
-		'posts_per_page'  => 15,
-		'numberposts'     => 15,
-		'category'        => 5,
-		'post_type'       => $type
-	);
-	echo the_title();
-	$row1_posts_array = get_posts( $args );
-
- 	foreach($row1_posts_array as $post) : setup_postdata($post);
-		echo '<div class="drop-shadow postit ' . $type . '">';
-		echo '<div class="faq-title">' . get_the_title() . '</div>';
-		echo '<div class="faq-text">' . get_the_content() . '</div>';
-		echo '</div>';
-
-	endforeach; 
-}
-
-
-// API CALL FUNCTIONS
-
-
+<?php
 	include( TEMPLATEPATH .'/constants.php' );
 	if(file_exists(TEMPLATEPATH . '/countries.php')) {
 		$fmdate = filemtime(TEMPLATEPATH . '/countries.php');

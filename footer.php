@@ -1,29 +1,60 @@
+
+
+
+
+
+
+
+<div class="footer">
+	<div class="container">
+
+		<div class="row-fluid footer-firstrow">
+			<div class="span8">
+
+				<div class="navbar">
+					<?php
+                        
+                        wp_nav_menu( array('menu' =>
+					'footer-menu', 'container' => 'div', 'container_class' => 'nav-inner','menu_class' => 'menu','items_wrap' => '
+					<ul class="nav">%3$s</ul>
+					') ); 
+                        ?>
+				</div>
+
+			</div>
+			<div class="span4">
+
+				<div id="footer-social-media-wrapper">
+
+					<a class="footer-social-media-icon footer-facebook" href="https://www.facebook.com/pages/UN-HABITAT/127012777443" alt=""></a>
+					<a class="footer-social-media-icon footer-flickr" href="http://www.flickr.com/photos/66729176@N02/" alt=""></a>
+					<a class="footer-social-media-icon footer-twitter" href="https://twitter.com/#!/unhabitat" alt=""></a>
+					<a class="footer-social-media-icon footer-youtube" href="http://www.youtube.com/user/epitunhabitat" alt=""></a>
+					<a class="footer-social-media-icon footer-scribd" href="http://www.scribd.com/UN-HABITAT" alt=""></a>
+
+				</div>
+
+			</div>
+		</div>
+		<div class="row-fluid footer-info">
+			<div class="span12">
+				<div class="footer-info-text">
+					Open UN-Habitat Transparency Initiative.
+					<a href="http://www.unhabitat.org">Back to main website of UN-Habitat</a>
+					<br/>
+					Content licensed under a Creative Commons Attribution 3.0 Unported License
+				</div>
+			</div>
+		</div>
+
 	</div>
-    <div id="opunh-footerwrap">
-        <div id="opunh-footer">
-            <?php wp_nav_menu(array(
-					'menu'			  =>'footer-menu',
-				    'container'       => '',
-					'fallback_cb'	  =>  false,
-					'menu_class'      => 'menu footmenu',
-					'link_before'     => '<span>',
-					'link_after'     => '</span>',
-					'theme_location'  => 'footer-menu')
-					); 
-			?>
-            <div class="socialprofiles">
-                <a target="_blank" href="https://www.facebook.com/pages/UN-HABITAT/127012777443"><img src="<?php bloginfo('template_url'); ?>/images/facebook.png" alt="Facebook" /></a>
-                <a target="_blank" href="http://www.flickr.com/photos/66729176@N02/"><img src="<?php bloginfo('template_url'); ?>/images/flickr.png" alt="Flickr" /></a>
-                <a target="_blank" href="https://twitter.com/#!/unhabitat"><img src="<?php bloginfo('template_url'); ?>/images/twitter.png" alt="Twitter" /></a>
-                <a target="_blank" href="http://www.youtube.com/user/epitunhabitat"><img src="<?php bloginfo('template_url'); ?>/images/youtube.png" alt="Youtube" /></a>
-                <a target="_blank" href="http://www.scribd.com/UN-HABITAT"><img src="<?php bloginfo('template_url'); ?>/images/scribd.png" alt="Scribd" /></a>
-            </div>
-            <p class="copyright ff4"><?php /*echo date("Y");*/ echo " "; bloginfo('name'); ?><br/>
-            Content  licensed under a <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a></p>
-        </div>
-</div> 
-	<?php wp_footer(); ?>
+</div>
 
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/leaflet.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/countries.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/countries_loc.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/unhabitatmap.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/unhabitat.js"></script>
 </body>
-
 </html>
