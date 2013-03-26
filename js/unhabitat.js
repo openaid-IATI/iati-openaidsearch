@@ -109,3 +109,13 @@ jQuery(function($) {
 	});
 });
 
+
+jQuery(function($) {
+	$('.project-filter-button').click(function(){
+
+
+		$('#map-filter-overlay').css( "display", "block" );
+	
+	});
+});
+
