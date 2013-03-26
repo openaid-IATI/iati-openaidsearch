@@ -78,10 +78,10 @@
 
 			<div class="project-share-container">
 
-				<button id="project-share-export" class="project-share-button"><div></div>EXPORT</button>
-				<button id="project-share-share" class="project-share-button"><div></div>SHARE</button>
-				<button id="project-share-bookmark" class="project-share-button"><div></div>BOOKMARK</button>
-				<button id="project-share-whistleblower" class="project-share-button"><div></div>WHISTLEBLOWER</button>
+				<button id="project-share-export" class="project-share-button hneue-bold"><div class="share-icon"></div><div class="share-text">EXPORT</div></button>
+				<button id="project-share-share" class="project-share-button hneue-bold"><div class="share-icon"></div><div class="share-text">SHARE</div></button>
+				<button id="project-share-bookmark" class="project-share-button hneue-bold"><div class="share-icon"></div><div class="share-text">BOOKMARK</div></button>
+				<button id="project-share-whistleblower" class="project-share-button hneue-bold"><div class="share-icon"></div><div class="share-text">WHISTLEBLOWER</div></button>
 
 			</div>
 		</div>

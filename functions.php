@@ -3,6 +3,7 @@
 // WORDPRESS THEME FUNCTIONS
 add_theme_support( 'menus' );
 
+register_sidebar(array('name' => 'Unhabitat pages'));
 
 function register_my_menus() {
   register_nav_menus(

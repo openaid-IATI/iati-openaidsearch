@@ -84,7 +84,7 @@ button {
 
 .navbar .btn, .navbar .btn-group{
   margin-top: 0;
-  padding: 0.2em 1.2em 0 0.2em;
+  padding: 0.4em 1.2em 0 0.2em;
 }
 
 .btn.header-btn-search > img{
@@ -92,12 +92,10 @@ button {
 }
 
 .navbar-static-top .input-large{
-  font-size: 1.5em;
-  width: 22em;
+  font-size: 1.1em;
+  width: 15em;
   padding: 0.2em 0.7em;
-  margin: 1.85em 0;
-  width: 5em;
-  margin: 0;
+  margin: 1em 0;
 }
 
 input[type="text"]{
@@ -110,7 +108,7 @@ input[type="text"]{
   border: 0;
   box-shadow: none;
   text-shadow: none;
-  font-size: 1.29em;
+  font-size: 0.9em;
 }
 
 .footer {
@@ -144,13 +142,21 @@ input[type="text"]{
 
 .navbar-static-top.navbar .nav > li > a {
     font-size: 1.29em;
-    padding: 1.58em 0.61em;
+    padding: 1.64em 0.61em;
 }
 
+.navbar-static-top .current-menu-item a{
+    background: #006492;
+}
+
+.navbar.navbar-static-top .current-menu-item a:hover, .navbar.navbar-static-top .current-menu-item a:focus{
+    background: #006492;
+    color: #FFF;
+}
 
 .navbar-static-top .nav > li > a:hover, .navbar-static-top .nav > li > a:focus {
+    color: #CCC;
     
-    background: #006492;
 }
 
 .footer .navbar .nav > li > a {
@@ -529,6 +535,21 @@ label, input, button, select, textarea{
     color: #797972;
 }
 
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX STANDARD PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+.unhabitat-page-top{
+  border-top: 1px solid #CCC;
+}
+
+.unhabitat-page{
+  width: 78%;
+  padding: 2% 7.2% 2% 3.8%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECT FILTERS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 #project-filter-wrapper{
   background: #F1EEE8;
@@ -540,7 +561,7 @@ label, input, button, select, textarea{
 }
 
 
-/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECTS OVERVIEW XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECTS OVERVIEW XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 .projects-search-navbar{
   border-bottom: 1px solid #CCC;
@@ -669,24 +690,38 @@ label, input, button, select, textarea{
   margin-top: 1em;
 }
 
-.project-share-button div {
+.project-share-button{
+  height:18px;
+
+}
+
+.share-text{
+  height:18px;
+  margin-left:0.2em;
+  margin-right:0.6em;
+  color: #0086C8;
+  font-size:0.85em;
+}
+
+.project-share-button div{
+  float:left;
+}
+
+.share-icon {
   width: 18px;
   height: 18px;
   background-image: url('images/project-share.png');
-  display: inline-block;
-  margin-left: 6px;
-  margin-top: 6px;
 }
 
-#project-share-share div {
+#project-share-share .share-icon {
   background-position: -18px 0;
 }
 
-#project-share-bookmark div {
+#project-share-bookmark .share-icon {
   background-position: -36px 0;
 }
 
-#project-share-whistleblower div {
+#project-share-whistleblower .share-icon {
   background-position: -54px 0;
 }
 
