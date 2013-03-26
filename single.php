@@ -17,6 +17,8 @@
 				<?php the_tags( 'Tags: ', ', ', ''); ?>
 
 			</div>
+
+			<div id="test"></div>
 			
 			<?php edit_post_link('Edit this entry','','.'); ?>
 			
