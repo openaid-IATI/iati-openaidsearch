@@ -111,11 +111,30 @@ jQuery(function($) {
 
 
 jQuery(function($) {
+
 	$('.project-filter-button').click(function(){
 
-
-		$('#map-filter-overlay').css( "display", "block" );
+		if ($('#map-filter-overlay').is(":hidden")){
+			
+			$('#map-filter-overlay').show('slow');
+		} else {
+			// save selection?
+			$('#map-filter-overlay').hide('slow');
+		}
+		
 	
+	});
+
+	$('#map-filter-cancel').click(function(){
+
+		// clear updated selection
+		$('#map-filter-overlay').hide('slow');
+	});
+
+	$('#map-filter-save').click(function(){
+
+		// set selection as filter and load results
+		$('#map-filter-overlay').hide('slow');
 	});
 });
 

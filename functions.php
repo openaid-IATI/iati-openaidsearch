@@ -66,8 +66,8 @@ function get_items_by_type_and_row($type, $row){
 		asort($_REGION_CHOICES);
 	}
 	// Add RSS links to <head> section
-	automatic_feed_links();
-	
+	add_theme_support( 'automatic-feed-links' );
+
 	// Load jQuery
 	if ( !is_admin() ) {
 	   /*wp_deregister_script('jquery');
