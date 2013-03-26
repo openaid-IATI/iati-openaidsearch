@@ -187,12 +187,7 @@
     $factor = $maxcircleradius / $max_indicator;
  ?>
  <?php // Dit hoort onder je map container ?>
- <script>
- 
-$(document).ready(function() {
 
- 
- </script>
 
 	
 
