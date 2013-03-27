@@ -33,27 +33,7 @@ function wp_generate_results_v2(){
 
 
 	include( TEMPLATEPATH .'/constants.php' );
-	if(file_exists(TEMPLATEPATH . '/countries.php')) {
-		$fmdate = filemtime(TEMPLATEPATH . '/countries.php');
-		if((time() - $fmdate)>$_RELAOD_FILTERS_TIMEOUT) {
-			wp_generate_constants();
-		}
-		include_once( TEMPLATEPATH . '/countries.php' );
-		asort($_COUNTRY_ISO_MAP);
-	} else {
-		wp_generate_constants();
-		include_once( TEMPLATEPATH . '/countries.php' );
-		asort($_COUNTRY_ISO_MAP);
-		
-	}
-	if(file_exists(TEMPLATEPATH . '/sectors.php')) {
-		include_once( TEMPLATEPATH . '/sectors.php' );
-		asort($_SECTOR_CHOICES);
-	}
-	if(file_exists(TEMPLATEPATH . '/regions.php')) {
-		include_once( TEMPLATEPATH . '/regions.php' );
-		asort($_REGION_CHOICES);
-	}
+	
 	// Add RSS links to <head> section
 	add_theme_support( 'automatic-feed-links' );
 

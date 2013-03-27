@@ -1,8 +1,8 @@
-var map = L.map('map', {attributionControl: false, scrollWheelZoom: false}).setView([51.505, -35.09], 3);
+var map = L.map('map', {attributionControl: false, scrollWheelZoom: false}).setView([5.505, -20.09], 1.7);
 L.tileLayer('http://{s}.tile.cloudmade.com/6251fb4700fc4ea28ad28908a8fa8a4b/997/256/{z}/{x}/{y}.png', {
     maxZoom: 18
 }).addTo(map);
-L.geoJson(countryData, {style: style, onEachFeature: onEachFeature}).addTo(map);
+//L.geoJson(countryData, {style: style, onEachFeature: onEachFeature}).addTo(map);
 
 function getColor(d) {
     return d > 100  ? '#045A8D' :
@@ -100,10 +100,10 @@ legend.onAdd = function (map) {
 legend.addTo(map);
 
 
-for (var key in countryloc){
-	var circle = L.circle(new L.LatLng(countryloc[key].longitude, countryloc[key].latitude), 100000, {
-		color: 'red',
-		fillColor: '#f03',
-		fillOpacity: 0.5
-	}).addTo(map);
-}
+//for (var key in countryloc){
+//	var circle = L.circle(new L.LatLng(countryloc[key].longitude, countryloc[key].latitude), 100000, {
+//		color: 'red',
+//		fillColor: '#f03',
+//		fillOpacity: 0.5
+//	}).addTo(map);
+//}

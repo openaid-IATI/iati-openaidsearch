@@ -156,20 +156,43 @@
     <option value="urban_slum_population">urban_slum_population</option>
  
     </select>
+
 <?php 
 //    print_r($countries);
 //    echo $selected_region;
 ?>
 
 
-<?php // Dit hoort in je head ?>
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
- <!--[if lte IE 8]>
-     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
- <![endif]-->
- <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+
  
 
+	
+ 
+ <?php // en in je css in je head ?>
+
+
+ 
+ 
+ <?php get_template_part( "map" ); ?>
+ <?php 
+ 
+ $temp = array();
+    foreach ($indicator_results as $i) {
+        array_push($temp, $i[$selected_indicator]);
+    }
+    $max_indicator = max($temp);
+    //$factor = 400000 / 40000;
+    //$factor = 600000 / $max_pop;
+    $maxcircleradius = 3000000000000;
+    $factor = $maxcircleradius / $max_indicator;
+ ?>
+ <?php // Dit hoort onder je map container ?>
+
+
+	
+
+
+<?php get_footer(); ?>
 <script type="text/javascript">
 $(document).ready(function() {
 //    alert(countryData.type);
@@ -192,192 +215,9 @@ $(document).ready(function() {
     });
     
     
-    $('#list_indicators option[value=<?php echo $selected_indicator ?>]').attr('selected', 'selected')
+    $('#list_indicators option[value=<?php echo $selected_indicator ?>]').attr('selected', 'selected');
     
-});
-</script>	
- 
- <?php // en in je css in je head ?>
- <style>
-#map { height: 420px; }
-.info {
-    padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background: white;
-    background: rgba(255,255,255,0.8);
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    border-radius: 5px;
-}
-.info h4 {
-    margin: 0 0 5px;
-    color: #777;
-}
-.legend {
-    line-height: 18px;
-    color: #555;
-}
-.legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-}
-</style>
-
- 
- 
- <div id="map"></div>
- <?php 
- 
- $temp = array();
-    foreach ($indicator_results as $i) {
-        array_push($temp, $i[$selected_indicator]);
-    }
-    $max_indicator = max($temp);
-    //$factor = 400000 / 40000;
-    //$factor = 600000 / $max_pop;
-    $maxcircleradius = 3000000000000;
-    $factor = $maxcircleradius / $max_indicator;
- ?>
- <?php // Dit hoort onder je map container ?>
- <script>
-
-var map = L.map('map').setView([5.505, -20.09], 1.7);
-L.tileLayer('http://{s}.tile.cloudmade.com/6251fb4700fc4ea28ad28908a8fa8a4b/997/256/{z}/{x}/{y}.png', {
-    maxZoom: 18
-}).addTo(map);
-
-//jsonPath(countryData, "$..features[?(@.id=='USA')]")[0].properties.projects
-
-
-
-
-
-function getColor(d) {
-    return d > 1000000  ? '#045A8D' :
-           d > 500000   ? '#2B8CBE' :
-           d > 20000   ? '#74A9CF' :
-           d > 10000   ? '#BDC9E1' :
-                      '#F1EEF6';
-}
-
-function style(feature) {
-    return {
-        fillColor: getColor(feature.properties.projects),
-        weight: 0,
-        opacity: 1,
-        color: 'white',
-        dashArray: '',
-        fillOpacity: 0.7
-    };
-}
-
-function highlightFeature(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        weight: 3,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-
-    if (!L.Browser.ie && !L.Browser.opera) {
-        layer.bringToFront();
-    }
-	
-	info.update(layer.feature.properties);
-}
-
-function resetHighlight(e) {
-    geojson.resetStyle(e.target);
-	info.update();
-}
-
-var geojson;
-
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-}
-
-function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToFeature
-    });
-}
-
-geojson = L.geoJson(countryData, {
-    style: style,
-    onEachFeature: onEachFeature
-}).addTo(map);
-
-var info = L.control();
-
-info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this.update();
-    return this._div;
-};
-
-// method that we will use to update the control based on feature properties passed
-info.update = function (props) {
-    this._div.innerHTML = '<h4>Amount of IATI projects</h4>' +  (props ?
-        '<b>' + props.name + '</b><br />' + props.projects + ' projects'
-        : 'Hover over a country');
-};
-
-info.addTo(map);
-
-//for (var key in countryloc){
- 
-//}
-
-
-
-
-var legend = L.control({position: 'bottomright'});
-
-legend.onAdd = function (map) {
-
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 10000, 200000, 500000, 1000000],
-        labels = [];
-
-    // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    }
-
-    return div;
-};
-
-
-//var geojsonLayer = new L.GeoJSON(null,{
-//pointToLayer: function (latlng){
-//    return new L.CircleMarker(latlng, {
-//        radius: 5,
-//        fillColor: "#ff7800",
-//        color: "#000",
-//        weight: 1,
-//        opacity: 1,
-//        fillOpacity: 0.8
-//    });
-//}});
-//geojsonLayer.addTo(map);
-//var circle = L.circle([51.508, -0.11], 300000, {
-//    color: 'red',
-//    fillColor: '#f03',
-//    fillOpacity: 0.5
-//}).addTo(map);
-//legend.addTo(map);
-
-
- <?php foreach($indicator_results as $i) :?>
+    <?php foreach($indicator_results as $i) :?>
     
     <?php if (strlen($i[$selected_indicator])>0) :?>
     
@@ -404,9 +244,6 @@ legend.onAdd = function (map) {
     
     <?php endif ?>
 <?php endforeach; ?>
- </script>
-
-	
-
-
-<?php get_footer(); ?>
+    
+});
+</script>
