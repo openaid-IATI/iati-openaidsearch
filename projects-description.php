@@ -32,7 +32,13 @@ foreach($objects AS $idx=>$project) {
 
 			<div class="projects-project-spec-key">Principal sector:</div>
 			<div class="projects-project-spec-value">
-			
+			<?php
+			$sep = '';
+			foreach($project->activity_sectors AS $sector) {
+						echo $sep . $sector->name;
+						$sep = ', ';
+			}
+			?>
 			</div>
 
 			<div class="projects-project-divider"></div>

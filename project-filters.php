@@ -5,26 +5,26 @@
 				
 				<div class="project-filter-by">
 					<div class="project-filter-name hneue-bold">BY COUNTRY: </div>
-					<button class="project-filter-button">PLEASE SELECT.. <div class="project-filter-button-icon"></div></button>
+					<button id="filter-by-country" class="project-filter-button">PLEASE SELECT.. <div class="project-filter-button-icon"></div></button>
 				</div>
 
 				<div class="project-filter-by">
 					<div class="project-filter-name hneue-bold">BY REGION: </div>
-					<button class="project-filter-button">PLEASE SELECT.. <div class="project-filter-button-icon"></div></button>
+					<button id="filter-by-region" class="project-filter-button">PLEASE SELECT.. <div class="project-filter-button-icon"></div></button>
 				</div>
 
 				<div class="project-filter-by">
 					<div class="project-filter-name hneue-bold">BY SECTOR: </div>
-					<button class="project-filter-button">PLEASE SELECT.. <div class="project-filter-button-icon"></div></button>
+					<button id="filter-by-sector" class="project-filter-button">PLEASE SELECT.. <div class="project-filter-button-icon"></div></button>
 				</div>
 
 				<div class="project-filter-by">
 					<div class="project-filter-name hneue-bold">BY BUDGET: </div>
-					<button class="project-filter-button">PLEASE SELECT.. <div class="project-filter-button-icon"></div></button>
+					<button id="filter-by-budget" class="project-filter-button">PLEASE SELECT.. <div class="project-filter-button-icon"></div></button>
 				</div>
 
 			</div>
 		</div>
 	</div>
-</div>
 
+</div>

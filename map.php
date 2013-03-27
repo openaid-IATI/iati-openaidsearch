@@ -1,8 +1,8 @@
-<div id="map">
+<div id="map-wrapper">
+
 	<div id="map-filter-overlay">
 		<div class="container">
 			<div class="row-fluid map-filter-list">
-
 
 
 
@@ -29,6 +29,8 @@
 				} ?>
 				
 			</div>
+
+
 		</div>
 
 		<div id="map-filters-buttons">
@@ -45,6 +47,8 @@
 		</div>
 
 	</div>
+
+	<div id="map"></div>
 
 </div>
 

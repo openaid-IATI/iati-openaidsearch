@@ -18,7 +18,6 @@ jQuery(function($) {
   // Way 1
   function hide_all_project_tabs()
   {
-
   	$(".project-description").hide();
     $(".project-commitments").hide();
     $(".project-documents").hide();
@@ -122,8 +121,9 @@ jQuery(function($) {
 			$('#map-filter-overlay').hide('slow');
 		}
 		
-	
 	});
+
+	
 
 	$('#map-filter-cancel').click(function(){
 

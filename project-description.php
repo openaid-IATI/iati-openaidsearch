@@ -41,20 +41,18 @@ $activity = wp_get_activity($project_id);
 
 			<div class="projects-project-spec-key">Principal sector:</div>
 			<div class="projects-project-spec-value">
-				<a href="#">
 
-					<?php if(!empty($activity->activity_sectors)) {
-						$sep = '';
-						foreach($activity->activity_sectors AS $sector) {
-							if($sector->name=='No information available') {
-								echo $sector->name;
-							} else {
-								echo  $sep . "<a href='".get_bloginfo('url')."/?s=&amp;sectors={$sector->code}'>" . $sector->name . "</a>";
-							}
-								$sep = ', ';
-							}
-					} ?>
-				</a>
+				<?php if(!empty($activity->activity_sectors)) {
+					$sep = '';
+					foreach($activity->activity_sectors AS $sector) {
+						if($sector->name=='No information available') {
+							echo $sector->name;
+						} else {
+							echo  $sep . "<a href='".get_bloginfo('url')."/?s=&amp;sectors={$sector->code}'>" . $sector->name . "</a>";
+						}
+							$sep = ', ';
+						}
+				} ?>
 			</div>
 
 			<div class="projects-project-divider"></div>

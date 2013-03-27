@@ -374,12 +374,16 @@ input[type=checkbox] {
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX MAP XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 
+#map-wrapper{
+  position: relative;
+  z-index: 3;
+  -webkit-box-shadow: 0 8px 6px -6px #979791;
+  -moz-box-shadow: 0 8px 6px -6px #979791;
+  box-shadow: 0 8px 6px -6px #979791;
+}
+
 #map { 
-    z-index: 3;
     height: 45em; 
-    -webkit-box-shadow: 0 8px 6px -6px #979791;
-    -moz-box-shadow: 0 8px 6px -6px #979791;
-    box-shadow: 0 8px 6px -6px #979791;
 }
 
 #map-filter-overlay{
