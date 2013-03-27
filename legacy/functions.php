@@ -59,6 +59,18 @@
 		return $query_vars;
 	}
 
+function wp_generate_results_v2(){
+
+	$search_url = SEARCH_URL . "activities/?format=json&limit=5";
+
+	$content = file_get_contents($search_url);
+	$result = json_decode($content);
+	$meta = $result->meta;
+	$objects = $result->objects;
+
+	return $objects;
+}
+
 function wp_generate_results($details, &$meta, &$projects_html, &$has_filter) {
 	global $_DEFAULT_ORGANISATION_ID, $_PER_PAGE, $_COUNTRY_ISO_MAP;
 	$search_url = SEARCH_URL . "activities/?format=json&limit={$_PER_PAGE}";

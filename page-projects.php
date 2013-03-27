@@ -27,13 +27,9 @@ Template Name: Projects page
 				</div>
 			</div>
 
-			<!-- ITERATING PROCESS -->
+		
 			<?php get_template_part( "projects", "description" ); ?>
-			<?php get_template_part( "projects", "description" ); ?>
-			<?php get_template_part( "projects", "description" ); ?>
-			<?php get_template_part( "projects", "description" ); ?>
-			<?php get_template_part( "projects", "description" ); ?>
-			<!-- ITERATING PROCESS END -->
+		
 		</div>
 	</div>
 </div>

@@ -16,28 +16,16 @@ function register_my_menus() {
 add_action( 'init', 'register_my_menus' );
 
 
+function wp_generate_results_v2(){
 
+	$search_url = SEARCH_URL . "activities/?format=json&limit=5";
 
-function get_items_by_type_and_row($type, $row){
-	echo 'test';
-	$cat_obj = get_category_by_slug($row); 
-	$cat_id = $cat_obj->term_id;
-	$args = array(
-		'posts_per_page'  => 15,
-		'numberposts'     => 15,
-		'category'        => 5,
-		'post_type'       => $type
-	);
-	echo the_title();
-	$row1_posts_array = get_posts( $args );
+	$content = file_get_contents($search_url);
+	$result = json_decode($content);
+	$meta = $result->meta;
+	$objects = $result->objects;
 
- 	foreach($row1_posts_array as $post) : setup_postdata($post);
-		echo '<div class="drop-shadow postit ' . $type . '">';
-		echo '<div class="faq-title">' . get_the_title() . '</div>';
-		echo '<div class="faq-text">' . get_the_content() . '</div>';
-		echo '</div>';
-
-	endforeach; 
+	return $objects;
 }
 
 
