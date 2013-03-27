@@ -9,20 +9,36 @@ License:
 License URI:
 */
 
+/*
+This CSS resource incorporates links to font software which is the valuable copyrighted
+property of Monotype Imaging and/or its suppliers. You may not attempt to copy, install,
+redistribute, convert, modify or reverse engineer this font software. Please contact Monotype
+Imaging with any questions regarding Web Fonts:  http://webfonts.fonts.com
+*/
 
-/* @Font-face declarations 
-{
-  font-family:'HelveticaNeueW01-45Ligh';
-  font-family:'HelveticaNeueW02-55Roma';
-  font-family:'HelveticaNeueW01-65Medi';
-  font-family:'HelveticaNeueW01-75Bold';
+@import url("http://fast.fonts.com/t/1.css?apiType=css&projectid=68a30854-f7c3-46a7-89ca-8e9e74e69a2a");
+@font-face{
+font-family:"HelveticaNeueW01-45Ligh";
+src:url("Fonts/ae1656aa-5f8f-4905-aed0-93e667bd6e4a.eot?#iefix");
+src:url("Fonts/ae1656aa-5f8f-4905-aed0-93e667bd6e4a.eot?#iefix") format("eot"),url("Fonts/530dee22-e3c1-4e9f-bf62-c31d510d9656.woff") format("woff"),url("Fonts/688ab72b-4deb-4e15-a088-89166978d469.ttf") format("truetype"),url("Fonts/7816f72f-f47e-4715-8cd7-960e3723846a.svg#7816f72f-f47e-4715-8cd7-960e3723846a") format("svg");
+}
+@font-face{
+font-family:"HelveticaNeueW01-75Bold";
+src:url("Fonts/c07fef9e-a934-42d7-92ad-69205f2b8a00.eot?#iefix");
+src:url("Fonts/c07fef9e-a934-42d7-92ad-69205f2b8a00.eot?#iefix") format("eot"),url("Fonts/14ff6081-326d-4dae-b778-d7afa66166fc.woff") format("woff"),url("Fonts/8fda1e47-19be-46c7-8d83-8d4fb35572f0.ttf") format("truetype"),url("Fonts/f751c8ae-1057-46d9-8d74-62592e002568.svg#f751c8ae-1057-46d9-8d74-62592e002568") format("svg");
+}
+@font-face{
+font-family:"HelveticaNeueW02-55Roma";
+src:url("Fonts/0b3a3fca-0fad-402b-bd38-fdcbad1ef776.eot?#iefix");
+src:url("Fonts/0b3a3fca-0fad-402b-bd38-fdcbad1ef776.eot?#iefix") format("eot"),url("Fonts/d5af76d8-a90b-4527-b3a3-182207cc3250.woff") format("woff"),url("Fonts/1d238354-d156-4dde-89ea-4770ef04b9f9.ttf") format("truetype"),url("Fonts/b68875cb-14a9-472e-8177-0247605124d7.svg#b68875cb-14a9-472e-8177-0247605124d7") format("svg");
+}
 
-}*/
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX GLOBAL PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 body {
   color: #666;
+  font-family:"HelveticaNeueW02-55Roma","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .page-wrapper{
@@ -42,6 +58,13 @@ button {
 
 }
 
+.hneue-bold{
+  font-family: "HelveticaNeueW02-55Roma";
+}
+
+.hneue-light{
+  font-family: "HelveticaNeueW01-45Ligh";
+}
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX HEADER + FOOTER ADJUSTMENTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
@@ -93,7 +116,7 @@ button {
 
 .navbar-static-top .input-large{
   font-size: 1.1em;
-  width: 15em;
+  width: 19.5em;
   padding: 0.2em 0.7em;
   margin: 1.72em 0;
 }
@@ -142,15 +165,18 @@ input[type="text"]{
 
 .navbar-static-top.navbar .nav > li > a {
     font-size: 1.29em;
-    padding: 1.64em 0.61em;
+    padding: 1.68em 0.8em;
 }
 
-.navbar-static-top .current-menu-item a{
+.navbar-static-top .active a{
     background: #006492;
+    -webkit-box-shadow:inset 0 3px 8px rgba(0, 0, 0, 0.125);
+    -moz-box-shadow:inset 0 3px 8px rgba(0, 0, 0, 0.125);
+    box-shadow:inset 0 3px 8px rgba(0, 0, 0, 0.125);
 }
 
-.navbar.navbar-static-top .current-menu-item a:hover, .navbar.navbar-static-top .current-menu-item a:focus{
-    background: #006492;
+.navbar.navbar-static-top .active a:hover, .navbar.navbar-static-top .active a:focus{
+    background: #006492;  
     color: #FFF;
 }
 
@@ -248,6 +274,7 @@ input[type="text"]{
 .project-filter-name{
   float: left;
   padding: 0.3em 0.5em 0.3em 0;
+  width: 7em;
 }
 
 .project-filter-button{

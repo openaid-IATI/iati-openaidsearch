@@ -93,7 +93,6 @@ Template Name: FAQ page
 				</div>
 			</div>
 
-			<!-- ITERATING PROCESS END -->
 		</div>
 	</div>
 </div>

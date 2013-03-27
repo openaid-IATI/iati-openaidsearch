@@ -14,7 +14,6 @@
 
     <link href="<?php echo get_template_directory_uri(); ?>/style.css" rel="stylesheet" media="screen">
 
-    <script type="text/javascript" src="http://fast.fonts.com/jsapi/ce8c2ae2-ba23-4999-b0e8-e4b80c83ea8f.js"></script>
 </head>
 <body>
 
@@ -33,13 +32,13 @@
 
                 <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li><a href="">H</a></li>
-                    <li><a href="<?php echo site_url(); ?>/projects/">Projects</a></li>
-                    <li><a href="<?php echo site_url(); ?>/indicators/">Indicators</a></li>
-                    <li><a href="<?php echo site_url(); ?>/city-prosperity/">City Prosperity</a></li>
-                    <li><a href="<?php echo site_url(); ?>/faq/">FAQ</a></li>
-                    <li><a href="<?php echo site_url(); ?>/about/">About</a></li>
-                    <li><a href="<?php echo site_url(); ?>/contact/">Contact</a></li>
+                    <li <?php if (is_home()) {echo 'class="active"';} ?>><a class="navbar-home-icon" href="<?php echo site_url(); ?>"></a></li>
+                    <li <?php if (is_page('projects')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/projects/">Projects</a></li>
+                    <li <?php if (is_page('indicators')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/indicators/">Indicators</a></li>
+                    <li <?php if (is_page('city-prosperity')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/city-prosperity/">City Prosperity</a></li>
+                    <li <?php if (is_page('faq')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/faq/">FAQ</a></li>
+                    <li <?php if (is_page('about')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/about/">About</a></li>
+                    <li <?php if (is_page('contact')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/contact/">Contact</a></li>
                 </ul>
 
                 <form class="navbar-form pull-right">
