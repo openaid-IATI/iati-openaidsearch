@@ -33,7 +33,7 @@
 ?>
 <?php get_header(); ?>
 
-<select id="regions">
+<!--<select id="regions">
     <option value="">all</option>
     <?php foreach ($regions as $region) : ?>
     <?php if ($region['code'] == $selected_region ) :?>    
@@ -66,7 +66,7 @@
     <?php endforeach ?>
 </select>
 
-<!--<select id="regions">
+<select id="regions">
     <?php foreach (wp_get_unique_result($indicator_results, 'dac_region_name') as $ir) : ?>
     
     <option value=""><?php echo $ir; ?></option>
@@ -77,7 +77,7 @@
     
     <option value=""><?php print_r($ir); ?></option>
     <?php endforeach ?>
-</select>-->
+</select>
 
 <select id="list_years">
             <option value="">all</option>
@@ -155,9 +155,11 @@
         
     <option value="urban_slum_population">urban_slum_population</option>
  
-    </select>
+    </select>-->
 
 <?php 
+ 
+
 //    print_r($countries);
 //    echo $selected_region;
 ?>
@@ -171,7 +173,7 @@
  <?php // en in je css in je head ?>
 
 
- 
+ <?php get_template_part( "project", "filters" ); ?>
  
  <?php get_template_part( "map" ); ?>
  <?php 
