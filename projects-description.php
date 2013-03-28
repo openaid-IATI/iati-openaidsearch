@@ -82,7 +82,35 @@ foreach($objects AS $idx=>$project) {
 
 			<div class="projects-project-divider"></div>
 
+			<div class="projects-project-spec-key">Start date planned:</div>
+			<div class="projects-project-spec-value">
+
+			 <?php if(!empty($project->start_planned)) { echo $project->start_planned; } ?>
+
+			</div>
+
+			<div class="projects-project-divider"></div>
+
 			<div class="project-project-spec-hidden <?php echo $project->iati_identifier; ?>">
+
+
+			<div class="projects-project-spec-key">Last updated:</div>
+			<div class="projects-project-spec-value">
+
+			<?php if(!empty($project->date_updated)) { echo $project->date_updated; } ?>
+
+			</div>
+
+			<div class="projects-project-divider"></div>
+
+			<div class="projects-project-spec-key">End date planned:</div>
+			<div class="projects-project-spec-value">
+
+			<?php if(!empty($project->end_planned)) { echo $project->end_planned; } ?>
+
+			</div>
+
+			<div class="projects-project-divider"></div>
 
 			<div class="projects-project-spec-key">Reporting organisation:</div>
 			<div class="projects-project-spec-value">
@@ -97,33 +125,6 @@ foreach($objects AS $idx=>$project) {
 			<div class="projects-project-spec-value">
 
 			<?php if(!empty($project->activity_sectors[0]->code)) { echo $project->activity_sectors[0]->code; } ?>
-
-			</div>
-
-			<div class="projects-project-divider"></div>
-
-			<div class="projects-project-spec-key">Last updated:</div>
-			<div class="projects-project-spec-value">
-
-			<?php if(!empty($project->date_updated)) { echo $project->date_updated; } ?>
-
-			</div>
-
-			<div class="projects-project-divider"></div>
-
-			<div class="projects-project-spec-key">Start date planned:</div>
-			<div class="projects-project-spec-value">
-
-			 <?php if(!empty($project->start_planned)) { echo $project->start_planned; } ?>
-
-			</div>
-
-			<div class="projects-project-divider"></div>
-
-			<div class="projects-project-spec-key">End date planned:</div>
-			<div class="projects-project-spec-value">
-
-			<?php if(!empty($project->end_planned)) { echo $project->end_planned; } ?>
 
 			</div>
 

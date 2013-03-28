@@ -1,5 +1,5 @@
-var map = L.map('map', {attributionControl: false, scrollWheelZoom: false}).setView([0.505, -20.09], 2);
-L.tileLayer('http://{s}.tile.cloudmade.com/6251fb4700fc4ea28ad28908a8fa8a4b/997/256/{z}/{x}/{y}.png', {
+var map = L.map('map', {attributionControl: false, scrollWheelZoom: false}).setView([10.505, 25.09], 3);
+L.tileLayer('http://{s}.tile.cloudmade.com/88497ce4207141ec955d7c63aaf2b673/997/256/{z}/{x}/{y}.png', {
     maxZoom: 18
 }).addTo(map);
 //L.geoJson(countryData, {style: style, onEachFeature: onEachFeature}).addTo(map);
