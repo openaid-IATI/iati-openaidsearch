@@ -59,7 +59,7 @@
 		return $query_vars;
 	}
 
-function wp_generate_results_v2(){
+function wp_generate_results_v2(&$objects, &$meta){
 
 	$search_url = SEARCH_URL . "activities/?format=json&limit=5";
 
@@ -67,8 +67,6 @@ function wp_generate_results_v2(){
 	$result = json_decode($content);
 	$meta = $result->meta;
 	$objects = $result->objects;
-
-	return $objects;
 }
 
 function wp_generate_results($details, &$meta, &$projects_html, &$has_filter) {

@@ -1,12 +1,22 @@
 jQuery(function($){
-  $('.project-back-button').click(function(e){
-    history.back();
-  });
-});
-
-jQuery(function($){
   $('.project-expand-button').click(function(e){
     // TO DO: show the whole description.
+
+    var currentId = $(this).attr('id');
+
+    if($(this).hasClass("expand-plus")){
+    	$('.project-project-spec-hidden.'+currentId).show();
+    	$('.projects-project-description.'+currentId).css("height", "auto");
+    	$(this).removeClass('expand-plus');
+		$(this).addClass('expand-min');
+    } else {
+    	$('.project-project-spec-hidden.'+currentId).hide();
+    	$('.projects-project-description.'+currentId).css("height", "6em");
+    	$(this).removeClass('expand-min');
+		$(this).addClass('expand-plus');
+    }
+
+    
   });
 });
 
@@ -15,41 +25,48 @@ jQuery(function($){
 
 jQuery(function($) {
 
-  // Way 1
-  function hide_all_project_tabs()
-  {
-  	$(".project-description").hide();
-    $(".project-commitments").hide();
-    $(".project-documents").hide();
-    $(".project-related-projects").hide();
-    $(".project-related-indicator").hide();
-  }	
 
 
-  $(".project-description-link").click(function(){
-  	  alert('test');
-	  hide_all_project_tabs();
-	  
+  function change_tab(curlink, newtab){
+
+  	// hide all tab content
+  	$(".project-tabs-wrapper > div").hide();
+  	// remove active tab
+  	$(".nav-pills > li").removeClass("active");
+  	// make link of current tab active
+	$(curlink).closest("li").addClass("active");
+	// show current tab content
+	$("#project-" + newtab).show();
+
+  }
+
+  $("#project-description-link").click(function(){
+	  change_tab(this, "description");
 	  return false;
   });
 
-  $(".project-commitments-link").click(function(){
-	  hide_all_project_tabs();
+  $("#project-commitments-link").click(function(){
+	  change_tab(this, "commitments");
 	  return false;
   });
 
-  $(".project-documents-link").click(function(){
-	  hide_all_project_tabs();
+  $("#project-documents-link").click(function(){
+	  change_tab(this, "documents");
 	  return false;
   });
 
-  $(".project-related-indicators-link").click(function(){
-	  hide_all_project_tabs();
+  $("#project-related-indicators-link").click(function(){
+	  change_tab(this, "related-indicators");
 	  return false;
   });
 
-  $(".project-related-projects-link").click(function(){
-	  hide_all_project_tabs();
+  $("#project-related-projects-link").click(function(){
+	  change_tab(this, "related-projects");
+	  return false;
+  });
+
+  $("#project-located-in-link").click(function(){
+	  change_tab(this, "located-in");
 	  return false;
   });
 
@@ -57,73 +74,57 @@ jQuery(function($) {
 
 
 jQuery(function($) {
+
 	$('#map-hide-show-button').click(function(){
-
-		var mapheight = '45em';
 		if($(this).hasClass("map-show")){
-			mapheight = '13.5em';
-			$(this).removeClass('map-show');
-			$(this).addClass('map-hide');
-			$(this).html("SHOW MAP");
-
+			if ($('#map-filter-overlay').is(":visible")){
+				$('#map-filter-overlay').hide('slow');
+			}
+			hide_map();
 		} else {
-			mapheight = '45em';
-			$(this).removeClass('map-hide');
-			$(this).addClass('map-show');
-			$(this).html("HIDE MAP");
+			show_map();
 		}
-
-		$('#map').animate({
-			height: mapheight
-		}, 1000, function() {
-		// Animation complete.
-		});
 	});
-});
 
+  	function hide_map()
+  	{
+	  	$('#map-hide-show-button').removeClass('map-show');
+		$('#map-hide-show-button').addClass('map-hide');
+		$('#map-hide-show-text').html("SHOW MAP");
+		animate_map('13.5em');
+  	}
 
+  	function show_map(){
+	  	$('#map-hide-show-button').removeClass('map-hide');
+		$('#map-hide-show-button').addClass('map-show');
+		$('#map-hide-show-text').html("HIDE MAP");
+		animate_map('45em');
+  	}
 
-jQuery(function($) {
-	$('.project-expand-button').click(function(){
-
-		var mapheight = '45em';
-		if($(this).hasClass("map-show")){
-			mapheight = '13.5em';
-			$(this).removeClass('map-show');
-			$(this).addClass('map-hide');
-			$(this).html("SHOW MAP");
-
-		} else {
-			mapheight = '45em';
-			$(this).removeClass('map-hide');
-			$(this).addClass('map-show');
-			$(this).html("HIDE MAP");
-		}
-
-		$('#map').animate({
-			height: mapheight
-		}, 1000, function() {
-		// Animation complete.
+  	function animate_map(mapheight){
+  		$('#map').animate({
+				height: mapheight
+			}, 1000, function() {
+			// Animation complete.
 		});
-	});
-});
-
-
-jQuery(function($) {
+  	}
 
 	$('.project-filter-button').click(function(){
 
 		if ($('#map-filter-overlay').is(":hidden")){
 			
+			if($('#map-hide-show-button').hasClass("map-hide")){
+				show_map();
+			}
+
 			$('#map-filter-overlay').show('slow');
+
 		} else {
 			// save selection?
 			$('#map-filter-overlay').hide('slow');
 		}
 		
 	});
-
-	
 
 	$('#map-filter-cancel').click(function(){
 

@@ -4,33 +4,63 @@ Template Name: Projects page
 */
 ?>
 
+<?php wp_generate_results_v2($objects, $meta); ?>
+
 <?php get_header(); ?>
 <?php get_template_part( "project", "filters" ); ?>
 <?php get_template_part( "map" ); ?>
 
 <div class="page-wrapper">
-	<div class="container">
-		<div class="page-content">
 
+	<div class="page-header page-header-less-margin">
+		<div class="container">
 			<div class="row-fluid projects-search-navbar">
 				<div class="span7">
-					<div class="projects-pagination-info hneue-bold">RESULTS 1 - 5 OF 114</div>
-					
+					<div class="projects-pagination-info hneue-bold">
+						<div class="pagination-totals">
+							RESULTS <?php echo $meta->offset + 1; ?> - <?php if(($meta->offset + $meta->limit)>$meta->total_count) { echo $meta->total_count; } else { echo ($meta->offset + $meta->limit); } ?> OF <?php echo $meta->total_count; ?>
+						</div>
+						<div class="projects-sort-type">
+							<a class="sort-type sort-type-amount" href="#">
+								SHOW <?php echo $meta->limit; ?>
+								<span class="sort-icon"></span>
+							</a>
+						</div>
+						<a id="save-search-results" href="#">SAVE SEARCH RESULTS</a>
+
+					</div>
 				</div>
 				<div class="span5">
 					<div class="projects-sorting">
 						<div class="projects-sort-text hneue-bold">SORT BY:</div>
-						<div class="projects-sort-type"><a class="sort-type-budget" href="#">Budget</a><a id="sort-by-budget" class="sort-desc" href="#"></a></div>
-						<div class="projects-sort-type"><a class="sort-type-startdate" href="#">Start date</a><a id="sort-by-startdate" class="sort-desc" href="#"></a></div>
-						<div class="projects-sort-type"><a class="sort-type-country" href="#">Country</a><a id="sort-by-country" class="sort-desc" href="#"></a></div>
+						<div class="projects-sort-type hneue-bold">
+							<a class="sort-type sort-type-budget" href="#">
+								BUDGET
+								<span class="sort-icon"></span>
+							</a>
+						</div>
+						<div class="projects-sort-type hneue-bold">
+							<a class="sort-type sort-type-startdate" href="#">
+								START DATE
+								<span class="sort-icon"></span>
+							</a>
+						</div>
+						<div class="projects-sort-type hneue-bold">
+							<a class="sort-type sort-type-country" href="#">
+								COUNTRY
+								<span class="sort-icon"></span>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
-
-		
-			<?php get_template_part( "projects", "description" ); ?>
-		
 		</div>
+	</div>
+
+	<div class="container">
+		<div class="page-content">
+
+			<?php get_template_part( "projects", "description" ); ?></div>
 	</div>
 </div>
 

@@ -9,35 +9,62 @@ Template Name: Indicators page
 <?php get_template_part( "map" ); ?>
 
 <div class="page-wrapper">
+	<div class="page-header page-header-less-margin">
+		<div class="container">
+			<div class="row-fluid">
+				<div class="span8">
+
+					<div class="project-share-container share-left">
+
+						<button id="project-share-graph" class="project-share-button hneue-bold">
+							<div class="share-icon"></div>
+							<div class="share-text">TYPE GRAPH</div>
+							<span class="sort-icon"></span>
+						</button>
+						<button id="project-share-export" class="project-share-button hneue-bold">
+							<div class="share-icon"></div>
+							<div class="share-text">EXPORT</div>
+						</button>
+						<button id="project-share-embed" class="project-share-button hneue-bold">
+							<div class="share-icon"></div>
+							<div class="share-text">EMBED</div>
+						</button>
+					</div>
+
+				</div>
+				<div class="span4">
+					<div class="project-share-container">
+
+						<button id="project-share-share" class="project-share-button hneue-bold">
+							<div class="share-icon"></div>
+							<div class="share-text">SHARE</div>
+						</button>
+						<button id="project-share-whistleblower" class="project-share-button hneue-bold">
+							<div class="share-icon"></div>
+							<div class="share-text">WHISTLEBLOWER</div>
+						</button>
+						<button id="project-share-bookmark" class="project-share-button hneue-bold">
+							<div class="share-icon"></div>
+							<div class="share-text">BOOKMARK</div>
+						</button>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
 	<div class="container">
 		<div class="page-content">
 			<div class="row-fluid">
+				<div class="span7">// different graph type implementations</div>
 				<div class="span4">
 					<div class="drop-shadow postit indicator-postit">
 
-						<div class="indicator-postit-title">Have a question about the site?</div>
-						<div class="indicator-postit-text">
-							You can find answers to frequently asked question on our FAQ’s page. Alternatively, contact us using the form below.
-						</div>
-
-					</div>
-				</div>
-				<div class="span4">
-					<div class="drop-shadow postit indicator-postit">
-
-						<div class="indicator-postit-title">Have a question about the site?</div>
-						<div class="indicator-postit-text">
-							You can find answers to frequently asked question on our FAQ’s page. Alternatively, contact us using the form below.
-						</div>
-
-					</div>
-				</div>
-				<div class="span4">
-					<div class="drop-shadow postit indicator-postit">
-
-						<div class="indicator-postit-title">Have a question about the site?</div>
-						<div class="indicator-postit-text">
-							You can find answers to frequently asked question on our FAQ’s page. Alternatively, contact us using the form below.
+						<div class="postit-title">Information placeholder</div>
+						<div class="postit-text">
+							Maecenas sed diam eget risus varius blandit sit amet non magna. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.
 						</div>
 
 					</div>

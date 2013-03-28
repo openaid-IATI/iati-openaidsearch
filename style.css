@@ -39,16 +39,13 @@ src:url("Fonts/0b3a3fca-0fad-402b-bd38-fdcbad1ef776.eot?#iefix") format("eot"),u
 body {
   color: #666;
   font-family:"HelveticaNeueW02-55Roma","Helvetica Neue",Helvetica,Arial,sans-serif;
+  line-height: 100%;
 }
 
 .page-wrapper{
     background-color: #F1EEE8;
     position: relative;
     z-index: 2;
-}
-
-.page-content{
-    min-height:300px;
 }
 
 button {
@@ -59,11 +56,40 @@ button {
 }
 
 .hneue-bold{
-  font-family: "HelveticaNeueW02-55Roma";
+  font-family: "HelveticaNeueW01-75Bold";
 }
 
 .hneue-light{
   font-family: "HelveticaNeueW01-45Ligh";
+}
+
+a:hover, a:focus{
+  text-decoration: none;
+}
+
+.page-content{
+  margin-bottom: 4em;
+}
+
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX GLOBAL PAGE HEADER XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+.page-header{
+  padding-bottom: 0.6em;
+  border-bottom: 1px solid #CCC;
+  margin: 0;
+}
+
+.share-left{
+  float: left;
+}
+
+.share-right{
+  float: right;
+}
+
+.page-header .project-share-container{
+  margin-top: 0;
 }
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX HEADER + FOOTER ADJUSTMENTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -75,6 +101,7 @@ button {
   font-size: 100%;
   margin-left: -0.8em;
   height: 2.8em;
+  width: 22.2em;
 }
 
 .navbar-static-top .navbar-inner{
@@ -98,16 +125,17 @@ button {
     box-shadow: 0px 1px 3px #979791;
 }
 
-.navbar-home-icon{
-  display: inline-block;
-  width: 22px;
-  height: 19px;
-  background-image:url('images/home.png');
+.navbar-static-top.navbar .nav > li > .navbar-home-link{
+  height: 1.1em;
+}
+
+.navbar-home-link img{
+  width:1.2em;
 }
 
 .navbar .btn, .navbar .btn-group{
   margin-top: 0;
-  padding: 0.4em 1.2em 0 0.2em;
+  padding: 0.4em 1.2em 0.15em 0.2em;
 }
 
 .btn.header-btn-search > img{
@@ -117,8 +145,8 @@ button {
 .navbar-static-top .input-large{
   font-size: 1.1em;
   width: 19.5em;
-  padding: 0.2em 0.7em;
-  margin: 1.72em 0;
+  padding: 0.25em 0.7em;
+  margin: 1.67em 0;
 }
 
 input[type="text"]{
@@ -181,12 +209,15 @@ input[type="text"]{
 }
 
 .navbar-static-top .nav > li > a:hover, .navbar-static-top .nav > li > a:focus {
-    color: #CCC;
-    
+    color: #CCC;    
+}
+
+.footer .nav > li > a:hover, .footer .nav > li > a:focus {
+  color:#CCC;
 }
 
 .footer .navbar .nav > li > a {
-    padding: 15px 30px 15px 0;
+    padding: 1.1em 2.8em 1em 0;
 }
 
 .footer, .footer a {
@@ -218,7 +249,7 @@ input[type="text"]{
 .footer-info-text{
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 1.5em;
 }
 
 #footer-social-media-wrapper{
@@ -461,14 +492,19 @@ input[type=checkbox] {
 }
 
 #map-hide-show-button{
-    background-color: #222;
+    background-color: #000;
     color: #E5E5E3;
     border: none;
     margin: 0 auto;
-    padding: 2px 10px;
+    padding: 2px 10px 2px 4px;
     opacity:0.48;
     filter:alpha(opacity=48); /* For IE8 and earlier */
     display: block;
+}
+
+.hide-show-icon{
+    margin-bottom: 1px;
+    margin-right: 0.3em;
 }
 
 .leaflet-container{
@@ -535,6 +571,7 @@ label, input, button, select, textarea{
    transform:rotate(-3deg);
 }
 
+
 .drop-shadow:after{
    right:10px;
    left:auto;
@@ -552,6 +589,7 @@ label, input, button, select, textarea{
 
  .postit-text{
   font-size: 1.21em;
+  line-height: 1.2em;
  }
 
  .postit-page .span4{
@@ -580,7 +618,6 @@ label, input, button, select, textarea{
 }
 
 
-
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECT FILTERS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 #project-filter-wrapper{
   background: #F1EEE8;
@@ -593,10 +630,6 @@ label, input, button, select, textarea{
 
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECTS OVERVIEW XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
-
-.projects-search-navbar{
-  border-bottom: 1px solid #CCC;
-}
 
 .row-fluid [class*="span"]{
   min-height:24px;
@@ -617,13 +650,42 @@ label, input, button, select, textarea{
   left:0;
   top: 0.7em;
   display: block;
-  background-image:url('images/plus.png');
   height: 14px;
   width: 14px;
 }
 
+.expand-plus{
+  background-image:url('images/plus.png');
+}
+
+.expand-min{
+  background-image:url('images/min.png');
+}
+
+.project-project-spec-hidden{
+  display: none;
+}
+
 .projects-sorting{
   margin-left: 5em;
+}
+
+.page-header-less-margin{
+  padding-bottom: 0;
+}
+
+.projects-sorting div{
+  float: left;
+  display: block;
+}
+
+.sort-type{
+  display: block;
+  padding-left: 1.2em;
+}
+
+.sort-type-amount{
+  padding-left: 0;
 }
 
 .projects-sort-text, .projects-sort-type{
@@ -638,9 +700,26 @@ label, input, button, select, textarea{
   margin-right:1em;
 }
 
+.sort-icon{
+  background-image:url('images/order-icon.png');
+  background-repeat:no-repeat;
+  width: 8px;
+  height:17px;
+  display: block;
+  margin-left: 0.4em;
+  float: right;
+}
+
+
 .projects-sort-text, .projects-pagination-info{
   color: #797974; 
 }
+
+.projects-pagination-info div{
+  float:left;
+  margin-right: 2em;
+}
+
 .projects-project-main-info a{
   color : #008CCB;
 }
@@ -648,12 +727,16 @@ label, input, button, select, textarea{
 .projects-project-main-info{
   color: #666666;
 }
-.projects-project-spec{
+.projects-project-spec, .project-spec{
   color: #878787;
   margin-left: 5em;
 }
 
-.project-description .span5{
+.project-spec{
+  margin-bottom: 5em;
+}
+
+.project-description-text .span5{
   margin-bottom: 3em;
 }
 
@@ -683,6 +766,22 @@ label, input, button, select, textarea{
   padding-top: 0.4em;
 }
 
+
+
+#project-commitments, #project-documents, #project-related-projects, #project-related-indicators, #project-located-in{
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
 .projects-project-title{
   font-size: 1.5em;
   color: #008CCB;
@@ -691,10 +790,28 @@ label, input, button, select, textarea{
   width: 80%;
 }
 
-.projects-project-description{
+.projects-project-title a:hover, .projects-project-title a:focus{
+  color: #006591;
+  text-decoration: none;
+}
+
+.project-title{
+  font-size: 1.5em;
+  color: #797973;
+  line-height: 1.2em;
+  margin-bottom: 0.6em;
+  width: 80%;
+}
+
+.projects-project-description, .project-description-text{
   font-size: 1.14em;
   line-height: 1.5em;
   width: 96%;
+}
+
+.projects-project-description{
+  overflow: hidden;
+  height:6em;
 }
 
 .projects-project-divider{
@@ -723,7 +840,7 @@ label, input, button, select, textarea{
 
 .project-share-button{
   height:18px;
-
+  margin-left:1.7em;
 }
 
 .share-text{
@@ -746,6 +863,7 @@ label, input, button, select, textarea{
 
 #project-share-share .share-icon {
   background-position: -18px 0;
+  margin-top: 1px ;
 }
 
 #project-share-bookmark .share-icon {
@@ -756,12 +874,24 @@ label, input, button, select, textarea{
   background-position: -54px 0;
 }
 
+#project-share-embed .share-icon{
+  background-position: -72px 0;
+}
+
+#project-share-graph .share-icon{
+  background-position: -90px 0;
+}
+
+#project-share-graph .sort-icon{
+  margin-left: 0;
+  margin-top: 0.1em;
+}
+
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAQ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
 .postit.faq-item {
   background-color: #FFFFBF;
 }
-
-
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX RESPONSIVE CSS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
@@ -773,7 +903,7 @@ label, input, button, select, textarea{
     @media (min-width: 980px) and (max-width: 1439px) {
 
     body {
-      font-size:12px;
+      font-size:8px;
     }
 
     } 
@@ -783,7 +913,7 @@ label, input, button, select, textarea{
     @media (min-width: 768px) and (max-width: 979px) { 
 
     body {
-      font-size:12px;
+      font-size:8px;
     }
 
 

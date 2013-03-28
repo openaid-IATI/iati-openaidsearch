@@ -4,16 +4,11 @@
 		<div class="container">
 			<div class="row-fluid map-filter-list">
 
-
-
 				<?php 
-
 				for ($i = 0;$i<=74;$i++){ 
-
 					if(in_array($i, array(0, 15, 30, 45, 60))){
 						echo '<div class="span2">';
 					}
-
 					?>
 
 					<div class="squaredThree">
@@ -29,7 +24,6 @@
 				} ?>
 				
 			</div>
-
 
 		</div>
 
@@ -56,7 +50,7 @@
 	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
-				<button id="map-hide-show-button" class="map-show hneue-bold">HIDE MAP</button>
+				<button id="map-hide-show-button" class="map-show"><img class="hide-show-icon" src="<?php echo get_template_directory_uri(); ?>/images/hide-show.png" alt="" /><span id="map-hide-show-text" class="hneue-bold">HIDE MAP</span></button>
 			</div>
 		</div>
 	</div>

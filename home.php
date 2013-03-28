@@ -24,7 +24,7 @@
 
  				foreach( $row1_posts_array as $post ) :	setup_postdata($post); ?>
 
-					<div class="drop-shadow postit faq-item">
+					<div class="drop-shadow postit">
 						<div class="postit-title hneue-light"><?php the_title(); ?></div>
 						<div class="postit-text"><?php the_content(); ?></div>
 					</div>
@@ -45,14 +45,14 @@
 				'numberposts'     => 15,
 				'category'        => $row_cat_id,
 				'order'           => 'ASC',
-				'post_type'       => 'faq-item',
+				'post_type'       => 'homepage-item',
 				);
 
 			 	$row1_posts_array = get_posts( $args );
 
  				foreach( $row1_posts_array as $post ) :	setup_postdata($post); ?>
 
-					<div class="drop-shadow postit faq-item">
+					<div class="drop-shadow postit">
 						<div class="postit-title hneue-light"><?php the_title(); ?></div>
 						<div class="postit-text"><?php the_content(); ?></div>
 					</div>
@@ -70,14 +70,14 @@
 				'numberposts'     => 15,
 				'category'        => $row_cat_id,
 				'order'           => 'ASC',
-				'post_type'       => 'faq-item',
+				'post_type'       => 'homepage-item',
 				);
 
 			 	$row1_posts_array = get_posts( $args );
 
  				foreach( $row1_posts_array as $post ) :	setup_postdata($post); ?>
 
-					<div class="drop-shadow postit faq-item">
+					<div class="drop-shadow postit">
 						<div class="postit-title hneue-light"><?php the_title(); ?></div>
 						<div class="postit-text"><?php the_content(); ?></div>
 					</div>

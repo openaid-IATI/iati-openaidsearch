@@ -26,13 +26,13 @@
                     <span class="icon-bar"></span>
                 </a>
 
-                <a href="/" class="brand">
+                <a href="<?php echo site_url(); ?>" class="brand">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/logo2.png" />
                 </a>
 
                 <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li <?php if (is_home()) {echo 'class="active"';} ?>><a class="navbar-home-icon" href="<?php echo site_url(); ?>"></a></li>
+                    <li <?php if (is_home()) {echo 'class="active"';} ?>><a class="navbar-home-link" href="<?php echo site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/home.png" alt="" /></a></li>
                     <li <?php if (is_page('projects')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/projects/">Projects</a></li>
                     <li <?php if (is_page('indicators')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/indicators/">Indicators</a></li>
                     <li <?php if (is_page('city-prosperity')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/city-prosperity/">City Prosperity</a></li>
