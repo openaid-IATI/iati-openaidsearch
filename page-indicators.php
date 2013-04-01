@@ -6,9 +6,10 @@ Template Name: Indicators page
 
 <?php get_header(); ?>
 
-<?php get_template_part( "map" ); ?>
+<?php get_template_part( "indicator", "filters" ); ?>
+<?php get_template_part( "map-indicator-page" ); ?>
 
-<div class="page-wrapper">
+<div id="page-wrapper">
 	<div class="page-header page-header-less-margin">
 		<div class="container">
 			<div class="row-fluid">
@@ -58,7 +59,10 @@ Template Name: Indicators page
 	<div class="container">
 		<div class="page-content">
 			<div class="row-fluid">
-				<div class="span7">// different graph type implementations</div>
+				<div class="span7">
+					<div id="line-chart-placeholder"></div>
+					<div id="table-chart-placeholder"></div>
+				</div>
 				<div class="span4">
 					<div class="drop-shadow postit indicator-postit">
 
@@ -73,4 +77,7 @@ Template Name: Indicators page
 		</div>
 	</div>
 </div>
+
+
+
 <?php get_footer(); ?>

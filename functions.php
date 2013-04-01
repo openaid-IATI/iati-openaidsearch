@@ -17,17 +17,121 @@ add_action( 'init', 'register_my_menus' );
 
 
 function wp_generate_results_v2(&$objects, &$meta){
+	global $_PER_PAGE;
+	// get amount of activities per page
+	$activities_per_page = $_PER_PAGE;
+	if(isset($_GET['per_page'])){	$activities_per_page = $_GET['per_page']; }
 
-	$search_url = SEARCH_URL . "activities/?format=json&limit=5";
+	// get offset
+	$activities_offset = 0;
+	if(isset($_REQUEST['offset'])){	$activities_offset = rawurlencode($_REQUEST['offset']);	}
+
+	$search_url = SEARCH_URL . "activities/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset;
 
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
 	$meta = $result->meta;
 	$objects = $result->objects;
+
+
+
+
 }
 
 
-// API CALL FUNCTIONS
+
+function wp_generate_paging($meta) {
+	global $_PER_PAGE;
+	$total_count = $meta->total_count;
+	$offset = $meta->offset;
+	$limit = $meta->limit;
+	$per_page = $_PER_PAGE;
+	if(isset($_GET['per_page'])){ $per_page = $_GET['per_page']; }
+	$total_pages = ceil($total_count/$limit);
+	$cur_page = $offset/$limit + 1;
+
+	// range of num links to show
+	$range = 2;
+
+	$params = $_GET;
+
+	$paging_block = "<ul class='menu pagination'>";
+
+	// if not on page 1, don't show back links
+	if ($cur_page > 1) {
+	   // show << link to go back to page 1
+		$params['offset'] = 0;
+	   $paging_block .=  "<li><a href='?" . http_build_query($params) . "' class='start'><span>&laquo;</span></a></li>";
+	   // get previous page num
+	   $prevpage = $cur_page - 1;
+	   // show < link to go back to 1 page
+	   $params['offset'] = $offset - $limit;
+	   $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='limitstart'><span>&larr; </span></a></li>";
+	} // end if 
+
+	if ($cur_page > 5){
+		$params['offset'] = 0;
+	   $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='page'><span>1</span></a></li>";
+	   $paging_block .= "<li>...</li>";
+	}
+
+	// loop to show links to range of pages around current page
+	for ($x = ($cur_page - $range); $x < (($cur_page + $range) + 1); $x++) {
+	   // if it's a valid page number...
+	   if (($x > 0) && ($x <= $total_pages)) {
+	      // if we're on current page...
+	      if ($x == $cur_page) {
+	         // 'highlight' it but don't make a link
+	         $paging_block .= "<li><a class='active'>$x</a></li>";
+	      // if not current page...
+	      } else {
+	         // make it a link
+	      	 $params['offset'] = ($x*$per_page) - $per_page;
+	      	 $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='page'><span>$x</span></a></li>";
+	      } // end else
+	   } // end if 
+	} // end for
+
+
+	if($cur_page < ($total_pages - 5)){
+		$paging_block .= "<li>...</li>";
+	   $params['offset'] = $total_count - ($total_count % $per_page);
+	   $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='page'><span>$total_pages</span></a></li>";
+	}
+	               
+	// if not on last page, show forward and last page links        
+	if ($cur_page != $total_pages) {
+
+	   // get next page
+	   $nextpage = $cur_page + 1;
+	    // echo forward link for next page 
+	   $params['offset'] = $offset + $limit;
+	   $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='endmilit'><span>&rarr; </span></a></li>";
+
+	   $params['offset'] = $total_count - ($total_count % $per_page);
+	   $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='end'><span>&raquo;</span></a></li>";
+	} // end if
+	/****** end build pagination links ******/
+
+
+	$paging_block .= "</ul>";
+
+
+	echo $paging_block; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// UNTOUCHED API CALL FUNCTIONS
 
 
 	include( TEMPLATEPATH .'/constants.php' );
@@ -1163,42 +1267,7 @@ function wp_get_summary_data($type) {
 	
 }
 
-function wp_generate_paging($meta) {
-	global $_PER_PAGE;
-	//fix the paging 
-	$total_count = $meta->total_count;
-	$offset = $meta->offset;
-	$limit = $meta->limit;
-	$per_page = $_PER_PAGE;
-	$total_pages = ceil($total_count/$limit);
-	$cur_page = $offset/$limit + 1;
-	
-	$paging_block = "<ul class='menu pagination'><li><a href='javascript:void(0);' class='start'><span>&laquo;</span></a></li><li><a href='javascript:void(0);' class='limitstart'><span>&larr; </span></a></li>";
-	$page_limit = 3;
-	$show_dots = true;
-		
 
-	for($i=1; $i<=$total_pages; $i++) {
-		$paging_block .= "<li>";
-		if ($i == 1 || $i == $total_pages || ($i >= $cur_page - $page_limit && $i <= $cur_page + $page_limit) ) {
-			$show_dots = true;
-			if($cur_page==$i) {
-				$paging_block .= "<a href='javascript:void(0);' class='active'><span id='cur_page'>{$i}</span></a>";
-			} else {
-				$paging_block .= "<a href='javascript:void(0);' class='page'><span>{$i}</span></a>";
-			}
-		
-		} else if ($show_dots == true) {
-			$show_dots = false;
-			$paging_block .= "...";
-		}
-		$paging_block .= "</li>";
-	}
-		
-	$paging_block .= "<li><a href='javascript:void(0);' class='endmilit'><span>&rarr; </span></a></li><li><a href='javascript:void(0)' class='end'><span>&raquo;</span></a></li></ul>";
-	
-	echo $paging_block;
-}
 
 function wp_generate_home_map_data() {
 		global $_GM_POLYGONS, $_DEFAULT_ORGANISATION_ID, $_COUNTRY_ISO_MAP, $_COUNTRY_ACTIVITY_COUNT;

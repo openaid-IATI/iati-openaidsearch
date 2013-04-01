@@ -1,7 +1,10 @@
 var map = L.map('map', {attributionControl: false, scrollWheelZoom: false}).setView([10.505, 25.09], 3);
-L.tileLayer('http://{s}.tile.cloudmade.com/88497ce4207141ec955d7c63aaf2b673/997/256/{z}/{x}/{y}.png', {
+
+L.tileLayer('http://{s}.tile.cloudmade.com/88497ce4207141ec955d7c63aaf2b673/90076/256/{z}/{x}/{y}.png', {
     maxZoom: 18
 }).addTo(map);
+
+//L.control.zoom({position : "topright"}).addTo(map);
 //L.geoJson(countryData, {style: style, onEachFeature: onEachFeature}).addTo(map);
 
 function getColor(d) {
@@ -58,27 +61,7 @@ function onEachFeature(feature, layer) {
         click: zoomToFeature
     });
 }
-
-var info = L.control();
-
-info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this.update();
-    return this._div;
-};
-
-// method that we will use to update the control based on feature properties passed
-info.update = function (props) {
-    this._div.innerHTML = '<h4>Amount of IATI projects</h4>' +  (props ?
-        '<b>' + props.name + '</b><br />' + props.projects + ' projects'
-        : 'Hover over a country');
-};
-
-info.addTo(map);
-
-
-
-
+/*
 var legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function (map) {
@@ -98,6 +81,7 @@ legend.onAdd = function (map) {
 };
 
 legend.addTo(map);
+*/
 
 
 //for (var key in countryloc){

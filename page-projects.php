@@ -10,7 +10,7 @@ Template Name: Projects page
 <?php get_template_part( "project", "filters" ); ?>
 <?php get_template_part( "map" ); ?>
 
-<div class="page-wrapper">
+<div id="page-wrapper">
 
 	<div class="page-header page-header-less-margin">
 		<div class="container">
@@ -60,7 +60,20 @@ Template Name: Projects page
 	<div class="container">
 		<div class="page-content">
 
-			<?php get_template_part( "projects", "description" ); ?></div>
+			<?php get_template_part( "projects", "description" ); ?>
+		
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div id="pagination">
+					<?php wp_generate_paging($meta); ?>
+				</div>
+			</div>
+		</div>
+
+
+
+		</div>
 	</div>
 </div>
 

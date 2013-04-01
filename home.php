@@ -2,7 +2,7 @@
 
 <?php get_template_part( "map" ); ?>
 
-<div class="page-wrapper">
+<div id="page-wrapper">
 	<div class="container">
 		<div class="page-content">
 			<div class="row-fluid postit-page">

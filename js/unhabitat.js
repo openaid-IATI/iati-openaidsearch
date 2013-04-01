@@ -1,3 +1,7 @@
+// XXXXXXXXXXXXX PROJECT PAGE XXXXXXXXXXXXX
+
+
+// plus - min button in project description 
 jQuery(function($){
   $('.project-expand-button').click(function(e){
     // TO DO: show the whole description.
@@ -22,6 +26,8 @@ jQuery(function($){
 
 
 
+
+// XXXXXXX PROJECT DETAIL PAGE XXXXXXXXXXX
 
 jQuery(function($) {
 
@@ -73,6 +79,9 @@ jQuery(function($) {
 });
 
 
+// XXXXXXX MAP (GLOBAL) XXXXXXXXXXX
+
+
 jQuery(function($) {
 
 	$('#map-hide-show-button').click(function(){
@@ -89,16 +98,16 @@ jQuery(function($) {
   	function hide_map()
   	{
 	  	$('#map-hide-show-button').removeClass('map-show');
-		$('#map-hide-show-button').addClass('map-hide');
-		$('#map-hide-show-text').html("SHOW MAP");
-		animate_map('13.5em');
+  		$('#map-hide-show-button').addClass('map-hide');
+  		$('#map-hide-show-text').html("SHOW MAP");
+  		animate_map('13.5em');
   	}
 
   	function show_map(){
 	  	$('#map-hide-show-button').removeClass('map-hide');
-		$('#map-hide-show-button').addClass('map-show');
-		$('#map-hide-show-text').html("HIDE MAP");
-		animate_map('45em');
+  		$('#map-hide-show-button').addClass('map-show');
+  		$('#map-hide-show-text').html("HIDE MAP");
+  		animate_map('45em');
   	}
 
   	function animate_map(mapheight){
@@ -109,7 +118,10 @@ jQuery(function($) {
 		});
   	}
 
-	$('.project-filter-button').click(function(){
+// XXXXXXX MAP FILTERS XXXXXXXXXXX
+
+
+	$('.filter-button').click(function(){
 
 		if ($('#map-filter-overlay').is(":hidden")){
 			
@@ -117,11 +129,11 @@ jQuery(function($) {
 				show_map();
 			}
 
-			$('#map-filter-overlay').show('slow');
+			$('#map-filter-overlay').show("blind", { direction: "vertical" }, 1000);
 
 		} else {
 			// save selection?
-			$('#map-filter-overlay').hide('slow');
+			$('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
 		}
 		
 	});
@@ -138,4 +150,5 @@ jQuery(function($) {
 		$('#map-filter-overlay').hide('slow');
 	});
 });
+
 

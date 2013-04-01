@@ -56,5 +56,18 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/countries_loc.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/unhabitatmap.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/unhabitat.js"></script>
+
+
+<?php if (is_page('indicators') or is_page('city-prosperity')) {
+	echo '<script src="https://www.google.com/jsapi"></script>';
+	echo '<script src="' . get_template_directory_uri() . '/js/jquery-ui.js"></script>';
+	echo '<script src="' . get_template_directory_uri() . '/js/indicators.js"></script>';
+} ?>
+
+<?php if (is_page('project')) {echo '<script src="' . get_template_directory_uri() . '/js/map_project_page.js"></script>';} ?>
+
+
+<script src="<?php echo get_template_directory_uri(); ?>/js/script.js"></script>
+
 </body>
 </html>

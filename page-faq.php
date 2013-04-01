@@ -8,7 +8,7 @@ Template Name: FAQ page
 
 <?php get_template_part( "map" ); ?>
 
-<div class="page-wrapper">
+<div id="page-wrapper">
 	<div class="page-header">
 		<div class="container">
 			<div class="row-fluid">

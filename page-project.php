@@ -16,41 +16,49 @@ $activity = wp_get_activity($project_id);
 <?php get_template_part( "project", "filters" ); ?>
 <?php get_template_part( "map" ); ?>
 
-<div class="page-wrapper">
+<div id="page-wrapper">
+
 	<div class="container">
-		<div class="page-content">
-
-			<div class="row-fluid">
-				<div class="span12">
-					<button class="project-back-button">BACK TO SEARCH RESULTS</button>
-
-				</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<button class="project-back-button">BACK TO SEARCH RESULTS</button>
 			</div>
+		</div>
+	</div>
 
-			<div class="row-fluid">
-				<div class="span12 project-navbar">
-					<ul class="nav nav-pills">
-						<li class="active">
-							<a id="project-description-link" href="#project-description">Description</a>
-						</li>
-						<li>
-							<a id="project-commitments-link" href="#project-commitments">Commitments</a>
-						</li>
-						<li>
-							<a id="project-documents-link" href="#project-documents">Documents</a>
-						</li>
-						<li>
-							<a id="project-related-projects-link" href="#project-related-projects">Related projects</a>
-						</li>
-						<li>
-							<a id="project-related-indicators-link" href="#project-related-indicators">Related indicators</a>
-						</li>
-						<li>
-							<a id="project-located-in-link" href="#project-located-in">Located in</a>
-						</li>
-					</ul>
-				</div>
+	<div class="page-full-width-line"></div>
+
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span12 project-navbar">
+				<ul class="nav nav-pills">
+					<li class="active">
+						<a id="project-description-link" href="#project-description">Description</a>
+					</li>
+					<li>
+						<a id="project-commitments-link" href="#project-commitments">Commitments</a>
+					</li>
+					<li>
+						<a id="project-documents-link" href="#project-documents">Documents</a>
+					</li>
+					<li>
+						<a id="project-related-projects-link" href="#project-related-projects">Related projects</a>
+					</li>
+					<li>
+						<a id="project-related-indicators-link" href="#project-related-indicators">Related indicators</a>
+					</li>
+					<li>
+						<a id="project-located-in-link" href="#project-located-in">Located in</a>
+					</li>
+				</ul>
 			</div>
+		</div>
+	</div>
+
+	<div class="page-full-width-line"></div>
+
+	<div class="container">
+		<div class="page-content project-page-content">
 			<div class="row-fluid">
 				<div class="span7 project-tabs-wrapper">
 
@@ -220,5 +228,27 @@ $activity = wp_get_activity($project_id);
 			</div>
 		</div>
 	</div>
+	</div>
+
+
+
+	<script type="text/javascript">
+
+	// PREPARE COUNTRIES FOR SHOWING ON MAP
+
+		<?php if(!empty($activity->recipient_country)) {
+			$sep = '';
+			$countries = "";
+			foreach($activity->recipient_country AS $country) {
+				$countries .=  $sep . '"' . $country->name . '"';
+				$sep = ', ';
+			}
+		}
+		?>
+
+		var project_countries = new Array(<?php echo $countries; ?>);
+
+	</script>
+
 
 	<?php get_footer(); ?>

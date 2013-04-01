@@ -52,7 +52,7 @@ body {
   line-height: 100%;
 }
 
-.page-wrapper{
+#page-wrapper{
     background-color: #F1EEE8;
     position: relative;
     z-index: 2;
@@ -84,6 +84,14 @@ a:hover, a:focus{
 .page-content{
   margin-bottom: 4em;
 }
+
+h2{
+  font-family: "HelveticaNeueW01-45Ligh";
+  font-size: 2.1em;
+  line-height: 1.2em;
+  margin-bottom:0.5em;
+}
+
 
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX GLOBAL PAGE HEADER XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -207,7 +215,7 @@ input[type="text"]{
 
 .navbar-static-top.navbar .nav > li > a {
     font-size: 1.29em;
-    padding: 1.68em 0.8em;
+    padding: 1.70em 0.8em;
 }
 
 .navbar-static-top .active a{
@@ -223,7 +231,7 @@ input[type="text"]{
 }
 
 .navbar-static-top .nav > li > a:hover, .navbar-static-top .nav > li > a:focus {
-    color: #CCC;    
+    background-color: #CCC;    
 }
 
 .footer .nav > li > a:hover, .footer .nav > li > a:focus {
@@ -299,30 +307,36 @@ input[type="text"]{
   background-position: -96px 0;
 }
 
+
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FILTER CONTAINER XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
-#project-filter-wrapper{
+#project-filter-wrapper, #indicator-filter-wrapper{
   position: relative;
   z-index: 4;
   -moz-box-shadow: 0px 2px 3px #BBB;
   -webkit-box-shadow: 0px 2px 3px #BBB;
   box-shadow: 0px 2px 3px #BBB;
+  background: #F1EEE8;
 }
 
-.project-filter-by{
+.project-filter, .indicator-filter{
+  height:5.72em;
+}
+
+.filter-by{
   position: relative;
   float: left;
   margin-top: 2em;
   margin-right: 3em;
 }
 
-.project-filter-name{
+.filter-name{
   float: left;
   padding: 0.3em 0.5em 0.3em 0;
   width: 7em;
 }
 
-.project-filter-button{
+.filter-button{
   float: left;
   background: #F9F9F7;
   color: #5D706E;
@@ -335,17 +349,17 @@ input[type="text"]{
   font-size: 0.86em;
 }
 
-.project-filter-button-icon{
+.filter-button-icon{
   position: absolute;
   background-image:url('images/order-icon.png');
   background-repeat:no-repeat;
   width: 8px;
   height:17px;
-  top:6px;
-  right:9px;
+  top:0.4em;
+  right:0.7em;
 }
 
-.project-filter-button:hover, .project-filter-button:focus{
+.filter-button:hover, .filter-button:focus{
   background: #8a8a7b; /* Old browsers */
   background: -moz-linear-gradient(top, #8a8a7b 0%, #6d6d5e 42%, #464637 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8a8a7b), color-stop(42%,#6d6d5e), color-stop(100%,#464637)); /* Chrome,Safari4+ */
@@ -445,6 +459,10 @@ input[type=checkbox] {
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX MAP XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
+#map-graph-wrapper .row-fluid .span12{
+  min-height: 0;
+  position: relative;
+}
 
 #map-wrapper{
   position: relative;
@@ -453,6 +471,48 @@ input[type=checkbox] {
   -moz-box-shadow: 0 8px 6px -6px #979791;
   box-shadow: 0 8px 6px -6px #979791;
 }
+
+#map-graph-buttons{
+  position:absolute;
+  top: 0;
+  right:0;
+  z-index: 1100;
+}
+
+.map-graph-text{
+  text-align: left;
+  width: 5.7em;
+}
+
+#map-graph-buttons a{
+  background-image: url('images/map-graph-buttons.png');
+  width: 107px;
+  height: 25px;
+  margin-top:0.4em;
+  float:left;
+  clear: both;
+}
+
+#map-graph-buttons a:hover{
+  background-image: url('images/map-graph-buttons-hover.png');
+}
+
+#map-graph-buttons #graph-button-map{
+  margin-top: 1.2em;
+}
+
+#graph-button-graph{
+  background-position: 0 -25px;
+}
+
+#graph-button-table{
+  background-position: 0 -50px;
+}
+
+#graph-button-treemap{
+  background-position: 0 -75px;
+}
+
 
 #map { 
     height: 45em; 
@@ -516,8 +576,10 @@ input[type=checkbox] {
     display: block;
 }
 
-#map-hide-show-button:hover, #map-hide-show-button:focus{
+#map-hide-show-button:hover{
   opacity:0.60;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
 }
 
 .hide-show-icon{
@@ -556,6 +618,88 @@ input[type=checkbox] {
 label, input, button, select, textarea{ 
     font-size: 100%;
 }
+
+#map-border-bottom{
+  position: absolute;
+  height: 0.3em;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
+  opacity: 60;
+  background-color: #777;
+  width: 100%;
+  bottom: 0;
+}
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX MAP INDICATOR PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+#map-timeline-wrapper{
+  position: absolute;
+  height: 4em;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 1500;
+}
+
+.slider-year{
+  float:left;
+  background-color: #000;
+  height: 100%;
+  width:1%;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+  filter: alpha(opacity=40);
+  opacity: 0.4;
+}
+
+.slider-year:hover{
+  background-color: #B20000;
+  opacity: 0.9;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+  filter: alpha(opacity=90);
+}
+
+.slider-year-inner-white{
+  background-color: #FFF;
+  width: 2px;
+  float: right;
+  height:100%;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: alpha(opacity=70);
+  opacity: 0.7;
+}
+
+.slider-active{
+  background-color:#D3F101;
+
+}
+
+.slider-active:hover{
+    background-color: #D3F101;
+  opacity: 0.9;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+  filter: alpha(opacity=90);
+}
+
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX INDICATOR PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+#treemap-placeholder{
+  display: none;
+  height: 45em;
+  width:100%;
+  background-color:#F1EEE8;
+}
+
+#line-chart-placeholder, #table-chart-placeholder{
+  margin-top: 20px;
+}
+
+
+
+
+
+
+
+
 
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAQ AND HOME PAGE POST-ITS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -633,18 +777,9 @@ label, input, button, select, textarea{
   padding: 2% 7.2% 2% 3.8%;
   margin-left: auto;
   margin-right: auto;
+  line-height:1.5em;
 }
 
-
-/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECT FILTERS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
-#project-filter-wrapper{
-  background: #F1EEE8;
-}
-
-.project-filter{
-  height:5.72em;
-
-}
 
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECTS OVERVIEW XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -728,7 +863,6 @@ label, input, button, select, textarea{
   float: right;
 }
 
-
 .projects-sort-text, .projects-pagination-info{
   color: #797974; 
 }
@@ -758,16 +892,30 @@ label, input, button, select, textarea{
   margin-bottom: 3em;
 }
 
+/* pagination */
+#pagination ul {list-style: none; display: inline-block; float: none;}
+#pagination { margin:20px auto 10px auto; text-align:center; }
+.pagination li{ float:left;}
+.pagination li a{ padding:2px 5px; margin:0 5px; display:block; color:#595959;}
+.pagination li span{display:block; padding:0px 3px;}
+.pagination li a.start,.pagination li a.limitstart, .pagination li a.endmilit, .pagination li a.end{ background:#a8b6ae; color:#fff; padding:0px 5px 4px 5px;}
+.pagination li a.active{ background:#42604f;color:#fff;}
+.pagination li a.start,.pagination li a.limitstart, .pagination li a.endmilit, .pagination li a.end,.pagination li a.active{-moz-border-radius: 2px; -webkit-border-radius: 2px; -khtml-border-radius: 2px; border-radius: 2px; behavior: url(http://localhost/Open-UNH/HTML/css/border-radius.htc);}
+
+
+
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECT DETAILED DESCRIPTION PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 .project-back-button{
   color: #797972;
 }
 
-.project-navbar{
-  border-top: 1px solid #CCCCCC;
-  border-bottom: 1px solid #CCCCCC;
-  margin-bottom: 1.5em;
+.page-full-width-line{
+  border-bottom: 1px solid #CCC;
+}
+
+.project-page-content{
+  margin-top: 1.5em;
 }
 
 .project-navbar .nav{
@@ -789,14 +937,6 @@ label, input, button, select, textarea{
 #project-commitments, #project-documents, #project-related-projects, #project-related-indicators, #project-located-in{
   display: none;
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -921,7 +1061,7 @@ label, input, button, select, textarea{
     @media (min-width: 980px) and (max-width: 1439px) {
 
     body {
-      font-size:8px;
+      font-size:9px;
     }
 
     } 
@@ -931,7 +1071,7 @@ label, input, button, select, textarea{
     @media (min-width: 768px) and (max-width: 979px) { 
 
     body {
-      font-size:8px;
+      font-size:9px;
     }
 
 

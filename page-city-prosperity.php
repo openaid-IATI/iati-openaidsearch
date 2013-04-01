@@ -6,9 +6,10 @@ Template Name: Publishing policy page
 
 <?php get_header(); ?>
 
-<?php get_template_part( "map" ); ?>
+<?php get_template_part( "cpi", "filters" ); ?>
+<?php get_template_part( "map-indicator-page" ); ?>
 
-<div class="page-wrapper">
+<div id="page-wrapper">
 	<div class="page-header page-header-less-margin">
 		<div class="container">
 			<div class="row-fluid">

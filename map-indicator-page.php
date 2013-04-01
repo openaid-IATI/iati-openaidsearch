@@ -1,5 +1,30 @@
 <div id="map-wrapper">
     
+    <!-- The 4 graph buttons in right top --> 
+    <div id="map-graph-wrapper" class="container">
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="map-graph-buttons">
+                    <a href="#" class="hneue-bold" id="graph-button-map"></a>
+                    <a href="#" class="hneue-bold" id="graph-button-graph"></a> 
+                    <a href="#" class="hneue-bold" id="graph-button-table"></a>
+                    <a href="#" class="hneue-bold" id="graph-button-treemap"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="map-timeline-wrapper">
+        <?php for ($i = 0; $i < 100;$i++){   
+        echo '<div class="slider-year';
+        if($i > 50 && $i < 70){ echo ' slider-active'; }
+        echo '" id="year-' . $i . '">';
+        echo '<div class="slider-year-inner-white"></div></div>'; 
+        } ?>
+    </div>
+
+
+    <!-- The black overlay for filtering options --> 
 	<div id="map-filter-overlay">
         <div class="container">
 
@@ -63,11 +88,8 @@
                                         
                             <?php $c++;?>
                             <?php endforeach;?>
-            </div>
-                                
-				
+                </div>
 			</div>
-
 		</div>
 
 		<div id="map-filters-buttons">
@@ -84,8 +106,9 @@
 		</div>
 
 	</div>
+    <!-- treemap visualization placeholder, TO DO: load dynamically on click, no preloading of the treemap -->
+    <div id="treemap-placeholder"></div>
 	<div id="map"></div>
-    <div id="map-border-bottom"></div>
 </div>
 
 <div id="map-hide-show">
