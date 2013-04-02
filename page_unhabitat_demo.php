@@ -232,6 +232,7 @@ $(document).ready(function() {
         console.log('<?php echo $i['country_iso3'] ?>'+err);
       }
           try{
+              
             var circle = L.circle(new L.LatLng(countryloc['<?php echo $i['country_iso'] ?>'].longitude, countryloc['<?php echo $i['country_iso'] ?>'].latitude), <?php echo sqrt(($factor * $i[$selected_indicator])/pi()); //echo round($factor * $i['population']); ?>, {
               color: 'red',
              weight: '0',

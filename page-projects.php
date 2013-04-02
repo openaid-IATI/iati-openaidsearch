@@ -80,3 +80,35 @@ Template Name: Projects page
 </div>
 
 <?php get_footer(); ?>
+        <?php $projects = wp_get_activity();// print_r($projects);?>
+<script type="text/javascript">
+    $(document).ready(function() {
+//            jsonPath(countryData, "$..features[?(@.id=='AFG')]")[0].properties.projects = 2444;
+        <?php foreach($projects as $i) :?>
+                <?php if (!empty($i['recipient_country'])) :?>
+        try
+        
+        {   
+            var iso3 = jsonPath(country_info, "$[?(@.ISO2=='<?php echo $i['recipient_country'][0]['iso'] ?>')]")[0].ISO3
+            
+            jsonPath(countryData, "$..features[?(@.id=='"+ iso3 +"')]")[0].properties.projects = '1000';//Run some code here
+        }
+        catch(err)
+        {
+            console.log('<?php echo $i['recipient_country'][0]['iso'] ?>'+err);
+        }
+            <?php endif ?>
+        <?php endforeach;?>
+        
+        L.geoJson(countryData, {style: style,onEachFeature: function(feature,layer) {
+                  layer.bindPopup(feature.properties.projects + " " + feature.id);
+              }}).addTo(map);
+        
+//        var popup = L.popup()
+//    .setLatLng(latlng)
+//    .setContent('<p>Hello world!<br />This is a nice popup.</p>')
+//    .openOn(map);
+        
+    });
+</script>
+
