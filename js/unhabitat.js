@@ -108,20 +108,52 @@ jQuery(function($) {
   		$('#map-hide-show-button').addClass('map-hide');
   		$('#map-hide-show-text').html("SHOW MAP");
   		animate_map('13.5em');
-  		$('#map-lightbox').hide();
-		$('#map-lightbox-bg').hide();
+  		hide_map_homepage();
   	}
+
+
 
   	function show_map(){
 	  	$('#map-hide-show-button').removeClass('map-hide');
   		$('#map-hide-show-button').addClass('map-show');
   		$('#map-hide-show-text').html("HIDE MAP");
   		animate_map('45em');
+  		show_map_homepage();
   	}
 
   	function animate_map(mapheight){
   		$('#map').animate({
 				height: mapheight
+			}, 1000, function() {
+			// Animation complete.
+		});
+  	}
+
+  	  	function hide_map_homepage(){
+  		$('#map-lightbox').animate({
+				fontSize: "0.7em",
+				top: "3em"
+			}, 1000, function() {
+			// Animation complete.
+		});
+		$('#map-lightbox-bg').animate({
+				fontSize: "0.7em",
+				top: "3em"
+			}, 1000, function() {
+			// Animation complete.
+		});
+  	}
+
+  	function show_map_homepage(){
+  		$('#map-lightbox').animate({
+				fontSize: "1em",
+				top: "10.5em"
+			}, 1000, function() {
+			// Animation complete.
+		});
+		$('#map-lightbox-bg').animate({
+				fontSize: "1em",
+				top: "10.5em"
 			}, 1000, function() {
 			// Animation complete.
 		});
