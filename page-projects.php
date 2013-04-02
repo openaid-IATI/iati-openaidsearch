@@ -84,6 +84,7 @@ Template Name: Projects page
 <script type="text/javascript">
     $(document).ready(function() {
 //            jsonPath(countryData, "$..features[?(@.id=='AFG')]")[0].properties.projects = 2444;
+        var countries = new Array();
         <?php foreach($projects as $i) :?>
                 <?php if (!empty($i['recipient_country'])) :?>
         try
@@ -92,6 +93,7 @@ Template Name: Projects page
             var iso3 = jsonPath(country_info, "$[?(@.ISO2=='<?php echo $i['recipient_country'][0]['iso'] ?>')]")[0].ISO3
             
             jsonPath(countryData, "$..features[?(@.id=='"+ iso3 +"')]")[0].properties.projects = '1000';//Run some code here
+            countries.push("<?php echo $i['recipient_country'][0]['name'] ?>");
         }
         catch(err)
         {
@@ -99,9 +101,16 @@ Template Name: Projects page
         }
             <?php endif ?>
         <?php endforeach;?>
-        
+        console.log(countries);
+        $.each(countries, function(index, value){
+            var html = '<div class="squaredThree">';
+            html += '<input type="checkbox" value="None" id="" name="check" />';
+            html += '<label class="map-filter-cb-value" for="land"></label>';
+            html += '<span>'+value+'</span></div>'; 
+            $('#filters').html(html);
+        });
         L.geoJson(countryData, {style: style,onEachFeature: function(feature,layer) {
-                  layer.bindPopup(feature.properties.projects + " " + feature.id);
+                  layer.bindPopup("How to get the total of projects per country?");
               }}).addTo(map);
         
 //        var popup = L.popup()

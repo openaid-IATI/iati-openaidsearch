@@ -51,6 +51,7 @@
 </div>
 
 <script src="http://code.jquery.com/jquery.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/jquery-ui.js"></script>;
 <script src="<?php echo get_template_directory_uri(); ?>/js/leaflet.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/countries.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/countries_loc.js"></script>
@@ -60,8 +61,9 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/countries_isos.js"></script>
 
 <?php if (is_page('indicators') or is_page('city-prosperity')) {
-	echo '<script src="https://www.google.com/jsapi"></script>';
-	echo '<script src="' . get_template_directory_uri() . '/js/jquery-ui.js"></script>';
+	
+    echo '<script src="https://www.google.com/jsapi"></script>';
+	
 	echo '<script src="' . get_template_directory_uri() . '/js/indicators.js"></script>';
 } ?>
 
