@@ -13,22 +13,33 @@ jQuery(function($) {
     min: 1950,
     max: 2050,
     value: 2013,
-    slide: change_tooltip
+    slide: slide_tooltip,
+    change: change_tooltip
   });
 
   $( "#map-slider-tooltip a" ).append("2013");
+  $( "#year-2013").addClass("active");
 
   function change_tooltip(event, ui){
     $( "#map-slider-tooltip a" ).text(ui.value);
   }
 
+  function slide_tooltip(event, ui){
+    $( "#map-slider-tooltip a" ).text(ui.value);
+    $( ".slider-year").removeClass("active");
+    $( "#year-" + ui.value).addClass("active");
+   // $( "#year-" + (ui.value+1)).removeClass("active");
+   // $( "#year-" + (ui.value-1)).removeClass("active");
+  }
 
-
-
-
-
-
-
+  $(".slider-year").hover(
+    function() {
+      var curId = $(this).attr('id');
+      var curYear = curId.replace("year-", "");
+      $( "#map-slider-tooltip" ).slider( "option", "value", curYear); 
+      $( ".slider-year").removeClass("active");
+      $(this).addClass("active");
+  });
 
 
 

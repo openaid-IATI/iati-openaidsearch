@@ -56,13 +56,15 @@ Template Name: Projects page
 			</div>
 		</div>
 	</div>
-
-	<div class="container">
-		<div class="page-content">
+	<div class="page-content">
+		
+		
 
 			<?php get_template_part( "projects", "description" ); ?>
 		
 
+
+		<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
 				<div id="pagination">

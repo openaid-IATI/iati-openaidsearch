@@ -31,7 +31,7 @@
                 </a>
 
                 <div class="nav-collapse collapse">
-                <ul class="nav hneue-medium">
+                <ul class="nav">
                     <li <?php if (is_home()) {echo 'class="active"';} ?>><a class="navbar-home-link" href="<?php echo site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/home.png" alt="" /></a></li>
                     <li <?php if (is_page('projects')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/projects/">Projects</a></li>
                     <li <?php if (is_page('indicators')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/indicators/">Indicators</a></li>

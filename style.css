@@ -62,7 +62,6 @@ button {
     border: none;
     margin: 0px;
     padding: 0px;
-
 }
 
 .hneue-bold{
@@ -82,7 +81,7 @@ a:hover, a:focus{
 }
 
 .page-content{
-  margin-bottom: 4em;
+  padding-bottom: 4em;
 }
 
 h2{
@@ -459,6 +458,42 @@ input[type=checkbox] {
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX MAP XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
+
+
+#selection-hide-show{
+    background-color: #F1EEE8;
+}
+
+#selection-hide-show-button{
+    position: absolute;
+    left: 9em;
+    top: 0;
+    background-color: #000;
+    color: #E5E5E3;
+    border: none;
+    padding: 2px 10px 2px 4px;
+    opacity:0.48;
+    filter:alpha(opacity=48); /* For IE8 and earlier */
+    display: block;
+    z-index: 1500;
+}
+
+#selection-hide-show-button:hover{
+  opacity:0.60;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
+}
+
+#selection-hide-show .span12{
+  min-height: 0;
+}
+
+#selection-hide-show .container{
+  position: relative;
+}
+
+
+
 #map-graph-wrapper .row-fluid .span12{
   min-height: 0;
   position: relative;
@@ -632,10 +667,11 @@ label, input, button, select, textarea{
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX MAP INDICATOR PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
+
 /* the real slider tooltip drawing */
 #map-slider-tooltip{
   position: absolute;
-  height: 3em;
+  height: 0.1em;
   width: 100%;
   bottom: 4em;
   left: 0;
@@ -643,8 +679,8 @@ label, input, button, select, textarea{
 }   
 
 .ui-slider-horizontal .ui-slider-handle{
-  margin-left: -0.6em;
-  top: -0.3em;
+  margin-left: -1.3em;
+  bottom:0.4em;
   border: 1px solid #D3D3D3;
   background-color: white;
   color: #505D59;
@@ -653,6 +689,33 @@ label, input, button, select, textarea{
   position: absolute;
   z-index: 2;
   padding: 0.5em;
+
+   -webkit-box-shadow:0 6px 9px rgba(0, 0, 0, 0.7);
+   -moz-box-shadow:0 6px 9px rgba(0, 0, 0, 0.7);
+   box-shadow:0 6px 9px rgba(0, 0, 0, 0.7);
+}
+
+.ui-slider-handle:before {
+  position: absolute;
+  display: inline-block;
+  border-left: 0.6em solid transparent;
+  border-top: 1.3em solid #FFF;
+  border-right: 0.6em solid transparent;
+  left: 1.02em;
+  top: 1.65em;
+  content: '';
+
+}
+
+.ui-slidefwfr-handle:after {
+  position: absolute;
+  display: inline-block;
+  border-top: 6px solid transparent;
+  border-right: 6px solid #eee;
+  border-bottom: 6px solid transparent;
+  left: -12px;
+  top: 21px;
+  content: '';
 }
 
 
@@ -676,7 +739,7 @@ label, input, button, select, textarea{
   opacity: 0.4;
 }
 
-.slider-year:hover{
+.slider-year.active{
   background-color: #B20000;
   opacity: 0.9;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
@@ -695,10 +758,9 @@ label, input, button, select, textarea{
 
 .slider-active{
   background-color:#D3F101;
-
 }
 
-.slider-active:hover{
+.slider-year.slider-active.active{
   background-color: #D3F101;
   opacity: 0.9;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
@@ -809,6 +871,10 @@ label, input, button, select, textarea{
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECTS OVERVIEW XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
+.projects-project-block{
+  border-bottom: 1px solid #CCC;
+}
+
 .row-fluid [class*="span"]{
   min-height:24px;
 }
@@ -816,7 +882,6 @@ label, input, button, select, textarea{
 .projects-description{
   padding-top: 1.8em;
   padding-bottom: 2em;
-  border-bottom: 1px solid #ccc;
 }
 
 .projects-description .span5{

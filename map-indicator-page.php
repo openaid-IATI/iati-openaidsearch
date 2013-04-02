@@ -1,5 +1,24 @@
 <div id="map-wrapper">
     
+
+
+
+    <!-- Show selection button --> 
+    <div id="selection-hide-show">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="selection-box-wrapper">
+                        <div id="selection-box">
+
+                        </div>
+                        <button id="selection-hide-show-button" class="selection-show"><img class="hide-show-icon" src="<?php echo get_template_directory_uri(); ?>/images/hide-show.png" alt="" /><span id="selection-hide-show-text" class="hneue-bold">SHOW SELECTION</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- The 4 graph buttons in right top --> 
     <div id="map-graph-wrapper" class="container">
         <div class="row-fluid">
@@ -15,13 +34,13 @@
     </div>
 
     <div id="map-slider-tooltip">
-        
+
     </div>
 
     <div id="map-timeline-wrapper">
-        <?php for ($i = 0; $i < 100;$i++){   
+        <?php for ($i = 1950; $i < 2050;$i++){   
         echo '<div class="slider-year';
-        if($i > 50 && $i < 70){ echo ' slider-active'; }
+        if($i > 2000 && $i < 2013){ echo ' slider-active'; }
         echo '" id="year-' . $i . '">';
         echo '<div class="slider-year-inner-white"></div></div>'; 
         } ?>
