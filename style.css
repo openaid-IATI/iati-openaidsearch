@@ -230,7 +230,7 @@ input[type="text"]{
 }
 
 .navbar-static-top .nav > li > a:hover, .navbar-static-top .nav > li > a:focus {
-    background-color: #CCC;    
+    background-color: #008DCD;    
 }
 
 .footer .nav > li > a:hover, .footer .nav > li > a:focus {
@@ -458,7 +458,72 @@ input[type=checkbox] {
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX MAP XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
+/* homepage only */
+#map-lightbox-bg{
+  background-color: #000;
+  opacity:0.70;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: alpha(opacity=70);
+  border-radius: 7px;
+}
 
+#map-lightbox, #map-lightbox-bg{
+  position: absolute;
+  top: 10.5em;
+  left: 6.5em;
+  display: block;
+  width: 44em;
+  height: 14em;
+  z-index: 1500;
+}
+
+#map-lightbox-close{
+  background-image: url('images/lightbox-close.png');
+  width: 15px;
+  height: 15px;
+  display: block;
+  position: absolute;
+  top:0.4em;
+  right: 0.4em;
+  background-color: transparent;
+}
+
+#map-lightbox, #map-lightbox a{
+  color: #F1EEE8;
+}
+
+.map-lightbox-title{
+  font-size: 1.2em;
+  padding-bottom: 0.4em;
+}
+
+#map-lightbox-text, #map-lightbox a{
+  font-size: 1.6em;
+}
+
+#map-lightbox-text{
+  padding-left: 1.2em;
+  padding-top: 1.4em;
+}
+
+#map-lightbox a{
+  float:left;
+  margin-left: 1.2em;
+  margin-top: 1em;
+  padding: 0.8em 1.6em;
+  border-radius: 7px;
+  background: #2cac00; /* Old browsers */
+  background: -moz-linear-gradient(top, #82dc82 0%, #2cac00 38%, #56aa38 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#82dc82), color-stop(38%,#2cac00), color-stop(100%,#56aa38)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #82dc82 0%,#2cac00 38%,#56aa38 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #82dc82 0%,#2cac00 38%,#56aa38 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #82dc82 0%,#2cac00 38%,#56aa38 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #82dc82 0%,#2cac00 38%,#56aa38 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82dc82', endColorstr='#56aa38',GradientType=0 ); /* IE6-9 */
+}
+
+
+/* global */
 
 #selection-hide-show{
     background-color: #F1EEE8;
@@ -839,6 +904,17 @@ label, input, button, select, textarea{
  .postit-text{
   font-size: 1.21em;
   line-height: 1.2em;
+ }
+
+ .postit-text img{
+  display: block;
+  margin-bottom: 1em;
+ }
+
+ .postit-thumb img{
+  padding-top: 1em;
+  display: block;
+  margin: 0 auto;
  }
 
  .postit-page .span4{

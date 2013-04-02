@@ -1,10 +1,22 @@
 <div id="map-wrapper">
     
+    
     <div id="selection-hide-show">
         <div class="container">
             <div class="row-fluid">
                 <div class="span12">
                     <button id="selection-hide-show-button" class="selection-show"><img class="hide-show-icon" src="<?php echo get_template_directory_uri(); ?>/images/hide-show.png" alt="" /><span id="selection-hide-show-text" class="hneue-bold">SHOW SELECTION</span></button>
+                    <?php if(is_home()){ ?>
+                        <div id="map-lightbox-bg"></div>
+                        <div id="map-lightbox" class="hneue-light">
+                            <div id="map-lightbox-text">
+                                <p class="map-lightbox-title">Publicly available open data.</p>
+                                <p>Information about UN-Habitats projects and programmes.</p>
+                            </div>
+                            <button id="map-lightbox-close"></button>
+                            <a href="/projects/?hide_map=true">All projects</a>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

@@ -84,6 +84,13 @@ jQuery(function($) {
 
 jQuery(function($) {
 
+	$('#map-lightbox-close').click(function(){
+		$('#map-lightbox').hide();
+		$('#map-lightbox-bg').hide();
+	});
+
+
+
 	$('#map-hide-show-button').click(function(){
 		if($(this).hasClass("map-show")){
 			if ($('#map-filter-overlay').is(":visible")){
@@ -101,6 +108,8 @@ jQuery(function($) {
   		$('#map-hide-show-button').addClass('map-hide');
   		$('#map-hide-show-text').html("SHOW MAP");
   		animate_map('13.5em');
+  		$('#map-lightbox').hide();
+		$('#map-lightbox-bg').hide();
   	}
 
   	function show_map(){

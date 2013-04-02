@@ -5,6 +5,9 @@ add_theme_support( 'menus' );
 
 register_sidebar(array('name' => 'Unhabitat pages'));
 
+add_theme_support( 'post-thumbnails' );
+
+
 function register_my_menus() {
   register_nav_menus(
     array(
