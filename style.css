@@ -632,6 +632,31 @@ label, input, button, select, textarea{
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX MAP INDICATOR PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
+/* the real slider tooltip drawing */
+#map-slider-tooltip{
+  position: absolute;
+  height: 3em;
+  width: 100%;
+  bottom: 4em;
+  left: 0;
+  z-index: 1600;
+}   
+
+.ui-slider-horizontal .ui-slider-handle{
+  margin-left: -0.6em;
+  top: -0.3em;
+  border: 1px solid #D3D3D3;
+  background-color: white;
+  color: #505D59;
+  font-size: 1.7em;
+  font-family: 'HelveticaNeueW01-75Bold';
+  position: absolute;
+  z-index: 2;
+  padding: 0.5em;
+}
+
+
+/* year blocks */
 #map-timeline-wrapper{
   position: absolute;
   height: 4em;
@@ -674,7 +699,7 @@ label, input, button, select, textarea{
 }
 
 .slider-active:hover{
-    background-color: #D3F101;
+  background-color: #D3F101;
   opacity: 0.9;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
   filter: alpha(opacity=90);

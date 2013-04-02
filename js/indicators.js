@@ -5,7 +5,36 @@
 
 jQuery(function($) {
  	  
-      
+
+// XXXXXXXXXXXXXX INDICATOR SLIDER XXXXXXXXXXXXXXXXX
+
+
+  $( "#map-slider-tooltip" ).slider({ 
+    min: 1950,
+    max: 2050,
+    value: 2013,
+    slide: change_tooltip
+  });
+
+  $( "#map-slider-tooltip a" ).append("2013");
+
+  function change_tooltip(event, ui){
+    $( "#map-slider-tooltip a" ).text(ui.value);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// XXXXXXXXXXXXXXXX INDICATOR GRAPHS XXXXXXXXXXXXXXXX 
       function drawTreemap() {
         // Create and populate the data table.
         var data = google.visualization.arrayToDataTable([

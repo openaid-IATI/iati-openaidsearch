@@ -14,6 +14,10 @@
         </div>
     </div>
 
+    <div id="map-slider-tooltip">
+        
+    </div>
+
     <div id="map-timeline-wrapper">
         <?php for ($i = 0; $i < 100;$i++){   
         echo '<div class="slider-year';
