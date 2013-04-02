@@ -29,8 +29,8 @@ function wp_generate_results_v2(&$objects, &$meta){
 	$activities_offset = 0;
 	if(isset($_REQUEST['offset'])){	$activities_offset = rawurlencode($_REQUEST['offset']);	}
 
-	$search_url = SEARCH_URL . "activities/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset;
-
+	$search_url = SEARCH_URL . "activities/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset."&organisations=41120";;
+        $search_url = wp_filter_request($search_url);
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
 	$meta = $result->meta;
@@ -327,14 +327,69 @@ function wp_generate_results($details, &$meta, &$projects_html, &$has_filter) {
 	$projects_html = $return;
 
 }
-
-function wp_get_activity($identifier) {
-	if(empty($identifier)) return null;
-	$search_url = SEARCH_URL . "activities/{$identifier}/?format=json";
+function wp_filter_request($search_url){
+    if(!empty($_REQUEST['countries'])) {
+		$countries = explode('|', trim($_REQUEST['countries']));
+		foreach($countries AS &$c) $c = trim($c);
+		$countries = implode('|', $countries);
+		$search_url .= "&countries={$countries}";
+		$has_filter = true;
+		if(!empty($srch_countries)) {
+			$search_url .= "|{$srch_countries}";
+		}
+	} else {
+		if(!empty($srch_countries)) {
+			$search_url .= "&countries={$srch_countries}";
+			$has_filter = true;
+		}
+		/*
+		if($has_filter!==true) {
+			$countries = $_COUNTRY_ISO_MAP;
+			unset($countries['WW']);
+			$search_url .= "&countries=" . implode('|', array_keys($countries));
+		}*/
+		
+	}
+	
+	if(!empty($_REQUEST['regions'])) {
+		$regions = explode('|', trim($_REQUEST['regions']));
+		foreach($regions AS &$c) $c = trim($c);
+		$regions = implode('|', $regions);
+		$search_url .= "&regions={$regions}";
+		$has_filter = true;
+	}
+	
+	if(!empty($_REQUEST['sectors'])) {
+		$sectors = explode('|', trim($_REQUEST['sectors']));
+		foreach($sectors AS &$c) $c = trim($c);
+		$sectors = implode('|', $sectors);
+		$search_url .= "&sectors={$sectors}";
+		$has_filter = true;
+	}
+	
+	if(!empty($_REQUEST['budgets'])) {
+		$budgets = explode('|', trim($_REQUEST['budgets']));
+		//Get the lowest budget from filter and use this one, all the other are included in the range
+		ksort($budgets);
+		$search_url .= "&statistics__total_budget__gt={$budgets[0]}";
+		$has_filter = true;
+	}
+        return $search_url;
+}
+function wp_get_activity() {
+//	if(empty($identifier)) return null;
+	$search_url = SEARCH_URL . "activities/?format=json&limit=20&organisations=41120";//
+        
+        $search_url = wp_filter_request($search_url);
+	
+	
 	
 	$content = file_get_contents($search_url);
-	$activity = json_decode($content);
-	return $activity;
+        
+	$result = json_decode($content);
+        $objects = $result->objects;
+	return objectToArray($objects);
+	
 
 }
 function wp_get_regions() {
