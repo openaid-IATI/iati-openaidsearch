@@ -56,6 +56,7 @@ body {
     background-color: #F1EEE8;
     position: relative;
     z-index: 2;
+    min-height: 45em;
 }
 
 button {
@@ -274,6 +275,7 @@ input[type="text"]{
   position: absolute;
   left: 0;
   bottom: 1.5em;
+  line-height: 1.2em;
 }
 
 #footer-social-media-wrapper{
@@ -327,34 +329,44 @@ input[type="text"]{
 
 .filter-by{
   position: relative;
-  float: left;
+  display: inline-block;
   margin-top: 2em;
-  margin-right: 3em;
+  margin-right: 2em;
 }
 
 .filter-name{
-  float: left;
+  display: inline-block;
   padding: 0.3em 0.5em 0.3em 0;
-  width: 7em;
+  vertical-align: middle;
 }
 
 .filter-button{
-  float: left;
-  background-color: #F9F9F7;
-  background-image: url('images/order-icon.png');
-  background-position: 90% center;
-  background-size: 0.68em auto;
-  background-repeat: no-repeat;
+  display: inline-block;
+  background: #F9F9F7;
   color: #5D706E;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -khtml-border-radius: 5px;
   border-radius: 5px;
   border: 1px solid #CCC;
-  padding:0.3em 5em 0.3em 1em;
+  padding:0.7em 1em 0.7em 1em;
   font-size: 0.86em;
+  vertical-align: middle;
 }
 
+.filter-text{
+  display: inline-block;
+  vertical-align: middle;
+  padding-right:4em;
+}
+
+.filter-button-icon{
+  display:inline-block;
+  vertical-align: middle;
+  background-image:url('images/order-icon.png');
+  width: 8px;
+  height:17px;
+}
 
 .filter-button:hover, .filter-button:focus{
   background: #8a8a7b; /* Old browsers */
@@ -800,7 +812,7 @@ label, input, button, select, textarea{
   border-top: 1.3em solid #FFF;
   border-right: 0.6em solid transparent;
   left: 1.02em;
-  top: 1.65em;
+  top: 1.6em;
   content: '';
 
 }
@@ -1058,23 +1070,31 @@ label, input, button, select, textarea{
 }
 
 .projects-pagination-info > div, .project-pagination-info > a{
-  float:left;
+  vertical-align: middle;
 }
 
 .pagination-totals{
+  display:inline-block;
   margin-right:1.5em;
 }
 
-.project-sort-type{
-  position: relative;
-  background-image: url('images/order-icon.png');
-  background-repeat: no-repeat;
-  background-position: right center;
-  background-size: 0.45em 1em;
-  min-height:1.25em;
+.project-sort-text, #save-search-results, #sort-type-header{
+  vertical-align: middle;
+}
+
+.project-sort-icon{
+  width:8px;
+  height:17px;  
+  display:inline-block;
+  background:url('images/order-icon.png');
+  vertical-align: middle;
+  margin-left: 0.1em;
+}
+
+.project-sort-type, #sort-type-header{
   display: inline-block;
-  padding-right: 1em;
   margin-right: 1.5em;
+  position: relative;
 }
 
 .dropdown-project{
@@ -1087,7 +1107,7 @@ label, input, button, select, textarea{
   -moz-box-shadow: 0 2px 3px #888;
   box-shadow: 0 2px 3px #888;
   z-index:1600;
-  padding: 0 0.5em 0.5em 0.7em;
+  padding: 0.4em 0.5em;
 }
 
 .dropdown-project button{
@@ -1226,15 +1246,10 @@ label, input, button, select, textarea{
 
 
 .share-text{
-  height:18px;
   margin-left:0.2em;
   margin-right:0.6em;
   color: #0086C8;
   font-size:0.85em;
-}
-
-.project-share-button div{
-  float:left;
 }
 
 .share-icon {
@@ -1264,23 +1279,21 @@ label, input, button, select, textarea{
   background-position: -90px 0;
 }
 
-/*
 .project-share-button{
-  position: relative;
-  background-image: url('images/order-icon.png');
-  background-repeat: no-repeat;
-  background-position: right center;
   display: inline-block;
-  padding-right: 0.6em;
-  height:1.2em;
-  margin-left:1.7em;
-}*/
+  margin-right: 0.4em;
+  position: relative;
+}
+
+.project-share-button > div{
+  vertical-align: middle;
+  display: inline-block;
+}
 
 .project-share-container{
   margin-top: 1em;
   margin-left:0.8em;
 }
-
 
 #dropdown-type-graph{
   background-color:#fff;
@@ -1326,6 +1339,10 @@ label, input, button, select, textarea{
 
     .navbar-static-top .input-large{
       width: 13em;
+    }
+
+    .filter-text{
+      padding-right:2em;
     }
 
     } 

@@ -12,7 +12,7 @@ function getColor(d) {
            d > 50   ? '#2B8CBE' :
            d > 20   ? '#74A9CF' :
            d > 10   ? '#BDC9E1' :
-                      '#F1EEF6';
+                      'transparent';
 }
 
 function style(feature) {
@@ -26,41 +26,41 @@ function style(feature) {
     };
 }
 
-function highlightFeature(e) {
-    var layer = e.target;
+// function highlightFeature(e) {
+//     var layer = e.target;
 
-    layer.setStyle({
-        weight: 3,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
+//     layer.setStyle({
+//         weight: 3,
+//         color: '#666',
+//         dashArray: '',
+//         fillOpacity: 0.7
+//     });
 
-    if (!L.Browser.ie && !L.Browser.opera) {
-        layer.bringToFront();
-    }
+//     if (!L.Browser.ie && !L.Browser.opera) {
+//         layer.bringToFront();
+//     }
 	
-	info.update(layer.feature.properties);
-}
+// 	info.update(layer.feature.properties);
+// }
 
-function resetHighlight(e) {
-    geojson.resetStyle(e.target);
-	info.update();
-}
+// function resetHighlight(e) {
+//     geojson.resetStyle(e.target);
+// 	info.update();
+// }
 
-var geojson;
+// var geojson;
 
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-}
+// function zoomToFeature(e) {
+//     map.fitBounds(e.target.getBounds());
+// }
 
-function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToFeature
-    });
-}
+// function onEachFeature(feature, layer) {
+//     layer.on({
+//         mouseover: highlightFeature,
+//         mouseout: resetHighlight,
+//         click: zoomToFeature
+//     });
+// }
 //var info = L.control();
 //
 //info.onAdd = function (map) {

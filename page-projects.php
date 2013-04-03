@@ -22,7 +22,9 @@ Template Name: Projects page
 						</div>
 
 						<a id="sort-type-amount" class="project-sort-type" href="#">
-                            <div class="project-sort-text">SHOW <?php echo $meta->limit; ?></div>
+                            <span class="project-sort-text hneue-bold">SHOW <?php echo $meta->limit; ?></span>
+                            <span class="project-sort-icon"></span>
+
                             <div id="dropdown-project-amount" class="dropdown-project">
                                 <button href="#" id="dropdown-project-amount-5">5</button>
                                 <button href="#" id="dropdown-project-amount-10">10</button>
@@ -36,28 +38,46 @@ Template Name: Projects page
 				</div>
 				<div class="span5">
 					<div class="projects-sorting hneue-bold">
-                        <div class="project-sort-type">
+                        <div id="sort-type-header">
                             SORT BY:
                         </div>
 
-                        <a id="sort-type-budget" class="project-sort-type" href="#">
-                            <div class="project-sort-text">BUDGET</div>
+                        <?php
+                        $params = $_GET;
+                        $params['order_by'] = "budget";
+                        ?>
+
+                        <a id="sort-type-budget" class="project-sort-type" href="?<?php echo http_build_query($params); ?>">
+                            <span class="project-sort-text hneue-bold">BUDGET</span>
+                            <span class="project-sort-icon"></span>
                             <div id="dropdown-project-budget" class="dropdown-project">
                                 <button href="#" id="dropdown-project-budget-asc">ASCENDING</button>
                                 <button href="#" id="dropdown-project-budget-desc">DESCENDING</button>
                             </div>
                         </a>
 
-                        <a id="sort-type-startdate" class="project-sort-type" href="#">
-                            <div class="project-sort-text">START DATE</div>
+
+                        <?php
+                        $params = $_GET;
+                        $params['order_by'] = "start_planned";
+                        ?>
+
+                        <a id="sort-type-startdate" class="project-sort-type" href="?<?php echo http_build_query($params); ?>">
+                            <span class="project-sort-text hneue-bold">START DATE</span>
+                            <span class="project-sort-icon"></span>
                             <div id="dropdown-project-startdate" class="dropdown-project">
                                 <button href="#" id="dropdown-project-startdate-asc">ASCENDING</button>
                                 <button href="#" id="dropdown-project-startdate-desc">DESCENDING</button>
                             </div>
                         </a>
 
-                        <a id="sort-type-country" class="project-sort-type" href="#">
-                            <div class="project-sort-text">COUNTRY</div>
+                        <?php
+                        $params = $_GET;
+                        $params['order_by'] = "country";
+                        ?>
+                        <a id="sort-type-country" class="project-sort-type" href="?<?php echo http_build_query($params); ?>">
+                            <span class="project-sort-text hneue-bold">COUNTRY</span>
+                            <span class="project-sort-icon"></span>
                             <div id="dropdown-project-country" class="dropdown-project">
                                 <button href="#" id="dropdown-project-country-asc">ASCENDING</button>
                                 <button href="#" id="dropdown-project-country-desc">DESCENDING</button>
