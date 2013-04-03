@@ -129,7 +129,7 @@ jQuery(function($) {
 		});
   	}
 
-  	  	function hide_map_homepage(){
+  	function hide_map_homepage(){
   		$('#map-lightbox').animate({
 				fontSize: "0.7em",
 				top: "3em"
@@ -182,14 +182,34 @@ jQuery(function($) {
 	$('#map-filter-cancel').click(function(){
 
 		// clear updated selection
-		$('#map-filter-overlay').hide('slow');
+		$('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
 	});
 
 	$('#map-filter-save').click(function(){
 
 		// set selection as filter and load results
-		$('#map-filter-overlay').hide('slow');
+		$('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
 	});
+
+
+
+// XXXXXX MAP SELECTION BOX XXXXXXX
+
+
+  $("#selection-hide-show-button").click(function(){
+	  if($('#selection-box').is(":hidden")){
+	    	$('#selection-box').show("blind", { direction: "vertical" }, 500);
+	    	$('#selection-hide-show-text').html("HIDE SELECTION");
+	  } else {
+	  		$('#selection-box').hide("blind", { direction: "vertical" }, 500);
+	  		$('#selection-hide-show-text').html("SHOW SELECTION");
+	  }
+  });
+
+
+
+
 });
+
 
 
