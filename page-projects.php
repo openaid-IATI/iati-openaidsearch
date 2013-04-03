@@ -80,15 +80,15 @@ Template Name: Projects page
 </div>
 
 <?php get_footer(); ?>
-        <?php $projects = wp_get_activity();// print_r($projects);
+        <?php $projects = wp_get_activities();// print_r($projects);
                 $totals = array();
         foreach($projects AS $a) {
                 
                 foreach($a['recipient_country'] AS $c) {
-                        if(isset($totals[$c['iso']])) {
+                        if(isset($totals[$c['iso']['total_cnt']])) {
                                 $totals[$c['iso']]['total_cnt']++;
                         }else{
-                            $totals[$c['iso']]['total_cnt'] = 0;
+                            $totals[$c['iso']]['total_cnt'] = 1;
                         }
                 }
 	}
