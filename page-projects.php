@@ -105,7 +105,7 @@ Template Name: Projects page
         
         ?>
 <script type="text/javascript">
-    /*
+    
     function create_filter_attributes(objects, keys){
         var html = '';
         $.each(objects, function(index, value){
@@ -216,6 +216,6 @@ Template Name: Projects page
 //    .setContent('<p>Hello world!<br />This is a nice popup.</p>')
 //    .openOn(map);
         
-    });*/
+    });
 </script>
 
