@@ -378,7 +378,7 @@ function wp_filter_request($search_url){
 }
 function wp_get_activity() {
 //	if(empty($identifier)) return null;
-	$search_url = SEARCH_URL . "activities/?format=json&limit=10&organisations=41120";//
+	$search_url = SEARCH_URL . "activities/?format=json&limit=200&organisations=41120";//
         
         $search_url = wp_filter_request($search_url);
 	
