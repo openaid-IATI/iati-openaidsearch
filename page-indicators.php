@@ -27,14 +27,14 @@ Template Name: Indicators page
 						</a>
 						
 
-						<button id="project-share-export" class="project-share-button hneue-bold">
+						<a id="project-share-export" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
 							<div class="share-text">EXPORT</div>
-						</button>
-						<button id="project-share-embed" class="project-share-button hneue-bold">
+						</a>
+						<a id="project-share-embed" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
 							<div class="share-text">EMBED</div>
-						</button>
+						</a>
 					</div>
 
 				</div>

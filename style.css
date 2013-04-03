@@ -1241,15 +1241,17 @@ label, input, button, select, textarea{
   background-position: -72px 0;
 }
 
-#project-share-graph{
+#project-share-graph .share-icon{
+  background-position: -90px 0;
+}
+
+.project-share-button{
   position: relative;
   background-image: url('images/order-icon.png');
   background-repeat: no-repeat;
   background-position: right center;
-}
-
-#project-share-graph .share-icon{
-  background-position: -90px 0;
+  display: inline-block;
+  padding-right: 0.6em;
 }
 
 #dropdown-type-graph{

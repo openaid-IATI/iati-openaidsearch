@@ -1,6 +1,6 @@
 <div id="map-wrapper">
 
-    <?php if(is_page("project")){ get_template_part( "map", "selection" ); } ?>
+    <?php if(is_page("projects")){ get_template_part( "map", "selection" ); } ?>
     
 
     <?php if(is_home()){ get_template_part( "home", "lightbox" ); } ?>
