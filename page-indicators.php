@@ -137,19 +137,30 @@ function create_filter_attributes(objects, keys){
         var counter = 0;
         $.each(objects, function(index, value){
             
-            if (counter == 0 || counter == 15 || counter == 30 || counter == 45 || counter == 60){
-                html += '<div class="span2">';
+            //limit on 80
+        	if (counter == 80){
+            	return false;
+            }
+
+            if (counter == 0 || counter == 20 || counter == 40 || counter == 60){
+                html += '<div class="span3">';
             }
             html += '<div class="squaredThree">';
             html += '<input type="checkbox" value="'+ keys[value] +'" id="land'+keys[value]+'" name="check" />';
             html += '<label class="map-filter-cb-value" for="land'+keys[value]+'"></label>';
             html += '<span>'+value+'</span></div>'; 
             
-            if (counter == 14 || counter == 29 || counter == 44 || counter == 59 || counter == 74){
+            if (counter == 19 || counter == 39 || counter == 59 || counter == 79){
                         html += '</div>';
 
             }
+
             counter++;
+
+            //limit on 80
+            if (counter == 80){
+            	return html;	
+            }
         });
         return html;
     }
