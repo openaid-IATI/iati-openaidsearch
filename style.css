@@ -91,6 +91,9 @@ h2{
   margin-bottom:0.5em;
 }
 
+button{
+  background-color: transparent;
+}
 
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX GLOBAL PAGE HEADER XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -523,50 +526,86 @@ input[type=checkbox] {
 }
 
 
-/* global */
+/* selection box */
 
-#selection-hide-show{
-    background-color: #F1EEE8;
+#selection-box-wrapper{
+  position: absolute;
+  left: 0;
+  top: 0;
+  display:block;
+  z-index:1500;
+  width:29em;
+}
+
+#selection-hide-show-button, #selection-box{
+  position: relative;
+  color: #FFF;
+  border: none;
+  padding: 0;
+  background-color: #000;
+  opacity:0.60;
+  filter:alpha(opacity=60); /* For IE8 and earlier */
 }
 
 #selection-hide-show-button{
-    position: absolute;
-    left: 9em;
-    top: 0;
-    background-color: #000;
-    color: #E5E5E3;
-    border: none;
-    padding: 2px 10px 2px 4px;
-    opacity:0.48;
-    filter:alpha(opacity=48); /* For IE8 and earlier */
-    display: block;
-    z-index: 1500;
+  display: block;
+  width:12em;
+  margin: 0 auto;
+  padding: 0.3em 0.8em 0.1em 0.4em;
+}
+
+#selection-box{
+  display: none;
+}
+
+.select-box{
+  padding-bottom: 0.6em;
+  border-bottom: 1px solid #CCC;
 }
 
 #selection-hide-show-button:hover{
-  opacity:0.60;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
-  filter: alpha(opacity=60);
+  opacity:0.80;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
 }
 
-#selection-hide-show .span12{
-  min-height: 0;
-}
-
-#selection-hide-show .container{
-  position: relative;
-}
-
-
-
-#map-graph-wrapper .row-fluid .span12{
+#selection-hide-show .span12, #lightbox-wrapper .span12, #map-graph-wrapper .span12{
   min-height: 0;
   position: relative;
 }
+
+.select-box-header{
+  padding-left: 1.5em;
+  padding-top: 0.5em;
+  font-family: 'HelveticaNeueW01-75Bold';
+}
+
+.select-box-selected{
+  padding-top: 0.3em;
+}
+
+.selected-remove-button{
+  float:left;
+  width: 1.2em;
+  margin-left:0.3em;
+  margin-top:0.2em;
+  background-image:url('images/select-remove.png');
+  background-repeat: no-repeat;
+  height:12px;
+}
+
+#selected-clear{
+  padding-top: 0.2em;
+  padding-bottom:0.4em;
+}
+
+
+/* global */
+
+
 
 #map-wrapper{
   position: relative;
-  z-index: 3;
   -webkit-box-shadow: 0 8px 6px -6px #979791;
   -moz-box-shadow: 0 8px 6px -6px #979791;
   box-shadow: 0 8px 6px -6px #979791;
@@ -1246,13 +1285,23 @@ label, input, button, select, textarea{
     /* Landscape phone to portrait tablet */
     @media (max-width: 767px) {
 
-    .projects-project-spec {
-      margin-top: 2em;
-      margin-left: 0;
-    }
+      .projects-project-spec {
+        margin-top: 2em;
+        margin-left: 0;
+      }
+
+      #map{
+        display: none;
+      }
 
     }
      
 
     /* Landscape phones and down */
-    @media (max-width: 480px) { ... }
+    @media (max-width: 480px) { 
+
+      #map{
+        display: none;
+      }
+
+    }
