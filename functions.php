@@ -388,7 +388,8 @@ function wp_get_activities() {
         
 	$result = json_decode($content);
         $objects = $result->objects;
-	return objectToArray($objects);
+        return objectToArray($objects);
+      
 	
 
 }

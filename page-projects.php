@@ -80,7 +80,20 @@ Template Name: Projects page
 </div>
 
 <?php get_footer(); ?>
-        <?php $projects = wp_get_activity();// print_r($projects);?>
+        <?php $projects = wp_get_activity();// print_r($projects);
+                $totals = array();
+        foreach($projects AS $a) {
+                
+                foreach($a['recipient_country'] AS $c) {
+                        if(isset($totals[$c['iso']])) {
+                                $totals[$c['iso']]['total_cnt']++;
+                        }else{
+                            $totals[$c['iso']]['total_cnt'] = 0;
+                        }
+                }
+	}
+        
+        ?>
 <script type="text/javascript">
     
     function create_filter_attributes(objects, keys){
@@ -124,7 +137,9 @@ Template Name: Projects page
         {   
             var iso3 = jsonPath(country_info, "$[?(@.ISO2=='<?php echo $i['recipient_country'][0]['iso'] ?>')]")[0].ISO3
             
-            jsonPath(countryData, "$..features[?(@.id=='"+ iso3 +"')]")[0].properties.projects = '1000';//Run some code here
+            jsonPath(countryData, "$..features[?(@.id=='"+ iso3 +"')]")[0].properties.projects = '23<?php echo $totals[$i['recipient_country'][0]['iso']]['total_cnt'] ?>';//Run some code here
+            jsonPath(countryData, "$..features[?(@.id=='"+ iso3 +"')]")[0].properties.iso = '<?php echo $i['recipient_country'][0]['iso'] ?>';
+            
             if ( $.inArray( "<?php echo $i['recipient_country'][0]['name'] ?>", countries ) > -1 )
             {
 
@@ -180,7 +195,10 @@ Template Name: Projects page
         $('#budget_filters').append(budget_html);
 
         L.geoJson(countryData, {style: style,onEachFeature: function(feature,layer) {
-                  layer.bindPopup("How to get the total of projects per country?");
+                var total_projects = feature.properties.projects;
+                var str = "test"
+                str += total_projects;
+                  layer.bindPopup('<p>Total projects: '+str.substring(6)+ '</p><p><a href="?s=&countries='+feature.properties.iso+'">Click to view related projects</a></p>');
               }}).addTo(map);
         
 //        var popup = L.popup()
