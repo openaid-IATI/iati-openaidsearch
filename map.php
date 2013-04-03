@@ -1,6 +1,6 @@
 <div id="map-wrapper">
 
-    <?php if(is_page("project"){ get_template_part( "map", "selection" ); } ?>
+    <?php if(is_page("project")){ get_template_part( "map", "selection" ); } ?>
     
 
     <?php if(is_home()){ get_template_part( "home", "lightbox" ); } ?>
@@ -9,22 +9,13 @@
         <div class="container">
 
             <div class="row-fluid map-filter-list">
-                
-
-               
-                
-                
+                   
                 
                     <div id="country_filters" class="hide"></div>
                     
                     <div id="region_filters" class="hide"></div>
                     <div id="sector_filters" class="hide"></div>
                     <div id="budget_filters" class="hide"></div>
-                                                 
-                                        
-                                                          
-                
-
 
             </div>
 
