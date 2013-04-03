@@ -376,7 +376,7 @@ function wp_filter_request($search_url){
 	}
         return $search_url;
 }
-function wp_get_activity() {
+function wp_get_activities() {
 //	if(empty($identifier)) return null;
 	$search_url = SEARCH_URL . "activities/?format=json&limit=200&organisations=41120";//
         
@@ -392,6 +392,17 @@ function wp_get_activity() {
 	
 
 }
+
+function wp_get_activity($identifier) {
+	if(empty($identifier)) return null;
+	$search_url = SEARCH_URL . "activities/{$identifier}/?format=json";
+	
+	$content = file_get_contents($search_url);
+	$activity = json_decode($content);
+	return $activity;
+
+}
+
 function wp_get_regions() {
 	
 	$search_url = SEARCH_URL . "region/?format=json&limit=10";

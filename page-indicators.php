@@ -17,11 +17,16 @@ Template Name: Indicators page
 
 					<div class="project-share-container share-left">
 
-						<button id="project-share-graph" class="project-share-button hneue-bold">
+						<a href="#" id="project-share-graph" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
 							<div class="share-text">TYPE GRAPH</div>
-							<span class="sort-icon"></span>
-						</button>
+							<div id="dropdown-type-graph">
+								<button id="dropdown-line-graph">LINE GRAPH</button>
+								<button id="dropdown-table-graph">TABLE GRAPH</button>
+							</div>
+						</a>
+						
+
 						<button id="project-share-export" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
 							<div class="share-text">EXPORT</div>

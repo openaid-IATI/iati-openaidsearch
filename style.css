@@ -559,7 +559,8 @@ input[type=checkbox] {
 }
 
 .select-box{
-  padding-bottom: 0.6em;
+  padding-top: 0.2em;
+  padding-bottom: 0.8em;
   border-bottom: 1px solid #CCC;
 }
 
@@ -1201,7 +1202,7 @@ label, input, button, select, textarea{
 }
 
 .project-share-button{
-  height:18px;
+  height:1.2em;
   margin-left:1.7em;
 }
 
@@ -1240,13 +1241,31 @@ label, input, button, select, textarea{
   background-position: -72px 0;
 }
 
+#project-share-graph{
+  position: relative;
+  background-image: url('images/order-icon.png');
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
 #project-share-graph .share-icon{
   background-position: -90px 0;
 }
 
-#project-share-graph .sort-icon{
-  margin-left: 0;
-  margin-top: 0.1em;
+#dropdown-type-graph{
+  background-color:#fff;
+  position:absolute;
+  top:1.2em;
+  right: 0;
+  display: none;
+}
+
+.dropdown-type-graph button{
+  color: #008CCC;
+}
+
+.dropdown-type-graph button.active{
+  border-bottom: 1px solid #008CCC;
 }
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAQ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */

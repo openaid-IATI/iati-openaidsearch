@@ -248,6 +248,7 @@ jQuery(function($) {
 
 
   $("#selection-hide-show-button").click(function(){
+
     if($('#selection-box').is(":hidden")){
         $('#selection-box').show("blind", { direction: "vertical" }, 500);
         $('#selection-hide-show-text').html("HIDE SELECTION");
@@ -257,6 +258,19 @@ jQuery(function($) {
     }
   });
 
+
+// XXXXXX GRAPH BUTTON XXXXXX
+
+  $("#project-share-graph").click(function(){
+
+    if($('#dropdown-type-graph').is(":hidden")){
+        $('#dropdown-type-graph').show("blind", { direction: "vertical" }, 500);
+    } else {
+        $('#dropdown-type-graph').hide("blind", { direction: "vertical" }, 500);
+    }
+    return false;
+
+  });
 
 
 
