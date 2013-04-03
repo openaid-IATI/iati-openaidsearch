@@ -12,17 +12,36 @@ jQuery(function($) {
   $( "#map-slider-tooltip" ).slider({ 
     min: 1950,
     max: 2050,
-    value: 2013,
+//    value: 2013,
     slide: slide_tooltip,
     change: change_tooltip
   });
+  
+  
 
-  $( "#map-slider-tooltip a" ).append("2013");
-  $( "#year-2013").addClass("active");
-
+  //$( "#map-slider-tooltip a" ).append("2013");
+  //$( "#year-2013").addClass("active");
+  
+  
+  
   function change_tooltip(event, ui){
     $( "#map-slider-tooltip a" ).text(ui.value);
+//    console.log(event);
+    try{
+        if(event.originalEvent.type.toString() == 'mouseup'){
+            console.log(event.originalEvent);
+            console.log(event.originalEvent.currentTarget.activeElement.childNodes[0].data);
+            select_year(event.originalEvent.currentTarget.activeElement.childNodes[0].data);
+        }
+    }
+        
+    catch(err){
+        
+    }
+    
+    
   }
+  
 
   function slide_tooltip(event, ui){
     $( "#map-slider-tooltip a" ).text(ui.value);

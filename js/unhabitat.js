@@ -177,6 +177,7 @@ jQuery(function($) {
                             $('#country_filters').removeClass('hide');
                         }
                         if(e.target.id == 'filter-by-region'){
+                            
                             $('#region_filters').removeClass('hide');
                         }
                         if(e.target.id == 'filter-by-budget'){
@@ -184,6 +185,9 @@ jQuery(function($) {
                         }
                         if(e.target.id == 'filter-by-sector'){
                             $('#sector_filters').removeClass('hide');
+                        }
+                        if(e.target.id == 'filter-by-indicator'){
+                            $('#indicator_filters').removeClass('hide');
                         }
 
 		} else {
@@ -193,6 +197,7 @@ jQuery(function($) {
                         $('#budget_filters').addClass('hide');
                         $('#sector_filters').addClass('hide');
                         $('#region_filters').addClass('hide');
+                        $('#indicator_filters').addClass('hide');
                         
 		}
 		
@@ -219,27 +224,32 @@ jQuery(function($) {
                 });
                 str_sector = str_sector.substring(0, str_sector.length-1);
                 
-                var str_country = ''
+                var str_country = '';
                 $('#country_filters input:checked').each(function(index, value){ 
                     str_country += value.value + ',';
                 });
                 str_country = str_country.substring(0, str_country.length-1);
                 
-                var str_budget = ''
+                var str_budget = '';
                 $('#budget_filters input:checked').each(function(index, value){ 
                     str_budget += value.value + ',';
                 });
                 str_budget = str_budget.substring(0, str_budget.length-1);
                 
-                var str_region = ''
+                var str_region = '';
                 $('#region_filters input:checked').each(function(index, value){ 
                     str_region += value.value + ',';
                 });
                 str_region = str_region.substring(0, str_region.length-1);
+                var str_indicator = '';
+                $('#indicator_filters input:checked').each(function(index, value){ 
+                    str_indicator += value.value + ',';
+                });
+                str_indicator = str_indicator.substring(0, str_indicator.length-1);
                 
                 
                 
-                window.location = '?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
+                window.location = '?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator;
   });
 
 

@@ -9,7 +9,8 @@
  * @since 18 March 2013
  */
 ?>
-<?php $regions = wp_get_regions(); 
+<?php 
+    $regions = wp_get_regions(); 
       
       
 //      $countries = wp_get_unique_result($indicator_results, 'country_name', 'dac_region_name');
@@ -198,23 +199,8 @@
 <script type="text/javascript">
 $(document).ready(function() {
 //    alert(countryData.type);
-    $('#regions').change(function(e){
-       console.log(e.currentTarget.value); 
-       window.location = '?region=' + e.currentTarget.value;
-       sel_region = e.currentTarget.value;
-    });
-    $('#list_countries').change(function(e){
-       console.log(e.currentTarget.value, $('#regions').val()); 
-       window.location = '?region=' + $('#regions').val() + '&country=' + e.currentTarget.value + '&indicator=' + $('#list_indicators').val();
-    });
-    $('#list_years').change(function(e){
-       
-       window.location = '?region=' + $('#regions').val() + '&indicator=' + $('#list_indicators').val() + '&country=' + $('#list_countries').val() + '&years=' + e.currentTarget.value;
-    });
-    $('#list_indicators').change(function(e){
-       
-       window.location = '?region=' + $('#regions').val() + '&country=' + $('#list_countries').val() + '&years=' + $('#list_years').val() + '&indicator=' + e.currentTarget.value;
-    });
+   
+    
     
     
     $('#list_indicators option[value=<?php echo $selected_indicator ?>]').attr('selected', 'selected');

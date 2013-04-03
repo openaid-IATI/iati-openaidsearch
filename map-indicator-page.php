@@ -27,7 +27,7 @@
     <div id="map-timeline-wrapper">
         <?php for ($i = 1950; $i < 2050;$i++){   
         echo '<div class="slider-year';
-        if($i > 2000 && $i < 2013){ echo ' slider-active'; }
+//        if($i > 2000 && $i < 2013){ echo ' slider-active'; }
         echo '" id="year-' . $i . '">';
         echo '<div class="slider-year-inner-white"></div></div>'; 
         } ?>
@@ -37,9 +37,33 @@
     <!-- The black overlay for filtering options --> 
 	<div id="map-filter-overlay">
         <div class="container">
-
+<!--                            var indicator_keys = {};
+        indicator_keys['all'] = 'all';
+        indicator_keys['avg_annual_rate_change_percentage_urban'] = 'test';
+                indicator_keys['avg_annual_rate_change_total_population'] = 'test';
+        indicator_keys['bottle_water'] = 'test';
+        indicator_keys['composting_toilet'] = 'test';
+        indicator_keys['connection_to_electricity'] = 'test';
+        indicator_keys['deprivation'] = 'test';
+        indicator_keys['enrollment_female_primary_education'] = 'test';
+        indicator_keys['enrollment_male_primary_education'] = 'test';
+        indicator_keys['has_telephone'] = 'test';
+        indicator_keys['improved_floor'] = 'test';
+        indicator_keys['improved_flush_toilet'] = 'test';
+        indicator_keys['improved_pit_latrine'] = 'test';
+        indicator_keys['improved_spring_surface_water'] = 'test';
+        indicator_keys['improved_toilet'] = 'test';
+        indicator_keys['improved_water'] = 'test';
+        indicator_keys['piped_water'] = 'test';
+        indicator_keys['pit_latrine_with_slab_or_covered_latrine'] = 'test';
+        indicator_keys['pit_latrine_without_slab'] = 'test';
+        indicator_keys['test'] = 'test';
+        indicator_keys['test'] = 'test';
+        indicator_keys['test'] = 'test';
+        indicator_keys['test'] = 'test';
+        indicator_keys['test'] = 'test';-->
 			<div class="row-fluid map-filter-list">
-
+                            <div id="indicator_filters" class="hide">
 				<?php 
 
                                 
@@ -86,7 +110,7 @@
                             <?php endif ?>
                             
                             <div class="squaredThree">
-						<input type="checkbox" value="None" id="land<?php echo $key; ?>" name="check" />
+						<input type="checkbox" value="<?php echo $key ?>" id="land<?php echo $key; ?>" name="check" />
 						<label class="map-filter-cb-value" for="land<?php echo $key; ?>"></label>
 						<span><?php echo $key; ?></span>
 					</div>
@@ -98,8 +122,14 @@
                                         
                             <?php $c++;?>
                             <?php endforeach;?>
+                                </div>
+                        </div>
+                            <div id="region_filters" class="hide"></div>
+                            <div id="country_filters" class="hide"></div>
+                            
+                            
                 </div>
-			</div>
+			
 		</div>
 
 		<div id="map-filters-buttons">

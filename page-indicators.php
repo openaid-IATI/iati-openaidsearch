@@ -6,6 +6,50 @@ Template Name: Indicators page
 
 <?php get_header(); ?>
 
+
+<?php 
+        $regions = wp_get_regions(); 
+      
+      
+      
+//      $countries = wp_get_unique_result($indicator_results, 'country_name', 'dac_region_name');
+      $selected_region = $_GET['region'];
+      $selected_country = $_GET['country'];
+      $selected_year = $_GET['years'];
+      $selected_indicator = $_GET['indicator'];
+      
+      if (!isset($selected_year)){
+          $selected_year = 2013;
+      }
+      
+      if(!strlen($selected_indicator)>0 || $selected_indicator == 'all'){
+          $selected_indicator = 'population';
+      }
+      
+      $countries = wp_get_countries($selected_region);
+      global $countries;
+      $cities = wp_get_cities($selected_country);
+      global $cities;
+      
+      $indicator_results = wp_get_indicator_results($selected_region, $selected_country, $selected_year);
+      
+//      $indicator_relevant_results = wp_get_relevant_results($selected_indicator);
+      
+      $years = wp_get_unique_result(wp_get_relevant_results($selected_indicator), 'year');
+      
+
+      $temp = array();
+    foreach ($indicator_results as $i) {
+        array_push($temp, $i[$selected_indicator]);
+    }
+    $max_indicator = max($temp);
+    //$factor = 400000 / 40000;
+    //$factor = 600000 / $max_pop;
+    $maxcircleradius = 3000000000000;
+    $factor = $maxcircleradius / $max_indicator;
+    
+    
+?>  
 <?php get_template_part( "indicator", "filters" ); ?>
 <?php get_template_part( "map-indicator-page" ); ?>
 
@@ -86,3 +130,96 @@ Template Name: Indicators page
 
 
 <?php get_footer(); ?>
+<script type="text/javascript">
+//@todo add this to a global js, also being used by page-projects.php
+function create_filter_attributes(objects, keys){
+        var html = '';
+        var counter = 0;
+        $.each(objects, function(index, value){
+            
+            if (counter == 0 || counter == 15 || counter == 30 || counter == 45 || counter == 60){
+                html += '<div class="span2">';
+            }
+            html += '<div class="squaredThree">';
+            html += '<input type="checkbox" value="'+ keys[value] +'" id="land'+keys[value]+'" name="check" />';
+            html += '<label class="map-filter-cb-value" for="land'+keys[value]+'"></label>';
+            html += '<span>'+value+'</span></div>'; 
+            
+            if (counter == 14 || counter == 29 || counter == 44 || counter == 59 || counter == 74){
+                        html += '</div>';
+
+            }
+            counter++;
+        });
+        return html;
+    }
+$(document).ready(function() {
+//    alert(countryData.type);
+   
+    
+    
+    
+    
+    
+    <?php foreach($indicator_results as $i) :?>
+    
+    <?php if (strlen($i[$selected_indicator])>0) :?>
+    
+    try
+      {
+// jsonPath(countryData, "$..features[?(@.id=='<?php echo $i['country_iso3'] ?>')]")[0].properties.projects = '<?php echo $i[$selected_indicator] ?>';//Run some code here
+      }
+    catch(err)
+      {
+        console.log('<?php echo $i['country_iso3'] ?>'+err);
+      }
+          try{
+              
+            var circle = L.circle(new L.LatLng(countryloc['<?php echo $i['country_iso'] ?>'].longitude, countryloc['<?php echo $i['country_iso'] ?>'].latitude), <?php echo sqrt(($factor * $i[$selected_indicator])/pi()); //echo round($factor * $i['population']); ?>, {
+              color: 'red',
+             weight: '0',
+              fillColor: '#f03',
+              fillOpacity: 0.5
+             }).addTo(map);
+             circle.bindPopup('<?php echo $selected_indicator?>: <?php echo $i[$selected_indicator]?>');
+            }catch(err){
+                console.log(err);
+            }
+        
+    
+    <?php endif ?>
+<?php endforeach; ?>
+    
+    
+    var region_keys = {};
+    <?php foreach($regions as $region): ?>
+        region_keys['<?php echo $region['code'] ?>'] = '<?php echo $region['code'] ?>';
+    <?php endforeach ?>
+        
+        regions_html = create_filter_attributes(region_keys, region_keys);
+        $('#region_filters').append(regions_html);
+        
+    var country_keys = {};
+    <?php foreach($countries as $c): ?>
+        country_keys['<?php echo $c['iso'] ?>'] = '<?php echo $c['iso'] ?>';
+    <?php endforeach ?>
+        
+     country_html = create_filter_attributes(country_keys, country_keys);
+        $('#country_filters').append(country_html);
+        
+    <?php foreach($years as $year) :?>
+        $('#year-<?php echo $year ?>').addClass('slider-active');
+    <?php endforeach; ?>
+        
+    <?php if (isset($selected_year)) :?>
+        $( "#map-slider-tooltip" ).slider( "option", "value", <?php echo $selected_year ?> );
+        
+//        $("#map-slider-tooltip a" ).append("<?php echo $selected_year ?>");
+        $('#year-<?php echo $selected_year ?>').addClass('active');
+    <?php endif ?>
+    
+});
+function select_year(year){
+    window.location = '?years=' + year + '&indicator=<?php echo $selected_indicator ?>';
+}
+</script>
