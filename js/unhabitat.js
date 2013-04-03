@@ -282,7 +282,35 @@ jQuery(function($) {
 
   });
 
+// XXXXXXX sort buttons project page XXXXX
 
+  $(".project-sort-type").click(function(){
+
+    if($('.dropdown-project', this).is(":hidden")){
+        $('.dropdown-project', this).show("blind", { direction: "vertical" }, 500);
+    } else {
+        $('.dropdown-project', this).hide("blind", { direction: "vertical" }, 500);
+    }
+    return false;
+
+  });
+
+
+// XXXXXXXXX Ajax pagination (not so neat fix, TO DO: update this ) XXXXXXXX
+
+ $('#pagination a').on('click', function(e){ //check when pagination link is clicked and stop its action.
+   e.preventDefault();
+   var link = $(this).attr('href'); //Get the href attribute
+   $('#page-wrapper').fadeOut(500, function(){ //fade out the content area
+   $("#loader").show(); // show the loader animation
+   }).load(link + ' #page-wrapper', function(){ $('#page-wrapper').fadeIn(500, function(){ //load data from the content area from paginator link page that we just get from the top
+   $("#loader").hide(); //hide the loader
+   }); });
+   $('html,body').animate({
+          scrollTop: ($("#page-wrapper").offset().top - 200)},
+          'slow');
+   
+   });
 
 });
 

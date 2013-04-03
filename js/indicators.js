@@ -160,24 +160,24 @@ jQuery(function($) {
     });
 
     $('#graph-button-graph').click(function(){
-      hide_all_graphs();
-      $('#line-chart-placeholder').show();
-      $('html, body').animate({
-        scrollTop: $('#line-chart-placeholder').offset().top
-      }, 1000);
-      google.load("visualization", "1", {packages:["corechart"], callback:drawLineChart});
-      
+      show_line_graph();
+      return false;
+    });
+
+    $('#dropdown-line-graph').click(function(){
+      show_line_graph();
+      $('#dropdown-type-graph').hide();
       return false;
     });
 
     $('#graph-button-table').click(function(){
-      hide_all_graphs();
-      $('#table-chart-placeholder').show();
-      $('html, body').animate({
-        scrollTop: $('#table-chart-placeholder').offset().top
-      }, 1000);
-      google.load("visualization", "1", {packages:["table"], callback:drawTableChart});
-      
+      show_table_graph();
+      return false;
+    });
+
+    $('#dropdown-table-graph').click(function(){
+      show_table_graph();
+      $('#dropdown-type-graph').hide();
       return false;
     });
 
@@ -187,6 +187,28 @@ jQuery(function($) {
       $('#treemap-placeholder').hide();
       $('#map').show();
     }
+
+    function show_line_graph(){
+      hide_all_graphs();
+      $('#line-chart-placeholder').show();
+      $('html, body').animate({
+        scrollTop: ($('#line-chart-placeholder').offset().top - 150)
+      }, 1000);
+      google.load("visualization", "1", {packages:["corechart"], callback:drawLineChart});
+      
+    }
+
+    function show_table_graph(){
+      hide_all_graphs();
+      $('#table-chart-placeholder').show();
+      $('html, body').animate({
+        scrollTop: ($('#table-chart-placeholder').offset().top - 150)
+      }, 1000);
+      google.load("visualization", "1", {packages:["table"], callback:drawTableChart});
+    }
+
+    
+    
 
 
 });

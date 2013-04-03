@@ -20,37 +20,47 @@ Template Name: Projects page
 						<div class="pagination-totals">
 							RESULTS <?php echo $meta->offset + 1; ?> - <?php if(($meta->offset + $meta->limit)>$meta->total_count) { echo $meta->total_count; } else { echo ($meta->offset + $meta->limit); } ?> OF <?php echo $meta->total_count; ?>
 						</div>
-						<div class="projects-sort-type">
-							<a class="sort-type sort-type-amount" href="#">
-								SHOW <?php echo $meta->limit; ?>
-								<span class="sort-icon"></span>
-							</a>
-						</div>
-						<a id="save-search-results" href="#">SAVE SEARCH RESULTS</a>
+
+						<a id="sort-type-amount" class="project-sort-type" href="#">
+                            <div class="project-sort-text">SHOW <?php echo $meta->limit; ?></div>
+                            <div id="dropdown-project-amount" class="dropdown-project">
+                                <button href="#" id="dropdown-project-amount-5">5</button>
+                                <button href="#" id="dropdown-project-amount-10">10</button>
+                                <button href="#" id="dropdown-project-amount-20">20</button>
+                            </div>
+
+						</a>
+						<a id="save-search-results" href="#save-search-results">SAVE SEARCH RESULTS</a>
 
 					</div>
 				</div>
 				<div class="span5">
-					<div class="projects-sorting">
-						<div class="projects-sort-text hneue-bold">SORT BY:</div>
-						<div class="projects-sort-type hneue-bold">
-							<a class="sort-type sort-type-budget" href="#">
-								BUDGET
-								<span class="sort-icon"></span>
-							</a>
-						</div>
-						<div class="projects-sort-type hneue-bold">
-							<a class="sort-type sort-type-startdate" href="#">
-								START DATE
-								<span class="sort-icon"></span>
-							</a>
-						</div>
-						<div class="projects-sort-type hneue-bold">
-							<a class="sort-type sort-type-country" href="#">
-								COUNTRY
-								<span class="sort-icon"></span>
-							</a>
-						</div>
+					<div class="projects-sorting hneue-bold">
+
+                        <a id="sort-type-budget" class="project-sort-type" href="#">
+                            <div class="project-sort-text">BUDGET</div>
+                            <div id="dropdown-project-budget" class="dropdown-project">
+                                <button href="#" id="dropdown-project-budget-asc">ASCENDING</button>
+                                <button href="#" id="dropdown-project-budget-desc">DESCENDING</button>
+                            </div>
+                        </a>
+
+                        <a id="sort-type-startdate" class="project-sort-type" href="#">
+                            <div class="project-sort-text">START DATE</div>
+                            <div id="dropdown-project-startdate" class="dropdown-project">
+                                <button href="#" id="dropdown-project-startdate-asc">ASCENDING</button>
+                                <button href="#" id="dropdown-project-startdate-desc">DESCENDING</button>
+                            </div>
+                        </a>
+
+                        <a id="sort-type-country" class="project-sort-type" href="#">
+                            <div class="project-sort-text">COUNTRY</div>
+                            <div id="dropdown-project-country" class="dropdown-project">
+                                <button href="#" id="dropdown-project-country-asc">ASCENDING</button>
+                                <button href="#" id="dropdown-project-country-desc">DESCENDING</button>
+                            </div>
+                        </a>
+
 					</div>
 				</div>
 			</div>
@@ -95,7 +105,7 @@ Template Name: Projects page
         
         ?>
 <script type="text/javascript">
-    
+    /*
     function create_filter_attributes(objects, keys){
         var html = '';
         $.each(objects, function(index, value){
@@ -206,6 +216,6 @@ Template Name: Projects page
 //    .setContent('<p>Hello world!<br />This is a nice popup.</p>')
 //    .openOn(map);
         
-    });
+    });*/
 </script>
 

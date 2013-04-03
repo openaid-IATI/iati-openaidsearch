@@ -7,7 +7,7 @@
 		<div class="page-content">
 			<div class="row-fluid postit-page">
 				<div class="span4">
-						<?php 
+				<?php 
 
 				$cat_obj = get_category_by_slug('row-1'); 
 				$row_cat_id = $cat_obj->term_id;
