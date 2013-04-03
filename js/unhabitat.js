@@ -239,8 +239,21 @@ jQuery(function($) {
 
 
 
+// XXXXXX MAP SELECTION BOX XXXXXXX
+
+
+  $("#selection-hide-show-button").click(function(){
+    if($('#selection-box').is(":hidden")){
+        $('#selection-box').show("blind", { direction: "vertical" }, 500);
+        $('#selection-hide-show-text').html("HIDE SELECTION");
+    } else {
+        $('#selection-box').hide("blind", { direction: "vertical" }, 500);
+        $('#selection-hide-show-text').html("SHOW SELECTION");
+    }
+  });
+
+
+
 
 });
-
-
 

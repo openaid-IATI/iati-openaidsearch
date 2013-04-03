@@ -539,7 +539,7 @@ input[type=checkbox] {
 
 #selection-hide-show-button, #selection-box{
   position: relative;
-  color: #FFF;
+  color: #EEE;
   border: none;
   padding: 0;
   background-color: #000;
