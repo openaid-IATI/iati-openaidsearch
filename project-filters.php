@@ -5,7 +5,7 @@
 				
 				<div class="filter-by">
 					<div class="filter-name hneue-bold">BY COUNTRY: </div>
-					<button id="filter-by-country" class="filter-button">PLEASE SELECT.. <div class="filter-button-icon"></div></button>
+					<button id="filter-by-country" class="filter-button">PLEASE SELECT.. </button>
 				</div>
 
 				<div class="filter-by">

@@ -1,5 +1,10 @@
 <?php 
 
+include( TEMPLATEPATH .'/constants.php' );
+	
+// Add RSS links to <head> section
+add_theme_support( 'automatic-feed-links' );
+
 // WORDPRESS THEME FUNCTIONS
 add_theme_support( 'menus' );
 
@@ -30,17 +35,13 @@ function wp_generate_results_v2(&$objects, &$meta){
 	if(isset($_REQUEST['offset'])){	$activities_offset = rawurlencode($_REQUEST['offset']);	}
 
 	$search_url = SEARCH_URL . "activities/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset."&organisations=41120";;
-        $search_url = wp_filter_request($search_url);
+    
+    $search_url = wp_filter_request($search_url);
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
 	$meta = $result->meta;
 	$objects = $result->objects;
-
-
-
-
 }
-
 
 
 function wp_generate_paging($meta) {
@@ -125,30 +126,6 @@ function wp_generate_paging($meta) {
 
 
 
-
-
-
-
-
-
-
-
-
-// UNTOUCHED API CALL FUNCTIONS
-
-
-	include( TEMPLATEPATH .'/constants.php' );
-	
-	// Add RSS links to <head> section
-	add_theme_support( 'automatic-feed-links' );
-
-	// Load jQuery
-	if ( !is_admin() ) {
-	   /*wp_deregister_script('jquery');
-	   wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"), false);
-	   wp_enqueue_script('jquery');*/
-	}
-	
 	// Clean up the <head>
 	function removeHeadLinks() {
     	remove_action('wp_head', 'rsd_link');
@@ -177,157 +154,9 @@ function wp_generate_paging($meta) {
 		return $query_vars;
 	}
 
-function wp_generate_results($details, &$meta, &$projects_html, &$has_filter) {
-	global $_DEFAULT_ORGANISATION_ID, $_PER_PAGE, $_COUNTRY_ISO_MAP;
-	$search_url = SEARCH_URL . "activities/?format=json&limit={$_PER_PAGE}";
-	if(!empty($_DEFAULT_ORGANISATION_ID)) {
-		$search_url .= "&organisations=" . $_DEFAULT_ORGANISATION_ID;
-	}
-	if(isset($_REQUEST['s']) && !empty($_REQUEST['s'])) {
-		$query = rawurlencode($_REQUEST['s']);
-		
-		$srch_countries = array_map('strtolower', $_COUNTRY_ISO_MAP);
-		$srch_countries = array_flip($srch_countries);
-		$key = strtolower($query);
-		if(isset($srch_countries[$key])) {
-			$srch_countries = $srch_countries[$key];
-		} else {
-			$search_url .= "&query={$query}";
-			$srch_countries = null;
-		}
-		
-	}
-	
-	if(!empty($_REQUEST['countries'])) {
-		$countries = explode('|', trim($_REQUEST['countries']));
-		foreach($countries AS &$c) $c = trim($c);
-		$countries = implode('|', $countries);
-		$search_url .= "&countries={$countries}";
-		$has_filter = true;
-		if(!empty($srch_countries)) {
-			$search_url .= "|{$srch_countries}";
-		}
-	} else {
-		if(!empty($srch_countries)) {
-			$search_url .= "&countries={$srch_countries}";
-			$has_filter = true;
-		}
-		/*
-		if($has_filter!==true) {
-			$countries = $_COUNTRY_ISO_MAP;
-			unset($countries['WW']);
-			$search_url .= "&countries=" . implode('|', array_keys($countries));
-		}*/
-		
-	}
-	
-	if(!empty($_REQUEST['regions'])) {
-		$regions = explode('|', trim($_REQUEST['regions']));
-		foreach($regions AS &$c) $c = trim($c);
-		$regions = implode('|', $regions);
-		$search_url .= "&regions={$regions}";
-		$has_filter = true;
-	}
-	
-	if(!empty($_REQUEST['sectors'])) {
-		$sectors = explode('|', trim($_REQUEST['sectors']));
-		foreach($sectors AS &$c) $c = trim($c);
-		$sectors = implode('|', $sectors);
-		$search_url .= "&sectors={$sectors}";
-		$has_filter = true;
-	}
-	
-	if(!empty($_REQUEST['budgets'])) {
-		$budgets = explode('|', trim($_REQUEST['budgets']));
-		//Get the lowest budget from filter and use this one, all the other are included in the range
-		ksort($budgets);
-		$search_url .= "&statistics__total_budget__gt={$budgets[0]}";
-		$has_filter = true;
-	}
-	
-	$back_url = $_SERVER['REQUEST_URI'];
-	
-	$content = file_get_contents($search_url);
-	$result = json_decode($content);
-	$meta = $result->meta;
-	$objects = $result->objects;
-	
-	$return = "";
 
-	if(!empty($objects)) {
-		$base_url = get_option('home');
-		foreach($objects AS $idx=>$project) {
-			
-			$return .= '<div class="searchresult row'.($idx%2).'">
-                        	<a id="rdetail_'.$idx.'" href="javascript:void(0);" class="moredetail"></a>';
-			$return .= '<h3><a href="'.$base_url.'/?page_id=2&amp;id='.$project->iati_identifier.'&amp;back_url='.rawurlencode($back_url).'">'.$project->titles[0]->title.'</a></h3>';			
-			
-			if(in_array("all",$details) || in_array("country",$details) ){
-				$return .= '<span class="detail"><span>Countries</span>:';
-				$sep = '';
-				foreach($project->recipient_country AS $country) {
-					$return .= $sep . $country->name;
-					$sep = ', ';
-				}
-				$return .= '</span>';
-			}
-			if(in_array("all",$details) || in_array("subject",$details) ){
-				$return .= '<span class="detail"><span>Subject</span>: '.$project->titles[0]->title.'</span>';
-			}
-			if(in_array("all",$details) || in_array("budget",$details) ){
-				$return .= '<span class="detail"><span>Budget</span>: US$ '.format_custom_number($project->statistics->total_budget).'</span>';
-			}
-			if(in_array("all",$details) || in_array("sector",$details) ){
-				$return .= '<span class="detail"><span>Sector</span>: ';
-				$sep = '';
-				if(empty($project->activity_sectors)) {
-					$return .= "No information available";
-				} else {
-					foreach($project->activity_sectors AS $sector) {
-						$return .= $sep . $sector->name;
-						$sep = ', ';
-					}
-				}
-				$return .= '</span>';
-			}
-			
-			$return .= '<p class="shortdescription">'.$project->descriptions[0]->description.'</p>';
-			$return .= '<div class="resultdetail rdetail_'.$idx.'">';
-			$return .= '<div class="rcol rcol1">
-							<ul>
-							  <li><span>Last updated: </span>'.$project->date_updated.'</li>
-							  <li><span>Status: </span>'.$project->activity_status->name.'</li>
-							</ul>
-						</div>';
-			$return .= '<div class="rcol rcol2">
-							<ul>
-							  <li><span>Start date planned: </span>'.$project->start_planned.'</li>
-							  <li><span>Start date actual: </span>'.$project->start_actual.'</li>
-							</ul>
-						</div>';
-			$return .= '<div class="rcol rcol3">
-							<ul>
-							  <li><span>End date planned: </span>'.$project->end_planned.'</li>
-							  <li><span>End date actual: </span>'.$project->end_actual.'</li>
-							</ul>
-						</div>';
-			$return .= '<div class="clr"></div>
-						<div class="resultrow">
-							<a href="'.$base_url.'/?page_id=42" class="whistleb"><span>WHISTLEBLOWER</span></a>
-							<a class="addthis_button share" href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=ra-50408ec91245851b" addthis:url="'.$base_url.'/?page_id=2&amp;id='.$project->iati_identifier.'&amp;back_url='.rawurlencode($back_url).'"><span>SHARE</span></a>
-							<a href="javascript:bookmarksite(\''. addslashes($project->titles[0]->title).'\', \''.$base_url.'/?page_id=2&amp;id='.$project->iati_identifier.'&amp;back_url='.rawurlencode($back_url).'\')" class="bookmark"><span>BOOKMARK</span></a>	
-						</div>';
-			
-			$return .= '</div>
-                       </div>';
-				
-		}
-	}
-	
-	$projects_html = $return;
-
-}
 function wp_filter_request($search_url){
+
     if(!empty($_REQUEST['countries'])) {
 		$countries = explode('|', trim($_REQUEST['countries']));
 		foreach($countries AS &$c) $c = trim($c);
@@ -341,14 +170,7 @@ function wp_filter_request($search_url){
 		if(!empty($srch_countries)) {
 			$search_url .= "&countries={$srch_countries}";
 			$has_filter = true;
-		}
-		/*
-		if($has_filter!==true) {
-			$countries = $_COUNTRY_ISO_MAP;
-			unset($countries['WW']);
-			$search_url .= "&countries=" . implode('|', array_keys($countries));
-		}*/
-		
+		}	
 	}
 	
 	if(!empty($_REQUEST['regions'])) {
@@ -374,8 +196,15 @@ function wp_filter_request($search_url){
 		$search_url .= "&statistics__total_budget__gt={$budgets[0]}";
 		$has_filter = true;
 	}
-        return $search_url;
+
+	if(!empty($_REQUEST['order_by'])){
+		$orderby = trim($_REQUEST['order_by']);
+		$search_url .= "&order_by={$orderby}";
+	}
+
+    return $search_url;
 }
+
 function wp_get_activities() {
 //	if(empty($identifier)) return null;
 	$search_url = SEARCH_URL . "activities/?format=json&limit=200&organisations=41120";//

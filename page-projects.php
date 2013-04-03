@@ -36,6 +36,9 @@ Template Name: Projects page
 				</div>
 				<div class="span5">
 					<div class="projects-sorting hneue-bold">
+                        <div class="project-sort-type">
+                            SORT BY:
+                        </div>
 
                         <a id="sort-type-budget" class="project-sort-type" href="#">
                             <div class="project-sort-text">BUDGET</div>
@@ -69,9 +72,9 @@ Template Name: Projects page
 	<div class="page-content">
 		
 		
-
+        <div id="paginated-projects">
 			<?php get_template_part( "projects", "description" ); ?>
-		
+		</div>
 
 
 		<div class="container">

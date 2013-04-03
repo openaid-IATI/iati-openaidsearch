@@ -301,15 +301,14 @@ jQuery(function($) {
  $('#pagination a').on('click', function(e){ //check when pagination link is clicked and stop its action.
    e.preventDefault();
    var link = $(this).attr('href'); //Get the href attribute
-   $('#page-wrapper').fadeOut(500, function(){ //fade out the content area
+   $('#paginated-projects').fadeOut(500, function(){ //fade out the content area
    $("#loader").show(); // show the loader animation
-   }).load(link + ' #page-wrapper', function(){ $('#page-wrapper').fadeIn(500, function(){ //load data from the content area from paginator link page that we just get from the top
+   }).load(link + ' #paginated-projects', function(){ $('#paginated-projects').fadeIn(500, function(){ //load data from the content area from paginator link page that we just get from the top
    $("#loader").hide(); //hide the loader
    }); });
    $('html,body').animate({
-          scrollTop: ($("#page-wrapper").offset().top - 200)},
+          scrollTop: ($("#paginated-projects").offset().top - 200)},
           'slow');
-   
    });
 
 });

@@ -84,7 +84,7 @@ $activity = wp_get_activity($project_id);
 					$cSep = "";
 					foreach($activity->recipient_country AS $country) {
 						echo  $sep . "
-							<a href='".get_bloginfo('url')."/?s=&amp;countries={$country->iso}'>" . $country->name . "</a>
+							<a href='".get_bloginfo('url')."/projects/?countries={$country->iso}'>" . $country->name . "</a>
 							";
 						$countries .= $cSep . $country->iso;
 						$sep = ', ';
@@ -107,7 +107,7 @@ $activity = wp_get_activity($project_id);
 							echo $sector->name;
 						} else {
 							echo  $sep . "
-							<a href='".get_bloginfo('url')."/?s=&amp;sectors={$sector->code}'>" . $sector->name . "</a>
+							<a href='".get_bloginfo('url')."/projects/?sectors={$sector->code}'>" . $sector->name . "</a>
 							";
 						}
 							$sep = ', ';

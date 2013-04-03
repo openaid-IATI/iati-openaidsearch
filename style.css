@@ -340,7 +340,11 @@ input[type="text"]{
 
 .filter-button{
   float: left;
-  background: #F9F9F7;
+  background-color: #F9F9F7;
+  background-image: url('images/order-icon.png');
+  background-position: 90% center;
+  background-size: 0.68em auto;
+  background-repeat: no-repeat;
   color: #5D706E;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -351,15 +355,6 @@ input[type="text"]{
   font-size: 0.86em;
 }
 
-.filter-button-icon{
-  position: absolute;
-  background-image:url('images/order-icon.png');
-  background-repeat:no-repeat;
-  width: 8px;
-  height:17px;
-  top:0.4em;
-  right:0.7em;
-}
 
 .filter-button:hover, .filter-button:focus{
   background: #8a8a7b; /* Old browsers */
@@ -549,7 +544,6 @@ input[type=checkbox] {
 
 #selection-hide-show-button{
   display: block;
-  width:12em;
   margin: 0 auto;
   padding: 0.3em 0.8em 0.1em 0.4em;
 }
@@ -1063,8 +1057,12 @@ label, input, button, select, textarea{
   color: #797974; 
 }
 
-.projects-pagination-info div{
+.projects-pagination-info > div, .project-pagination-info > a{
   float:left;
+}
+
+.pagination-totals{
+  margin-right:1.5em;
 }
 
 .project-sort-type{
@@ -1072,10 +1070,11 @@ label, input, button, select, textarea{
   background-image: url('images/order-icon.png');
   background-repeat: no-repeat;
   background-position: right center;
+  background-size: 0.45em 1em;
+  min-height:1.25em;
   display: inline-block;
   padding-right: 1em;
-  margin-right: 0.5em;
-  min-height:17px;
+  margin-right: 1.5em;
 }
 
 .dropdown-project{
@@ -1225,9 +1224,6 @@ label, input, button, select, textarea{
   width: 53%;
 }
 
-.project-share-container{
-  margin-top: 1em;
-}
 
 .share-text{
   height:18px;
@@ -1268,6 +1264,7 @@ label, input, button, select, textarea{
   background-position: -90px 0;
 }
 
+/*
 .project-share-button{
   position: relative;
   background-image: url('images/order-icon.png');
@@ -1277,7 +1274,13 @@ label, input, button, select, textarea{
   padding-right: 0.6em;
   height:1.2em;
   margin-left:1.7em;
+}*/
+
+.project-share-container{
+  margin-top: 1em;
+  margin-left:0.8em;
 }
+
 
 #dropdown-type-graph{
   background-color:#fff;
@@ -1318,7 +1321,11 @@ label, input, button, select, textarea{
     @media (min-width: 980px) and (max-width: 1439px) {
 
     body {
-      font-size:9px;
+      font-size:10px;
+    }
+
+    .navbar-static-top .input-large{
+      width: 13em;
     }
 
     } 
@@ -1328,9 +1335,12 @@ label, input, button, select, textarea{
     @media (min-width: 768px) and (max-width: 979px) { 
 
     body {
-      font-size:9px;
+      font-size:10px;
     }
 
+    .navbar-static-top .input-large{
+      width: 13em;
+    }
 
     }
      
