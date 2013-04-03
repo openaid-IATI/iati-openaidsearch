@@ -85,7 +85,7 @@ Template Name: Projects page
         foreach($projects AS $a) {
                 
                 foreach($a['recipient_country'] AS $c) {
-                        if(isset($totals[$c['iso']['total_cnt']])) {
+                        if(isset($totals[$c['iso']])) {
                                 $totals[$c['iso']]['total_cnt']++;
                         }else{
                             $totals[$c['iso']]['total_cnt'] = 1;
