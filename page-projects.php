@@ -82,9 +82,41 @@ Template Name: Projects page
 <?php get_footer(); ?>
         <?php $projects = wp_get_activity();// print_r($projects);?>
 <script type="text/javascript">
+    
+    function create_filter_attributes(objects, keys){
+        var html = '';
+        $.each(objects, function(index, value){
+            
+            if (index == 0 || index == 15 || index == 30 || index == 45 || index == 60){
+                html += '<div class="span2">';
+            }
+            html += '<div class="squaredThree">';
+            html += '<input type="checkbox" value="'+ keys[value] +'" id="land'+keys[value]+'" name="check" />';
+            html += '<label class="map-filter-cb-value" for="land'+keys[value]+'"></label>';
+            html += '<span>'+value+'</span></div>'; 
+            
+            if (index == 14 || index == 29 || index == 44 || index == 59 || index == 74){
+                        html += '</div>';
+
+            }
+        });
+        return html;
+    }
     $(document).ready(function() {
 //            jsonPath(countryData, "$..features[?(@.id=='AFG')]")[0].properties.projects = 2444;
         var countries = new Array();
+        var country_keys = {};
+        var region_keys = {};
+        var sector_keys = {};
+        var budget_keys = {};
+        budget_keys['all'] = 'all';
+        budget_keys['> US$ 0'] = '';
+        budget_keys['> US$ 10.000'] = '10000';
+        budget_keys['> US$ 50.000'] = '50000';
+        budget_keys['> US$ 100.000'] = '100000';
+        budget_keys['> US$ 500.000'] = '500000';
+        budget_keys['> US$ 1.000.000'] = '1000000';
+        
         <?php foreach($projects as $i) :?>
                 <?php if (!empty($i['recipient_country'])) :?>
         try
@@ -93,7 +125,23 @@ Template Name: Projects page
             var iso3 = jsonPath(country_info, "$[?(@.ISO2=='<?php echo $i['recipient_country'][0]['iso'] ?>')]")[0].ISO3
             
             jsonPath(countryData, "$..features[?(@.id=='"+ iso3 +"')]")[0].properties.projects = '1000';//Run some code here
-            countries.push("<?php echo $i['recipient_country'][0]['name'] ?>");
+            if ( $.inArray( "<?php echo $i['recipient_country'][0]['name'] ?>", countries ) > -1 )
+            {
+
+            }else{
+                countries.push("<?php echo $i['recipient_country'][0]['name'] ?>");
+                
+                
+                country_keys["<?php echo $i['recipient_country'][0]['name'] ?>"] = "<?php echo $i['recipient_country'][0]['iso'] ?>";
+                
+                <?php foreach ($i['recipient_region'] as $region) :?>
+                    region_keys["<?php echo $region['name'] ?>"] = "<?php echo $region['code'] ?>"
+                <?php endforeach; ?>
+                    
+                <?php foreach ($i['activity_sectors'] as $sector) :?>
+                    sector_keys["<?php echo $sector['name'] ?>"] = "<?php echo $sector['code'] ?>"
+                <?php endforeach; ?>
+            }
         }
         catch(err)
         {
@@ -101,14 +149,36 @@ Template Name: Projects page
         }
             <?php endif ?>
         <?php endforeach;?>
-        console.log(countries);
-        $.each(countries, function(index, value){
-            var html = '<div class="squaredThree">';
-            html += '<input type="checkbox" value="None" id="" name="check" />';
-            html += '<label class="map-filter-cb-value" for="land"></label>';
-            html += '<span>'+value+'</span></div>'; 
-            $('#filters').html(html);
-        });
+        
+        countries = countries.sort();
+        
+        country_html = create_filter_attributes(countries, country_keys);
+        
+        $('#country_filters').append(country_html);
+        
+        var regions = [];
+        for (var key in region_keys){
+            regions.push(key);
+        }
+        region_html = create_filter_attributes(regions, region_keys);
+        $('#region_filters').append(region_html);
+        
+        var sectors = [];
+        for (var key in sector_keys){
+            sectors.push(key);
+        }
+        
+        
+        sector_html = create_filter_attributes(sectors, sector_keys);
+        $('#sector_filters').append(sector_html);
+        
+        var budgets = [];
+        for (var key in budget_keys){
+            budgets.push(key);
+        }
+        budget_html = create_filter_attributes(budgets, budget_keys);
+        $('#budget_filters').append(budget_html);
+
         L.geoJson(countryData, {style: style,onEachFeature: function(feature,layer) {
                   layer.bindPopup("How to get the total of projects per country?");
               }}).addTo(map);
