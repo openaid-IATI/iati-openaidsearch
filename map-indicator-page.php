@@ -126,6 +126,7 @@
                         </div>
                             <div id="region_filters" class="hide"></div>
                             <div id="country_filters" class="hide"></div>
+                            <div id="city_filters" class="hide"></div>
                             
                             
                 </div>

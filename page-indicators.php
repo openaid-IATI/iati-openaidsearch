@@ -14,28 +14,32 @@ Template Name: Indicators page
       
 //      $countries = wp_get_unique_result($indicator_results, 'country_name', 'dac_region_name');
       $selected_region = $_GET['region'];
-      $selected_country = $_GET['country'];
+      $selected_country = $_GET['countries'];
       $selected_year = $_GET['years'];
+      //@todo fix dynamic cities
+      $selected_city = '';
       $selected_indicator = $_GET['indicator'];
       
-      if (!isset($selected_year)){
-          $selected_year = 2013;
-      }
+      
       
       if(!strlen($selected_indicator)>0 || $selected_indicator == 'all'){
           $selected_indicator = 'population';
       }
       
       $countries = wp_get_countries($selected_region);
-      global $countries;
+      
       $cities = wp_get_cities($selected_country);
-      global $cities;
+      
+      
       
       $indicator_results = wp_get_indicator_results($selected_region, $selected_country, $selected_year);
       
 //      $indicator_relevant_results = wp_get_relevant_results($selected_indicator);
       
       $years = wp_get_unique_result(wp_get_relevant_results($selected_indicator), 'year');
+      if (!isset($selected_year)){
+          $selected_year = $years[0];
+      }
       
 
       $temp = array();
@@ -215,8 +219,16 @@ $(document).ready(function() {
         country_keys['<?php echo $c['iso'] ?>'] = '<?php echo $c['iso'] ?>';
     <?php endforeach ?>
         
-     country_html = create_filter_attributes(country_keys, country_keys);
+        country_html = create_filter_attributes(country_keys, country_keys);
         $('#country_filters').append(country_html);
+        
+    var city_keys = {};
+    <?php foreach($cities as $c): ?>
+        city_keys['<?php echo $c['name'] ?>'] = '<?php echo $c['name'] ?>';
+    <?php endforeach ?>
+        
+     city_html = create_filter_attributes(city_keys, city_keys);
+        $('#city_filters').append(city_html);
         
     <?php foreach($years as $year) :?>
         $('#year-<?php echo $year ?>').addClass('slider-active');
@@ -231,6 +243,6 @@ $(document).ready(function() {
     
 });
 function select_year(year){
-    window.location = '?years=' + year + '&indicator=<?php echo $selected_indicator ?>';
+    window.location = '?years=' + year + '&indicator=<?php echo $selected_indicator ?>' + '&countries=<?php echo $selected_country ?>&regions=<?php echo $selected_region ?>&city=<?php echo $selected_city ?>';;
 }
 </script>

@@ -426,7 +426,7 @@ function wp_get_countries($region) {
 }
 function wp_get_cities($country) {
 	
-	$search_url = SEARCH_URL . "city/?format=json&limit=10&country=".$country;
+	$search_url = SEARCH_URL . "city/?format=json&limit=200&country=".$country;
 	
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);

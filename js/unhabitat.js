@@ -189,6 +189,9 @@ jQuery(function($) {
                         if(e.target.id == 'filter-by-indicator'){
                             $('#indicator_filters').removeClass('hide');
                         }
+                        if(e.target.id == 'filter-by-city'){
+                            $('#city_filters').removeClass('hide');
+                        }
 
 		} else {
 			// save selection?
@@ -198,6 +201,7 @@ jQuery(function($) {
                         $('#sector_filters').addClass('hide');
                         $('#region_filters').addClass('hide');
                         $('#indicator_filters').addClass('hide');
+                        $('#city_filters').addClass('hide');
                         
 		}
 		
@@ -247,9 +251,15 @@ jQuery(function($) {
                 });
                 str_indicator = str_indicator.substring(0, str_indicator.length-1);
                 
+                var str_city = '';
+                $('#city_filters input:checked').each(function(index, value){ 
+                    str_city += value.value + ',';
+                });
+                str_city = str_city.substring(0, str_city.length-1);
                 
                 
-                window.location = '?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator;
+                
+                window.location = '?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city;
   });
 
 
