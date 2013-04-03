@@ -603,13 +603,11 @@ input[type=checkbox] {
 /* global */
 
 
-
 #map-wrapper{
   position: relative;
   -webkit-box-shadow: 0 8px 6px -6px #979791;
   -moz-box-shadow: 0 8px 6px -6px #979791;
   box-shadow: 0 8px 6px -6px #979791;
-  
 }
 
 #map-graph-buttons{
