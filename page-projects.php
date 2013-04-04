@@ -139,15 +139,15 @@ Template Name: Projects page
         var html = '';
         $.each(objects, function(index, value){
             
-            if (index == 0 || index == 15 || index == 30 || index == 45 || index == 60){
-                html += '<div class="span2">';
+            if (index == 0 || index == 20 || index == 40 || index == 60){
+                html += '<div class="span3">';
             }
             html += '<div class="squaredThree">';
             html += '<input type="checkbox" value="'+ keys[value] +'" id="land'+keys[value]+'" name="check" />';
             html += '<label class="map-filter-cb-value" for="land'+keys[value]+'"></label>';
             html += '<span>'+value+'</span></div>'; 
             
-            if (index == 14 || index == 29 || index == 44 || index == 59 || index == 74){
+            if (index == 19 || index == 39 || index == 59){
                         html += '</div>';
 
             }

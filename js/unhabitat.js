@@ -211,8 +211,6 @@ jQuery(function($) {
     $('.filter-button.filter-selected').removeClass("filter-selected");
 		$('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
 
-    window.location = '?sectors=&budgets=&countries=&regions=';
-
 	});
 
 	$('#map-filter-save').click(function(){
