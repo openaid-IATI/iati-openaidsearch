@@ -217,6 +217,7 @@ jQuery(function($) {
 
 	$('#map-filter-save').click(function(){
 
+    $('.filter-button.filter-selected').removeClass("filter-selected");
 		// set selection as filter and load results
 		$('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
                 var str_sector = ''
