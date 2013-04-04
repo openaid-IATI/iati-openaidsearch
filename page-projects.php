@@ -14,24 +14,27 @@ Template Name: Projects page
 
 	<div class="page-header page-header-less-margin">
 		<div class="container">
-			<div class="row-fluid projects-search-navbar">
+			<div id="projects-search-navbar" class="row-fluid">
 				<div class="span7">
 					<div class="projects-pagination-info hneue-bold">
-						<div class="pagination-totals">
+						<div id="pagination-totals">
 							RESULTS <?php echo $meta->offset + 1; ?> - <?php if(($meta->offset + $meta->limit)>$meta->total_count) { echo $meta->total_count; } else { echo ($meta->offset + $meta->limit); } ?> OF <?php echo $meta->total_count; ?>
 						</div>
 
-						<a id="sort-type-amount" class="project-sort-type" href="#">
+						<div id="sort-type-amount" class="project-sort-type" href="#">
                             <span class="project-sort-text hneue-bold">SHOW <?php echo $meta->limit; ?></span>
                             <span class="project-sort-icon"></span>
 
                             <div id="dropdown-project-amount" class="dropdown-project">
-                                <button href="#" id="dropdown-project-amount-5">5</button>
-                                <button href="#" id="dropdown-project-amount-10">10</button>
-                                <button href="#" id="dropdown-project-amount-20">20</button>
+
+                                <!-- TO DO: keep parameters -->
+                                <a href="<?php echo home_url(); ?>/projects/?offset=0&per_page=5" id="dropdown-project-amount-5">5</a>
+                                <a href="<?php echo home_url(); ?>/projects/?offset=0&per_page=10" id="dropdown-project-amount-10">10</a>
+                                <a href="<?php echo home_url(); ?>/projects/?offset=0&per_page=25" id="dropdown-project-amount-20">25</a>
+                                <a href="<?php echo home_url(); ?>/projects/?offset=0&per_page=50" id="dropdown-project-amount-20">50</a>
                             </div>
 
-						</a>
+						</div>
 						<a id="save-search-results" href="#save-search-results">SAVE SEARCH RESULTS</a>
 
 					</div>
@@ -55,7 +58,6 @@ Template Name: Projects page
                                 <button href="#" id="dropdown-project-budget-desc">DESCENDING</button>
                             </div>
                         </a>
-
 
                         <?php
                         $params = $_GET;
@@ -95,6 +97,10 @@ Template Name: Projects page
         <div id="paginated-projects">
 			<?php get_template_part( "projects", "description" ); ?>
 		</div>
+        <div id="paginated-loader">
+            <div id="paginated-text">Loading projects</div>
+            <img src="<?php echo get_template_directory_uri(); ?>/images/ajax-loader.gif" alt="" />
+        </div>
 
 
 		<div class="container">

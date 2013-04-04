@@ -1069,11 +1069,11 @@ label, input, button, select, textarea{
   color: #797974; 
 }
 
-.projects-pagination-info > div, .project-pagination-info > a{
+.projects-pagination-info > div, .project-pagination-info > a, .project-pagination-info > button{
   vertical-align: middle;
 }
 
-.pagination-totals{
+#pagination-totals{
   display:inline-block;
   margin-right:1.5em;
 }
@@ -1097,6 +1097,10 @@ label, input, button, select, textarea{
   position: relative;
 }
 
+.project-sort-type{
+  cursor: pointer;
+}
+
 .dropdown-project{
   background-color:#fff;
   position:absolute;
@@ -1110,7 +1114,7 @@ label, input, button, select, textarea{
   padding: 0.4em 0.5em;
 }
 
-.dropdown-project button{
+.dropdown-project button, .dropdown-project a{
   font-size: 0.85em;
   color: #008CCC;
   font-family: "HelveticaNeueW01-75Bold";
@@ -1120,7 +1124,7 @@ label, input, button, select, textarea{
 }
 
 #dropdown-project-amount button:hover{
-  border-bottom: 1px solid #008CCC;
+  text-decoration: underline;
 }
 
 
@@ -1142,6 +1146,25 @@ label, input, button, select, textarea{
 
 .project-description-text .span5{
   margin-bottom: 3em;
+}
+
+#paginated-loader{
+  display: none;
+  height:50em;
+  width:100%;
+  text-align: center;
+}
+
+#paginated-loader img{
+  clear:both;
+  margin:2.5em;
+}
+
+#paginated-text{
+  clear:both;
+  margin-top:3em;
+  font-size:2em;
+  font-family: "HelveticaNeueW01-45Ligh";
 }
 
 /* pagination */

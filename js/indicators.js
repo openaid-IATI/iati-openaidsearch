@@ -63,6 +63,35 @@ jQuery(function($) {
 
 
 
+// XXXXXXXXXXXXX INDICATOR INITIALIZATION XXXXXXXXXXX
+
+  // var indicator1_years = new Array(); 
+
+
+
+  // try{      
+  //   var circle = L.circle(new L.LatLng(countryloc['<?php echo $i['country_iso'] ?>'].longitude, countryloc['<?php echo $i['country_iso'] ?>'].latitude), <?php echo sqrt(($factor * $i[$selected_indicator])/pi()); //echo round($factor * $i['population']); ?>, {
+  //     color: 'orange',
+  //     weight: '0',
+  //     fillColor: '#f03',
+  //     fillOpacity: 0.5
+  //     }).addTo(map);
+  //     circle.bindPopup('<?php echo $selected_indicator?>: <?php echo $i[$selected_indicator]?>');
+  //     indicator1_years.push(circle);
+
+  // }catch(err){
+  //     console.log(err);
+  // }
+
+  
+
+
+
+
+
+
+
+
 
 // XXXXXXXXXXXXXXXX INDICATOR GRAPHS XXXXXXXXXXXXXXXX 
       function drawTreemap() {

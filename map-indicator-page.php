@@ -105,17 +105,17 @@
                             <?php $c = 0;?>
                             <?php foreach ($indicators as $key => $value) :?>
                             
-                            <?php if(in_array($c, array(0, 15, 30, 45, 60))) : ?>
-                                    <div class="span2">
+                            <?php if(in_array($c, array(0, 15, 30, 45))) : ?>
+                                    <div class="span3">
                             <?php endif ?>
                             
                             <div class="squaredThree">
-						<input type="checkbox" value="<?php echo $key ?>" id="land<?php echo $key; ?>" name="check" />
+						<input type="checkbox" value="<?php echo $key; ?>" id="land<?php echo $key; ?>" name="check" />
 						<label class="map-filter-cb-value" for="land<?php echo $key; ?>"></label>
 						<span><?php echo $key; ?></span>
 					</div>
                                         
-                             <?php if(in_array($c, array(14,29,44, 59,74))) : ?>
+                             <?php if(in_array($c, array(14,29,44, 59))) : ?>
                                     </div>
                             <?php endif ?>
                                         

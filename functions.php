@@ -320,6 +320,7 @@ function wp_get_relevant_results($indicator = ''){
             }
         }
 //        print_r($return_objs);
+        
         return $return_objs;
 }   
 function wp_get_unique_result($array, $value){

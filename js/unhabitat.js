@@ -284,12 +284,12 @@ jQuery(function($) {
   $("#project-share-graph").click(function(){
 
     if($('#dropdown-type-graph').is(":hidden")){
-        $('#dropdown-type-graph').show("blind", { direction: "vertical" }, 500);
+        $('#dropdown-type-graph').show("blind", { direction: "vertical" }, 200);
     } else {
-        $('#dropdown-type-graph').hide("blind", { direction: "vertical" }, 500);
+        $('#dropdown-type-graph').hide("blind", { direction: "vertical" }, 200);
     }
-    return false;
 
+    return false;
   });
 
 // XXXXXXX sort buttons project page XXXXX
@@ -297,12 +297,12 @@ jQuery(function($) {
   $(".project-sort-type").click(function(){
 
     if($('.dropdown-project', this).is(":hidden")){
-        $('.dropdown-project', this).show("blind", { direction: "vertical" }, 500);
+        $('.dropdown-project', this).show("blind", { direction: "vertical" }, 200);
     } else {
-        $('.dropdown-project', this).hide("blind", { direction: "vertical" }, 500);
+        $('.dropdown-project', this).hide("blind", { direction: "vertical" }, 200);
     }
-    return false;
 
+    return false;
   });
 
 
@@ -312,10 +312,11 @@ jQuery(function($) {
    e.preventDefault();
    var link = $(this).attr('href'); //Get the href attribute
    $('#paginated-projects').fadeOut(500, function(){ //fade out the content area
-   $("#loader").show(); // show the loader animation
-   }).load(link + ' #paginated-projects', function(){ $('#paginated-projects').fadeIn(500, function(){ //load data from the content area from paginator link page that we just get from the top
-   $("#loader").hide(); //hide the loader
+   $("#paginated-loader").show(); // show the loader animation
+   }).load(link + ' #paginated-projects', function(){ $('#paginated-projects').fadeIn(500, function(){
+   $("#paginated-loader").hide(); //hide the loader
    }); });
+   $("#pagination-totals").load('http://localhost/unhabitat/projects/?offset=40' + ' #pagination-totals', function(){  });
    $('html,body').animate({
           scrollTop: ($("#paginated-projects").offset().top - 200)},
           'slow');
