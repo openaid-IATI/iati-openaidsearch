@@ -162,50 +162,48 @@ jQuery(function($) {
 // XXXXXXX MAP FILTERS XXXXXXXXXXX
 
 
-	$('.filter-button').click(function(e){
+  $('.filter-button').click(function(e){
 
-		if ($('#map-filter-overlay').is(":hidden")){
-			
-			if($('#map-hide-show-button').hasClass("map-hide")){
-				show_map();
-			}
+      if($('#map-filter-overlay').is(":hidden")){
+      
+        if($('#map-hide-show-button').hasClass("map-hide")){
+          show_map();
+        }
+      }
 
-			$('#map-filter-overlay').show("blind", { direction: "vertical" }, 1000);
-                        
-                     
-                        if($(this).attr('id') == 'filter-by-country'){
-                            $('#country_filters').show();
-                        }
-                        if($(this).attr('id') == 'filter-by-region'){
-                            
-                            $('#region_filters').show();
-                        }
-                        if($(this).attr('id') == 'filter-by-budget'){
-                            $('#budget_filters').show();
-                        }
-                        if($(this).attr('id') == 'filter-by-sector'){
-                            $('#sector_filters').show();
-                        }
-                        if($(this).attr('id') == 'filter-by-indicator'){
-                            $('#indicator_filters').show();
-                        }
-                        if($(this).attr('id') == 'filter-by-city'){
-                            $('#city_filters').show();
-                        }
+      $('#map-filter-overlay').show("blind", { direction: "vertical" }, 1000);         
+      hide_all_filters();               
+      if($(this).attr('id') == 'filter-by-country'){
+        $('#country_filters').show();
+      }
+      if($(this).attr('id') == 'filter-by-region'){                   
+        $('#region_filters').show();
+      }
+      if($(this).attr('id') == 'filter-by-budget'){
+        $('#budget_filters').show();
+      }
+      if($(this).attr('id') == 'filter-by-sector'){
+        $('#sector_filters').show();
+      }
+      if($(this).attr('id') == 'filter-by-indicator'){
+        $('#indicator_filters').show();
+      }
+      if($(this).attr('id') == 'filter-by-city'){
+        $('#city_filters').show();
+      }
+      $(this).addClass("filter-selected");
 
-		} else {
-			// save selection?
-			$('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
-                        $('#country_filters').hide();
-                        $('#budget_filters').hide();
-                        $('#sector_filters').hide();
-                        $('#region_filters').hide();
-                        $('#indicator_filters').hide();
-                        $('#city_filters').hide();
-                        
-		}
-		
-	});
+  });
+
+  function hide_all_filters(){
+    $('#country_filters').hide();
+    $('#region_filters').hide();
+    $('#budget_filters').hide();
+    $('#sector_filters').hide();
+    $('#indicator_filters').hide();
+    $('#city_filters').hide();
+    $('.filter-button.filter-selected').removeClass("filter-selected");
+  }
 
 	$('#map-filter-cancel').click(function(){
 
