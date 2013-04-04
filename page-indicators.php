@@ -8,7 +8,7 @@ Template Name: Indicators page
 
 
 <?php 
-        $regions = wp_get_regions(); 
+      $regions = wp_get_regions(); 
       
       
       

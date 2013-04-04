@@ -854,7 +854,6 @@ a.thumbnail:hover,a.thumbnail:focus{border-color:#0088cc;-webkit-box-shadow:0 1p
 button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-appearance:none;}
 .pull-right{float:right;}
 .pull-left{float:left;}
-.hide{display:none;}
 .show{display:block;}
 .invisible{visibility:hidden;}
 .affix{position:fixed;}

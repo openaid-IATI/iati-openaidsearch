@@ -314,6 +314,10 @@ input[type="text"]{
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FILTER CONTAINER XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
+#region_filters, #country_filters, #city_filters, #indicator_filters, #sector_filters, #budget_filters{
+  display: none;
+}
+
 #project-filter-wrapper, #indicator-filter-wrapper{
   position: relative;
   z-index: 4;

@@ -63,15 +63,15 @@
         indicator_keys['test'] = 'test';
         indicator_keys['test'] = 'test';-->
 			<div class="row-fluid map-filter-list">
-                            <div id="indicator_filters" class="hide">
+                            <div id="indicator_filters">
 				<?php 
 
                                 
-                               $indicators = array('avg_annual_rate_change_percentage_urban' => 'avg_annual_rate_change_percentage_urban',
-                                                    'avg_annual_rate_change_total_population' => 'avg_annual_rate_change_total_population',
-                                                    
-                                                    'bottle_water' => 'bottle_water',
-                                                    'composting_toilet' => 'composting_toilet',
+                               $indicators = array( 
+                                                    'avg_annual_rate_change_percentage_urban' => 'Average annual rate cahnge percentage urban',
+                                                    'avg_annual_rate_change_total_population' => 'Average annual rate of total population change',
+                                                    'bottle_water' => 'Bottle water',
+                                                    'composting_toilet' => 'Composting toilets',
                                                     'connection_to_electricity' => 'avg_annual_rate_change_percentage_urban',
                                                     'deprivation' => 'deprivation',
                                                     'enrollment_female_primary_education' => 'enrollment_female_primary_education',
@@ -100,7 +100,7 @@
                                                     'urban_population' => 'urban_population',
                                                     'urban_slum_population' => 'urban_slum_population'
 
-                );
+                                );
                                ?>
                             <?php $c = 0;?>
                             <?php foreach ($indicators as $key => $value) :?>
@@ -112,7 +112,7 @@
                             <div class="squaredThree">
 						<input type="checkbox" value="<?php echo $key; ?>" id="land<?php echo $key; ?>" name="check" />
 						<label class="map-filter-cb-value" for="land<?php echo $key; ?>"></label>
-						<span><?php echo $key; ?></span>
+						<span><?php echo $value; ?></span>
 					</div>
                                         
                              <?php if(in_array($c, array(14,29,44, 59))) : ?>
@@ -124,9 +124,9 @@
                             <?php endforeach;?>
                                 </div>
                         </div>
-                            <div id="region_filters" class="hide"></div>
-                            <div id="country_filters" class="hide"></div>
-                            <div id="city_filters" class="hide"></div>
+                            <div id="region_filters"></div>
+                            <div id="country_filters"></div>
+                            <div id="city_filters"></div>
                             
                             
                 </div>

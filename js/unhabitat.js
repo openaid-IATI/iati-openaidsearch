@@ -172,36 +172,36 @@ jQuery(function($) {
 
 			$('#map-filter-overlay').show("blind", { direction: "vertical" }, 1000);
                         
-                        
-                        if(e.target.id == 'filter-by-country'){
-                            $('#country_filters').removeClass('hide');
+                     
+                        if($(this).attr('id') == 'filter-by-country'){
+                            $('#country_filters').show();
                         }
-                        if(e.target.id == 'filter-by-region'){
+                        if($(this).attr('id') == 'filter-by-region'){
                             
-                            $('#region_filters').removeClass('hide');
+                            $('#region_filters').show();
                         }
-                        if(e.target.id == 'filter-by-budget'){
-                            $('#budget_filters').removeClass('hide');
+                        if($(this).attr('id') == 'filter-by-budget'){
+                            $('#budget_filters').show();
                         }
-                        if(e.target.id == 'filter-by-sector'){
-                            $('#sector_filters').removeClass('hide');
+                        if($(this).attr('id') == 'filter-by-sector'){
+                            $('#sector_filters').show();
                         }
-                        if(e.target.id == 'filter-by-indicator'){
-                            $('#indicator_filters').removeClass('hide');
+                        if($(this).attr('id') == 'filter-by-indicator'){
+                            $('#indicator_filters').show();
                         }
-                        if(e.target.id == 'filter-by-city'){
-                            $('#city_filters').removeClass('hide');
+                        if($(this).attr('id') == 'filter-by-city'){
+                            $('#city_filters').show();
                         }
 
 		} else {
 			// save selection?
 			$('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
-                        $('#country_filters').addClass('hide');
-                        $('#budget_filters').addClass('hide');
-                        $('#sector_filters').addClass('hide');
-                        $('#region_filters').addClass('hide');
-                        $('#indicator_filters').addClass('hide');
-                        $('#city_filters').addClass('hide');
+                        $('#country_filters').hide();
+                        $('#budget_filters').hide();
+                        $('#sector_filters').hide();
+                        $('#region_filters').hide();
+                        $('#indicator_filters').hide();
+                        $('#city_filters').hide();
                         
 		}
 		

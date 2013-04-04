@@ -65,9 +65,14 @@ jQuery(function($) {
 
 // XXXXXXXXXXXXX INDICATOR INITIALIZATION XXXXXXXXXXX
 
-  // var indicator1_years = new Array(); 
+  // // var indicator1_years = new Array(); 
+  // $.each(result[0], function(key, value){
+  //   console.log(key, value);
+  // }
 
-
+  // $.each(result[0], function(key, value){
+  //   console.log(key, value);
+  // }
 
   // try{      
   //   var circle = L.circle(new L.LatLng(countryloc['<?php echo $i['country_iso'] ?>'].longitude, countryloc['<?php echo $i['country_iso'] ?>'].latitude), <?php echo sqrt(($factor * $i[$selected_indicator])/pi()); //echo round($factor * $i['population']); ?>, {
