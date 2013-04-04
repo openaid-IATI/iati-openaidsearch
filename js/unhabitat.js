@@ -208,11 +208,10 @@ jQuery(function($) {
 	$('#map-filter-cancel').click(function(){
 
 		// clear updated selection
-
+    $('.filter-button.filter-selected').removeClass("filter-selected");
 		$('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
 
-		$('#map-filter-overlay').hide('slow');
-                window.location = '?sectors=&budgets=&countries=&regions=';
+    window.location = '?sectors=&budgets=&countries=&regions=';
 
 	});
 
