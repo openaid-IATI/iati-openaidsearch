@@ -208,12 +208,7 @@ jQuery(function($) {
       };
 
 
-      $.getJSON("http://dev.oipa.openaidsearch.org/json").done(function( data ) {
-        $.each( data.items, function( i, item ) {
-
-        });
-      });
-      indicator_json_data = "?";
+     
       
       return indicator_json_data;
   }
