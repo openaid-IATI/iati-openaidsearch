@@ -133,6 +133,18 @@ Template Name: Indicators page
 </div>
 
 
+<script>
+// <?php fqefe 
+
+// $content = file_get_contents($search_url);
+//   $result = json_decode($content);
+// ?>
+// var indicator_json_data = 
+
+
+
+</script>
+
 
 <?php get_footer(); ?>
 <script type="text/javascript">

@@ -1132,7 +1132,7 @@ label, input, button, select, textarea{
   float:left;
 }
 
-#dropdown-project-amount button:hover{
+#dropdown-project-amount a:hover{
   text-decoration: underline;
 }
 
