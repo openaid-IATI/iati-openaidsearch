@@ -208,9 +208,14 @@ jQuery(function($) {
       };
 
 
-     
-      
-      return indicator_json_data;
+      var jsonobject = "";
+      $.getJSON("http://dev.oipa.openaidsearch.org/json").done(function( data ) {
+        $.each( data.items, function( i, item ) {
+
+        });
+      });
+      indicator_json_data = "?";
+    return indicator_json_data;
   }
 
   function draw_available_data_blocks(indicator_data){
@@ -287,7 +292,6 @@ jQuery(function($) {
     // }
   }
 
-
   function slide_tooltip(event, ui){
 
     refresh_circles(ui.value);
@@ -360,6 +364,9 @@ jQuery(function($) {
 
 // XXXXXXXXXXXXXXXX INDICATOR GRAPHS XXXXXXXXXXXXXXXX 
       function drawTreemap() {
+
+
+
         // Create and populate the data table.
         var data = google.visualization.arrayToDataTable([
           ['Location', 'Parent', 'Market trade volume (size)'],
@@ -403,17 +410,23 @@ jQuery(function($) {
       }
 
       function drawLineChart(){
+        var curyear = $(".ui-slider-handle").html();
+        var currentData = [];
+        currentData.push(['Year', 'Country1', 'Country2']);
 
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
+        var minyear = curyear - 10;
+        var maxyear = curyear + 10;
+        console.log(minyear);
+        for (var i = minyear;i < maxyear; i++){
+          currentData.push([i, parseInt("1000"), parseInt("20000")]);
+        }
+
+        // if( typeof assoc_pagine["var"] != "undefined" ) 
+
+        var data = google.visualization.arrayToDataTable(currentData);
 
         var options = {
-          title: 'Company Performance',
+          title: 'Line chart header?',
           backgroundColor: '#F1EEE8'
         };
 
@@ -424,16 +437,24 @@ jQuery(function($) {
 
       function drawTableChart(){
 
+        var indicator_data = get_indicator_data("", "", "", "");
+        
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Name');
-        data.addColumn('number', 'Salary');
-        data.addColumn('boolean', 'Full Time Employee');
-        data.addRows([
-          ['Mike',  {v: 10000, f: '$10,000'}, true],
-          ['Jim',   {v:8000,   f: '$8,000'},  false],
-          ['Alice', {v: 12500, f: '$12,500'}, true],
-          ['Bob',   {v: 7000,  f: '$7,000'},  true]
-        ]);
+        data.addColumn('string', 'Country');
+        data.addColumn('number', 'Value');
+        $.each(indicator_data, function(key, value){
+
+          try{
+            console.log(value.years.y2000);
+            
+            data.addRow([value.name, parseInt(value.years.y2010)]);
+            
+
+          }catch(err){
+              console.log(err);
+          }
+
+        });
 
         var table = new google.visualization.Table(document.getElementById('table-chart-placeholder'));
         table.draw(data, {showRowNumber: true});
@@ -446,6 +467,7 @@ jQuery(function($) {
     } else {
         $('#dropdown-type-graph').hide("blind", { direction: "vertical" }, 200);
     }
+    return false;
   });
 
 
