@@ -102,7 +102,6 @@ jQuery(function($) {
   //     alert("test");
   //   });
 
-   
 
   function get_indicator_data(indicator_id, countries, regions, cities){
     
@@ -223,10 +222,16 @@ jQuery(function($) {
       var curyear = "y" + i;
       $.each(indicator_data, function(key, value){
           
-          if (curyear in value.years){
+
+          for (var a = value.years.length - 1; a >= 0; a--) {
+            if (curyear in value.years[a]){
+
             $("#year-" + i).addClass("slider-active");
+            break;
             return false;
           }
+          };
+          
         
       });
     }
