@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: summary
+Template was Named: summary
 */
 ?>
 <?php get_header(); ?>

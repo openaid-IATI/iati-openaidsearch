@@ -149,6 +149,10 @@
 	</div>
     <!-- treemap visualization placeholder, TO DO: load dynamically on click, no preloading of the treemap -->
     <div id="treemap-placeholder"></div>
+    <div id="map-loader">
+        <div id="map-loader-text">Loading indicator map</div>
+        <img src="<?php echo get_template_directory_uri(); ?>/images/ajax-loader.gif" alt="" />
+    </div>
 	<div id="map"></div>
 </div>
 

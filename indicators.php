@@ -8,6 +8,7 @@ Template Name: Indicators page
 
 
 <?php 
+/*
       $regions = wp_get_regions(); 
       
       
@@ -51,11 +52,11 @@ Template Name: Indicators page
     //$factor = 600000 / $max_pop;
     $maxcircleradius = 3000000000000;
     $factor = $maxcircleradius / $max_indicator;
-    
+    */
     
 ?>  
 <?php get_template_part( "indicator", "filters" ); ?>
-<?php get_template_part( "map-indicator-page" ); ?>
+<?php get_template_part( "indicator", "map" ); ?>
 
 <div id="page-wrapper">
 	<div class="page-header page-header-less-margin">
@@ -135,6 +136,7 @@ Template Name: Indicators page
 
 <?php get_footer(); ?>
 <script type="text/javascript">
+/*
 //@todo add this to a global js, also being used by page-projects.php
 function create_filter_attributes(objects, keys){
         var html = '';
@@ -179,8 +181,8 @@ $(document).ready(function() {
     <?php foreach($indicator_results as $i) :?>
     
     <?php if (strlen($i[$selected_indicator])>0) :?>
-    
-    try
+   
+    try 
       {
 // jsonPath(countryData, "$..features[?(@.id=='<?php echo $i['country_iso3'] ?>')]")[0].properties.projects = '<?php echo $i[$selected_indicator] ?>';//Run some code here
       }
@@ -244,5 +246,6 @@ $(document).ready(function() {
 });
 function select_year(year){
     window.location = '?years=' + year + '&indicator=<?php echo $selected_indicator ?>' + '&countries=<?php echo $selected_country ?>&regions=<?php echo $selected_region ?>&city=<?php echo $selected_city ?>';;
-}
+} 
+*/
 </script>

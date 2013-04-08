@@ -11,11 +11,10 @@
             <div class="row-fluid map-filter-list">
                    
                 
-                    <div id="country_filters" class="hide"></div>
-                    
-                    <div id="region_filters" class="hide"></div>
-                    <div id="sector_filters" class="hide"></div>
-                    <div id="budget_filters" class="hide"></div>
+                    <div id="country_filters"></div>
+                    <div id="region_filters"></div>
+                    <div id="sector_filters"></div>
+                    <div id="budget_filters"></div>
 
             </div>
 

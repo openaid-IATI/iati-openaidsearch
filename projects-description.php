@@ -3,6 +3,7 @@ wp_generate_results_v2($objects, $meta);
 
 foreach($objects AS $idx=>$project) {
 ?>
+
 <div class="projects-project-block">
 <div class="container">
 	<div class="row-fluid projects-description <?php echo $project->iati_identifier; ?>">

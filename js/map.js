@@ -1,11 +1,17 @@
-var map = L.map('map', {attributionControl: false, scrollWheelZoom: false}).setView([10.505, 25.09], 3);
+var map = L.map('map', {
+    attributionControl: false, 
+    scrollWheelZoom: false,
+    minZoom: 2,
+    maxZoom:6
+}).setView([10.505, 25.09], 3);
 
 L.tileLayer('http://{s}.tile.cloudmade.com/07c00b1d0e4c4bed9a926bdca23d2232/90076/256/{z}/{x}/{y}.png', {
-    maxZoom: 18
+    maxZoom: 6
 }).addTo(map);
 
 //L.control.zoom({position : "topright"}).addTo(map);
 //L.geoJson(countryData, {style: style, onEachFeature: onEachFeature}).addTo(map);
+
 
 function getColor(d) {
     return d > 100  ? '#045A8D' :

@@ -1,13 +1,13 @@
 <?php
 /*
-Template Name: Publishing policy page
+Template Name: City prosperity page
 */
 ?>
 
 <?php get_header(); ?>
 
-<?php get_template_part( "cpi", "filters" ); ?>
-<?php get_template_part( "map-indicator-page" ); ?>
+<?php get_template_part( "city-prosperity", "filters" ); ?>
+<?php get_template_part( "indicator", "map" ); ?>
 
 <div id="page-wrapper">
 	<div class="page-header page-header-less-margin">

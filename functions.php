@@ -24,7 +24,7 @@ function register_my_menus() {
 add_action( 'init', 'register_my_menus' );
 
 
-function wp_generate_results_v2(&$objects, &$meta){
+function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	global $_PER_PAGE;
 	// get amount of activities per page
 	$activities_per_page = $_PER_PAGE;
@@ -33,6 +33,7 @@ function wp_generate_results_v2(&$objects, &$meta){
 	// get offset
 	$activities_offset = 0;
 	if(isset($_REQUEST['offset'])){	$activities_offset = rawurlencode($_REQUEST['offset']);	}
+	//if($offsetpar != ""){ $activities_offset = $offsetpar; }
 
 	$search_url = SEARCH_URL . "activities/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset."&organisations=41120";;
     

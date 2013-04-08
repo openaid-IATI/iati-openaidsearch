@@ -12,70 +12,15 @@ jQuery(function($){
     	$('.project-project-spec-hidden.'+currentId).show();
     	$('.projects-project-description.'+currentId).css("height", "auto");
     	$(this).removeClass('expand-plus');
-		$(this).addClass('expand-min');
+		  $(this).addClass('expand-min');
     } else {
     	$('.project-project-spec-hidden.'+currentId).hide();
     	$('.projects-project-description.'+currentId).css("height", "6em");
     	$(this).removeClass('expand-min');
-		$(this).addClass('expand-plus');
+		  $(this).addClass('expand-plus');
     }
-
     
   });
-});
-
-
-
-
-// XXXXXXX PROJECT DETAIL PAGE XXXXXXXXXXX
-
-jQuery(function($) {
-
-
-
-  function change_tab(curlink, newtab){
-
-  	// hide all tab content
-  	$(".project-tabs-wrapper > div").hide();
-  	// remove active tab
-  	$(".nav-pills > li").removeClass("active");
-  	// make link of current tab active
-	$(curlink).closest("li").addClass("active");
-	// show current tab content
-	$("#project-" + newtab).show();
-
-  }
-
-  $("#project-description-link").click(function(){
-	  change_tab(this, "description");
-	  return false;
-  });
-
-  $("#project-commitments-link").click(function(){
-	  change_tab(this, "commitments");
-	  return false;
-  });
-
-  $("#project-documents-link").click(function(){
-	  change_tab(this, "documents");
-	  return false;
-  });
-
-  $("#project-related-indicators-link").click(function(){
-	  change_tab(this, "related-indicators");
-	  return false;
-  });
-
-  $("#project-related-projects-link").click(function(){
-	  change_tab(this, "related-projects");
-	  return false;
-  });
-
-  $("#project-located-in-link").click(function(){
-	  change_tab(this, "located-in");
-	  return false;
-  });
-
 });
 
 
@@ -160,7 +105,6 @@ jQuery(function($) {
   	}
 
 // XXXXXXX MAP FILTERS XXXXXXXXXXX
-
 
   $('.filter-button').click(function(e){
 
@@ -284,9 +228,9 @@ jQuery(function($) {
     } else {
         $('#dropdown-type-graph').hide("blind", { direction: "vertical" }, 200);
     }
-
-    return false;
   });
+
+ 
 
 // XXXXXXX sort buttons project page XXXXX
 
@@ -301,22 +245,38 @@ jQuery(function($) {
     return false;
   });
 
+   $( '.project-sort-type a' ).click( function(e) {
+    e.stopPropagation();
+  } );
 
-// XXXXXXXXX Ajax pagination (not so neat fix, TO DO: update this ) XXXXXXXX
 
- $('#pagination a').on('click', function(e){ //check when pagination link is clicked and stop its action.
-   e.preventDefault();
-   var link = $(this).attr('href'); //Get the href attribute
-   $('#paginated-projects').fadeOut(500, function(){ //fade out the content area
+// XXXXXXXXX Ajax wordpress simple pagination XXXXXXXX
+
+  $('#pagination a').click(function(){ //check when pagination link is clicked and stop its action.
+   var link = $(this).attr('href');
+   load_new_page(link);
+   return false;
+  });
+
+  function load_new_page(link){
+    
+   $('#page-wrapper').fadeOut(800, function(){ //fade out the content area
    $("#paginated-loader").show(); // show the loader animation
-   }).load(link + ' #paginated-projects', function(){ $('#paginated-projects').fadeIn(500, function(){
-   $("#paginated-loader").hide(); //hide the loader
+   }).load(link + ' #page-wrapper', function(){ 
+    
+    $("#paginated-loader").hide(); //hide the loader
+    $('#page-wrapper').fadeIn(200, function(){
+      $('#pagination a').click(function(){ //check when pagination link is clicked and stop its action.
+         var link = $(this).attr('href');
+         load_new_page(link);
+         return false;
+      });
+   
    }); });
-   $("#pagination-totals").load('http://localhost/unhabitat/projects/?offset=40' + ' #pagination-totals', function(){  });
-   $('html,body').animate({
-          scrollTop: ($("#paginated-projects").offset().top - 200)},
-          'slow');
-   });
+   // $('html,body').animate({
+   //        scrollTop: ($("#map-hide-show").offset().top - 200)},
+   //        'slow');
+  }
 
 });
 

@@ -50,27 +50,26 @@
 	</div>
 </div>
 
-<script src="http://code.jquery.com/jquery.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/jquery-ui.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/leaflet.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/countries.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/countries_loc.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/unhabitatmap.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/unhabitat.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/jsonpath-0.8.0.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/countries_isos.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery-ui.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/leaflet.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/countries.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/countries_loc.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jsonpath-0.8.0.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/countries_isos.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/map.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/main.js"></script>
 
 <?php if (is_page('indicators') or is_page('city-prosperity')) {
 	
     echo '<script src="https://www.google.com/jsapi"></script>';
-	
 	echo '<script src="' . get_template_directory_uri() . '/js/indicators.js"></script>';
 } ?>
 
-<?php if (is_page('project')) {echo '<script src="' . get_template_directory_uri() . '/js/map_project_page.js"></script>';} ?>
+<?php if (is_page('project')) {
 
-
-<!--<script src="<?php echo get_template_directory_uri(); ?>/js/script.js"></script>-->
+	echo '<script src="' . get_template_directory_uri() . '/js/project.js"></script>';
+} ?>
 
 </body>
 </html>

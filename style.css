@@ -50,6 +50,7 @@ body {
   color: #666;
   font-family:"HelveticaNeueW02-55Roma","Helvetica Neue",Helvetica,Arial,sans-serif;
   line-height: 100%;
+  background-color: #F1EEE8;
 }
 
 #page-wrapper{
@@ -1086,6 +1087,10 @@ label, input, button, select, textarea{
   vertical-align: middle;
 }
 
+.project-sort-text{
+  color: #0088CC;
+}
+
 .project-sort-icon{
   width:8px;
   height:17px;  
@@ -1154,19 +1159,28 @@ label, input, button, select, textarea{
 
 #paginated-loader{
   display: none;
-  height:50em;
+  height:89em;
   width:100%;
   text-align: center;
+  background-color: #F1EEE8;
 }
 
-#paginated-loader img{
+#map-loader{
+  display:none;
+  height: 45em;
+  width: 100%;
+  text-align: center;
+  background-color: #F1EEE8;
+}
+
+#paginated-loader img, #map-loader img{
   clear:both;
   margin:2.5em;
 }
 
-#paginated-text{
+#paginated-text, #map-loader-text{
   clear:both;
-  margin-top:3em;
+  padding-top:3em;
   font-size:2em;
   font-family: "HelveticaNeueW01-45Ligh";
 }
@@ -1391,6 +1405,10 @@ label, input, button, select, textarea{
     /* Landscape phone to portrait tablet */
     @media (max-width: 767px) {
 
+      body {
+        font-size:10px;
+      }
+
       .projects-project-spec {
         margin-top: 2em;
         margin-left: 0;
@@ -1405,6 +1423,10 @@ label, input, button, select, textarea{
 
     /* Landscape phones and down */
     @media (max-width: 480px) { 
+
+      body {
+        font-size:10px;
+      }
 
       #map{
         display: none;

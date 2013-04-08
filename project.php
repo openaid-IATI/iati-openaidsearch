@@ -13,7 +13,6 @@ $activity = wp_get_activity($project_id);
 
 ?>
 
-<?php get_template_part( "project", "filters" ); ?>
 <?php get_template_part( "map" ); ?>
 
 <div id="page-wrapper">
