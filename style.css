@@ -895,7 +895,9 @@ label, input, button, select, textarea{
   margin-top: 20px;
 }
 
-
+#line-chart-placeholder{
+  height:36em;
+}
 
 
 

@@ -262,54 +262,54 @@ jQuery(function($) {
       }
 
       function drawLineChart(){
-        // var curyear = parseInt($(".ui-slider-handle").html());
-        // var currentData = [];
-        // var minyear = curyear - 10;
-        // var maxyear = curyear + 10;
-        // var lineChartData = [];
-        // //var lineChartLines = new Object();
+        var curyear = parseInt($(".ui-slider-handle").html());
+        var currentData = [];
+        var minyear = curyear - 10;
+        var maxyear = curyear + 10;
+        var lineChartData = [];
+        //var lineChartLines = new Object();
 
-        // currentData.unshift(['Year', circles[0].countryiso2, circles[1].countryiso2, circles[2].countryiso2, circles[3].countryiso2, circles[4].countryiso2]);
+        currentData.push(['Year', circles[0].countryiso2, circles[1].countryiso2, circles[2].countryiso2, circles[3].countryiso2, circles[4].countryiso2]);
 
 
-        // for (var i=minyear;i<maxyear;i++)
-        // { 
-        //     var c1val;
-        //     var c2val;
-        //     var c3val;
-        //     var c4val;
-        //     var c5val;
+        for (var i=1950;i<2050;i++)
+        { 
+            var c1val;
+            var c2val;
+            var c3val;
+            var c4val;
+            var c5val;
 
-        //     var curvalue = circles[0].values["y" + i.toString()];
-        //     if (curvalue === undefined || curvalue === null){ c1val = "Null"; } else { c1val = curvalue; }
+            var curvalue = circles[0].values["y" + i.toString()];
+            if (curvalue === undefined || curvalue === null){ c1val = null; } else { c1val = curvalue; }
 
-        //     var curvalue = circles[1].values["y" + i.toString()];
-        //     if (curvalue === undefined || curvalue === null){ c2val = "Null"; } else { c2val = curvalue; }
+            var curvalue = circles[1].values["y" + i.toString()];
+            if (curvalue === undefined || curvalue === null){ c2val = null; } else { c2val = curvalue; }
             
-        //     var curvalue = circles[2].values["y" + i.toString()];
-        //     if (curvalue === undefined || curvalue === null){ c3val = "Null"; } else { c3val = curvalue; }
+            var curvalue = circles[2].values["y" + i.toString()];
+            if (curvalue === undefined || curvalue === null){ c3val = null; } else { c3val = curvalue; }
           
-        //     var curvalue = circles[3].values["y" + i.toString()];
-        //     if (curvalue === undefined || curvalue === null){ c4val = "Null"; } else { c4val = curvalue; }
+            var curvalue = circles[3].values["y" + i.toString()];
+            if (curvalue === undefined || curvalue === null){ c4val = null; } else { c4val = curvalue; }
             
-        //     var curvalue = circles[4].values["y" + i.toString()];
-        //     if (curvalue === undefined || curvalue === null){ c5val = "Null"; } else { c5val = curvalue; }
+            var curvalue = circles[4].values["y" + i.toString()];
+            if (curvalue === undefined || curvalue === null){ c5val = null; } else { c5val = curvalue; }
             
-        //     currentData.push([i.toString(), c1val, c2val, c3val, c4val, c5val]);
-        // }
+            currentData.push([i.toString(), c1val, c2val, c3val, c4val, c5val]);
+        }
 
 
 
-        // var data = google.visualization.arrayToDataTable(currentData);
+        var data = google.visualization.arrayToDataTable(currentData);
 
-        // var options = {
-        //   title: 'Line chart header?',
-        //   backgroundColor: '#F1EEE8',
-        //   interpolateNulls: true
-        // };
+        var options = {
+          title: 'Line chart header?',
+          backgroundColor: '#F1EEE8',
+          interpolateNulls: true
+        };
 
-        // var chart = new google.visualization.LineChart(document.getElementById('line-chart-placeholder'));
-        // chart.draw(data, options);
+        var chart = new google.visualization.LineChart(document.getElementById('line-chart-placeholder'));
+        chart.draw(data, options);
       
       }
 

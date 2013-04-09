@@ -74,9 +74,12 @@ function wp_generate_paging($meta) {
 	   $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='limitstart'><span>&larr; </span></a></li>";
 	} // end if 
 
-	if ($cur_page > 5){
-		$params['offset'] = 0;
+	if ($cur_page > (1 + $range)){
+	   $params['offset'] = 0;
 	   $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='page'><span>1</span></a></li>";
+	}
+
+	if ($cur_page > (2 + $range)){
 	   $paging_block .= "<li>...</li>";
 	}
 
@@ -97,9 +100,11 @@ function wp_generate_paging($meta) {
 	   } // end if 
 	} // end for
 
+	if($cur_page < ($total_pages - (1 + $range))){
+	    $paging_block .= "<li>...</li>";
+	}
 
-	if($cur_page < ($total_pages - 5)){
-		$paging_block .= "<li>...</li>";
+	if($cur_page < ($total_pages - $range)){
 	   $params['offset'] = $total_count - ($total_count % $per_page);
 	   $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='page'><span>$total_pages</span></a></li>";
 	}
