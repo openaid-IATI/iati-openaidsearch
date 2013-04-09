@@ -239,6 +239,43 @@ function wp_get_activity($identifier) {
 
 }
 
+function format_custom_number($num) {
+	
+	$s = explode('.', $num);
+
+	$parts = "";
+	if(strlen($s[0])>3) {
+		$parts = "." . substr($s[0], strlen($s[0])-3, 3);
+		$s[0] = substr($s[0], 0, strlen($s[0])-3);
+		
+		if(strlen($s[0])>3) {
+			$parts = "." . substr($s[0], strlen($s[0])-3, 3) . $parts;
+			$s[0] = substr($s[0], 0, strlen($s[0])-3);
+			if(strlen($s[0])>3) {
+				$parts = "." . substr($s[0], strlen($s[0])-3, 3) . $parts;
+				$s[0] = substr($s[0], 0, strlen($s[0])-3);
+			} else {
+				$parts = $s[0] . $parts;
+			}
+		} else {
+			$parts = $s[0] . $parts;
+		}
+	} else {
+		$parts = $s[0] . $parts;
+	}
+	
+	
+	$ret = $parts;
+	
+	if(isset($s[1])) {
+		if($s[1]!="00") {
+			$ret .= "," . $s[1];
+		}
+	}
+	
+	return $ret;
+}
+
 function wp_get_regions() {
 	
 	$search_url = SEARCH_URL . "region/?format=json&limit=10";
@@ -1193,42 +1230,7 @@ function wp_generate_home_map_data() {
 		return $array;
 }
 
-function format_custom_number($num) {
-	
-	$s = explode('.', $num);
 
-	$parts = "";
-	if(strlen($s[0])>3) {
-		$parts = "." . substr($s[0], strlen($s[0])-3, 3);
-		$s[0] = substr($s[0], 0, strlen($s[0])-3);
-		
-		if(strlen($s[0])>3) {
-			$parts = "." . substr($s[0], strlen($s[0])-3, 3) . $parts;
-			$s[0] = substr($s[0], 0, strlen($s[0])-3);
-			if(strlen($s[0])>3) {
-				$parts = "." . substr($s[0], strlen($s[0])-3, 3) . $parts;
-				$s[0] = substr($s[0], 0, strlen($s[0])-3);
-			} else {
-				$parts = $s[0] . $parts;
-			}
-		} else {
-			$parts = $s[0] . $parts;
-		}
-	} else {
-		$parts = $s[0] . $parts;
-	}
-	
-	
-	$ret = $parts;
-	
-	if(isset($s[1])) {
-		if($s[1]!="00") {
-			$ret .= "," . $s[1];
-		}
-	}
-	
-	return $ret;
-}
 
 function objectToArray($d) {
 	if (is_object($d)) {

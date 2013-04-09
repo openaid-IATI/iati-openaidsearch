@@ -190,7 +190,15 @@
     }
   }
 
-  
+  $(".slider-year").hover(
+    function() {
+      var curId = $(this).attr('id');
+      var curYear = curId.replace("year-", "");
+      refresh_circles(curYear);
+      $( "#map-slider-tooltip" ).slider( "option", "value", curYear); 
+      $( ".slider-year").removeClass("active");
+      $(this).addClass("active");
+  });
 
   $("#project-share-export").click(function(){
 

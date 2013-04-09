@@ -5,7 +5,7 @@ $activity = wp_get_activity($project_id);
 ?>
 <div id="project-documents">
 	<?php if(empty($activity->documents)) {?>
-		<h2>No information available</h2>
+		No information available
 		<?php } else { ?>
 									
 		<ul>
