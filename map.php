@@ -35,7 +35,7 @@
 
 </div>
 
-<?php $hide_map = !is_page("projects"); ?>
+<?php $hide_map = (!is_page("projects") || !is_home()); ?>
 
 <div id="map" <?php if($hide_map){ echo 'style="height:13.5em"'; }?>></div>
 <div id="map-border-bottom"></div>
