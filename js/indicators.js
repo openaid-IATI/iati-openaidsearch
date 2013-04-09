@@ -202,18 +202,23 @@ jQuery(function($) {
   }
 
   function refresh_circles(year){
+
     var curyear = "y" + year;
     var max = 0;
     for (var i=0;i<circles.length;i++)
     { 
+      
       try{
-        if(circles[i].values[curyear] > max){
-          max = circles[i].values[curyear];
+        for (var a = circles[i].values.length - 1; a >= 0; a--) {
+          if(circles[i].values[a][curyear] > max){
+          max = circles[i].values[a][curyear];
         }
+        }
+        
       } catch (err){
       }
     }
-
+    console.log(max);
     var factor = Math.round(600000 / max);
 
     for (var i=0;i<circles.length;i++)
@@ -222,11 +227,17 @@ jQuery(function($) {
         //circles[i].unbindPopup();
         //circles[i].bindPopup(circles[i].values[curyear]);
        // <?php echo sqrt(($factor * $i[$selected_indicator])/pi()); //echo round($factor * $i['population']); ?>
+        for (var a = circles[i].values.length - 1; a >= 0; a--) {
 
-        var circle_radius = Math.round(Math.sqrt(factor * circles[i].values[curyear]) / Math.PI);
+          var circle_radius = Math.round(Math.sqrt(factor * circles[i].values[a][curyear]) / Math.PI);
         //console.log("radius:" + circle_radius);
-
+        if (circle_radius){
+          break;
+        }
+        
+        }
         circles[i].circleinfo.setRadius(circle_radius);
+        
       } catch (err){
         //console.log(err);
         //circles[i].circleinfo.setRadius(0);
