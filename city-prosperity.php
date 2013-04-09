@@ -105,3 +105,8 @@ Template Name: City prosperity page
 </div>
 
 <?php get_footer(); ?>
+<script type="text/javascript">
+$(document).ready(function(){
+	initialize_map('http://dev.oipa.openaidsearch.org/json-city',2012,"", "", "");
+});
+</script>
