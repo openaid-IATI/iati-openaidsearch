@@ -41,6 +41,7 @@
     $( "#map-slider-tooltip a" ).append(sel_year);
     $( "#map-slider-tooltip" ).slider( "option", "value", sel_year); 
     $( "#year-" + sel_year).addClass("active");
+    refresh_circles(sel_year.toString());
 
     // hide loader, show map
     $('#map').show();
@@ -190,21 +191,21 @@
     }
   }
 
-  $(".slider-year").hover(
-    function() {
-      var curId = $(this).attr('id');
-      var curYear = curId.replace("year-", "");
-      refresh_circles(curYear);
-      $( "#map-slider-tooltip" ).slider( "option", "value", curYear); 
-      $( ".slider-year").removeClass("active");
-      $(this).addClass("active");
-  });
+  // $(".slider-year").hover(
+  //   function() {
+  //     var curId = $(this).attr('id');
+  //     var curYear = curId.replace("year-", "");
+  //     refresh_circles(curYear);
+  //     $( "#map-slider-tooltip" ).slider( "option", "value", curYear); 
+  //     $( ".slider-year").removeClass("active");
+  //     $(this).addClass("active");
+  // });
 
-  $("#project-share-export").click(function(){
+  // $("#project-share-export").click(function(){
 
-    initialize_map("","", "", "");
-    return false;
-  });
+  //   initialize_map("","", "", "");
+  //   return false;
+  // });
   
 
 
