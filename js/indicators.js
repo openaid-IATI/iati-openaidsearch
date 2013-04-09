@@ -3,7 +3,7 @@
 
 
 
-jQuery(function($) {
+// jQuery(function($) {
     
 
 
@@ -14,10 +14,13 @@ jQuery(function($) {
   // first indicator circles
   var circles = [];
   var maxdatavalue = 0;
+  var request_url = ""
+
 
   // We run this function on each filter save.
-  function initialize_map(indicator_id, countries, regions, cities){
+  function initialize_map(url, sel_year, indicator_id, countries, regions, cities){
     // show loader, hide map
+    request_url = url;
     $('#map-loader').show();
     $('#map').hide();
 
@@ -35,9 +38,9 @@ jQuery(function($) {
     draw_circles(indicator_data);
 
     // set current year, temp: set to 2010
-    $( "#map-slider-tooltip a" ).append("2010");
-    $( "#map-slider-tooltip" ).slider( "option", "value", "2010"); 
-    $( "#year-2010").addClass("active");
+    $( "#map-slider-tooltip a" ).append(sel_year);
+    $( "#map-slider-tooltip" ).slider( "option", "value", sel_year); 
+    $( "#year-" + sel_year).addClass("active");
 
     // hide loader, show map
     $('#map').show();
@@ -61,7 +64,7 @@ jQuery(function($) {
    
 
     var indicator_json_data = [];
-    var url = 'http://dev.oipa.openaidsearch.org/json';
+    var url = request_url;
      $.ajax({
         type: 'GET',
          url: url,
@@ -207,7 +210,7 @@ jQuery(function($) {
 
 
 
-  initialize_map("","", "", "");
+  // initialize_map("","", "", "");
 
 
 
@@ -425,4 +428,4 @@ jQuery(function($) {
     
 
 
-});
+// });

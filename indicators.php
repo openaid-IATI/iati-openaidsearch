@@ -135,6 +135,12 @@ Template Name: Indicators page
 
 <?php get_footer(); ?>
 <script type="text/javascript">
+$(document).ready(function(){
+  initialize_map('http://dev.oipa.openaidsearch.org/json',2010,"", "", "");
+});
+</script>
+<script type="text/javascript">
+
 /*
 //@todo add this to a global js, also being used by page-projects.php
 function create_filter_attributes(objects, keys){
