@@ -7,16 +7,12 @@
     <?php get_template_part( "map", "selection" ); ?>
 
     <!-- The 4 graph buttons in right top --> 
-    <div id="map-graph-wrapper" class="container">
-        <div class="row-fluid">
-            <div class="span12">
-                <div id="map-graph-buttons">
-                    <a href="#" class="hneue-bold" id="graph-button-map"></a>
-                    <a href="#" class="hneue-bold" id="graph-button-graph"></a> 
-                    <a href="#" class="hneue-bold" id="graph-button-table"></a>
-                    <a href="#" class="hneue-bold" id="graph-button-treemap"></a>
-                </div>
-            </div>
+    <div id="map-graph-wrapper">
+        <div id="map-graph-buttons">
+            <a href="#" class="hneue-bold" id="graph-button-map"></a>
+            <a href="#" class="hneue-bold" id="graph-button-graph"></a> 
+            <a href="#" class="hneue-bold" id="graph-button-table"></a>
+            <a href="#" class="hneue-bold" id="graph-button-treemap"></a>
         </div>
     </div>
 

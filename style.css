@@ -1240,22 +1240,14 @@ label, input, button, select, textarea{
   margin-bottom: 0.5em;
 }
 
-.nav-pills > .active > a, .nav-pills > .active > a:hover, .nav-pills > .active > a:focus {
-  height: 1em;
-}
-
 .nav-pills > li > a {
   padding-bottom: 0.4em;
   padding-top: 0.4em;
 }
 
-
-
 #project-commitments, #project-documents, #project-related-projects, #project-related-indicators, #project-located-in{
   display: none;
 }
-
-
 
 .projects-project-title{
   font-size: 1.5em;
@@ -1308,7 +1300,6 @@ label, input, button, select, textarea{
 .projects-project-spec-value {
   width: 53%;
 }
-
 
 .share-text{
   margin-left:0.2em;

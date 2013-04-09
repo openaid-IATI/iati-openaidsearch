@@ -60,9 +60,10 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/map.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/main.js"></script>
 
+<?php if (is_page('indicators') or is_page('city-prosperity') or is_page('project')) {
+	echo '<script src="https://www.google.com/jsapi"></script>';
+} ?>
 <?php if (is_page('indicators') or is_page('city-prosperity')) {
-	
-    echo '<script src="https://www.google.com/jsapi"></script>';
 	echo '<script src="' . get_template_directory_uri() . '/js/indicators.js"></script>';
 } ?>
 

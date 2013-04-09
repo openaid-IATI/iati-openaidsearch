@@ -113,20 +113,11 @@ Template Name: Indicators page
 	<div class="container">
 		<div class="page-content">
 			<div class="row-fluid">
-				<div class="span7">
+				<div class="span12">
 					<div id="line-chart-placeholder"></div>
 					<div id="table-chart-placeholder"></div>
 				</div>
-				<div class="span4">
-					<div class="drop-shadow postit indicator-postit">
-
-						<div class="postit-title">Information placeholder</div>
-						<div class="postit-text">
-							Maecenas sed diam eget risus varius blandit sit amet non magna. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.
-						</div>
-
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	</div>
