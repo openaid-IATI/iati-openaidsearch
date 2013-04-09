@@ -44,7 +44,7 @@
     refresh_circles(sel_year.toString());
 
     // hide loader, show map
-    $('#map').show();
+    $('#map').show(); 
     $('#map-loader').hide();
     // end
     //load filters depending on page
