@@ -1,3 +1,26 @@
+//HTML function to create filters
+    function create_filter_attributes(objects, keys){
+        var html = '';
+        var counter = 0;
+        $.each(objects, function(index, value){
+            
+            if (counter == 0 || counter == 20 || counter == 40 || counter == 60){
+                html += '<div class="span3">';
+            }
+            html += '<div class="squaredThree">';
+            html += '<input type="checkbox" value="'+ index +'" id="land'+index+'" name="check" />';
+            html += '<label class="map-filter-cb-value" for="land'+index+'"></label>';
+            html += '<span>'+value+'</span></div>'; 
+            
+            if (counter == 19 || counter == 39 || counter == 59){
+                        html += '</div>';
+
+            }
+            counter++;
+        });
+        return html;
+    }
+
 // XXXXXXX MAP (GLOBAL) XXXXXXXXXXX
 
 
@@ -94,6 +117,7 @@ jQuery(function($) {
   });
 });
 
+
 // XXXXXXX MAP FILTERS XXXXXXXXXXX
 
 jQuery(function($){
@@ -122,6 +146,9 @@ jQuery(function($){
         $('#sector_filters').show();
       }
       if($(this).attr('id') == 'filter-by-indicator'){
+        $('#indicator_filters').show();
+      }
+      if($(this).attr('id') == 'filter-by-dimension'){
         $('#indicator_filters').show();
       }
       if($(this).attr('id') == 'filter-by-city'){
@@ -189,9 +216,9 @@ jQuery(function($){
                 });
                 str_city = str_city.substring(0, str_city.length-1);
                 
+                initialize_map('http://localhost:8000/json-city?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2012,'',"", "", "");
                 
-                
-                window.location = '?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city;
+                // window.location = '?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city;
   });
 });
 

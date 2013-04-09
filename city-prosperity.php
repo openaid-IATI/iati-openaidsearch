@@ -107,6 +107,12 @@ Template Name: City prosperity page
 <?php get_footer(); ?>
 <script type="text/javascript">
 $(document).ready(function(){
-	initialize_map('http://dev.oipa.openaidsearch.org/json-city',2012,"", "", "");
+	load_map('http://dev.oipa.openaidsearch.org/json-city');
+	function load_map(url){
+		data = initialize_map(url,2012,'cpi',"", "", "");
+
+	}
+
+
 });
 </script>

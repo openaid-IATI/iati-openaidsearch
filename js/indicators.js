@@ -18,7 +18,7 @@
 
 
   // We run this function on each filter save.
-  function initialize_map(url, sel_year, indicator_id, countries, regions, cities){
+  function initialize_map(url, sel_year, type, indicator_id, countries, regions, cities){
     // show loader, hide map
     request_url = url;
     $('#map-loader').show();
@@ -46,6 +46,11 @@
     $('#map').show();
     $('#map-loader').hide();
     // end
+    //load filters depending on page
+    if(type=='cpi'){
+        set_filters_cpi(indicator_data);
+    }
+    return indicator_data
   }
 
   function clear_circles(){
@@ -57,6 +62,20 @@
         console.log("removal of circle failed");
       }
     }
+  }
+
+  function set_filters_cpi(data){
+    region_html = create_filter_attributes(data['regions'], data['regions']);
+    $('#region_filters').html(region_html);
+
+    country_html = create_filter_attributes(data['countries'], data['countries']);
+    $('#country_filters').html(country_html);
+
+    city_html = create_filter_attributes(data['cities'], data['cities']);
+    $('#city_filters').html(city_html);
+
+    indicator_html = create_filter_attributes(data['indicators'], data['indicators']);
+    $('#indicator_filters').html(indicator_html);
   }
 
   function get_indicator_data(indicator_id, countries, regions, cities){
@@ -81,12 +100,15 @@
   function draw_available_data_blocks(indicator_data){
     for (var i=1950;i<2051;i++){
       var curyear = "y" + i;
+
       $.each(indicator_data, function(key, value){
+          if (value.years){
+            if (curyear in value.years){
+              $("#year-" + i).addClass("slider-active");
+              return false;
+            }
+          }   
           
-          if (curyear in value.years){
-            $("#year-" + i).addClass("slider-active");
-            return false;
-          }
         
       });
     }
