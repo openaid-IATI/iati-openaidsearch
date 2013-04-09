@@ -34,7 +34,10 @@
     </div>
 
 </div>
-<div id="map"></div>
+
+<?php $hide_map = !is_page("projects"); ?>
+
+<div id="map" <?php if($hide_map){ echo 'style="height:13.5em"'; }?>></div>
 <div id="map-border-bottom"></div>
 </div>
 
@@ -42,7 +45,10 @@
     <div class="container">
         <div class="row-fluid">
             <div class="span12">
-                <button id="map-hide-show-button" class="map-show"><img class="hide-show-icon" src="<?php echo get_template_directory_uri(); ?>/images/hide-show.png" alt="" /><span id="map-hide-show-text" class="hneue-bold">HIDE MAP</span></button>
+                <button id="map-hide-show-button" class="map-<?php if($hide_map) {echo "hide"; } else {echo "show"; } ?>">
+                    <img class="hide-show-icon" src="<?php echo get_template_directory_uri(); ?>/images/hide-show.png" alt="" />
+                    <span id="map-hide-show-text" class="hneue-bold"><?php if($hide_map) {echo "SHOW MAP"; } else {echo "HIDE MAP"; } ?></span>
+                </button>
             </div>
         </div>
     </div>

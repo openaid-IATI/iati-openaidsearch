@@ -4,6 +4,13 @@
 <?php// endif; ?>
 
 
-<div class="drop-shadow unhabitat-page-sidebar-item">
- test
-</div>
+ 	<div class="drop-shadow postit page-sidebar-item">
+		<div class="postit-title hneue-light">Popular searches</div>
+		<div class="postit-text">
+			<div class="popular-search-item"><div class="pop-search-icon"></div><div><a href="#">test1</a></div></div>
+			<div class="popular-search-item"><div class="pop-search-icon"></div><div><a href="#">test1</a></div></div>
+			<div class="popular-search-item"><div class="pop-search-icon"></div><div><a href="#">test1</a></div></div>
+			<div class="popular-search-item"><div class="pop-search-icon"></div><div><a href="#">test1</a></div></div>
+			<div class="popular-search-item"><div class="pop-search-icon"></div><div><a href="#">test1</a></div></div>
+		</div>
+	</div>

@@ -993,7 +993,29 @@ label, input, button, select, textarea{
   line-height:1.5em;
 }
 
+.popular-search-item{
+  display:inline-block;
+  width: 100%;
+  margin-bottom: 0.6em;
+  margin-left: 0.2em;
+  font-size: 1.2em;
+  color: #0088C9;
+}
+.popular-search-item > div{
+  display:inline-block;
+  vertical-align: middle;
+}
 
+.popular-search-item a:hover{
+  color: #006492;
+}
+
+.pop-search-icon{
+  background-image:url('images/pop-search-arrow.png');
+  width: 25px;
+  height:20px;
+  margin-right: 0.8em;
+}
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECTS OVERVIEW XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 

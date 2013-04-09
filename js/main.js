@@ -210,10 +210,9 @@ jQuery(function($){
   function load_new_page(link){
     
    $('#page-wrapper').fadeOut(100, function(){ //fade out the content area
-   $("#paginated-loader").show(); // show the loader animation
+   $("#paginated-loader").show();
    }).load(link + ' #page-wrapper', function(){ 
-    
-    $("#paginated-loader").hide(); //hide the loader
+    $("#paginated-loader").hide();
     $('#page-wrapper').fadeIn(200, function(){
       load_projects_listeners();
 

@@ -1,3 +1,4 @@
+
 // XXXXXXXXXXXXXXX INDICATORS XXXXXXXXXXXXXXXX
 
 
@@ -6,10 +7,13 @@ jQuery(function($) {
     
 
 
+
+
 // XXXXXXXXXXXXX INDICATOR INITIALIZATION XXXXXXXXXXX
   
   // first indicator circles
   var circles = [];
+  var maxdatavalue = 0;
 
   // We run this function on each filter save.
   function initialize_map(indicator_id, countries, regions, cities){
@@ -24,7 +28,20 @@ jQuery(function($) {
     // get data
     var indicator_data = get_indicator_data(indicator_id, countries, regions, cities);
     
-    
+    // check for what years data is available and add the right classes to the slider year blocks
+    draw_available_data_blocks(indicator_data);
+
+    // draw the circles
+    draw_circles(indicator_data);
+
+    // set current year, temp: set to 2010
+    $( "#map-slider-tooltip a" ).append("2010");
+    $( "#map-slider-tooltip" ).slider( "option", "value", "2010"); 
+    $( "#year-2010").addClass("active");
+
+    // hide loader, show map
+    $('#map').show();
+    $('#map-loader').hide();
     // end
   }
 
@@ -39,76 +56,23 @@ jQuery(function($) {
     }
   }
 
-
-//   var url = 'http://dev.oipa.openaidsearch.org/json';
-//   $.ajax({
-//     dataType: 'jsonp',
-//     data: 'json',
-//     jsonp: 'jsonp_callback',
-//     url: 'http://localhost:5001/listener.php',
-//     success: retorno
-//   });
-
-
-// function retorno(){
-//   alert: "worked";
-// }
-
-// --$.getJSON("http://localhost:5001/listener.php?function=testjsonp&callback=?",retorno);
-
-
-//   $.ajax({
-//    type: 'GET',
-//     url: url,
-//     async: false,
-//     jsonpCallback: 'jsonCallback',
-//     contentType: "application/json",
-//     dataType: 'jsonp',
-//     success: function(json) {
-//        console.dir(json.sites);
-//     },
-//     error: function(e) {
-//        console.log(e.message);
-//     }
-// });
-
-
-
-
-  // var url = 'http://dev.oipa.openaidsearch.org/json';
-  //  $.ajax({
-  //      type: 'GET',
-  //       url: url,
-  //       async: false,
-  //       contentType: "application/json",
-  //       dataType: 'json'
-  //   }, function(data){
-  //     alert("test");
-  //   });
-
-
   function get_indicator_data(indicator_id, countries, regions, cities){
-     var url = 'http://dev.oipa.openaidsearch.org/json';
-     
+    
+   
 
-    $.get(url, function(data){
-
-      // check for what years data is available and add the right classes to the slider year blocks
-      draw_available_data_blocks(data);
-
-      // draw the circles
-      draw_circles(data);
-
-      // set current year, temp: set to 2010
-      $( "#map-slider-tooltip a" ).append("2010");
-      $( "#map-slider-tooltip" ).slider( "option", "value", "2010"); 
-      $( "#year-2010").addClass("active");
-
-      // hide loader, show map
-      $('#map').show();
-      $('#map-loader').hide();
-      });
-     
+    var indicator_json_data = [];
+    var url = 'http://dev.oipa.openaidsearch.org/json';
+     $.ajax({
+        type: 'GET',
+         url: url,
+         async: false,
+         contentType: "application/json",
+         dataType: 'json',
+         success: function(data){
+          indicator_json_data = data;
+         }
+     });
+    return indicator_json_data;
   }
 
   function draw_available_data_blocks(indicator_data){
@@ -116,16 +80,10 @@ jQuery(function($) {
       var curyear = "y" + i;
       $.each(indicator_data, function(key, value){
           
-
-          for (var a = value.years.length - 1; a >= 0; a--) {
-            if (curyear in value.years[a]){
-
+          if (curyear in value.years){
             $("#year-" + i).addClass("slider-active");
-            break;
             return false;
-            }
-          };
-          
+          }
         
       });
     }
@@ -135,22 +93,24 @@ jQuery(function($) {
     $.each(indicator_data, function(key, value){
 
       try{
-        var circle = L.circle(new L.LatLng(value.longitude, value.latitude), 100000, {
+        maxdatavalue = value.max_value;
+        var circle = L.circle(new L.LatLng(value.longitude, value.latitude), 1, {
           color: 'red',
           weight: '0',
           fillColor: 'red',
           fillOpacity: 0.6
           }).addTo(map);
 
-          circle.bindPopup(value.name);
+          circle.bindPopup(key);
           circle.on('mouseover', function(evt) {
             evt.target.openPopup();
           });
-          circle.on('mouseout', function(evt) {
-            evt.target.closePopup();
-          });
+          // circle.on('mouseout', function(evt) {
+          //   evt.target.closePopup();
+          // });
 
           var singlecircleinfo = new Object();
+          singlecircleinfo.countryiso2 = key;
           singlecircleinfo.countryname = value.name;
           singlecircleinfo.values = value.years;
           singlecircleinfo.circleinfo = circle;
@@ -191,6 +151,7 @@ jQuery(function($) {
     // }
   }
 
+
   function slide_tooltip(event, ui){
 
     refresh_circles(ui.value);
@@ -203,33 +164,25 @@ jQuery(function($) {
 
   function refresh_circles(year){
     var curyear = "y" + year;
-    var max = 0;
-    for (var i=0;i<circles.length;i++)
-    { 
-      try{
-        if(circles[i].values[curyear] > max){
-          max = circles[i].values[curyear];
-        }
-      } catch (err){
-      }
-    }
-
-    var factor = Math.round(600000 / max);
+    var max = maxdatavalue;
+    var factor = Math.round(2000000000000 / max);
 
     for (var i=0;i<circles.length;i++)
     { 
       try{
         //circles[i].unbindPopup();
         //circles[i].bindPopup(circles[i].values[curyear]);
-       // <?php echo sqrt(($factor * $i[$selected_indicator])/pi()); //echo round($factor * $i['population']); ?>
 
-        var circle_radius = Math.round(Math.sqrt(factor * circles[i].values[curyear]) / Math.PI);
-        //console.log("radius:" + circle_radius);
+        var value = circles[i].values[curyear];
+        if (value === undefined || value === null){
+          //  circles[i].circleinfo.setRadius(0);
+        } else {
+          circle_radius = Math.round(Math.sqrt((factor * value) / Math.PI));
+          circles[i].circleinfo.setRadius(circle_radius); 
+        }
 
-        circles[i].circleinfo.setRadius(circle_radius);
       } catch (err){
         //console.log(err);
-        //circles[i].circleinfo.setRadius(0);
       }
     }
   }
@@ -255,10 +208,6 @@ jQuery(function($) {
 
 
   initialize_map("","", "", "");
-
-
-
-
 
 
 
@@ -313,54 +262,91 @@ jQuery(function($) {
       }
 
       function drawLineChart(){
-        var curyear = $(".ui-slider-handle").html();
-        var currentData = [];
-        currentData.push(['Year', 'Country1', 'Country2']);
+        // var curyear = parseInt($(".ui-slider-handle").html());
+        // var currentData = [];
+        // var minyear = curyear - 10;
+        // var maxyear = curyear + 10;
+        // var lineChartData = [];
+        // //var lineChartLines = new Object();
 
-        var minyear = curyear - 10;
-        var maxyear = curyear + 10;
-        console.log(minyear);
-        for (var i = minyear;i < maxyear; i++){
-          currentData.push([i, parseInt("1000"), parseInt("20000")]);
-        }
+        // currentData.unshift(['Year', circles[0].countryiso2, circles[1].countryiso2, circles[2].countryiso2, circles[3].countryiso2, circles[4].countryiso2]);
 
-        // if( typeof assoc_pagine["var"] != "undefined" ) 
 
-        var data = google.visualization.arrayToDataTable(currentData);
+        // for (var i=minyear;i<maxyear;i++)
+        // { 
+        //     var c1val;
+        //     var c2val;
+        //     var c3val;
+        //     var c4val;
+        //     var c5val;
 
-        var options = {
-          title: 'Line chart header?',
-          backgroundColor: '#F1EEE8'
-        };
+        //     var curvalue = circles[0].values["y" + i.toString()];
+        //     if (curvalue === undefined || curvalue === null){ c1val = "Null"; } else { c1val = curvalue; }
 
-        var chart = new google.visualization.LineChart(document.getElementById('line-chart-placeholder'));
-        chart.draw(data, options);
+        //     var curvalue = circles[1].values["y" + i.toString()];
+        //     if (curvalue === undefined || curvalue === null){ c2val = "Null"; } else { c2val = curvalue; }
+            
+        //     var curvalue = circles[2].values["y" + i.toString()];
+        //     if (curvalue === undefined || curvalue === null){ c3val = "Null"; } else { c3val = curvalue; }
+          
+        //     var curvalue = circles[3].values["y" + i.toString()];
+        //     if (curvalue === undefined || curvalue === null){ c4val = "Null"; } else { c4val = curvalue; }
+            
+        //     var curvalue = circles[4].values["y" + i.toString()];
+        //     if (curvalue === undefined || curvalue === null){ c5val = "Null"; } else { c5val = curvalue; }
+            
+        //     currentData.push([i.toString(), c1val, c2val, c3val, c4val, c5val]);
+        // }
+
+
+
+        // var data = google.visualization.arrayToDataTable(currentData);
+
+        // var options = {
+        //   title: 'Line chart header?',
+        //   backgroundColor: '#F1EEE8',
+        //   interpolateNulls: true
+        // };
+
+        // var chart = new google.visualization.LineChart(document.getElementById('line-chart-placeholder'));
+        // chart.draw(data, options);
       
       }
 
       function drawTableChart(){
+
+        
 
         var indicator_data = get_indicator_data("", "", "", "");
         
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Country');
         data.addColumn('number', 'Value');
-        $.each(indicator_data, function(key, value){
+        
+        var curyear = "y" + $(".ui-slider-handle").html();
 
+        for (var i=0;i<circles.length;i++)
+        { 
           try{
-            console.log(value.years.y2000);
-            
-            data.addRow([value.name, parseInt(value.years.y2010)]);
-            
 
-          }catch(err){
-              console.log(err);
+            var value = circles[i].values[curyear];
+            if (value === undefined || value === null){
+
+            } else {
+              data.addRow([circles[i].countryname, parseInt(value)]);
+            }
+
+          } catch (err){
           }
+        }
 
-        });
 
         var table = new google.visualization.Table(document.getElementById('table-chart-placeholder'));
-        table.draw(data, {showRowNumber: true});
+        table.draw(data, {
+          //showRowNumber: true,
+          sortColumn: 1,
+          sortAscending: false
+        });
       }
 
     $("#project-share-graph").click(function(){
