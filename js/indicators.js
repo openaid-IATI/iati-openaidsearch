@@ -173,7 +173,7 @@
           singlecircleinfo.circleinfo = circle;
           singlecircleinfo.indicator = value.indicator;
           singlecircleinfo.friendly_label = value.indicator_friendly;
-          console.log(value.indicator_friendly);
+          
           singlecircleinfo.type_data = value.type_data;
           circles.push(singlecircleinfo);
 
@@ -227,6 +227,16 @@
         } else {
           circle_radius = Math.round(Math.sqrt((factor * value) / Math.PI));
           circles[i].circleinfo.setRadius(circle_radius); 
+          if (circles[i].type_data == '1000'){
+            value = value * 1000;
+            value = CommaFormatted(value+'.');
+          }
+          if (circles[i].type_data == 'p'){
+            if (value < 1){
+              value = value * 100;
+            }
+            value = value + ' %';
+          }
           circles[i].circleinfo.bindPopup('<h4>'+circles[i].countryname+'</h4><p>' + circles[i].friendly_label + ': ' + value + '</p>');
           circles[i].circleinfo.on('mouseover', function(evt) {
             evt.target.openPopup();
