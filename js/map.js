@@ -1,6 +1,7 @@
 var map = L.map('map', {
     attributionControl: false, 
     scrollWheelZoom: false,
+    zoom: 3,
     minZoom: 2,
     maxZoom:6
 }).setView([10.505, 25.09], 3);
@@ -11,8 +12,8 @@ L.tileLayer('http://{s}.tile.cloudmade.com/07c00b1d0e4c4bed9a926bdca23d2232/9007
 
 //L.control.zoom({position : "topright"}).addTo(map);
 //L.geoJson(countryData, {style: style, onEachFeature: onEachFeature}).addTo(map);
-map.setZoom(3);
 var isiPad = navigator.userAgent.match(/iPad/i) != null;
+alert("is ipad "+isiPad);
 if (isiPad){
     map.setZoom(2);
 }
