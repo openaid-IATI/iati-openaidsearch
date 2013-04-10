@@ -109,7 +109,24 @@
 
     $(document).ready(function() {
 
-       
+       	function getColor(d) {
+		    return d > 8  ? '#045A8D' :
+		           d > 6   ? '#2B8CBE' :
+		           d > 4   ? '#74A9CF' :
+		           d > 2   ? '#BDC9E1' :
+		                      'transparent';
+		}
+
+		function style(feature) {
+		    return {
+		        fillColor: getColor(feature.properties.projects),
+		        weight: 0,
+		        opacity: 1,
+		        color: 'white',
+		        dashArray: '',
+		        fillOpacity: 0.7
+		    };
+		}
      	
 
         L.geoJson(allCountryData, {style: style,onEachFeature: function(feature,layer) {
