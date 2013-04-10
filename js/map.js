@@ -13,8 +13,8 @@ L.tileLayer('http://{s}.tile.cloudmade.com/07c00b1d0e4c4bed9a926bdca23d2232/9007
 //L.control.zoom({position : "topright"}).addTo(map);
 //L.geoJson(countryData, {style: style, onEachFeature: onEachFeature}).addTo(map);
 var isiPad = navigator.userAgent.match(/iPad/i) != null;
-alert("is ipad "+isiPad);
 if (isiPad){
+    $(.footer).html("is ipad");
     map.setZoom(2);
 }
 
