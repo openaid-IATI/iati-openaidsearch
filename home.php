@@ -102,47 +102,17 @@
 <?php get_footer(); ?>
 
 
-        <?php 
-        $projects = wp_get_activities();// print_r($projects);
-                $totals = array();
-        foreach($projects AS $a) {
-                
-                foreach($a['recipient_country'] AS $c) {
-                        if(isset($totals[$c['iso']])) {
-                                $totals[$c['iso']]['total_cnt']++;
-                        }else{
-                            $totals[$c['iso']]['total_cnt'] = 1;
-                        }
-                }
-	}
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/dependencies/all_projects_data.js"></script>
         
-        ?>
-
 <script type="text/javascript">
     
 
     $(document).ready(function() {
 
-        <?php foreach($projects as $i) :?>
-                <?php if (!empty($i['recipient_country'])) :?>
-        try
-        
-        {   
-            var iso3 = jsonPath(country_info, "$[?(@.ISO2=='<?php echo $i['recipient_country'][0]['iso'] ?>')]")[0].ISO3
-            
-            jsonPath(countryData, "$..features[?(@.id=='"+ iso3 +"')]")[0].properties.projects = '23<?php echo $totals[$i['recipient_country'][0]['iso']]['total_cnt'] ?>';//Run some code here
-            jsonPath(countryData, "$..features[?(@.id=='"+ iso3 +"')]")[0].properties.iso = '<?php echo $i['recipient_country'][0]['iso'] ?>';
-            
-        }
-        catch(err)
-        {
-            console.log('<?php echo $i['recipient_country'][0]['iso'] ?>'+err);
-        }
-            <?php endif ?>
-        <?php endforeach;?>
-     
+       
+     	
 
-        L.geoJson(countryData, {style: style,onEachFeature: function(feature,layer) {
+        L.geoJson(allCountryData, {style: style,onEachFeature: function(feature,layer) {
                 var total_projects = feature.properties.projects;
                 var str = "test"
                 str += total_projects;
