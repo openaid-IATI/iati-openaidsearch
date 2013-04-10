@@ -130,6 +130,21 @@ button{
   width: 22.2em;
 }
 
+.brand{
+  position: relative;
+}
+
+#brand-beta{
+  position: absolute;
+  background-color: #006492;
+  color: #F1ECE6;
+  font-size: 0.8em;
+  padding: 0.3em 1em 0.2em;
+  bottom: 0.4em;
+  right: 3.1em;
+  text-shadow: none;
+}
+
 .navbar-static-top .navbar-inner{
     background: #008ecb; /* Old browsers */
     background: -moz-linear-gradient(top, #008ecb 19%, #007ab2 79%); /* FF3.6+ */
@@ -541,10 +556,10 @@ input[type=checkbox] {
 /* selection box */
 
 #selection-box-wrapper{
+  display: none;
   position: absolute;
   left: 0;
   top: 0;
-  display:block;
   z-index:1500;
   width:29em;
 }
@@ -594,11 +609,17 @@ input[type=checkbox] {
 
 .select-box-selected{
   padding-top: 0.3em;
+  display: inline-block;
+
+}
+
+.select-box-selected > div{
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .selected-remove-button{
-  float:left;
-  width: 1.2em;
+  width: 12px;
   margin-left:0.3em;
   margin-top:0.2em;
   background-image:url('images/select-remove.png');
@@ -625,7 +646,7 @@ input[type=checkbox] {
 #map-graph-buttons{
   position:absolute;
   top: 0;
-  right:0;
+  right:1.5em;
   z-index: 1100;
 }
 
@@ -1017,6 +1038,24 @@ label, input, button, select, textarea{
   width: 25px;
   height:20px;
   margin-right: 0.8em;
+}
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX CONTACT PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+.contact-label{
+  clear:left;
+  float:left;
+  width: 10em;
+  padding-top: 1em;
+}
+
+.contact-input{
+  width: 100%;
+  padding-top: 0.5em;
+}
+
+.contact-input-textarea{
+  float:left;
 }
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECTS OVERVIEW XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */

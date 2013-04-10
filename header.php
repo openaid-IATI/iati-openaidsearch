@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
 
+    <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" type="image/vnd.microsoft.icon"/>
+    <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" type="image/x-ico"/>
+
     <link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/leaflet.css" />
     <!--[if lte IE 8]>
@@ -26,8 +29,9 @@
                     <span class="icon-bar"></span>
                 </a>
 
-                <a href="<?php echo site_url(); ?>" class="brand">
+                <a href="<?php echo site_url(); ?>" class="brand hneue-bold">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/logo2.png" />
+                    <div id="brand-beta">BETA VERSION</div>
                 </a>
 
                 <div class="nav-collapse collapse">

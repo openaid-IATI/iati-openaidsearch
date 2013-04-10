@@ -118,132 +118,132 @@ Template Name: Projects page
 
 <?php get_footer(); ?>
         <?php 
- //        $projects = wp_get_activities();// print_r($projects);
- //                $totals = array();
- //        foreach($projects AS $a) {
+        $projects = wp_get_activities();// print_r($projects);
+                $totals = array();
+        foreach($projects AS $a) {
                 
- //                foreach($a['recipient_country'] AS $c) {
- //                        if(isset($totals[$c['iso']])) {
- //                                $totals[$c['iso']]['total_cnt']++;
- //                        }else{
- //                            $totals[$c['iso']]['total_cnt'] = 1;
- //                        }
- //                }
-	// }
+                foreach($a['recipient_country'] AS $c) {
+                        if(isset($totals[$c['iso']])) {
+                                $totals[$c['iso']]['total_cnt']++;
+                        }else{
+                            $totals[$c['iso']]['total_cnt'] = 1;
+                        }
+                }
+	}
         
         ?>
 <script type="text/javascript">
     
-//     function create_filter_attributes(objects, keys){
-//         var html = '';
-//         $.each(objects, function(index, value){
+    function create_filter_attributes(objects, keys){
+        var html = '';
+        $.each(objects, function(index, value){
             
-//             if (index == 0 || index == 20 || index == 40 || index == 60){
-//                 html += '<div class="span3">';
-//             }
-//             html += '<div class="squaredThree">';
-//             html += '<input type="checkbox" value="'+ keys[value] +'" id="land'+keys[value]+'" name="check" />';
-//             html += '<label class="map-filter-cb-value" for="land'+keys[value]+'"></label>';
-//             html += '<span>'+value+'</span></div>'; 
+            if (index == 0 || index == 20 || index == 40 || index == 60){
+                html += '<div class="span3">';
+            }
+            html += '<div class="squaredThree">';
+            html += '<input type="checkbox" value="'+ keys[value] +'" id="land'+keys[value]+'" name="check" />';
+            html += '<label class="map-filter-cb-value" for="land'+keys[value]+'"></label>';
+            html += '<span>'+value+'</span></div>'; 
             
-//             if (index == 19 || index == 39 || index == 59){
-//                         html += '</div>';
+            if (index == 19 || index == 39 || index == 59){
+                        html += '</div>';
 
-//             }
-//         });
-//         return html;
-//     }
-//     $(document).ready(function() {
-// //            jsonPath(countryData, "$..features[?(@.id=='AFG')]")[0].properties.projects = 2444;
-//         var countries = new Array();
-//         var country_keys = {};
-//         var region_keys = {};
-//         var sector_keys = {};
-//         var budget_keys = {};
-//         budget_keys['all'] = 'all';
-//         budget_keys['> US$ 0'] = '';
-//         budget_keys['> US$ 10.000'] = '10000';
-//         budget_keys['> US$ 50.000'] = '50000';
-//         budget_keys['> US$ 100.000'] = '100000';
-//         budget_keys['> US$ 500.000'] = '500000';
-//         budget_keys['> US$ 1.000.000'] = '1000000';
+            }
+        });
+        return html;
+    }
+    $(document).ready(function() {
+//            jsonPath(countryData, "$..features[?(@.id=='AFG')]")[0].properties.projects = 2444;
+        var countries = new Array();
+        var country_keys = {};
+        var region_keys = {};
+        var sector_keys = {};
+        var budget_keys = {};
+        budget_keys['all'] = 'all';
+        budget_keys['> US$ 0'] = '';
+        budget_keys['> US$ 10.000'] = '10000';
+        budget_keys['> US$ 50.000'] = '50000';
+        budget_keys['> US$ 100.000'] = '100000';
+        budget_keys['> US$ 500.000'] = '500000';
+        budget_keys['> US$ 1.000.000'] = '1000000';
         
-//         <?php foreach($projects as $i) :?>
-//                 <?php if (!empty($i['recipient_country'])) :?>
-//         try
+        <?php foreach($projects as $i) :?>
+                <?php if (!empty($i['recipient_country'])) :?>
+        try
         
-//         {   
-//             var iso3 = jsonPath(country_info, "$[?(@.ISO2=='<?php echo $i['recipient_country'][0]['iso'] ?>')]")[0].ISO3
+        {   
+            var iso3 = jsonPath(country_info, "$[?(@.ISO2=='<?php echo $i['recipient_country'][0]['iso'] ?>')]")[0].ISO3
             
-//             jsonPath(countryData, "$..features[?(@.id=='"+ iso3 +"')]")[0].properties.projects = '23<?php echo $totals[$i['recipient_country'][0]['iso']]['total_cnt'] ?>';//Run some code here
-//             jsonPath(countryData, "$..features[?(@.id=='"+ iso3 +"')]")[0].properties.iso = '<?php echo $i['recipient_country'][0]['iso'] ?>';
+            jsonPath(countryData, "$..features[?(@.id=='"+ iso3 +"')]")[0].properties.projects = '23<?php echo $totals[$i['recipient_country'][0]['iso']]['total_cnt'] ?>';//Run some code here
+            jsonPath(countryData, "$..features[?(@.id=='"+ iso3 +"')]")[0].properties.iso = '<?php echo $i['recipient_country'][0]['iso'] ?>';
             
-//             if ( $.inArray( "<?php echo $i['recipient_country'][0]['name'] ?>", countries ) > -1 )
-//             {
+            if ( $.inArray( "<?php echo $i['recipient_country'][0]['name'] ?>", countries ) > -1 )
+            {
 
-//             }else{
-//                 countries.push("<?php echo $i['recipient_country'][0]['name'] ?>");
+            }else{
+                countries.push("<?php echo $i['recipient_country'][0]['name'] ?>");
                 
                 
-//                 country_keys["<?php echo $i['recipient_country'][0]['name'] ?>"] = "<?php echo $i['recipient_country'][0]['iso'] ?>";
+                country_keys["<?php echo $i['recipient_country'][0]['name'] ?>"] = "<?php echo $i['recipient_country'][0]['iso'] ?>";
                 
-//                 <?php foreach ($i['recipient_region'] as $region) :?>
-//                     region_keys["<?php echo $region['name'] ?>"] = "<?php echo $region['code'] ?>"
-//                 <?php endforeach; ?>
+                <?php foreach ($i['recipient_region'] as $region) :?>
+                    region_keys["<?php echo $region['name'] ?>"] = "<?php echo $region['code'] ?>"
+                <?php endforeach; ?>
                     
-//                 <?php foreach ($i['activity_sectors'] as $sector) :?>
-//                     sector_keys["<?php echo $sector['name'] ?>"] = "<?php echo $sector['code'] ?>"
-//                 <?php endforeach; ?>
-//             }
-//         }
-//         catch(err)
-//         {
-//             console.log('<?php echo $i['recipient_country'][0]['iso'] ?>'+err);
-//         }
-//             <?php endif ?>
-//         <?php endforeach;?>
+                <?php foreach ($i['activity_sectors'] as $sector) :?>
+                    sector_keys["<?php echo $sector['name'] ?>"] = "<?php echo $sector['code'] ?>"
+                <?php endforeach; ?>
+            }
+        }
+        catch(err)
+        {
+            console.log('<?php echo $i['recipient_country'][0]['iso'] ?>'+err);
+        }
+            <?php endif ?>
+        <?php endforeach;?>
         
-//         countries = countries.sort();
+        countries = countries.sort();
         
-//         country_html = create_filter_attributes(countries, country_keys);
+        country_html = create_filter_attributes(countries, country_keys);
         
-//         $('#country_filters').append(country_html);
+        $('#country_filters').append(country_html);
         
-//         var regions = [];
-//         for (var key in region_keys){
-//             regions.push(key);
-//         }
-//         region_html = create_filter_attributes(regions, region_keys);
-//         $('#region_filters').append(region_html);
+        var regions = [];
+        for (var key in region_keys){
+            regions.push(key);
+        }
+        region_html = create_filter_attributes(regions, region_keys);
+        $('#region_filters').append(region_html);
         
-//         var sectors = [];
-//         for (var key in sector_keys){
-//             sectors.push(key);
-//         }
+        var sectors = [];
+        for (var key in sector_keys){
+            sectors.push(key);
+        }
         
         
-//         sector_html = create_filter_attributes(sectors, sector_keys);
-//         $('#sector_filters').append(sector_html);
+        sector_html = create_filter_attributes(sectors, sector_keys);
+        $('#sector_filters').append(sector_html);
         
-//         var budgets = [];
-//         for (var key in budget_keys){
-//             budgets.push(key);
-//         }
-//         budget_html = create_filter_attributes(budgets, budget_keys);
-//         $('#budget_filters').append(budget_html);
+        var budgets = [];
+        for (var key in budget_keys){
+            budgets.push(key);
+        }
+        budget_html = create_filter_attributes(budgets, budget_keys);
+        $('#budget_filters').append(budget_html);
 
-//         L.geoJson(countryData, {style: style,onEachFeature: function(feature,layer) {
-//                 var total_projects = feature.properties.projects;
-//                 var str = "test"
-//                 str += total_projects;
-//                   layer.bindPopup('<p>Total projects: '+str.substring(6)+ '</p><p><a href="?s=&countries='+feature.properties.iso+'">Click to view related projects</a></p>');
-//               }}).addTo(map);
+        L.geoJson(countryData, {style: style,onEachFeature: function(feature,layer) {
+                var total_projects = feature.properties.projects;
+                var str = "test"
+                str += total_projects;
+                  layer.bindPopup('<p>Total projects: '+str.substring(6)+ '</p><p><a href="?s=&countries='+feature.properties.iso+'">Click to view related projects</a></p>');
+              }}).addTo(map);
         
-// //        var popup = L.popup()
-// //    .setLatLng(latlng)
-// //    .setContent('<p>Hello world!<br />This is a nice popup.</p>')
-// //    .openOn(map);
+//        var popup = L.popup()
+//    .setLatLng(latlng)
+//    .setContent('<p>Hello world!<br />This is a nice popup.</p>')
+//    .openOn(map);
         
-//     }); 
+    }); 
 </script>
 
