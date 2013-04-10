@@ -1419,6 +1419,12 @@ label, input, button, select, textarea{
   background-color: #FFFFBF;
 }
 
+/* XXXXXXXXXXXXXXXXXXXX TEMP: MAKE ALL NON CLICKABLE LINKS/BUTTONS GREY XXXXXXXXXXXXXXXXXXXX */
+
+#project-share-embed .share-text, #project-share-share .share-text, #project-share-bookmark .share-text, #save-search-results, #sort-type-budget .project-sort-text, #sort-type-country .project-sort-text{
+  color: #797974;
+}
+
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX RESPONSIVE CSS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
     /* Large desktop */
