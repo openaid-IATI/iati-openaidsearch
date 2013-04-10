@@ -140,7 +140,11 @@ var selected_type = "";
     $.each(indicator_data, function(key, value){
 
       try{
-        maxdatavalue = value.max_value;
+        if (value.max_value){
+            maxdatavalue = value.max_value;
+
+        }
+
         var circle = L.circle(new L.LatLng(value.longitude, value.latitude), 1, {
           color: 'red',
           weight: '0',
