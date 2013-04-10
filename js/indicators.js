@@ -172,6 +172,8 @@ var indicator_data;
           singlecircleinfo.values = value.years;
           singlecircleinfo.circleinfo = circle;
           singlecircleinfo.indicator = value.indicator;
+          singlecircleinfo.friendly_label = value.indicator_friendly;
+          singlecircleinfo.type_data = value.type_data;
           circles.push(singlecircleinfo);
 
       }catch(err){
@@ -241,7 +243,7 @@ var indicator_data;
         } else {
           circle_radius = Math.round(Math.sqrt((factor * value) / Math.PI));
           circles[i].circleinfo.setRadius(circle_radius); 
-          circles[i].circleinfo.bindPopup('<h4>'+circles[i].countryname+'</h4><p>' + circles[i].indicator + ': ' + value + '</p>');
+          circles[i].circleinfo.bindPopup('<h4>'+circles[i].countryname+'</h4><p>' + circles[i].friendly_label + ': ' + value + '</p>');
           circles[i].circleinfo.on('mouseover', function(evt) {
             evt.target.openPopup();
           });
