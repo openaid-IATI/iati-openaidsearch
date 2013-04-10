@@ -373,3 +373,12 @@ else if(window.opera && window.print){ // opera
 else if(document.all)// ie
   window.external.AddFavorite(url, title);
 }
+
+function isiPad(){
+    return (navigator.platform.indexOf("iPad") != -1);
+}
+
+if (isiPad()){
+    $(".footer").html("is ipad");
+    map.setZoom(2);
+}
