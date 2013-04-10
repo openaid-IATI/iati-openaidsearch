@@ -112,25 +112,33 @@ Template Name: Projects page
 	</div>
 </div>
 <div id="paginated-loader">
-            <div id="paginated-text">Loading projects</div>
-            <img src="<?php echo get_template_directory_uri(); ?>/images/ajax-loader.gif" alt="" />
-        </div>
+    <div id="paginated-text">Loading projects</div>
+    <img src="<?php echo get_template_directory_uri(); ?>/images/ajax-loader.gif" alt="" />
+</div>
 
 <?php get_footer(); ?>
         <?php 
         $projects = wp_get_activities();// print_r($projects);
-                $totals = array();
-        foreach($projects AS $a) {
-                
-                foreach($a['recipient_country'] AS $c) {
-                        if(isset($totals[$c['iso']])) {
-                                $totals[$c['iso']]['total_cnt']++;
-                        }else{
-                            $totals[$c['iso']]['total_cnt'] = 1;
-                        }
-                }
-	}
-        
+
+        // if parameters are set
+        if(count($_GET)) {
+            $totals = array();
+            foreach($projects AS $a) {
+                    
+                    foreach($a['recipient_country'] AS $c) {
+                            if(isset($totals[$c['iso']])) {
+                                    $totals[$c['iso']]['total_cnt']++;
+                            }else{
+                                $totals[$c['iso']]['total_cnt'] = 1;
+                            }
+                    }
+    	    }
+        } else {
+        ?>
+        <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/dependencies/all_projects_data.js"></script>
+        <?php  
+        }
+
         ?>
 <script type="text/javascript">
     
@@ -168,7 +176,11 @@ Template Name: Projects page
         budget_keys['> US$ 500.000'] = '500000';
         budget_keys['> US$ 1.000.000'] = '1000000';
         
-        <?php foreach($projects as $i) :?>
+        <?php 
+        // if parameters set
+        if(count($_GET)) {
+
+        foreach($projects as $i) :?>
                 <?php if (!empty($i['recipient_country'])) :?>
         try
         
@@ -202,6 +214,12 @@ Template Name: Projects page
         }
             <?php endif ?>
         <?php endforeach;?>
+        <?php 
+        // end if parameters are set
+        } else { ?>
+        countryData = allCountryData;
+        <?php
+        }?>
         
         countries = countries.sort();
         
@@ -232,18 +250,23 @@ Template Name: Projects page
         budget_html = create_filter_attributes(budgets, budget_keys);
         $('#budget_filters').append(budget_html);
 
+
         L.geoJson(countryData, {style: style,onEachFeature: function(feature,layer) {
                 var total_projects = feature.properties.projects;
                 var str = "test"
                 str += total_projects;
                   layer.bindPopup('<p>Total projects: '+str.substring(6)+ '</p><p><a href="?s=&countries='+feature.properties.iso+'">Click to view related projects</a></p>');
               }}).addTo(map);
-        
+
 //        var popup = L.popup()
 //    .setLatLng(latlng)
 //    .setContent('<p>Hello world!<br />This is a nice popup.</p>')
 //    .openOn(map);
         
     }); 
+
+
+    
 </script>
+
 
