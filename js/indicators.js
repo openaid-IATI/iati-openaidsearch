@@ -16,11 +16,17 @@
   var maxdatavalue = 0;
   var request_url = ""
 var selected_type = "";
+var indicator_data;
+
+
 
   // We run this function on each filter save.
   function initialize_map(url, sel_year, type, indicator_id, countries, regions, cities){
     // show loader, hide map
+    if(type){
     selected_type = type;
+
+    }
     request_url = url;
     $('#map-loader').show();
     $('#map').hide();
@@ -30,7 +36,7 @@ var selected_type = "";
     circles = [];
 
     // get data
-    var indicator_data = get_indicator_data(indicator_id, countries, regions, cities);
+    indicator_data = get_indicator_data(indicator_id, countries, regions, cities);
     
     // check for what years data is available and add the right classes to the slider year blocks
     draw_available_data_blocks(indicator_data);
@@ -152,10 +158,10 @@ var selected_type = "";
           fillOpacity: 0.6
           }).addTo(map);
 
-          circle.bindPopup(key);
-          circle.on('mouseover', function(evt) {
-            evt.target.openPopup();
-          });
+          // circle.bindPopup('<h4>'+value.name+'</h4><p>Population: ' + value.years['y'+selected_year] + '</p>');
+          // circle.on('mouseover', function(evt) {
+          //   evt.target.openPopup();
+          // });
           // circle.on('mouseout', function(evt) {
           //   evt.target.closePopup();
           // });
@@ -165,6 +171,7 @@ var selected_type = "";
           singlecircleinfo.countryname = value.name;
           singlecircleinfo.values = value.years;
           singlecircleinfo.circleinfo = circle;
+          singlecircleinfo.indicator = value.indicator;
           circles.push(singlecircleinfo);
 
       }catch(err){
@@ -204,6 +211,7 @@ var selected_type = "";
 
 
   function slide_tooltip(event, ui){
+    
 
     refresh_circles(ui.value);
     $( "#map-slider-tooltip a" ).text(ui.value);
@@ -216,7 +224,7 @@ var selected_type = "";
   function refresh_circles(year){
     var curyear = "y" + year;
     var max = maxdatavalue;
-    console.log(max);
+    // console.log(max);
 
     var factor = Math.round(2000000000000 / max);
 
@@ -227,17 +235,24 @@ var selected_type = "";
         //circles[i].bindPopup(circles[i].values[curyear]);
 
         var value = circles[i].values[curyear];
+
         if (value === undefined || value === null){
           //  circles[i].circleinfo.setRadius(0);
         } else {
           circle_radius = Math.round(Math.sqrt((factor * value) / Math.PI));
           circles[i].circleinfo.setRadius(circle_radius); 
+          circles[i].circleinfo.bindPopup('<h4>'+circles[i].countryname+'</h4><p>' + circles[i].indicator + ': ' + value + '</p>');
+          circles[i].circleinfo.on('mouseover', function(evt) {
+            evt.target.openPopup();
+          });
+
         }
 
       } catch (err){
         //console.log(err);
       }
     }
+    
   }
 
   // $(".slider-year").hover(

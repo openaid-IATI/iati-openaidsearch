@@ -154,7 +154,7 @@ jQuery(function($){
       if($(this).attr('id') == 'filter-by-city'){
         $('#city_filters').show();
       }
-      $(this).addClass("filter-selected");
+      // $(this).addClass("filter-selected");
 
   });
 
@@ -165,7 +165,7 @@ jQuery(function($){
     $('#sector_filters').hide();
     $('#indicator_filters').hide();
     $('#city_filters').hide();
-    $('.filter-button.filter-selected').removeClass("filter-selected");
+    
   }
 
 	$('#map-filter-cancel').click(function(){
@@ -178,7 +178,7 @@ jQuery(function($){
 
 	$('#map-filter-save').click(function(){
 
-    $('.filter-button.filter-selected').removeClass("filter-selected");
+    
 		// set selection as filter and load results
 		$('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
                 var str_sector = ''
@@ -217,11 +217,11 @@ jQuery(function($){
                 str_city = str_city.substring(0, str_city.length-1);
                 
                 if (selected_type=='indicator'){
-                  initialize_map('http://dev.oipa.openaidsearch.org/json?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2010,'indicator',"", "", "");
+                  initialize_map('http://dev.oipa.openaidsearch.org/json?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2010,'',"", "", "");
 
                 }
                 if (selected_type=='cpi'){
-                initialize_map('http://dev.oipa.openaidsearch.org/json-city?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2012,'cpi',"", "", "");
+                initialize_map('http://dev.oipa.openaidsearch.org/json-city?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2012,'',"", "", "");
 
                 }
                 
