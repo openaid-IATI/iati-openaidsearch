@@ -51,6 +51,10 @@
     if(type=='cpi'){
         set_filters_cpi(indicator_data);
     }
+    if (type=='indicator'){
+        set_filters_indicator(indicator_data);
+    }
+
     return indicator_data
   }
 
@@ -63,6 +67,20 @@
         console.log("removal of circle failed");
       }
     }
+  }
+
+  function set_filters_indicator(data){
+    region_html = create_filter_attributes(data['regions'], data['regions']);
+    $('#region_filters').html(region_html);
+
+    country_html = create_filter_attributes(data['countries'], data['countries']);
+    $('#country_filters').html(country_html);
+
+    // city_html = create_filter_attributes(data['cities'], data['cities']);
+    // $('#city_filters').html(city_html);
+    console.log(data['indicators']);
+    indicator_html = create_filter_attributes(data['indicators'], data['indicators']);
+    $('#indicator_filters').html(indicator_html);
   }
 
   function set_filters_cpi(data){

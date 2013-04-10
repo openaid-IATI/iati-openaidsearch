@@ -127,7 +127,7 @@ Template Name: Indicators page
 <?php get_footer(); ?>
 <script type="text/javascript">
 $(document).ready(function(){
-  initialize_map('http://dev.oipa.openaidsearch.org/json',2010,"", "", "");
+  initialize_map('http://dev.oipa.openaidsearch.org/json',2010,"indicator", "", "");
 });
 </script>
 <script type="text/javascript">
