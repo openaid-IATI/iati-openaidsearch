@@ -18,7 +18,7 @@
 					</button>
 				</div>
 
-				<div class="filter-by">
+				<div class="filter-by ipad-newrow">
 					<div class="filter-name hneue-bold">BY SECTOR: </div>
 					<button id="filter-by-sector" class="filter-button">
 						<div class="filter-text">PLEASE SELECT..</div>

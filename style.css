@@ -1040,23 +1040,6 @@ label, input, button, select, textarea{
   margin-right: 0.8em;
 }
 
-/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX CONTACT PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
-
-.contact-label{
-  clear:left;
-  float:left;
-  width: 10em;
-  padding-top: 1em;
-}
-
-.contact-input{
-  width: 100%;
-  padding-top: 0.5em;
-}
-
-.contact-input-textarea{
-  float:left;
-}
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECTS OVERVIEW XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
@@ -1421,8 +1404,54 @@ label, input, button, select, textarea{
 
 /* XXXXXXXXXXXXXXXXXXXX TEMP: MAKE ALL NON CLICKABLE LINKS/BUTTONS GREY XXXXXXXXXXXXXXXXXXXX */
 
-#project-share-embed .share-text, #project-share-share .share-text, #project-share-bookmark .share-text, #save-search-results, #sort-type-budget .project-sort-text, #sort-type-country .project-sort-text{
+#project-share-embed .share-text, #project-share-share .share-text, #project-share-bookmark .share-text, #project-share-export .share-text, #save-search-results, #sort-type-budget .project-sort-text, #sort-type-country .project-sort-text{
   color: #797974;
+}
+
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FORMS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+.wpcf7-form .wpcf7-submit{
+  color: #F1EEE8;
+  float:left;
+  margin-left: 1.2em;
+  margin-top: 1em;
+  padding: 0.8em 1.6em;
+  border-radius: 7px;
+  background: #2cac00; /* Old browsers */
+  background: -moz-linear-gradient(top, #82dc82 0%, #2cac00 38%, #56aa38 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#82dc82), color-stop(38%,#2cac00), color-stop(100%,#56aa38)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #82dc82 0%,#2cac00 38%,#56aa38 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #82dc82 0%,#2cac00 38%,#56aa38 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #82dc82 0%,#2cac00 38%,#56aa38 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #82dc82 0%,#2cac00 38%,#56aa38 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82dc82', endColorstr='#56aa38',GradientType=0 ); /* IE6-9 */
+}
+
+.contact-form-line{
+  display: inline-block;
+}
+
+.contact-form-line > div{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.contact-label{
+  width: 20%;
+}
+
+.contact-input{
+  width: 80%;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
 }
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX RESPONSIVE CSS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -1460,6 +1489,10 @@ label, input, button, select, textarea{
       width: 13em;
     }
 
+    .ipad-newrow{
+      clear:left;
+    }
+
     }
      
     /* Landscape phone to portrait tablet */
@@ -1477,6 +1510,17 @@ label, input, button, select, textarea{
       #map{
         display: none;
       }
+
+      .ipad-newrow{
+        clear:left;
+      }
+
+      #sort-type-header{
+        width: 100%;
+        padding-bottom:0.4em;
+      }
+
+
 
     }
      

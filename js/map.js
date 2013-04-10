@@ -14,10 +14,10 @@ L.tileLayer('http://{s}.tile.cloudmade.com/07c00b1d0e4c4bed9a926bdca23d2232/9007
 
 
 function getColor(d) {
-    return d > 100  ? '#045A8D' :
-           d > 50   ? '#2B8CBE' :
-           d > 20   ? '#74A9CF' :
-           d > 10   ? '#BDC9E1' :
+    return d > 8  ? '#045A8D' :
+           d > 6   ? '#2B8CBE' :
+           d > 4   ? '#74A9CF' :
+           d > 2   ? '#BDC9E1' :
                       'transparent';
 }
 
