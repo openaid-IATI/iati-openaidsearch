@@ -255,7 +255,10 @@ Template Name: Projects page
                 var total_projects = feature.properties.projects;
                 var str = "test"
                 str += total_projects;
-                  layer.bindPopup('<p>Total projects: '+str.substring(6)+ '</p><p><a href="?s=&countries='+feature.properties.iso+'">Click to view related projects</a></p>');
+                if(total_projects){
+                    layer.bindPopup('<p>Total projects: '+str.substring(6)+ '</p><p><a href="?s=&countries='+feature.properties.iso+'">Click to view related projects</a></p>');
+                }
+                  
               }}).addTo(map);
 
 //        var popup = L.popup()
