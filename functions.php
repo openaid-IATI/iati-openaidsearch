@@ -24,6 +24,66 @@ function register_my_menus() {
 add_action( 'init', 'register_my_menus' );
 
 
+function homepage_items_post_type() {
+	$labels = array(
+		'name'               => _x( 'Homepage items', 'Homepage items' ),
+		'singular_name'      => _x( 'Homepage item', 'Homepage item' ),
+		'add_new'            => _x( 'Add New', 'Homepage item' ),
+		'add_new_item'       => __( 'Add New Homepage item' ),
+		'edit_item'          => __( 'Edit Homepage item' ),
+		'new_item'           => __( 'New Homepage item' ),
+		'all_items'          => __( 'All Homepage items' ),
+		'view_item'          => __( 'View Homepage item' ),
+		'search_items'       => __( 'Search Homepage items' ),
+		'not_found'          => __( 'No Homepage items found' ),
+		'not_found_in_trash' => __( 'No Homepage items found in the Trash' ), 
+		'parent_item_colon'  => '',
+		'menu_name'          => 'Homepage'
+	);
+	$args = array(
+		'labels'        => $labels,
+		'description'   => 'Holds homepage items',
+		'public'        => true,
+		'menu_position' => 5,
+		'supports'      => array( 'title', 'editor', 'thumbnail'),
+		'has_archive'   => true,
+	);
+	register_post_type( 'homepage-item', $args );	
+}
+add_action( 'init', 'homepage_items_post_type' );
+
+function faq_items_post_type() {
+	$labels = array(
+		'name'               => _x( 'FAQ items', 'FAQ items' ),
+		'singular_name'      => _x( 'FAQ item', 'FAQ item' ),
+		'add_new'            => _x( 'Add New', 'FAQ item' ),
+		'add_new_item'       => __( 'Add New FAQ item' ),
+		'edit_item'          => __( 'Edit FAQ item' ),
+		'new_item'           => __( 'New FAQ item' ),
+		'all_items'          => __( 'All FAQ items' ),
+		'view_item'          => __( 'View FAQ item' ),
+		'search_items'       => __( 'Search FAQ items' ),
+		'not_found'          => __( 'No FAQ items found' ),
+		'not_found_in_trash' => __( 'No FAQ items found in the Trash' ), 
+		'parent_item_colon'  => '',
+		'menu_name'          => 'FAQ'
+	);
+	$args = array(
+		'labels'        => $labels,
+		'description'   => 'Holds FAQ items',
+		'public'        => true,
+		'menu_position' => 6,
+		'supports'      => array( 'title', 'editor', 'thumbnail'),
+		'has_archive'   => true,
+	);
+	register_post_type( 'faq-item', $args );	
+}
+add_action( 'init', 'faq_items_post_type' );
+
+
+
+
+
 function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	global $_PER_PAGE;
 	// get amount of activities per page

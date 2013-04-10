@@ -53,6 +53,7 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery-ui.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/leaflet.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery.nouislider.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/countries.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/countries_loc.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jsonpath-0.8.0.js"></script>

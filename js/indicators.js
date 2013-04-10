@@ -15,8 +15,8 @@
   var circles = [];
   var maxdatavalue = 0;
   var request_url = ""
-var selected_type = "";
-var indicator_data;
+  var selected_type = "";
+  var indicator_data;
 
 
 
@@ -45,8 +45,8 @@ var indicator_data;
     draw_circles(indicator_data);
 
     // set current year, temp: set to 2010
-    $( "#map-slider-tooltip a" ).append(sel_year);
-    $( "#map-slider-tooltip" ).slider( "option", "value", sel_year); 
+    $( "#map-slider-tooltip div" ).append(sel_year);
+    $( "#map-slider-tooltip" ).val(sel_year);
     $( "#year-" + sel_year).addClass("active");
     refresh_circles(sel_year.toString());
 
@@ -185,38 +185,22 @@ var indicator_data;
 // XXXXXXXXXXXXXX INDICATOR SLIDER XXXXXXXXXXXXXXXXX
 
 
-  $( "#map-slider-tooltip" ).slider({ 
-    min: 1950,
-    max: 2050,
-    slide: slide_tooltip,
-    change: change_tooltip
+  $( "#map-slider-tooltip" ).noUiSlider({
+    range: [1950, 2050],
+    handles: 1,
+    start: 2000,
+    step: 1,
+    slide: slide_tooltip
   });
-  
-  
-  function change_tooltip(event, ui){
-    $( "#map-slider-tooltip a" ).text(ui.value);
 
-    // try{
-    //     if(event.originalEvent.type.toString() == 'mouseup'){
-    //         console.log(event.originalEvent);
-    //         console.log(event.originalEvent.currentTarget.activeElement.childNodes[0].data);
-    //         select_year(event.originalEvent.currentTarget.activeElement.childNodes[0].data);
-    //     }
-    // }
-        
-    // catch(err){
-        
-    // }
-  }
+  function slide_tooltip(){
+    var curval = $("#map-slider-tooltip").val();
+    console.log(curval);
+    $( "#map-slider-tooltip div" ).text(curval);
 
-
-  function slide_tooltip(event, ui){
-    
-
-    refresh_circles(ui.value);
-    $( "#map-slider-tooltip a" ).text(ui.value);
+    refresh_circles(curval);
     $( ".slider-year").removeClass("active");
-    $( "#year-" + ui.value).addClass("active");
+    $( "#year-" + curval).addClass("active");
    // $( "#year-" + (ui.value+1)).removeClass("active");
    // $( "#year-" + (ui.value-1)).removeClass("active");
   }
@@ -245,7 +229,6 @@ var indicator_data;
           circles[i].circleinfo.on('mouseover', function(evt) {
             evt.target.openPopup();
           });
-
         }
 
       } catch (err){
@@ -255,31 +238,24 @@ var indicator_data;
     
   }
 
-  // $(".slider-year").hover(
-  //   function() {
-  //     var curId = $(this).attr('id');
-  //     var curYear = curId.replace("year-", "");
-  //     refresh_circles(curYear);
-  //     $( "#map-slider-tooltip" ).slider( "option", "value", curYear); 
-  //     $( ".slider-year").removeClass("active");
-  //     $(this).addClass("active");
-  // });
+  $(".slider-year").click(
+    function() {
+      var curId = $(this).attr('id');
+      var curYear = curId.replace("year-", "");
+      refresh_circles(curYear);
+      $( "#map-slider-tooltip" ).val(parseInt(curYear));
+      $( "#map-slider-tooltip div" ).text(curYear);
+      $( ".slider-year").removeClass("active");
+      $(this).addClass("active");
+  });
 
   // $("#project-share-export").click(function(){
 
   //   initialize_map("","", "", "");
   //   return false;
   // });
-  
-
-
-
 
   // initialize_map("","", "", "");
-
-
-
-
 
 
 // XXXXXXXXXXXXXXXX INDICATOR GRAPHS XXXXXXXXXXXXXXXX 

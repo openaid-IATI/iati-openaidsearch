@@ -310,8 +310,12 @@ jQuery(function($){
     });
   }
 
-});
+  // IE: prevent focus on internet explorer
+  var _preventDefault = function(evt) { evt.preventDefault(); };
+  $("#map-slider-tooltip div").bind("dragstart", _preventDefault).bind("selectstart", _preventDefault);
 
+
+});
 
 
 

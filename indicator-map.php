@@ -17,11 +17,11 @@
     </div>
 
     <div id="map-slider-tooltip">
-
+   
     </div>
 
     <div id="map-timeline-wrapper">
-        <?php for ($i = 1950; $i < 2050;$i++){   
+        <?php for ($i = 1950; $i < 2051;$i++){   
         echo '<div class="slider-year';
 //        if($i > 2000 && $i < 2013){ echo ' slider-active'; }
         echo '" id="year-' . $i . '">';
