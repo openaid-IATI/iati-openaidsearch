@@ -246,6 +246,14 @@ function wp_filter_request($search_url){
 		$search_url .= "&regions={$regions}";
 		$has_filter = true;
 	}
+
+	if(!empty($_REQUEST['query'])) {
+		// $regions = explode('|', trim($_REQUEST['regions']));
+		// foreach($regions AS &$c) $c = trim($c);
+		// $regions = implode('|', $regions);
+		$search_url .= "&query=".$_REQUEST['query'];
+		$has_filter = false;
+	}
 	
 	if(!empty($_REQUEST['sectors'])) {
 		$sectors = explode('|', trim($_REQUEST['sectors']));
