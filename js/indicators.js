@@ -77,6 +77,7 @@
   }
 
   function set_filters_indicator(data){
+    
     region_html = create_filter_attributes(data['regions'], data['regions']);
     $('#region_filters').html(region_html);
 

@@ -2,6 +2,7 @@
     function create_filter_attributes(objects, keys){
         var html = '';
         var counter = 0;
+        
         $.each(objects, function(index, value){
             
             if (counter == 0 || counter == 20 || counter == 40 || counter == 60){
