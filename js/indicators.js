@@ -173,6 +173,7 @@ var indicator_data;
           singlecircleinfo.circleinfo = circle;
           singlecircleinfo.indicator = value.indicator;
           singlecircleinfo.friendly_label = value.indicator_friendly;
+          console.log(value.indicator_friendly);
           singlecircleinfo.type_data = value.type_data;
           circles.push(singlecircleinfo);
 
