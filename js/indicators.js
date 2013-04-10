@@ -15,11 +15,12 @@
   var circles = [];
   var maxdatavalue = 0;
   var request_url = ""
-
+var selected_type = "";
 
   // We run this function on each filter save.
   function initialize_map(url, sel_year, type, indicator_id, countries, regions, cities){
     // show loader, hide map
+    selected_type = type;
     request_url = url;
     $('#map-loader').show();
     $('#map').hide();
@@ -51,6 +52,10 @@
     if(type=='cpi'){
         set_filters_cpi(indicator_data);
     }
+    if (type=='indicator'){
+        set_filters_indicator(indicator_data);
+    }
+
     return indicator_data
   }
 
@@ -63,6 +68,19 @@
         console.log("removal of circle failed");
       }
     }
+  }
+
+  function set_filters_indicator(data){
+    region_html = create_filter_attributes(data['regions'], data['regions']);
+    $('#region_filters').html(region_html);
+
+    country_html = create_filter_attributes(data['countries'], data['countries']);
+    $('#country_filters').html(country_html);
+
+    // city_html = create_filter_attributes(data['cities'], data['cities']);
+    // $('#city_filters').html(city_html);]);
+    indicator_html = create_filter_attributes(data['indicators'], data['indicators']);
+    $('#indicator_filters').html(indicator_html);
   }
 
   function set_filters_cpi(data){
@@ -99,11 +117,14 @@
   }
 
   function draw_available_data_blocks(indicator_data){
+    console.log(indicator_data);
+    $('.slider-year').removeClass('slider-active');
     for (var i=1950;i<2051;i++){
       var curyear = "y" + i;
-
+      
       $.each(indicator_data, function(key, value){
           if (value.years){
+
             if (curyear in value.years){
               $("#year-" + i).addClass("slider-active");
               return false;
@@ -191,6 +212,8 @@
   function refresh_circles(year){
     var curyear = "y" + year;
     var max = maxdatavalue;
+    console.log(max);
+
     var factor = Math.round(2000000000000 / max);
 
     for (var i=0;i<circles.length;i++)
