@@ -861,14 +861,13 @@ label, input, button, select, textarea{
   -o-user-select: none;
   user-select: none;
   cursor: pointer;
-
-  margin-left: -1.74em;
+  font-family: 'HelveticaNeueW01-75Bold';
+  margin-left: -1.68em;
   bottom:0.4em;
   border: 1px solid #D3D3D3;
   background-color: white;
   color: #505D59;
   font-size: 1.7em;
-  font-family: 'HelveticaNeueW01-75Bold';
   z-index: 2;
   padding: 0.5em;
 
@@ -883,7 +882,7 @@ label, input, button, select, textarea{
   border-left: 0.6em solid transparent;
   border-top: 1.3em solid #FFF;
   border-right: 0.6em solid transparent;
-  left: -0.66em;
+  left: -0.62em;
   top: 1.6em;
   content: '';
 
@@ -912,9 +911,9 @@ label, input, button, select, textarea{
 
 #map-timeline{
   position:absolute;
-  left: 4%;
+  left: 2%;
   bottom:0;
-  width:92%;
+  width:96%;
   height:4em;
   padding: 0;
   margin: 0;
@@ -922,7 +921,7 @@ label, input, button, select, textarea{
 
 #timeline-left, #timeline-right{
   position: absolute;
-  width: 4%;
+  width: 2%;
   background-color: #000;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
   filter: alpha(opacity=40);
@@ -1672,6 +1671,36 @@ label, input, button, select, textarea{
       height: 3px;
       left: 2px;
       width: 8px;
+    }
+
+    .slider-year{
+      width: 9px;
+    }
+
+    #map-timeline{
+      width: 909px;
+      left: 50%;
+      margin-left:-454.5px;
+    }
+
+    #timeline-left, #timeline-right{
+      min-height: 4em;
+      overflow: hidden;
+      width: 50%;
+      background-color: #000;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+      filter: alpha(opacity=40);
+      opacity: 0.4;
+    }
+
+    #timeline-left{
+      left:0;
+      margin-left:-454.5px;
+    }
+
+    #timeline-right{
+      right: 0;
+      margin-right:-454.5px;
     }
 
   }
