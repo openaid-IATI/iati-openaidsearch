@@ -1674,13 +1674,13 @@ label, input, button, select, textarea{
     }
 
     .slider-year{
-      width: 9px;
+      width: 10px;
     }
 
     #map-timeline{
-      width: 909px;
+      width: 1010px;
       left: 50%;
-      margin-left:-454.5px;
+      margin-left:-505px;
     }
 
     #timeline-left, #timeline-right{
@@ -1695,12 +1695,12 @@ label, input, button, select, textarea{
 
     #timeline-left{
       left:0;
-      margin-left:-454.5px;
+      margin-left:-505px;
     }
 
     #timeline-right{
       right: 0;
-      margin-right:-454.5px;
+      margin-right:-505px;
     }
 
   }
