@@ -21,7 +21,7 @@ Template Name: Standard page
 							<div class="share-icon"></div>
 							<div class="share-text">SHARE</div>
 						</a>
-						<a href"<?php echo site_url(); ?>/whistleblower/" id="project-share-whistleblower" class="project-share-button hneue-bold">
+						<a href="<?php echo site_url(); ?>/whistleblower/" id="project-share-whistleblower" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
 							<div class="share-text">WHISTLEBLOWER</div>
 						</a>

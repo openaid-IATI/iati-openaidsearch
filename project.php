@@ -121,7 +121,7 @@ $activity = wp_get_activity($project_id);
 
 							<?php if(!empty($activity->
 							statistics->total_budget)) {?>
-					US$
+							US$
 							<?php echo format_custom_number($activity->
 							statistics->total_budget);  ?>
 							<?php } ?></div>

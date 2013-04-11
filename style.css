@@ -1,8 +1,8 @@
 /*
-Theme Name: Open unhabitat v2
+Theme Name: Open UN-Habitat v2
 Theme URI: http://open.unhabitat.org/
-Description: Version 2 of the open unhabitat theme
-Author: Vincent van t Westende
+Description: Version 2 of the Open UN-Habitat theme
+Author: Zimmerman & Zimmerman dev team
 Author URI: http://www.zimmermanzimmerman.nl
 Version: 1.0
 License:
@@ -130,6 +130,24 @@ button{
   width: 22.2em;
 }
 
+#brand-image{
+  background-image: url('images/logo.png');
+  width: 309px;
+  height: 39px;
+  display: block;
+}
+
+#header-home-img{
+  display: block;
+  background-image: url('images/home.png');
+  width: 22px;
+  height: 19px;
+}
+
+.navbar-static-top.navbar .nav > li > .navbar-home-link{
+  padding: 1.72em 0.6em;
+}
+
 .brand{
   position: relative;
 }
@@ -164,14 +182,6 @@ button{
     -moz-box-shadow: 0px 1px 3px #979791;
     -webkit-box-shadow: 0px 1px 3px #979791;
     box-shadow: 0px 1px 3px #979791;
-}
-
-.navbar-static-top.navbar .nav > li > .navbar-home-link{
-  height: 1.1em;
-}
-
-.navbar-home-link img{
-  width:1.2em;
 }
 
 .navbar .btn, .navbar .btn-group{
@@ -421,6 +431,14 @@ input[type=checkbox] {
 .squaredThree { 
   margin: 0.5em 0 0;
   position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.squaredThree > div{
+  display:inline-block;
+  vertical-align: middle;
 }
 
 .squaredThree label {
@@ -552,6 +570,23 @@ input[type=checkbox] {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82dc82', endColorstr='#56aa38',GradientType=0 ); /* IE6-9 */
 }
 
+#map .leaflet-popup-content-wrapper{
+  -webkit-border-radius: 6px;
+          border-radius: 6px;
+}
+
+#map-tip-header{
+  font-family: 'HelveticaNeueW01-75Bold';
+
+}
+
+#map-tip-text{
+  padding: 1em 1em 1em 0;
+}
+
+#map-tip-link a:hover{
+  color: #006591;
+}
 
 /* selection box */
 
@@ -793,13 +828,13 @@ label, input, button, select, textarea{
 
 #map-border-bottom{
   position: absolute;
-  height: 0.3em;
+  height: 0.34em;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
   filter: alpha(opacity=60);
   opacity: 60;
   background-color: #777;
   width: 100%;
-  bottom: 0;
+  bottom: -1px;
 }
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX MAP INDICATOR PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -827,7 +862,7 @@ label, input, button, select, textarea{
   user-select: none;
   cursor: pointer;
 
-  margin-left: -1.66em;
+  margin-left: -1.74em;
   bottom:0.4em;
   border: 1px solid #D3D3D3;
   background-color: white;
@@ -848,7 +883,7 @@ label, input, button, select, textarea{
   border-left: 0.6em solid transparent;
   border-top: 1.3em solid #FFF;
   border-right: 0.6em solid transparent;
-  left: -0.6em;
+  left: -0.66em;
   top: 1.6em;
   content: '';
 
@@ -865,7 +900,6 @@ label, input, button, select, textarea{
   content: '';
 }
 
-
 /* year blocks */
 #map-timeline-wrapper{
   position: absolute;
@@ -874,6 +908,33 @@ label, input, button, select, textarea{
   bottom: 0;
   left: 0;
   z-index: 1500;
+}
+
+#map-timeline{
+  position:absolute;
+  left: 5%;
+  bottom:0;
+  width:90%;
+  height:4em;
+}
+
+#timeline-left, #timeline-right{
+  position: absolute;
+  width: 5%;
+  background-color: #000;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+  filter: alpha(opacity=40);
+  opacity: 0.4;
+  height: 4em;
+  display:block;
+}
+
+#timeline-left{
+  left:0;
+}
+
+#timeline-right{
+  right: 0;
 }
 
 .slider-year{
@@ -1073,7 +1134,7 @@ label, input, button, select, textarea{
 
 .project-expand-button{
   position: absolute;
-  left:0;
+  left: -0.8em;
   top: 0.7em;
   display: block;
   height: 14px;
@@ -1177,14 +1238,14 @@ label, input, button, select, textarea{
   -moz-box-shadow: 0 2px 3px #888;
   box-shadow: 0 2px 3px #888;
   z-index:1600;
-  padding: 0.4em 0.5em;
+  padding: 0.4em 0;
 }
 
 .dropdown-project button, .dropdown-project a{
   font-size: 0.85em;
   color: #008CCC;
   font-family: "HelveticaNeueW01-75Bold";
-  padding: 0.2em 0 0.2em 0;
+  padding: 0.4em 1em;
   clear:left;
   float:left;
 }
@@ -1203,7 +1264,7 @@ label, input, button, select, textarea{
 }
 .projects-project-spec, .project-spec{
   color: #878787;
-  margin-left: 5em;
+  margin-left: 4em;
 }
 
 .project-spec{
@@ -1403,6 +1464,10 @@ label, input, button, select, textarea{
   padding: 0.2em 0 0.2em 0.7em;
 }
 
+#dropdown-type-graph button:hover{
+  text-decoration: underline;
+}
+
 #dropdown-type-graph button.active{
   border-bottom: 1px solid #008CCC;
 }
@@ -1415,9 +1480,14 @@ label, input, button, select, textarea{
 
 /* XXXXXXXXXXXXXXXXXXXX TEMP: MAKE ALL NON CLICKABLE LINKS/BUTTONS GREY XXXXXXXXXXXXXXXXXXXX */
 
-#project-share-embed .share-text, #project-share-share .share-text, #project-share-bookmark .share-text, #project-share-export .share-text, #save-search-results, #sort-type-budget .project-sort-text, #sort-type-country .project-sort-text{
+#project-share-embed .share-text, #project-share-share .share-text, #project-share-export .share-text, #save-search-results, #sort-type-budget .project-sort-text, #sort-type-country .project-sort-text{
   color: #797974;
 }
+
+#graph-button-treemap{
+  display: none;
+}
+
 
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FORMS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -1470,44 +1540,187 @@ label, input, button, select, textarea{
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX RESPONSIVE CSS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
-    /* Large desktop */
-    @media (min-width: 1440px) { ... }
+  /* Large desktop */
+  @media (min-width: 1440px) { ... }
      
 
-    /* Medium large desktop */
-    @media (min-width: 980px) and (max-width: 1439px) {
+  /* Medium large desktop */
+  @media (min-width: 980px) and (max-width: 1439px) {
 
     body {
-      font-size:10px;
+      font-size:11px;
     }
 
     .navbar-static-top .input-large{
       width: 13em;
     }
 
-    .filter-text{
-      padding-right:2em;
+   /* .projects-share-spec #project-share-export, .projects-share-spec #project-share-bookmark{
+      width: 40%;
+      text-align: left;
+    }
+    .projects-share-spec{
+      padding-bottom: 0.4em;
+    }*/
+
+    /* font size 11 test */
+
+    .share-text{
+      font-size: 0.87em;
     }
 
-    } 
+    .navbar-static-top.navbar .nav > li > a{
+      padding: 1.70em 0.6em;
+    }
+
+    .navbar .brand{
+      width: 19em;
+      padding: 1.7em 0.5em 1.7em 0.8em;
+    }    
+
+    .filter-text{
+      padding-right: 2.2em;
+    }
+
+    .project-sort-type, #sort-type-header{
+      margin-right: 1.1em;
+    }
+
+    .share-text{
+      margin-left:0;
+      margin-right:0.2em;
+    }
+
+    .share-icon {
+      width: 14px;
+      height: 14px;
+      background-image: url('images/project-share-980-1440.png');
+    }
+
+    #project-share-share .share-icon {
+      background-position: -14px 0;
+      margin-top: 0px;
+    }
+
+    #project-share-bookmark .share-icon {
+      background-position: -28px 0;
+    }
+
+    #project-share-whistleblower .share-icon {
+      background-position: -42px 0;
+    }
+
+    #project-share-embed .share-icon{
+      background-position: -56px 0;
+    }
+
+    #project-share-graph .share-icon{
+      background-position: -70px 0;
+    }
+
+    #dropdown-type-graph{
+      right:auto;
+      left:0;
+      top: 2.24em;
+    }
+
+    #dropdown-type-graph button{
+      padding: 0.4em 0.7em;
+      white-space: nowrap;
+      font-size: 1em;
+    }
+
+
+    .dropdown-project{
+      top:2.24em;
+
+    }
+
+    .dropdown-project button, .dropdown-project a{
+      font-size: 1em;
+    }
+
+    #brand-image{
+      background-image: url('images/logo-980-1440.png');
+      width: 209px;
+      height: 26px;
+    }
+
+    #header-home-img{
+      background-image: url('images/home-980-1440.png');
+      width: 17px;
+      height: 15px;
+    }
+
+    .navbar-static-top.navbar .nav > li > .navbar-home-link{
+      padding: 1.86em 0.6em;
+    }
+
+    .squaredThree{
+      margin: 0.3em 0 0;
+    }
+
+    .squaredThree label {
+      width: 15px;
+      height: 16px;
+      border-radius: 3px;
+    }
+
+    .squaredThree label:after {
+      height: 3px;
+      left: 2px;
+      width: 8px;
+    }
+
+  }
+
 
 
     /* Portrait tablet to landscape and desktop */
     @media (min-width: 768px) and (max-width: 979px) { 
 
-    body {
-      font-size:10px;
+      body {
+        font-size:10px;
+      }
+
+      .navbar-static-top .input-large{
+        width: 13em;
+      }
+
+      .ipad-newrow{
+        clear:left;
+      }
+
+      .projects-share-spec #project-share-export, .projects-share-spec #project-share-bookmark{
+        width: 40%;
+        text-align: left;
+      }
+
+    .squaredThree{
+      margin: 0.3em 0 0;
     }
 
-    .navbar-static-top .input-large{
-      width: 13em;
+    .squaredThree label {
+      width: 15px;
+      height: 16px;
+      border-radius: 3px;
     }
 
-    .ipad-newrow{
-      clear:left;
+    .squaredThree label:after {
+      height: 3px;
+      left: 2px;
+      width: 8px;
     }
 
-    }
+
+
+
+
+
+
+
+
+  }
      
     /* Landscape phone to portrait tablet */
     @media (max-width: 767px) {

@@ -10,50 +10,11 @@ L.tileLayer('http://{s}.tile.cloudmade.com/07c00b1d0e4c4bed9a926bdca23d2232/9007
     maxZoom: 6
 }).addTo(map);
 
-//L.control.zoom({position : "topright"}).addTo(map);
-//L.geoJson(countryData, {style: style, onEachFeature: onEachFeature}).addTo(map);
+var currently_selected_country = "none";
 
-
-function getColor(d) {
-    return d > 8  ? '#045A8D' :
-           d > 6   ? '#2B8CBE' :
-           d > 4   ? '#74A9CF' :
-           d > 2   ? '#BDC9E1' :
-                      'transparent';
+function set_currently_selected_country(value){
+    currently_selected_country = value;
 }
-
-function style(feature) {
-    return {
-        fillColor: getColor(feature.properties.projects),
-        weight: 0,
-        opacity: 1,
-        color: 'white',
-        dashArray: '',
-        fillOpacity: 0.7
-    };
-}
-
-// function highlightFeature(e) {
-//     var layer = e.target;
-
-//     layer.setStyle({
-//         weight: 3,
-//         color: '#666',
-//         dashArray: '',
-//         fillOpacity: 0.7
-//     });
-
-//     if (!L.Browser.ie && !L.Browser.opera) {
-//         layer.bringToFront();
-//     }
-	
-// 	info.update(layer.feature.properties);
-// }
-
-// function resetHighlight(e) {
-//     geojson.resetStyle(e.target);
-// 	info.update();
-// }
 
 // var geojson;
 

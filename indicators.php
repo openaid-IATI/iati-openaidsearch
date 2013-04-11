@@ -16,7 +16,7 @@ Template Name: Indicators page
 //      $countries = wp_get_unique_result($indicator_results, 'country_name', 'dac_region_name');
       $selected_region = $_GET['region'];
       $selected_country = $_GET['countries'];
-      $selected_year = $_GET['years'];
+      $selected_countryyear = $_GET['years'];
       //@todo fix dynamic cities
       $selected_city = '';
       $selected_indicator = $_GET['indicator'];
@@ -127,121 +127,6 @@ Template Name: Indicators page
 <?php get_footer(); ?>
 <script type="text/javascript">
 $(document).ready(function(){
-  initialize_map('http://dev.oipa.openaidsearch.org/json',2010,"indicator", "", "");
+  initialize_map('http://dev.oipa.openaidsearch.org/json',2015,"indicator", "", "");
 });
-</script>
-<script type="text/javascript">
-
-/*
-//@todo add this to a global js, also being used by page-projects.php
-function create_filter_attributes(objects, keys){
-        var html = '';
-        var counter = 0;
-        $.each(objects, function(index, value){
-            
-            //limit on 80
-        	if (counter == 80){
-            	return false;
-            }
-
-            if (counter == 0 || counter == 20 || counter == 40 || counter == 60){
-                html += '<div class="span3">';
-            }
-            html += '<div class="squaredThree">';
-            html += '<input type="checkbox" value="'+ keys[value] +'" id="land'+keys[value]+'" name="check" />';
-            html += '<label class="map-filter-cb-value" for="land'+keys[value]+'"></label>';
-            html += '<span>'+value+'</span></div>'; 
-            
-            if (counter == 19 || counter == 39 || counter == 59 || counter == 79){
-                        html += '</div>';
-
-            }
-
-            counter++;
-
-            //limit on 80
-            if (counter == 80){
-            	return html;	
-            }
-        });
-        return html;
-    }
-$(document).ready(function() {
-//    alert(countryData.type);
-   
-    
-    
-    
-    
-    
-    <?php foreach($indicator_results as $i) :?>
-    
-    <?php if (strlen($i[$selected_indicator])>0) :?>
-   
-    try 
-      {
-// jsonPath(countryData, "$..features[?(@.id=='<?php echo $i['country_iso3'] ?>')]")[0].properties.projects = '<?php echo $i[$selected_indicator] ?>';//Run some code here
-      }
-    catch(err)
-      {
-        console.log('<?php echo $i['country_iso3'] ?>'+err);
-      }
-          try{
-              
-            var circle = L.circle(new L.LatLng(countryloc['<?php echo $i['country_iso'] ?>'].longitude, countryloc['<?php echo $i['country_iso'] ?>'].latitude), <?php echo sqrt(($factor * $i[$selected_indicator])/pi()); //echo round($factor * $i['population']); ?>, {
-              color: 'red',
-             weight: '0',
-              fillColor: '#f03',
-              fillOpacity: 0.5
-             }).addTo(map);
-             circle.bindPopup('<?php echo $selected_indicator?>: <?php echo $i[$selected_indicator]?>');
-            }catch(err){
-                console.log(err);
-            }
-        
-    
-    <?php endif ?>
-<?php endforeach; ?>
-    
-    
-    var region_keys = {};
-    <?php foreach($regions as $region): ?>
-        region_keys['<?php echo $region['code'] ?>'] = '<?php echo $region['code'] ?>';
-    <?php endforeach ?>
-        
-        regions_html = create_filter_attributes(region_keys, region_keys);
-        $('#region_filters').append(regions_html);
-        
-    var country_keys = {};
-    <?php foreach($countries as $c): ?>
-        country_keys['<?php echo $c['iso'] ?>'] = '<?php echo $c['iso'] ?>';
-    <?php endforeach ?>
-        
-        country_html = create_filter_attributes(country_keys, country_keys);
-        $('#country_filters').append(country_html);
-        
-    var city_keys = {};
-    <?php foreach($cities as $c): ?>
-        city_keys['<?php echo $c['name'] ?>'] = '<?php echo $c['name'] ?>';
-    <?php endforeach ?>
-        
-     city_html = create_filter_attributes(city_keys, city_keys);
-        $('#city_filters').append(city_html);
-        
-    <?php foreach($years as $year) :?>
-        $('#year-<?php echo $year ?>').addClass('slider-active');
-    <?php endforeach; ?>
-        
-    <?php if (isset($selected_year)) :?>
-        $( "#map-slider-tooltip" ).slider( "option", "value", <?php echo $selected_year ?> );
-        
-//        $("#map-slider-tooltip a" ).append("<?php echo $selected_year ?>");
-        $('#year-<?php echo $selected_year ?>').addClass('active');
-    <?php endif ?>
-    
-});
-function select_year(year){
-    window.location = '?years=' + year + '&indicator=<?php echo $selected_indicator ?>' + '&countries=<?php echo $selected_country ?>&regions=<?php echo $selected_region ?>&city=<?php echo $selected_city ?>';;
-} 
-*/
 </script>

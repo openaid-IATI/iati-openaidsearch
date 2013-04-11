@@ -18,7 +18,6 @@ foreach($objects AS $idx=>$project) {
 		</div>
 
 		<div class="span5">
-			<!-- TO DO: REPLACE PROJECTIDENTIFIER --> 
 			<button id="<?php echo $project->iati_identifier; ?>" class="project-expand-button expand-plus" title="Show more"></button>
 
 			<div class="projects-project-spec">
@@ -159,7 +158,7 @@ foreach($objects AS $idx=>$project) {
 
 				<div class="projects-project-divider"></div>
 
-				<div class="project-share-container">
+				<div class="project-share-container projects-share-spec">
 
 					<button id="project-share-export" class="project-share-button hneue-bold">
 						<div class="share-icon"></div>
@@ -181,11 +180,6 @@ foreach($objects AS $idx=>$project) {
 				</div>
 
 			</div>
-
-
-
-
-
 
 
 

@@ -1,14 +1,3 @@
-
-// XXXXXXXXXXXXXXX INDICATORS XXXXXXXXXXXXXXXX
-
-
-
-// jQuery(function($) {
-    
-
-
-
-
 // XXXXXXXXXXXXX INDICATOR INITIALIZATION XXXXXXXXXXX
   
   // first indicator circles
@@ -18,16 +7,16 @@
   var selected_type = "";
   var indicator_data;
 
-
-
   // We run this function on each filter save.
   function initialize_map(url, sel_year, type, indicator_id, countries, regions, cities){
-    // show loader, hide map
+    
     if(type){
     selected_type = type;
 
     }
     request_url = url;
+
+    // show loader, hide map
     $('#map-loader').show();
     $('#map').hide();
 
@@ -44,8 +33,8 @@
     // draw the circles
     draw_circles(indicator_data);
 
-    // set current year, temp: set to 2010
-    $( "#map-slider-tooltip div" ).append(sel_year);
+    // set current year
+    $( "#map-slider-tooltip div" ).html(sel_year);
     $( "#map-slider-tooltip" ).val(sel_year);
     $( "#year-" + sel_year).addClass("active");
     refresh_circles(sel_year.toString());
@@ -53,7 +42,7 @@
     // hide loader, show map
     $('#map').show(); 
     $('#map-loader').hide();
-    // end
+    
     //load filters depending on page
     if(type=='cpi'){
         set_filters_cpi(indicator_data);
@@ -78,29 +67,29 @@
 
   function set_filters_indicator(data){
     
-    region_html = create_filter_attributes(data['regions'], data['regions']);
+    region_html = create_filter_attributes(data['regions'], data['regions'], 4);
     $('#region_filters').html(region_html);
 
-    country_html = create_filter_attributes(data['countries'], data['countries']);
+    country_html = create_filter_attributes(data['countries'], data['countries'], 4);
     $('#country_filters').html(country_html);
 
     // city_html = create_filter_attributes(data['cities'], data['cities']);
     // $('#city_filters').html(city_html);]);
-    indicator_html = create_filter_attributes(data['indicators'], data['indicators']);
+    indicator_html = create_filter_attributes(data['indicators'], data['indicators'], 4);
     $('#indicator_filters').html(indicator_html);
   }
 
   function set_filters_cpi(data){
-    region_html = create_filter_attributes(data['regions'], data['regions']);
+    region_html = create_filter_attributes(data['regions'], data['regions'], 4);
     $('#region_filters').html(region_html);
 
-    country_html = create_filter_attributes(data['countries'], data['countries']);
+    country_html = create_filter_attributes(data['countries'], data['countries'], 4);
     $('#country_filters').html(country_html);
 
-    city_html = create_filter_attributes(data['cities'], data['cities']);
+    city_html = create_filter_attributes(data['cities'], data['cities'], 4);
     $('#city_filters').html(city_html);
 
-    indicator_html = create_filter_attributes(data['indicators'], data['indicators']);
+    indicator_html = create_filter_attributes(data['indicators'], data['indicators'], 4);
     $('#indicator_filters').html(indicator_html);
   }
 
