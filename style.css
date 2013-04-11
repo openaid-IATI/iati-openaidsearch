@@ -916,6 +916,8 @@ label, input, button, select, textarea{
   bottom:0;
   width:92%;
   height:4em;
+  padding: 0;
+  margin: 0;
 }
 
 #timeline-left, #timeline-right{
@@ -930,7 +932,7 @@ label, input, button, select, textarea{
 }
 
 #timeline-left{
-  left:0;
+  left: 0;
 }
 
 #timeline-right{
@@ -941,7 +943,7 @@ label, input, button, select, textarea{
   display:inline-block;
   background-color: #000;
   height: 100%;
-  width:1%;
+  width:1.086956%;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
   filter: alpha(opacity=40);
   opacity: 0.4;
