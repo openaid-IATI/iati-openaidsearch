@@ -3,6 +3,7 @@
   // first indicator circles
   var circles = [];
   var maxdatavalue = 0;
+  var maxcirclearea = 2000000000000;
   var request_url = ""
   var selected_type = "";
   var indicator_data;
@@ -12,8 +13,16 @@
     
     if(type){
     selected_type = type;
-
     }
+
+    //set max area depending on page
+    if(type=='cpi'){
+        maxcirclearea = 500000000000;
+    }
+    if (type=='indicator'){
+        maxcirclearea = 2000000000000;
+    }
+
     request_url = url;
 
     // show loader, hide map
@@ -148,14 +157,6 @@
           fillOpacity: 0.6
           }).addTo(map);
 
-          // circle.bindPopup('<h4>'+value.name+'</h4><p>Population: ' + value.years['y'+selected_year] + '</p>');
-          // circle.on('mouseover', function(evt) {
-          //   evt.target.openPopup();
-          // });
-          // circle.on('mouseout', function(evt) {
-          //   evt.target.closePopup();
-          // });
-
           var singlecircleinfo = new Object();
           singlecircleinfo.countryiso2 = key;
           singlecircleinfo.countryname = value.name;
@@ -200,9 +201,8 @@
   function refresh_circles(year){
     var curyear = "y" + year;
     var max = maxdatavalue;
-    // console.log(max);
 
-    var factor = Math.round(2000000000000 / max);
+    var factor = Math.round(maxcirclearea / max);
 
     for (var i=0;i<circles.length;i++)
     { 

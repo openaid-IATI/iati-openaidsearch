@@ -250,7 +250,7 @@ Template Name: Projects page
         <?php
         }?>
         
-
+        
         var geojson;
 
         function getColor(d) {

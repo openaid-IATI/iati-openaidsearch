@@ -3,15 +3,14 @@
         var html = '';
         var counter = 0;
         var per_col = 20;
-
         $.each(objects, function(index, value){
             
             if (counter%per_col == 0){
                 html += '<div class="span' + (12 / columns) + '">';
             } 
             html += '<div class="squaredThree"><div>';
-            html += '<input type="checkbox" value="'+ index +'" id="land'+index+'" name="check" />';
-            html += '<label class="map-filter-cb-value" for="land'+index+'"></label>';
+            html += '<input type="checkbox" value="'+ index +'" id="land'+value+'" name="check" />';
+            html += '<label class="map-filter-cb-value" for="land'+value+'"></label>';
             html += '</div><div><span>'+value+'</span></div></div>';
 
             if (counter%per_col == (per_col - 1)){
@@ -252,10 +251,13 @@ jQuery(function($){
     
     if (selected_type=='indicator'){
       initialize_map('http://dev.oipa.openaidsearch.org/json?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2010,'',"", "", "");
+    } else if (selected_type=='cpi'){
+      initialize_map('http://dev.oipa.openaidsearch.org/json-city?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2012,'',"", "", "");
+    } else {
+      // load projects
+      
     }
-    if (selected_type=='cpi'){
-    initialize_map('http://dev.oipa.openaidsearch.org/json-city?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2012,'',"", "", "");
-    }
+
     
     // window.location = '?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city;
   });
