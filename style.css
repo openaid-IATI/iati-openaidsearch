@@ -912,7 +912,7 @@ label, input, button, select, textarea{
 
 #map-timeline{
   position:absolute;
-  left: 5%;
+  left: 4%;
   bottom:0;
   width:92%;
   height:4em;
@@ -941,7 +941,7 @@ label, input, button, select, textarea{
   float:left;
   background-color: #000;
   height: 100%;
-  width:0.990099%;
+  width:0.99%;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
   filter: alpha(opacity=40);
   opacity: 0.4;
