@@ -914,13 +914,13 @@ label, input, button, select, textarea{
   position:absolute;
   left: 5%;
   bottom:0;
-  width:90%;
+  width:92%;
   height:4em;
 }
 
 #timeline-left, #timeline-right{
   position: absolute;
-  width: 5%;
+  width: 4%;
   background-color: #000;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
   filter: alpha(opacity=40);
@@ -941,7 +941,7 @@ label, input, button, select, textarea{
   float:left;
   background-color: #000;
   height: 100%;
-  width:0.99099%;
+  width:0.990099%;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
   filter: alpha(opacity=40);
   opacity: 0.4;
