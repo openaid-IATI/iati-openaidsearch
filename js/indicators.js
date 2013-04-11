@@ -222,10 +222,10 @@
             value = CommaFormatted(value+'.');
           }
           if (circles[i].type_data == 'p'){
-            if (value < 1){
-              value = value * 100;
-            }
-            value = value + ' %';
+            // if (value < 1){
+            //   value = value * 100;
+            // }
+            // value = value + ' %';
           }
           circles[i].circleinfo.bindPopup('<h4>'+circles[i].countryname+'</h4><p>' + circles[i].friendly_label + ': ' + value + '</p>');
           circles[i].circleinfo.on('mouseover', function(evt) {
