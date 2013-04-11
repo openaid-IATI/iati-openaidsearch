@@ -222,7 +222,6 @@ input[type="text"]{
     background: -ms-linear-gradient(top, #009ada 0%,#0075a7 100%); /* IE10+ */
     background: linear-gradient(to bottom, #009ada 0%,#0075a7 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#009ada', endColorstr='#0075a7',GradientType=0 ); /* IE6-9 */
-
     height:20em;
 }
 
@@ -288,16 +287,17 @@ input[type="text"]{
   text-decoration: none;
 }
 
-.footer-info {
-  height: 14.5em;
-}
-
 .footer-info .span12{
   height:100%;
   position: relative;
 }
 
-.footer-info-text{
+.footer .container{
+  position: relative;
+  height: 100%;
+}
+
+.footer-info  {
   position: absolute;
   left: 0;
   bottom: 1.5em;
@@ -941,7 +941,7 @@ label, input, button, select, textarea{
   float:left;
   background-color: #000;
   height: 100%;
-  width:0.9901%;
+  width:0.99099%;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
   filter: alpha(opacity=40);
   opacity: 0.4;

@@ -75,7 +75,7 @@
 
     // city_html = create_filter_attributes(data['cities'], data['cities']);
     // $('#city_filters').html(city_html);]);
-    indicator_html = create_filter_attributes(data['indicators'], data['indicators'], 4);
+    indicator_html = create_filter_attributes(data['indicators'], data['indicators'], 3);
     $('#indicator_filters').html(indicator_html);
   }
 
