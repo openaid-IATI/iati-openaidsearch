@@ -566,11 +566,11 @@ input[type=checkbox] {
 
 #map-lightbox, #map-lightbox-bg{
   position: absolute;
-  top: 10.5em;
+  top: 9.5em;
   left: 6.5em;
   display: block;
   width: 44em;
-  height: 14em;
+  height: 16em;
   z-index: 1500;
 }
 
@@ -595,7 +595,8 @@ input[type=checkbox] {
 }
 
 #map-lightbox-text, #map-lightbox a{
-  font-size: 1.6em;
+  font-size: 1.5em;
+  line-height: 1em;
 }
 
 #map-lightbox-text{
@@ -606,7 +607,7 @@ input[type=checkbox] {
 #map-lightbox a{
   float:left;
   margin-left: 1.2em;
-  margin-top: 1em;
+  margin-top: 0.3em;
   padding: 0.8em 1.6em;
   border-radius: 7px;
   background: #2cac00; /* Old browsers */
