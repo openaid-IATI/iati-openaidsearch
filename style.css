@@ -596,7 +596,7 @@ input[type=checkbox] {
 
 #map-lightbox-text, #map-lightbox a{
   font-size: 1.5em;
-  line-height: 1em;
+  line-height: 1.1em;
 }
 
 #map-lightbox-text{
@@ -607,7 +607,6 @@ input[type=checkbox] {
 #map-lightbox a{
   float:left;
   margin-left: 1.2em;
-  margin-top: 0.3em;
   padding: 0.8em 1.6em;
   border-radius: 7px;
   background: #2cac00; /* Old browsers */
