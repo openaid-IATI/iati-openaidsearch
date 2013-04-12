@@ -1563,6 +1563,7 @@ label, input, button, select, textarea{
 
 .contact-form-line{
   display: inline-block;
+  width: 100%;
 }
 
 .contact-form-line > div{
@@ -1577,6 +1578,10 @@ label, input, button, select, textarea{
 
 .contact-input{
   width: 80%;
+}
+
+.contact-input input{
+  width: 100%;
 }
 
 .clearfix:after {

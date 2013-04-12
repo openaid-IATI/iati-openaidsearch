@@ -203,22 +203,23 @@ $activity = wp_get_activity($project_id);
 
 						<div class="project-share-container">
 
-							<button id="project-share-export" class="project-share-button hneue-bold">
+							<a id="project-share-export" class="project-share-button hneue-bold">
 								<div class="share-icon"></div>
 								<div class="share-text">EXPORT</div>
-							</button>
-							<button id="project-share-share" class="project-share-button hneue-bold">
+							</a>
+							<a id="project-share-share" class="project-share-button hneue-bold">
 								<div class="share-icon"></div>
 								<div class="share-text">SHARE</div>
-							</button>
-							<button id="project-share-bookmark" class="project-share-button hneue-bold">
-								<div class="share-icon"></div>
-								<div class="share-text">BOOKMARK</div>
-							</button>
-							<button id="project-share-whistleblower" class="project-share-button hneue-bold">
+							</a>
+							<a href="<?php echo site_url(); ?>/whistleblower/" id="project-share-whistleblower" class="project-share-button hneue-bold">
 								<div class="share-icon"></div>
 								<div class="share-text">WHISTLEBLOWER</div>
-							</button>
+							</a>
+							<a href="<?php the_permalink(); ?>" alt="Bookmark <?php the_title(); ?>" id="project-share-bookmark" class="project-share-button hneue-bold">
+								<div class="share-icon"></div>
+								<div class="share-text">BOOKMARK</div>
+							</a>
+
 
 						</div>
 					</div>

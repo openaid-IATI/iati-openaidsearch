@@ -35,7 +35,7 @@ function create_filter_attributes(objects, columns){
 //         if ((i+1) > ((per_col * columns) - 1)) { break }
 
     // }
-
+    console.log(columns);
     $.each(objects, function(key, value){
         
         if (counter%per_col == 0){
