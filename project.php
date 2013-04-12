@@ -20,7 +20,7 @@ $activity = wp_get_activity($project_id);
 	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
-				<button class="project-back-button">BACK TO SEARCH RESULTS</button>
+				<button id="project-back-button">BACK TO SEARCH RESULTS</button>
 			</div>
 		</div>
 	</div>

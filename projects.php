@@ -145,13 +145,13 @@ Template Name: Projects page
         var region_keys = {};
         var sector_keys = {};
         var budget_keys = {};
-        budget_keys['All'] = 'all';
-        budget_keys['> US$ 0'] = '';
-        budget_keys['> US$ 10.000'] = '10000';
-        budget_keys['> US$ 50.000'] = '50000';
-        budget_keys['> US$ 100.000'] = '100000';
-        budget_keys['> US$ 500.000'] = '500000';
-        budget_keys['> US$ 1.000.000'] = '1000000';
+        budget_keys['all'] = 'All';
+        budget_keys[''] = '> US$ 0';
+        budget_keys['10000'] = '> US$ 10.000';
+        budget_keys['50000'] = '> US$ 50.000';
+        budget_keys['100000'] = '> US$ 100.000';
+        budget_keys['500000'] = '> US$ 500.000';
+        budget_keys['1000000'] = '> US$ 1.000.000';
         
         <?php 
         // if parameters set
@@ -174,14 +174,14 @@ Template Name: Projects page
                 countries.push("<?php echo $i['recipient_country'][0]['name'] ?>");
                 
                 
-                country_keys["<?php echo $i['recipient_country'][0]['name'] ?>"] = "<?php echo $i['recipient_country'][0]['iso'] ?>";
+                country_keys["<?php echo $i['recipient_country'][0]['iso'] ?>"] = "<?php echo $i['recipient_country'][0]['name'] ?>";
                 
                 <?php foreach ($i['recipient_region'] as $region) :?>
-                    region_keys["<?php echo $region['name'] ?>"] = "<?php echo $region['code'] ?>"
+                    region_keys["<?php echo $region['code'] ?>"] = "<?php echo $region['name'] ?>"
                 <?php endforeach; ?>
                     
                 <?php foreach ($i['activity_sectors'] as $sector) :?>
-                    sector_keys["<?php echo $sector['name'] ?>"] = "<?php echo $sector['code'] ?>"
+                    sector_keys["<?php echo $sector['code'] ?>"] = "<?php echo $sector['name'] ?>"
                 <?php endforeach; ?>
             }
         }
@@ -193,64 +193,42 @@ Template Name: Projects page
         <?php endforeach;?>
         countries = countries.sort();
 
-        
-        country_html = create_filter_attributes(countries, country_keys, 4);
-        
+        country_html = create_filter_attributes(country_keys, 4);
         $('#country_filters').append(country_html);
         
-        var regions = [];
-        for (var key in region_keys){
-            regions.push(key);
-        }
-        region_html = create_filter_attributes(regions, region_keys, 3);
+        region_html = create_filter_attributes(region_keys, 3);
         $('#region_filters').append(region_html);
         
-        var sectors = [];
-        for (var key in sector_keys){
-            sectors.push(key);
-        }
-        
-        sector_html = create_filter_attributes(sectors, sector_keys, 3);
+        sector_html = create_filter_attributes(sector_keys, 3);
         $('#sector_filters').append(sector_html);
-        
-        var budgets = [];
-        for (var key in budget_keys){
-            budgets.push(key);
-        }
-        budget_html = create_filter_attributes(budgets, budget_keys, 3);
+
+        budget_html = create_filter_attributes(budget_keys, 3);
         $('#budget_filters').append(budget_html);
-
-
-
 
         <?php 
         // end if parameters are set
         } else { ?>
         countryData = allCountryData;
-        countries = ["Afghanistan", "Brazil", "Burkina Faso", "Burma", "China", "Costa Rica", "Cuba", "Democratic Republic of the Congo", "Ecuador", "Egypt", "El Salvador", "Guatemala", "Haiti", "Indonesia", "Iraq", "Japan", "Korea, Democratic People's Republic of", "Libyan Arab Jamahiriya", "Madagascar", "Malawi", "Mongolia", "Mozambique", "Nigeria", "Pakistan", "Philippines", "Senegal", "Somalia", "Sri Lanka", "Sudan", "Timor-Leste", "Viet Nam"];
-        regions = ["Asia, regional", "Africa, regional", "Oceania, regional", "South America, regional", "Middle East, regional"];
-        sectors = ["Advanced technical and managerial training", "Urban development and management", "Housing policy and administrative management", "Population policy and administrative management", "Energy policy and administrative management", "Higher education", "Multisector aid for basic social services", "Disaster prevention and preparedness", "Research/scientific institutions", "Sectors not specified"];
-        
-        country_html = create_filter_attributes(countries, country_keys, 4);
-        
+        country_keys = {"KP":"Korea, Democratic People's Republic of","NG":"Nigeria","ID":"Indonesia","LY":"Libyan Arab Jamahiriya","EG":"Egypt","MZ":"Mozambique","SO":"Somalia","CD":"Democratic Republic of the Congo","MW":"Malawi","BF":"Burkina Faso","SN":"Senegal","MG":"Madagascar","SD":"Sudan","LK":"Sri Lanka","AF":"Afghanistan","PH":"Philippines","MN":"Mongolia","VN":"Viet Nam","PK":"Pakistan","MM":"Burma","TL":"Timor-Leste","CN":"China","CR":"Costa Rica","BR":"Brazil","EC":"Ecuador","SV":"El Salvador","GT":"Guatemala","HT":"Haiti","CU":"Cuba","IQ":"Iraq","JP":"Japan"};
+        region_keys = {"298":"Africa, regional","489":"South America, regional","589":"Middle East, regional","798":"Asia, regional","889":"Oceania, regional"} ;
+        sector_keys = {"11420":"Higher education","11430":"Advanced technical and managerial training","13010":"Population policy and administrative management","16030":"Housing policy and administrative management","16050":"Multisector aid for basic social services","23010":"Energy policy and administrative management","43030":"Urban development and management","43082":"Research/scientific institutions","74010":"Disaster prevention and preparedness","99810":"Sectors not specified"};
+        budget_keys = {"all":"All", "":"> US$ 0", "10000":"> US$ 10.000","50000":"> US$ 50.000","100000":"> US$ 100.000","500000":"> US$ 500.000","1000000":"> US$ 1.000.000"};
+
+
+        country_html = create_filter_attributes(country_keys, 4);
         $('#country_filters').append(country_html);
-        region_html = create_filter_attributes(regions, region_keys, 3);
+        region_html = create_filter_attributes(region_keys, 3);
         $('#region_filters').append(region_html);
-        sector_html = create_filter_attributes(sectors, sector_keys, 3);
+        sector_html = create_filter_attributes(sector_keys, 3);
         $('#sector_filters').append(sector_html);
-        
-        var budgets = [];
-        for (var key in budget_keys){
-            budgets.push(key);
-        }
-        budget_html = create_filter_attributes(budgets, budget_keys, 3);
+        budget_html = create_filter_attributes(budget_keys, 3);
         $('#budget_filters').append(budget_html);
 
         // end else
         <?php
         }?>
         
-        
+
         var geojson;
 
         function getColor(d) {
@@ -288,35 +266,35 @@ Template Name: Projects page
             var layer = e.target;
             
             if(typeof layer.feature.properties.projects != "undefined"){
-                var total_projects = layer.feature.properties.projects;
+                
                 if (currently_selected_country != layer.feature.properties.name){
-                set_currently_selected_country(layer.feature.properties.name);
-
-                var mostNorth = layer.getBounds().getNorthWest().lat;
-                var mostSouth = layer.getBounds().getSouthWest().lat;
-                var center = layer.getBounds().getCenter();
-                var heightToDraw = ((mostNorth - mostSouth) / 4) + center.lat;
-                var pointToDraw = new L.LatLng(heightToDraw, center.lng);
-
-                var popup = L.popup()
-                .setLatLng(pointToDraw)
-                .setContent('<div id="map-tip-header">' + layer.feature.properties.name + '</div><div id="map-tip-text">Total projects: '+ total_projects + '</div><div id="map-tip-link"><a href="?s=&countries='+layer.feature.properties.iso+'">Click to view related projects</a></div>')
-                .openOn(map);
+                    set_currently_selected_country(layer.feature.properties.name);
+                    showPopup(e);
                 }
 
                 layer.setStyle({
-                weight: 2,
-                color: 'white',
-                dashArray: '',
-                fillOpacity: 0.9
+                    weight: 2,
+                    fillOpacity: 0.9
                 });
 
                 if (!L.Browser.ie && !L.Browser.opera) {
-                layer.bringToFront();
+                    layer.bringToFront();
                 }
             }
+        }
 
-            
+        function showPopup(e){
+            var layer = e.target;
+            var mostNorth = layer.getBounds().getNorthWest().lat;
+            var mostSouth = layer.getBounds().getSouthWest().lat;
+            var center = layer.getBounds().getCenter();
+            var heightToDraw = ((mostNorth - mostSouth) / 4) + center.lat;
+            var pointToDraw = new L.LatLng(heightToDraw, center.lng);
+
+            var popup = L.popup()
+            .setLatLng(pointToDraw)
+            .setContent('<div id="map-tip-header">' + layer.feature.properties.name + '</div><div id="map-tip-text">Total projects: '+ layer.feature.properties.projects + '</div><div id="map-tip-link"><a href="?s=&countries='+layer.feature.properties.iso+'">Click to view related projects</a></div>')
+            .openOn(map);
         }
 
         function resetHighlight(e) {
@@ -327,7 +305,8 @@ Template Name: Projects page
 
             layer.on({
                 mouseover: highlightFeature,
-                mouseout: resetHighlight
+                mouseout: resetHighlight,
+                click: showPopup
             });
         }}).addTo(map); 
     }); 

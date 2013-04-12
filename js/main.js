@@ -1,27 +1,59 @@
 //HTML function to create filters
-    function create_filter_attributes(objects, keys, columns){
-        var html = '';
-        var counter = 0;
-        var per_col = 20;
-        $.each(objects, function(index, value){
-            
-            if (counter%per_col == 0){
-                html += '<div class="span' + (12 / columns) + '">';
-            } 
-            html += '<div class="squaredThree"><div>';
-            html += '<input type="checkbox" value="'+ index +'" id="land'+value+'" name="check" />';
-            html += '<label class="map-filter-cb-value" for="land'+value+'"></label>';
-            html += '</div><div><span>'+value+'</span></div></div>';
+function create_filter_attributes(objects, columns){
+    var html = '';
+    var counter = 0;
+    var per_col = 20;
+// console.log(objects);
+//     var sortable = [];
+//     for (var key in objects){
+//       sortable.push([key, objects[key]]);
+//     }
 
-            if (counter%per_col == (per_col - 1)){
-              html += '</div>';
+//     sortable.sort(function(a, b){
+//      var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
+//      if (nameA < nameB) //sort string ascending
+//       return -1 
+//      if (nameA > nameB)
+//       return 1
+//      return 0 //default return value (no sorting)
+//     });
+//     console.log(sortable);
 
-            }
-            counter++;
-            if (counter > ((per_col * columns) - 1)) { return false; }
-        });
-        return html;
-    }
+//     for (var i = 0; i < sortable.length; i++) {
+//       if (i%per_col == 0){
+//             html += '<div class="span' + (12 / columns) + '">';
+//         } 
+//         html += '<div class="squaredThree"><div>';
+//         html += '<input type="checkbox" value="'+ sortable[i][0] +'" id="land'+sortable[i][1]+'" name="check" />';
+//         html += '<label class="map-filter-cb-value" for="land'+sortable[i][1]+'"></label>';
+//         html += '</div><div><span>'+sortable[i][1]+'</span></div></div>';
+
+//         if (i%per_col == (per_col - 1)){
+//           html += '</div>';
+//         }
+
+//         if ((i+1) > ((per_col * columns) - 1)) { break }
+
+    // }
+
+    $.each(objects, function(key, value){
+        
+        if (counter%per_col == 0){
+            html += '<div class="span' + (12 / columns) + '">';
+        } 
+        html += '<div class="squaredThree"><div>';
+        html += '<input type="checkbox" value="'+ key +'" id="land'+value+'" name="check" />';
+        html += '<label class="map-filter-cb-value" for="land'+value+'"></label>';
+        html += '</div><div><span>'+value+'</span></div></div>';
+
+        if (counter%per_col == (per_col - 1)){
+          html += '</div>';
+        }
+        counter++;
+        if (counter > ((per_col * columns) - 1)) { return false; }
+    });
+    return html;
+}
 
 function CommaFormatted(amount) {
   var delimiter = ","; // replace comma if desired
@@ -214,52 +246,56 @@ jQuery(function($){
 		// set selection as filter and load results
 		$('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
 
+    var dlmtr = ',';
+
+
+    if ($('#project-filter-wrapper').length){ 
+        dlmtr = '|';
+    }
+
     var str_sector = ''
     $('#sector_filters input:checked').each(function(index, value){ 
-        str_sector += value.value + ',';
+        str_sector += value.value + dlmtr;
     });
     str_sector = str_sector.substring(0, str_sector.length-1);
     
     var str_country = '';
     $('#country_filters input:checked').each(function(index, value){ 
-        str_country += value.value + ',';
+        str_country += value.value + dlmtr;
     });
     str_country = str_country.substring(0, str_country.length-1);
     
     var str_budget = '';
     $('#budget_filters input:checked').each(function(index, value){ 
-        str_budget += value.value + ',';
+        str_budget += value.value + dlmtr;
     });
     str_budget = str_budget.substring(0, str_budget.length-1);
     
     var str_region = '';
     $('#region_filters input:checked').each(function(index, value){ 
-        str_region += value.value + ',';
+        str_region += value.value + dlmtr;
     });
     str_region = str_region.substring(0, str_region.length-1);
     var str_indicator = '';
     $('#indicator_filters input:checked').each(function(index, value){ 
-        str_indicator += value.value + ',';
+        str_indicator += value.value + dlmtr;
     });
     str_indicator = str_indicator.substring(0, str_indicator.length-1);
     
     var str_city = '';
     $('#city_filters input:checked').each(function(index, value){ 
-        str_city += value.value + ',';
+        str_city += value.value + dlmtr;
     });
     str_city = str_city.substring(0, str_city.length-1);
-    
-    if (selected_type=='indicator'){
+
+    if ($('#project-filter-wrapper').length){ 
+    window.location = '?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
+    } else if (selected_type=='indicator'){
       initialize_map('http://dev.oipa.openaidsearch.org/json?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2010,'',"", "", "");
     } else if (selected_type=='cpi'){
       initialize_map('http://dev.oipa.openaidsearch.org/json-city?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2012,'',"", "", "");
-    } else {
-      // load projects
-      
     }
 
-    
-    // window.location = '?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city;
   });
 });
 

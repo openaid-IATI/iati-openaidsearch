@@ -18,6 +18,10 @@ jQuery(function($) {
 
   }
 
+  $("#project-back-button").click(function(){
+  	  window.history.back();
+  });
+
   $("#project-description-link").click(function(){
 	  change_tab(this, "description");
 	  return false;

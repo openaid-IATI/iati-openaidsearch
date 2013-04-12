@@ -1,6 +1,6 @@
 // XXXXXXXXXXXXX INDICATOR INITIALIZATION XXXXXXXXXXX
   
-  // first indicator circles
+  // global variables
   var circles = [];
   var maxdatavalue = 0;
   var maxcirclearea = 2000000000000;
@@ -76,29 +76,30 @@
 
   function set_filters_indicator(data){
     
-    region_html = create_filter_attributes(data['regions'], data['regions'], 4);
+    region_html = create_filter_attributes(data['regions'], 4);
     $('#region_filters').html(region_html);
 
-    country_html = create_filter_attributes(data['countries'], data['countries'], 4);
+    country_html = create_filter_attributes(data['countries'], 4);
     $('#country_filters').html(country_html);
 
-    // city_html = create_filter_attributes(data['cities'], data['cities']);
-    // $('#city_filters').html(city_html);]);
-    indicator_html = create_filter_attributes(data['indicators'], data['indicators'], 3);
+    // city_html = create_filter_attributes(data['cities'], 4);
+    // $('#city_filters').html(city_html);
+
+    indicator_html = create_filter_attributes(data['indicators'], 3);
     $('#indicator_filters').html(indicator_html);
   }
 
   function set_filters_cpi(data){
-    region_html = create_filter_attributes(data['regions'], data['regions'], 4);
+    region_html = create_filter_attributes(data['regions'], 4);
     $('#region_filters').html(region_html);
 
-    country_html = create_filter_attributes(data['countries'], data['countries'], 4);
+    country_html = create_filter_attributes(data['countries'], 4);
     $('#country_filters').html(country_html);
 
-    city_html = create_filter_attributes(data['cities'], data['cities'], 4);
+    city_html = create_filter_attributes(data['cities'], 4);
     $('#city_filters').html(city_html);
 
-    indicator_html = create_filter_attributes(data['indicators'], data['indicators'], 4);
+    indicator_html = create_filter_attributes(data['indicators'], 4);
     $('#indicator_filters').html(indicator_html);
   }
 
@@ -122,7 +123,7 @@
   }
 
   function draw_available_data_blocks(indicator_data){
-    console.log(indicator_data);
+    
     $('.slider-year').removeClass('slider-active');
     for (var i=1950;i<2051;i++){
       var curyear = "y" + i;
@@ -169,7 +170,7 @@
           circles.push(singlecircleinfo);
 
       }catch(err){
-          console.log(err);
+          //console.log(err);
       }
     });
   }
@@ -395,15 +396,16 @@
         });
       }
 
-    $("#project-share-graph").click(function(){
+// HIDDEN FOR GC MEETING
+  //   $("#project-share-graph").click(function(){
 
-    if($('#dropdown-type-graph').is(":hidden")){
-        $('#dropdown-type-graph').show("blind", { direction: "vertical" }, 200);
-    } else {
-        $('#dropdown-type-graph').hide("blind", { direction: "vertical" }, 200);
-    }
-    return false;
-  });
+  //   if($('#dropdown-type-graph').is(":hidden")){
+  //       $('#dropdown-type-graph').show("blind", { direction: "vertical" }, 200);
+  //   } else {
+  //       $('#dropdown-type-graph').hide("blind", { direction: "vertical" }, 200);
+  //   }
+  //   return false;
+  // });
 
 
     $('#graph-button-treemap').click(function(){

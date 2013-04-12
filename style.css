@@ -506,6 +506,55 @@ input[type=checkbox] {
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX MAP XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
+
+/*.leaflet-popup-tip{
+  display: none;
+}
+
+.leaflet-popup-content-wrapper{
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  margin-left: -1.68em;
+  bottom:0.4em;
+  border: 1px solid #D3D3D3;
+  background-color: white;
+  color: #505D59;
+  z-index: 2;
+  padding: 0.5em;
+  -webkit-box-shadow:0 6px 9px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow:0 6px 9px rgba(0, 0, 0, 0.7);
+  box-shadow:0 6px 9px rgba(0, 0, 0, 0.7);
+}
+
+.leaflet-popup-content-wrapper:before {
+  position: absolute;
+  display: inline-block;
+  border-left: 0.6em solid transparent;
+  border-top: 1.3em solid #FFF;
+  border-right: 0.6em solid transparent;
+  left: -0.62em;
+  top: 1.6em;
+  content: '';
+
+}
+
+.leaflet-popup-content-wrapper:after {
+  position: absolute;
+  display: inline-block;
+  border-left: 6px solid transparent;
+  border-top: 6px solid #eee;
+  border-right: 6px solid transparent;
+  left: -12px;
+  top: 21px;
+  content: '';
+}
+
+*/
+
 /* homepage only */
 #map-lightbox-bg{
   background-color: #000;
@@ -1318,7 +1367,7 @@ label, input, button, select, textarea{
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECT DETAILED DESCRIPTION PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
-.project-back-button{
+#project-back-button{
   color: #797972;
 }
 
@@ -1481,11 +1530,11 @@ label, input, button, select, textarea{
 
 /* XXXXXXXXXXXXXXXXXXXX TEMP: MAKE ALL NON CLICKABLE LINKS/BUTTONS GREY XXXXXXXXXXXXXXXXXXXX */
 
-#project-share-embed .share-text, #project-share-share .share-text, #project-share-export .share-text, #save-search-results, #sort-type-budget .project-sort-text, #sort-type-country .project-sort-text{
+#project-share-graph .share-text, #project-share-embed .share-text, #project-share-share .share-text, #project-share-export .share-text, #save-search-results, #sort-type-budget .project-sort-text, #sort-type-country .project-sort-text{
   color: #797974;
 }
 
-#graph-button-treemap{
+#graph-button-treemap, #graph-button-graph, #graph-button-table{
   display: none;
 }
 
