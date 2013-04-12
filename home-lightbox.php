@@ -5,8 +5,8 @@
                 <div id="map-lightbox-bg"></div>
                 <div id="map-lightbox" class="hneue-light">
                     <div id="map-lightbox-text">
-                        <p class="map-lightbox-title hneue-bold">Publicly available open data.</p>
-                        <p>Information about UN-Habitats projects and programmes.</p>
+                        <p class="map-lightbox-title hneue-bold">Publicly available open data</p>
+                        <p>This website provides UN-Habitat project information, statistical indicators from cities across the world and the Cities Prosperity Index as open data.</p>
                     </div>
                     <button id="map-lightbox-close"></button>
                     <a href="/projects/?hide_map=true">All projects</a>
