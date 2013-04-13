@@ -591,9 +591,10 @@ input[type=checkbox] {
 
 .homepage-button{
   color: #F1EEE8;
-  font-size: 1.5em;
+  display: inline-block;
+  font-size: 1.2em;
   line-height: 1.1em;
-  margin-left: 1.2em;
+  margin-top: 0.3em;
   padding: 0.8em 1.6em;
   border-radius: 7px;
   background: #2cac00; /* Old browsers */
