@@ -50,7 +50,7 @@ Template Name: City prosperity page
 	</div>
 
 	<div class="container">
-		<div class="row-fluid">
+		<?php /* <div class="row-fluid">
 			<div class="span8">
 
 				<div class="drop-shadow unhabitat-page">
@@ -61,41 +61,15 @@ Template Name: City prosperity page
 
 			</div>
 			<div class="span4">
-				<?php get_sidebar( 'unhabitat-pages' ); ?></div>
-		</div>
+				<?php get_sidebar( 'unhabitat-pages' ); ?>
+			</div>
+		</div> */ ?>
 		<div class="row-fluid">
 			<div class="span12">
 
 
 
-				<script type='text/javascript' src='https://www.google.com/jsapi'></script>
-			    <script type='text/javascript'>
-			      google.load('visualization', '1', {packages:['table']});
-			      google.setOnLoadCallback(drawTable);
-			      function drawTable() {
-			        var data = new google.visualization.DataTable();
-			        data.addColumn('string', 'Name');
-			        data.addColumn('number', 'Salary');
-			        data.addColumn('boolean', 'Full Time Employee');
-			        data.addRows([
-			          ['Mike',  {v: 10000, f: '$10,000'}, true],
-			          ['Jim',   {v:8000,   f: '$8,000'},  false],
-			          ['Alice', {v: 12500, f: '$12,500'}, true],
-			          ['Bob',   {v: 7000,  f: '$7,000'},  true]
-			        ]);
-
-			        var table = new google.visualization.Table(document.getElementById('table_div'));
-			        table.draw(data, {showRowNumber: true});
-			      }
-			    </script>
-
-				<div id='table_div'></div>
-
-
-
-
-
-
+				<div id="table-city-prosperity"></div>
 
 
 			</div>
@@ -106,13 +80,14 @@ Template Name: City prosperity page
 
 <?php get_footer(); ?>
 <script type="text/javascript">
-$(document).ready(function(){
-	load_map('http://dev.oipa.openaidsearch.org/json-city');
-	function load_map(url){
-		data = initialize_map(url,2012,'cpi',"", "", "");
 
-	}
+	$(document).ready(function(){
+		load_map('http://dev.oipa.openaidsearch.org/json-city');
+		function load_map(url){
+			data = initialize_map(url,2012,'cpi',"", "", "");
 
+		}
 
-});
+	});
+
 </script>

@@ -589,6 +589,10 @@ input[type=checkbox] {
   color: #F1EEE8;
 }
 
+.homepage-button a{
+  color: #F1EEE8;
+}
+
 .homepage-button{
   color: #F1EEE8;
   display: inline-block;
