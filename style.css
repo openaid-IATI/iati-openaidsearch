@@ -1584,6 +1584,15 @@ label, input, button, select, textarea{
   width: 100%;
 }
 
+.contact-input-textarea{
+  width: 100%;
+  display: inline-block;
+}
+
+.contact-input-textarea textarea{
+  width: 100%;
+}
+
 .clearfix:after {
     visibility: hidden;
     display: block;
