@@ -373,7 +373,7 @@ function init_remove_filters_from_selection_box(){
       }
     }
     fill_selection_box();
-    //save_selection();
+    reload_map();
   });
 }
 
