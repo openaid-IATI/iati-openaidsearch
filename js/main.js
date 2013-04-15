@@ -45,10 +45,10 @@ function create_filter_attributes(objects, columns){
             html += '<div class="span' + (12 / columns) + '">';
         } 
         html += '<div class="squaredThree"><div>';
-        html += '<input type="checkbox" value="'+ key +'" id="'+value.replaceAll("\\s","")+'" name="'+value+'" />';
+        html += '<input type="checkbox" value="'+ key +'" id="'+value+'" name="'+value+'" />';
         html += '<label class="map-filter-cb-value" for="'+value+'"></label>';
         html += '</div><div><span>'+value+'</span></div></div>';
-
+        console.log(value);
         if (counter%per_col == (per_col - 1)){
           html += '</div>';
         }
