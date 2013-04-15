@@ -45,8 +45,8 @@ function create_filter_attributes(objects, columns){
             html += '<div class="span' + (12 / columns) + '">';
         } 
         html += '<div class="squaredThree"><div>';
-        html += '<input type="checkbox" value="'+ key +'" id="'+value.toString().replace(/ /g,'').replace(',', '').replace('&', '')+'" name="'+value+'" />';
-        html += '<label class="map-filter-cb-value" for="'+value.toString().replace(/ /g,'').replace(',', '').replace('&', '')+'"></label>';
+        html += '<input type="checkbox" value="'+ key +'" id="'+value.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'" name="'+value+'" />';
+        html += '<label class="map-filter-cb-value" for="'+value.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'"></label>';
         html += '</div><div><span>'+value+'</span></div></div>';
         if (counter%per_col == (per_col - 1)){
           html += '</div>';
@@ -136,7 +136,7 @@ jQuery(function($) {
   		$('#map').animate({
 				height: mapheight
 			}, 1000, function() {
-			// Animation complete.
+			 map.invalidateSize();
 		});
   	}
 
@@ -193,7 +193,8 @@ jQuery(function($) {
 
     var curId = $(this).attr('id');
     var filterContainerName = curId.replace("-button", "");
-
+    $('.filter-button.filter-selected').removeClass("filter-selected");
+    
     if($('#map-filter-overlay').is(":hidden")){
 
       initialize_filters();
@@ -210,7 +211,6 @@ jQuery(function($) {
       if($("#" + filterContainerName).is(":visible")){
         $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
         hide_all_filters();
-        $('.filter-button.filter-selected').removeClass("filter-selected");
         save_selection();
       } else {
         $(this).addClass("filter-selected");
@@ -302,7 +302,7 @@ function initialize_filters(){
 
 function init_filters_loop(arr){
   for(var i = 0; i < arr.length;i++){
-    var curId = arr[i].name.toString().replace(/ /g,'').replace(',', '').replace('&', '');
+    var curId = arr[i].name.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc');
     console.log(curId);
     $('#'+curId).prop('checked', true);
   }

@@ -1067,7 +1067,16 @@ label, input, button, select, textarea{
 
 
 
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX CITY PROSPERITY PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
+#table-city-prosperity{
+  width: 20%;
+  margin: 2em auto;
+}
+
+#table-city-prosperity .google-visualization-table-tr-head,#table-city-prosperity .google-visualization-table-tr-head td,#table-city-prosperity .google-visualization-table-tr-head-nonstrict {
+  background: #DDDBD6;
+}
 
 
 

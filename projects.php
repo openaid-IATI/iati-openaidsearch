@@ -194,7 +194,6 @@ Template Name: Projects page
         countries = countries.sort();
 
         country_html = create_filter_attributes(country_keys, 4);
-        console.log(country_html);
         $('#country-filters').append(country_html);
         
         region_html = create_filter_attributes(region_keys, 3);
