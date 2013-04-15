@@ -85,7 +85,9 @@ Template Name: City prosperity page
 		load_map('http://dev.oipa.openaidsearch.org/json-city');
 		function load_map(url){
 			data = initialize_map(url,2012,'cpi',"", "", "");
-
+			current_selection.indicator = [];
+		  	current_selection.indicator.push({"id":"cpi", "name":"City prosperity"});
+		  	fill_selection_box();
 		}
 
 	});

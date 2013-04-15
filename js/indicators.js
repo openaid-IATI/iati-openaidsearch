@@ -71,33 +71,33 @@
 
   }
 
-    function drawCityPropTable() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'City');
-    data.addColumn('number', 'Value');
+  function drawCityPropTable() {
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'City');
+  data.addColumn('number', 'Value');
 
-    for (var i=0;i<circles.length;i++)
-    { 
-      try{
+  for (var i=0;i<circles.length;i++)
+  { 
+    try{
 
-        var value = circles[i].values["y2012"];
-        if (value === undefined || value === null){
-          //  circles[i].circleinfo.setRadius(0);
-        } else {
-          data.addRow([circles[i].countryname, value]);
-        }
-
-      } catch (err){
-        //console.log(err);
+      var value = circles[i].values["y2012"];
+      if (value === undefined || value === null){
+        //  circles[i].circleinfo.setRadius(0);
+      } else {
+        data.addRow([circles[i].countryname, value]);
       }
-    }
 
-    var table = new google.visualization.Table(document.getElementById('table-city-prosperity'));
-    table.draw(data, {
-      showRowNumber: false,
-      sortColumn: 0,
-      sortAscending: true
-    });
+    } catch (err){
+      //console.log(err);
+    }
+  }
+
+  var table = new google.visualization.Table(document.getElementById('table-city-prosperity'));
+  table.draw(data, {
+    showRowNumber: false,
+    sortColumn: 0,
+    sortAscending: true
+  });
     
   }
 
@@ -290,11 +290,8 @@
 
   // $("#project-share-export").click(function(){
 
-  //   initialize_map("","", "", "");
-  //   return false;
-  // });
 
-  // initialize_map("","", "", "");
+  // });
 
 
 // XXXXXXXXXXXXXXXX INDICATOR GRAPHS XXXXXXXXXXXXXXXX 

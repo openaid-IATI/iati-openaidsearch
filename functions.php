@@ -47,6 +47,7 @@ function homepage_items_post_type() {
 		'menu_position' => 5,
 		'supports'      => array( 'title', 'editor', 'thumbnail'),
 		'has_archive'   => true,
+		'taxonomies' 	=> array('category'),
 	);
 	register_post_type( 'homepage-item', $args );	
 }
@@ -75,6 +76,7 @@ function faq_items_post_type() {
 		'menu_position' => 6,
 		'supports'      => array( 'title', 'editor', 'thumbnail'),
 		'has_archive'   => true,
+		'taxonomies' 	=> array('category'),
 	);
 	register_post_type( 'faq-item', $args );	
 }

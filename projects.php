@@ -26,7 +26,6 @@ Template Name: Projects page
                             <span class="project-sort-icon"></span>
 
                             <div id="dropdown-project-amount" class="dropdown-project">
-
                                 <!-- TO DO: keep parameters -->
                                 <a href="<?php echo home_url(); ?>/projects/?offset=0&per_page=5" id="dropdown-project-amount-5">5</a>
                                 <a href="<?php echo home_url(); ?>/projects/?offset=0&per_page=10" id="dropdown-project-amount-10">10</a>
@@ -191,7 +190,6 @@ Template Name: Projects page
         }
             <?php endif ?>
         <?php endforeach;?>
-        countries = countries.sort();
 
         country_html = create_filter_attributes(country_keys, 4);
         $('#country-filters').append(country_html);

@@ -58,7 +58,7 @@ function create_filter_attributes(objects, columns){
 }
 
 function CommaFormatted(amount) {
-  var delimiter = ","; // replace comma if desired
+  var delimiter = "."; // replace comma if desired
   amount = new String(amount);
   var a = amount.split('.',2)
   var d = a[1];
@@ -252,46 +252,65 @@ function save_selection(){
     // set selection as filter and load results
     $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
 
-    var dlmtr = ',';
-
-    if ($('#project-filter-wrapper').length){ 
-        dlmtr = '|';
-    }
-
-    var str_sector = get_checked_by_filter("sector", dlmtr, new_selection);
-    var str_country = get_checked_by_filter("country", dlmtr, new_selection);
-    var str_budget = get_checked_by_filter("budget", dlmtr, new_selection);
-    var str_region = get_checked_by_filter("region", dlmtr, new_selection);
-    var str_indicator = get_checked_by_filter("indicator", dlmtr, new_selection);
-    var str_city = get_checked_by_filter("city", dlmtr, new_selection);
-    
+    get_checked_by_filter("sector", new_selection);
+    get_checked_by_filter("country", new_selection);
+    get_checked_by_filter("budget", new_selection);
+    get_checked_by_filter("region", new_selection);
+    get_checked_by_filter("indicator", new_selection);
+    get_checked_by_filter("city", new_selection);
     current_selection = new_selection;
 
-    // if project filter container is on the page (= projects page)
-    if ($('#project-filter-wrapper').length){ 
-    window.location = '?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
-    } else if (selected_type=='indicator'){
-      initialize_map('http://dev.oipa.openaidsearch.org/json?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2010,'',"", "", "");
-    } else if (selected_type=='cpi'){
-      initialize_map('http://dev.oipa.openaidsearch.org/json-city?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2012,'',"", "", "");
-    }
-
+    fill_selection_box();
+    reload_map();
 }
 
-function get_checked_by_filter(filtername, dlmtr, new_selection){
-  var str = '';
+function get_checked_by_filter(filtername, new_selection){
   $('#' + filtername + '-filters input:checked').each(function(index, value){ 
-        str += value.value + dlmtr;
         new_selection[filtername].push({"id":value.value, "name":value.name});
     });
-  str = str.substring(0, str.length-1);
+}
+
+function reload_map(){
   
+  var dlmtr = ',';
+
+  if ($('#project-filter-wrapper').length){ 
+      dlmtr = '|';
+  }
+
+  var str_sector = reload_map_prepare_parameter_string("sector", dlmtr);
+  var str_country = reload_map_prepare_parameter_string("country", dlmtr);
+  var str_budget = reload_map_prepare_parameter_string("budget", dlmtr);
+  var str_region = reload_map_prepare_parameter_string("region", dlmtr);
+  var str_indicator = reload_map_prepare_parameter_string("indicator", dlmtr);
+  var str_city = reload_map_prepare_parameter_string("city", dlmtr);
+
+  // if project filter container is on the page (= projects page)
+  if ($('#project-filter-wrapper').length){ 
+    window.location = '?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
+  } else if (selected_type=='indicator'){
+    initialize_map('http://dev.oipa.openaidsearch.org/json?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2010,'',"", "", "");
+  } else if (selected_type=='cpi'){
+    initialize_map('http://dev.oipa.openaidsearch.org/json-city?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2012,'',"", "", "");
+  }
+}
+
+function reload_map_prepare_parameter_string(filtername, dlmtr){
+  var str = '';
+  var arr = current_selection[filtername];
+  if(arr.length > 0){
+    for(var i = 0; i < arr.length; i++){
+      str += arr[i].id + dlmtr;
+    }
+    str = str.substring(0, str.length-1);
+  }
+
   return str;
 }
 
 function initialize_filters(){
   $('#map-filter-overlay input:checked').prop('checked', false);
-  console.log(current_selection.country);
+
   if (!(typeof current_selection.sector === "undefined")) init_filters_loop(current_selection.sector);
   if (!(typeof current_selection.country === "undefined")) init_filters_loop(current_selection.country);
   if (!(typeof current_selection.budget === "undefined")) init_filters_loop(current_selection.budget);
@@ -303,9 +322,59 @@ function initialize_filters(){
 function init_filters_loop(arr){
   for(var i = 0; i < arr.length;i++){
     var curId = arr[i].name.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc');
-    console.log(curId);
     $('#'+curId).prop('checked', true);
   }
+}
+
+function fill_selection_box(){
+
+  var html = '';
+  var indicatorhtml = '';
+  if (!(typeof current_selection.sector === "undefined") && (current_selection.sector.length > 0)) html += fill_selection_box_single_filter("SECTORS", "sector", current_selection.sector);
+  if (!(typeof current_selection.country === "undefined") && (current_selection.country.length > 0)) html += fill_selection_box_single_filter("COUNTRIES", "country", current_selection.country);
+  if (!(typeof current_selection.budget === "undefined") && (current_selection.budget.length > 0)) html += fill_selection_box_single_filter("BUDGETS","budget", current_selection.budget);
+  if (!(typeof current_selection.region === "undefined") && (current_selection.region.length > 0)) html += fill_selection_box_single_filter("REGIONS", "region", current_selection.region);
+  if (!(typeof current_selection.city === "undefined") && (current_selection.city.length > 0)) html += fill_selection_box_single_filter("CITIES", "city", current_selection.city);
+  if (!(typeof current_selection.indicator === "undefined") && (current_selection.indicator.length > 0)) indicatorhtml = fill_selection_box_single_filter("INDICATORS", "indicator", current_selection.indicator);
+  $("#selection-box").html(html);
+  $("#selection-box-indicators").html(indicatorhtml);
+  init_remove_filters_from_selection_box();
+}
+
+function fill_selection_box_single_filter(header, singlename, arr){
+  var html = '<div class="select-box" id="selected-' + singlename + '">';
+      html += '<div class="select-box-header">';
+      if (header == "INDICATORS" && selected_type == "cpi"){ header = "DIMENSIONS";};
+      html += header;
+      html += '</div>';
+
+      for(var i = 0; i < arr.length; i++){
+        html += '<div class="select-box-selected">';
+        html += '<div id="selected-' + arr[i].id.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc') + '" class="selected-remove-button"></div>';
+        html += '<div>' + arr[i].name + '</div>';
+        html += '</div>';
+      }
+
+      html += '</div>';
+      return html;
+}
+
+function init_remove_filters_from_selection_box(){
+  $(".selected-remove-button").click(function(){
+    var id = $(this).attr('id');
+    id = id.replace("selected-", "");
+    var filtername = $(this).parent().parent().attr('id');
+    filtername = filtername.replace("selected-", "");
+    var arr = current_selection[filtername];
+    for (var i = 0; i < arr.length;i++){
+      if(arr[i].id == id){
+        arr.splice(i, 1);
+        break;
+      }
+    }
+    fill_selection_box();
+    //save_selection();
+  });
 }
 
 
@@ -430,3 +499,89 @@ else if(document.all)// ie
 }
 
 
+
+
+
+//   $('.saveresults').click(function(){
+//     generate_download_file();
+//     return false;
+//   }); 
+  
+//   $('.export').click(function(){
+//     var id = $(this).attr('id');
+//     generate_download_file(id);
+//     return false;
+//   }); 
+
+
+// function generate_download_file(id) {
+//   var url = sThemePath + "/export.php?author=" + sBlogName,
+//       urlSep = "&", country_fltr = '', region_fltr = '', sector_fltr = '', budget_fltr = '', sep = '';
+  
+//   if(id) {
+//     url +=  urlSep + "id=" + id;
+//   }
+  
+//   $('.filterbox input[type=checkbox]:checked').each(function(){
+//     var control_name = $(this).attr('name');
+//     var key = $(this).val();
+//     switch(control_name) {
+//       case 'countries':
+//         if(country_fltr.length==0) sep = '';
+//         country_fltr += sep + key;
+//         sep = "|";
+//         break;
+//       case 'regions':
+//         if(region_fltr.length==0) sep = '';
+//         region_fltr += sep + key;
+//         sep = "|";
+//         break;
+//       case 'sectors':
+//         if(sector_fltr.length==0) sep = '';
+//         sector_fltr += sep + key;
+//         sep = "|";
+//         break;
+//       case 'budgets':
+//         if(budget_fltr.length==0) sep = '';
+//         budget_fltr += sep + key;
+//         sep = "|";
+//         break;
+//     }
+//   });
+  
+//   country_fltr = country_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
+//   region_fltr = region_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
+//   sector_fltr = sector_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
+//   budget_fltr = budget_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
+
+//   var keyword = jQuery('#s').val();
+//   if(keyword) {
+//     url +=  urlSep + "query=" + encodeURI(keyword);
+//     urlSep = "&";
+//   }
+  
+  
+//   if(country_fltr.length>0) {
+//     url +=  urlSep + "countries=" + country_fltr;
+//     urlSep = "&";
+//     isFilter = true;
+//   }
+//   if(region_fltr.length>0) {
+//     url +=  urlSep + "regions=" + region_fltr;
+//     urlSep = "&";
+//     isFilter = true;
+//   }
+//   if(sector_fltr.length>0) {
+//     url +=  urlSep + "sectors=" + sector_fltr;
+//     urlSep = "&";
+//     isFilter = true;
+//   }
+//   if(budget_fltr.length>0) {
+//     url +=  urlSep + "budgets=" + budget_fltr;
+//     urlSep = "&";
+//     isFilter = true;
+//   }
+  
+  
+//   $("#secretIFrame").attr("src",url);
+// }
