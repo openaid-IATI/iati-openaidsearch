@@ -194,16 +194,17 @@ Template Name: Projects page
         countries = countries.sort();
 
         country_html = create_filter_attributes(country_keys, 4);
-        $('#country_filters').append(country_html);
+        console.log(country_html);
+        $('#country-filters').append(country_html);
         
         region_html = create_filter_attributes(region_keys, 3);
-        $('#region_filters').append(region_html);
+        $('#region-filters').append(region_html);
         
         sector_html = create_filter_attributes(sector_keys, 3);
-        $('#sector_filters').append(sector_html);
+        $('#sector-filters').append(sector_html);
 
         budget_html = create_filter_attributes(budget_keys, 3);
-        $('#budget_filters').append(budget_html);
+        $('#budget-filters').append(budget_html);
 
         <?php 
         // end if parameters are set
@@ -216,13 +217,13 @@ Template Name: Projects page
 
 
         country_html = create_filter_attributes(country_keys, 4);
-        $('#country_filters').append(country_html);
+        $('#country-filters').append(country_html);
         region_html = create_filter_attributes(region_keys, 3);
-        $('#region_filters').append(region_html);
+        $('#region-filters').append(region_html);
         sector_html = create_filter_attributes(sector_keys, 3);
-        $('#sector_filters').append(sector_html);
+        $('#sector-filters').append(sector_html);
         budget_html = create_filter_attributes(budget_keys, 3);
-        $('#budget_filters').append(budget_html);
+        $('#budget-filters').append(budget_html);
 
         // end else
         <?php

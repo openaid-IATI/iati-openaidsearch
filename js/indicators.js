@@ -52,6 +52,8 @@
     $('#map').show(); 
     $('#map-loader').hide();
     
+    
+
     //load filters depending on page
     if(type=='cpi'){
         set_filters_cpi(indicator_data);
@@ -61,7 +63,7 @@
         set_filters_indicator(indicator_data);
     }
 
-    return indicator_data
+    return indicator_data;
   }
 
   function create_cpi_table(){
@@ -95,7 +97,7 @@
       showRowNumber: false,
       sortColumn: 0,
       sortAscending: true
-      });
+    });
     
   }
 
@@ -113,36 +115,35 @@
   function set_filters_indicator(data){
     
     region_html = create_filter_attributes(data['regions'], 4);
-    $('#region_filters').html(region_html);
+    $('#region-filters').html(region_html);
 
     country_html = create_filter_attributes(data['countries'], 4);
-    $('#country_filters').html(country_html);
+    $('#country-filters').html(country_html);
 
     // city_html = create_filter_attributes(data['cities'], 4);
-    // $('#city_filters').html(city_html);
+    // $('#city-filters').html(city_html);
 
     indicator_html = create_filter_attributes(data['indicators'], 3);
-    $('#indicator_filters').html(indicator_html);
+    $('#indicator-filters').html(indicator_html);
   }
 
   function set_filters_cpi(data){
+
     region_html = create_filter_attributes(data['regions'], 4);
-    $('#region_filters').html(region_html);
+    $('#region-filters').html(region_html);
 
     country_html = create_filter_attributes(data['countries'], 4);
-    $('#country_filters').html(country_html);
+    $('#country-filters').html(country_html);
 
     city_html = create_filter_attributes(data['cities'], 4);
-    $('#city_filters').html(city_html);
+    $('#city-filters').html(city_html);
 
     indicator_html = create_filter_attributes(data['indicators'], 4);
-    $('#indicator_filters').html(indicator_html);
+    $('#indicator-filters').html(indicator_html);
   }
 
   function get_indicator_data(indicator_id, countries, regions, cities){
     
-   
-
     var indicator_json_data = [];
     var url = request_url;
      $.ajax({
@@ -225,7 +226,6 @@
 
   function slide_tooltip(){
     var curval = $("#map-slider-tooltip").val();
-    console.log(curval);
     $( "#map-slider-tooltip div" ).text(curval);
 
     refresh_circles(curval);

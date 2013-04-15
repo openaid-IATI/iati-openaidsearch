@@ -45,10 +45,9 @@ function create_filter_attributes(objects, columns){
             html += '<div class="span' + (12 / columns) + '">';
         } 
         html += '<div class="squaredThree"><div>';
-        html += '<input type="checkbox" value="'+ key +'" id="'+value+'" name="'+value+'" />';
-        html += '<label class="map-filter-cb-value" for="'+value+'"></label>';
+        html += '<input type="checkbox" value="'+ key +'" id="'+value.toString().replace(/ /g,'').replace(',', '').replace('&', '')+'" name="'+value+'" />';
+        html += '<label class="map-filter-cb-value" for="'+value.toString().replace(/ /g,'').replace(',', '').replace('&', '')+'"></label>';
         html += '</div><div><span>'+value+'</span></div></div>';
-        console.log(value);
         if (counter%per_col == (per_col - 1)){
           html += '</div>';
         }
@@ -203,7 +202,7 @@ jQuery(function($) {
         show_map();
       }
       $('#map-filter-overlay').show("blind", { direction: "vertical" }, 1000);         
-    
+      $(this).addClass("filter-selected");
       hide_all_filters();
       $("#" + filterContainerName).show();
 
@@ -211,8 +210,10 @@ jQuery(function($) {
       if($("#" + filterContainerName).is(":visible")){
         $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
         hide_all_filters();
+        $('.filter-button.filter-selected').removeClass("filter-selected");
         save_selection();
       } else {
+        $(this).addClass("filter-selected");
         hide_all_filters();
         $("#" + filterContainerName).show();
       }
@@ -234,17 +235,19 @@ jQuery(function($) {
 	});
 
 	$('#map-filter-save').click(function(){
+    $('.filter-button.filter-selected').removeClass("filter-selected");
     save_selection();
   });
 
 function save_selection(){
-   var new_selection = new Object();
-    new_selection.sectors = [];
-    new_selection.countries = [];
-    new_selection.budgets = [];
-    new_selection.regions = [];
-    new_selection.indicators = [];
-    new_selection.cities = [];
+    
+    var new_selection = new Object();
+    new_selection.sector = [];
+    new_selection.country = [];
+    new_selection.budget = [];
+    new_selection.region = [];
+    new_selection.indicator = [];
+    new_selection.city = [];
 
     // set selection as filter and load results
     $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
@@ -255,15 +258,14 @@ function save_selection(){
         dlmtr = '|';
     }
 
-    var str_sector = get_checked_by_filter("sector", dlmtr);
-    var str_country = get_checked_by_filter("country", dlmtr);
-    var str_budget = get_checked_by_filter("budget", dlmtr);
-    var str_region = get_checked_by_filter("region", dlmtr);
-    var str_indicator = get_checked_by_filter("indicator", dlmtr);
-    var str_city = get_checked_by_filter("city", dlmtr);
+    var str_sector = get_checked_by_filter("sector", dlmtr, new_selection);
+    var str_country = get_checked_by_filter("country", dlmtr, new_selection);
+    var str_budget = get_checked_by_filter("budget", dlmtr, new_selection);
+    var str_region = get_checked_by_filter("region", dlmtr, new_selection);
+    var str_indicator = get_checked_by_filter("indicator", dlmtr, new_selection);
+    var str_city = get_checked_by_filter("city", dlmtr, new_selection);
     
     current_selection = new_selection;
-
 
     // if project filter container is on the page (= projects page)
     if ($('#project-filter-wrapper').length){ 
@@ -276,29 +278,32 @@ function save_selection(){
 
 }
 
-function get_checked_by_filter(filtername, dlmtr){
+function get_checked_by_filter(filtername, dlmtr, new_selection){
   var str = '';
-  $('#' + filtername + '_filters input:checked').each(function(index, value){ 
-        str = value.value + dlmtr;
-        new_selection[filtername + "s"].push({"id":value.value, "name":value.name});
+  $('#' + filtername + '-filters input:checked').each(function(index, value){ 
+        str += value.value + dlmtr;
+        new_selection[filtername].push({"id":value.value, "name":value.name});
     });
   str = str.substring(0, str.length-1);
+  
   return str;
 }
 
 function initialize_filters(){
   $('#map-filter-overlay input:checked').prop('checked', false);
-  init_filters_loop(current_selection.sectors);
-  init_filters_loop(current_selection.countries);
-  init_filters_loop(current_selection.budgets);
-  init_filters_loop(current_selection.regions);
-  init_filters_loop(current_selection.indicators);
-  init_filters_loop(current_selection.cities);
+  console.log(current_selection.country);
+  if (!(typeof current_selection.sector === "undefined")) init_filters_loop(current_selection.sector);
+  if (!(typeof current_selection.country === "undefined")) init_filters_loop(current_selection.country);
+  if (!(typeof current_selection.budget === "undefined")) init_filters_loop(current_selection.budget);
+  if (!(typeof current_selection.region === "undefined")) init_filters_loop(current_selection.region);
+  if (!(typeof current_selection.indicator === "undefined")) init_filters_loop(current_selection.indicator);
+  if (!(typeof current_selection.city === "undefined")) init_filters_loop(current_selection.city);
 }
 
 function init_filters_loop(arr){
   for(var i = 0; i < arr.length;i++){
-    var curId = arr[i].id.replaceAll("\\s","");
+    var curId = arr[i].name.toString().replace(/ /g,'').replace(',', '').replace('&', '');
+    console.log(curId);
     $('#'+curId).prop('checked', true);
   }
 }
