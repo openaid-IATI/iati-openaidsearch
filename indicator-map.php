@@ -38,16 +38,12 @@
         <div class="container">
 
 			<div class="row-fluid map-filter-list">
-                            <div id="indicator_filters">
-				
-                        </div>
-                            <div id="region_filters"></div>
-                            <div id="country_filters"></div>
-                            <div id="city_filters"></div>
-                            <div id="dimension_filters"></div>
-                            
-                            
-                </div>
+                <div id="indicator-filters"></div>
+                <div id="region-filters"></div>
+                <div id="country-filters"></div>
+                <div id="city-filters"></div>
+                <div id="dimension-filters"></div>
+            </div>
 			
 		</div>
 

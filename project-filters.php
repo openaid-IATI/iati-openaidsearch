@@ -4,7 +4,7 @@
 			<div class="span12">
 				<div class="filter-by">
 					<div class="filter-name hneue-bold">BY COUNTRY: </div>
-					<button id="filter-by-country" class="filter-button">
+					<button id="country-filters-button" class="filter-button">
 						<div class="filter-text">PLEASE SELECT.. </div>
 						<div class="filter-button-icon"></div>
 					</button>
@@ -12,7 +12,7 @@
 
 				<div class="filter-by">
 					<div class="filter-name hneue-bold">BY REGION: </div>
-					<button id="filter-by-region" class="filter-button">
+					<button id="region-filters-button" class="filter-button">
 						<div class="filter-text">PLEASE SELECT..</div>
 						<div class="filter-button-icon"></div>
 					</button>
@@ -20,7 +20,7 @@
 
 				<div class="filter-by ipad-newrow">
 					<div class="filter-name hneue-bold">BY SECTOR: </div>
-					<button id="filter-by-sector" class="filter-button">
+					<button id="sector-filters-button" class="filter-button">
 						<div class="filter-text">PLEASE SELECT..</div>
 						<div class="filter-button-icon"></div>
 					</button>
@@ -28,7 +28,7 @@
 
 				<div class="filter-by">
 					<div class="filter-name hneue-bold">BY BUDGET: </div>
-					<button id="filter-by-budget" class="filter-button">
+					<button id="budget-filters-button" class="filter-button">
 						<div class="filter-text">PLEASE SELECT..</div>	 
 						<div class="filter-button-icon"></div>
 					</button>
