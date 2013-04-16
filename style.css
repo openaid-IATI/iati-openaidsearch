@@ -700,7 +700,7 @@ input[type=checkbox] {
   border-bottom: 0;
 }
 
-#selection-box-indicators{
+#selection-box-indicators, #selected-clear{
   position: relative;
   color: #EEE;
   border: none;
@@ -708,6 +708,10 @@ input[type=checkbox] {
   background-color: #000;
   opacity:0.60;
   filter:alpha(opacity=60); /* For IE8 and earlier */
+}
+
+#selected-clear{
+  display: none;
 }
 
 #selection-hide-show-button:hover{
@@ -738,7 +742,7 @@ input[type=checkbox] {
   vertical-align: middle;
 }
 
-.selected-remove-button{
+.selected-remove-button, .selection-clear-button{
   width: 12px;
   margin-left:0.3em;
   margin-top:0.2em;
@@ -746,12 +750,18 @@ input[type=checkbox] {
   background-image:url('images/select-remove.png');
   background-repeat: no-repeat;
   height:12px;
+  cursor: pointer;
+}
+
+.selection-clear-div{
+  cursor: pointer;
 }
 
 #selected-clear{
   padding-top: 0.2em;
   padding-bottom:0.4em;
 }
+
 
 
 /* global */

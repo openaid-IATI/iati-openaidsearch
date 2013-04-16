@@ -264,6 +264,7 @@
             // }
             // value = value + ' %';
           }
+          if (typeof circles[i].friendly_label === "undefined"){circles[i].friendly_label = 'score'; }
           circles[i].circleinfo.bindPopup('<h4>'+circles[i].countryname+'</h4><p>' + circles[i].friendly_label + ': ' + value + '</p>');
           circles[i].circleinfo.on('mouseover', function(evt) {
             evt.target.openPopup();

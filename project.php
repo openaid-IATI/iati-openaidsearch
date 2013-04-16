@@ -6,8 +6,6 @@ Template Name: Single project page
 
 <?php get_header();
 
-//$back_url = $_REQUEST['back_url'];
-//if(empty($back_url) && !empty($_SERVER['HTTP_REFERER'])) $back_url = $_SERVER['HTTP_REFERER'];
 $project_id = $_REQUEST['id'];
 $activity = wp_get_activity($project_id);
 
@@ -240,7 +238,7 @@ $activity = wp_get_activity($project_id);
 			$sep = '';
 			$countries = "";
 			foreach($activity->recipient_country AS $country) {
-				$countries .=  $sep . '"' . $country->name . '"';
+				$countries .=  $sep . '"' . $country->iso . '"';
 				$sep = ', ';
 			}
 		}

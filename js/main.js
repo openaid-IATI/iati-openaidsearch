@@ -113,81 +113,64 @@ jQuery(function($) {
 		}
 	});
 
-  	function hide_map()
-  	{
-	  	$('#map-hide-show-button').removeClass('map-show');
-  		$('#map-hide-show-button').addClass('map-hide');
-  		$('#map-hide-show-text').html("SHOW MAP");
-  		animate_map('13.5em');
-  		hide_map_homepage();
-  	}
+	function hide_map()
+	{
+  	$('#map-hide-show-button').removeClass('map-show');
+		$('#map-hide-show-button').addClass('map-hide');
+		$('#map-hide-show-text').html("SHOW MAP");
+		animate_map('13.5em');
+		hide_map_homepage();
+	}
 
+	function show_map(){
+  	$('#map-hide-show-button').removeClass('map-hide');
+		$('#map-hide-show-button').addClass('map-show');
+		$('#map-hide-show-text').html("HIDE MAP");
+		animate_map('45em');
+		show_map_homepage();
+	}
 
+	function animate_map(mapheight){
+		$('#map').animate({
+			height: mapheight
+		}, 1000, function() {
+		 map.invalidateSize();
+	});
+	}
 
-  	function show_map(){
-	  	$('#map-hide-show-button').removeClass('map-hide');
-  		$('#map-hide-show-button').addClass('map-show');
-  		$('#map-hide-show-text').html("HIDE MAP");
-  		animate_map('45em');
-  		show_map_homepage();
-  	}
+	function hide_map_homepage(){
+		$('#map-lightbox').animate({
+			fontSize: "0.7em",
+			top: "3em"
+		}, 1000, function() {
+		// Animation complete.
+	});
+	$('#map-lightbox-bg').animate({
+			fontSize: "0.7em",
+			top: "3em"
+		}, 1000, function() {
+		// Animation complete.
+	});
+	}
 
-  	function animate_map(mapheight){
-  		$('#map').animate({
-				height: mapheight
-			}, 1000, function() {
-			 map.invalidateSize();
-		});
-  	}
-
-  	function hide_map_homepage(){
-  		$('#map-lightbox').animate({
-				fontSize: "0.7em",
-				top: "3em"
-			}, 1000, function() {
-			// Animation complete.
-		});
-		$('#map-lightbox-bg').animate({
-				fontSize: "0.7em",
-				top: "3em"
-			}, 1000, function() {
-			// Animation complete.
-		});
-  	}
-
-  	function show_map_homepage(){
-  		$('#map-lightbox').animate({
-				fontSize: "1em",
-				top: "10.5em"
-			}, 1000, function() {
-			// Animation complete.
-		});
-		$('#map-lightbox-bg').animate({
-				fontSize: "1em",
-				top: "10.5em"
-			}, 1000, function() {
-			// Animation complete.
-		});
-  	}
-
-
-    // XXXXXX MAP SELECTION BOX XXXXXXX
-
-
-  $("#selection-hide-show-button").click(function(){
-
-    if($('#selection-box').is(":hidden")){
-        $('#selection-box').show("blind", { direction: "vertical" }, 500);
-        $('#selection-hide-show-text').html("HIDE SELECTION");
-    } else {
-        $('#selection-box').hide("blind", { direction: "vertical" }, 500);
-        $('#selection-hide-show-text').html("SHOW SELECTION");
-    }
-  });
+	function show_map_homepage(){
+		$('#map-lightbox').animate({
+			fontSize: "1em",
+			top: "10.5em"
+		}, 1000, function() {
+		// Animation complete.
+	});
+	$('#map-lightbox-bg').animate({
+			fontSize: "1em",
+			top: "10.5em"
+		}, 1000, function() {
+		// Animation complete.
+	});
+	}
 });
 
 
-// XXXXXXX MAP FILTERS XXXXXXXXXXX
+// MAP FILTER FUNCTIONS
 
   $('.filter-button').click(function(e){
 
@@ -220,6 +203,24 @@ jQuery(function($) {
     }
   });
 
+  function initialize_filters(){
+    $('#map-filter-overlay input:checked').prop('checked', false);
+
+    if (!(typeof current_selection.sector === "undefined")) init_filters_loop(current_selection.sector);
+    if (!(typeof current_selection.country === "undefined")) init_filters_loop(current_selection.country);
+    if (!(typeof current_selection.budget === "undefined")) init_filters_loop(current_selection.budget);
+    if (!(typeof current_selection.region === "undefined")) init_filters_loop(current_selection.region);
+    if (!(typeof current_selection.indicator === "undefined")) init_filters_loop(current_selection.indicator);
+    if (!(typeof current_selection.city === "undefined")) init_filters_loop(current_selection.city);
+  }
+
+  function init_filters_loop(arr){
+    for(var i = 0; i < arr.length;i++){
+      var curId = arr[i].name.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc');
+      $('#'+curId).prop('checked', true);
+    }
+  }
+
   function hide_all_filters(){
     $('#country-filters').hide();
     $('#region-filters').hide();
@@ -238,6 +239,8 @@ jQuery(function($) {
     $('.filter-button.filter-selected').removeClass("filter-selected");
     save_selection();
   });
+
+// FILTER SAVE FUNCTIONS
 
 function save_selection(){
     
@@ -270,6 +273,8 @@ function get_checked_by_filter(filtername, new_selection){
     });
 }
 
+// MAP RELOAD FUNCTIONS 
+
 function reload_map(){
   
   var dlmtr = ',';
@@ -288,43 +293,64 @@ function reload_map(){
   // if project filter container is on the page (= projects page)
   if ($('#project-filter-wrapper').length){ 
     window.location = '?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
+    //initialize_projects_map('http://dev.oipa.openaidsearch.org/projects?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region);
   } else if (selected_type=='indicator'){
-    initialize_map('http://dev.oipa.openaidsearch.org/json?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2010,'',"", "", "");
+    initialize_map('http://dev.oipa.openaidsearch.org/json?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2015,'',"", "", "");
+    move_slider_to_available_year(2015);
   } else if (selected_type=='cpi'){
     initialize_map('http://dev.oipa.openaidsearch.org/json-city?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2012,'',"", "", "");
+    
   }
 }
+
 
 function reload_map_prepare_parameter_string(filtername, dlmtr){
   var str = '';
-  var arr = current_selection[filtername];
-  if(arr.length > 0){
-    for(var i = 0; i < arr.length; i++){
-      str += arr[i].id + dlmtr;
+  if(!(typeof current_selection[filtername] === 'undefined')){
+    var arr = current_selection[filtername];
+    if(arr.length > 0){
+      for(var i = 0; i < arr.length; i++){
+        str += arr[i].id + dlmtr;
+      }
+      str = str.substring(0, str.length-1);
     }
-    str = str.substring(0, str.length-1);
+    console.log(current_selection[filtername]);
   }
-
   return str;
 }
 
-function initialize_filters(){
-  $('#map-filter-overlay input:checked').prop('checked', false);
-
-  if (!(typeof current_selection.sector === "undefined")) init_filters_loop(current_selection.sector);
-  if (!(typeof current_selection.country === "undefined")) init_filters_loop(current_selection.country);
-  if (!(typeof current_selection.budget === "undefined")) init_filters_loop(current_selection.budget);
-  if (!(typeof current_selection.region === "undefined")) init_filters_loop(current_selection.region);
-  if (!(typeof current_selection.indicator === "undefined")) init_filters_loop(current_selection.indicator);
-  if (!(typeof current_selection.city === "undefined")) init_filters_loop(current_selection.city);
-}
-
-function init_filters_loop(arr){
-  for(var i = 0; i < arr.length;i++){
-    var curId = arr[i].name.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc');
-    $('#'+curId).prop('checked', true);
+function move_slider_to_available_year(standard_year){
+  
+  for (var i = standard_year; i > 1949;i--){
+    
+    if ($("#year-"+i).hasClass("slider-active")){
+      if(i == standard_year){break;}
+      refresh_circles(i);
+      $( "#map-slider-tooltip" ).val(i);
+      $( "#map-slider-tooltip div" ).text(i.toString());
+      $( ".slider-year").removeClass("active");
+      $( "#year-" + i.toString()).addClass("active");
+      break;
+    }
   }
 }
+
+
+
+// SELECTION BOX FUNCTIONS
+
+  $("#selection-hide-show-button").click(function(){
+
+    if($('#selection-box').is(":hidden")){
+        $('#selection-box').show("blind", { direction: "vertical" }, 500);
+        $('#selected-clear').show("blind", { direction: "vertical" }, 500);
+        $('#selection-hide-show-text').html("HIDE SELECTION");
+    } else {
+        $('#selection-box').hide("blind", { direction: "vertical" }, 500);
+        $('#selected-clear').hide("blind", { direction: "vertical" }, 500);
+        $('#selection-hide-show-text').html("SHOW SELECTION");
+    }
+  });
 
 function fill_selection_box(){
 
@@ -377,6 +403,13 @@ function init_remove_filters_from_selection_box(){
   });
 }
 
+$(".selection-clear-div").click(function(){
+  current_selection = new Object();
+  current_selection.indicator = [];
+  current_selection.indicator.push({"id":"population", "name":"Total population"});
+  fill_selection_box();
+  reload_map();
+});
 
 
 // XXXXXXXXX Ajax wordpress simple pagination XXXXXXXX

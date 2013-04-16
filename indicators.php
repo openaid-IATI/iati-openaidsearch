@@ -129,7 +129,7 @@ Template Name: Indicators page
 $(document).ready(function(){
   initialize_map('http://dev.oipa.openaidsearch.org/json',2015,"indicator", "", "");
   current_selection.indicator = [];
-  current_selection.indicator.push({"id":"Totalpopulation", "name":"Total population"});
+  current_selection.indicator.push({"id":"population", "name":"Total population"});
   fill_selection_box();
 
 });
