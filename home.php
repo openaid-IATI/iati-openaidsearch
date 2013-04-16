@@ -5,7 +5,7 @@
 <div id="page-wrapper">
 	<div class="container">
 		<div class="page-content">
-			<div class="row-fluid postit-page">
+			<div class="row-fluid postit-page home-page">
 				<div class="span4">
 				<?php 
 
