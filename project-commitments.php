@@ -6,6 +6,7 @@ $activity = wp_get_activity($project_id);
 <div id="project-commitments">
 	<div id="commitments-placeholder"></div>
 	 <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+	 <?php /*
 	     <script type='text/javascript'>
       google.load('visualization', '1', {packages:['table']});
       google.setOnLoadCallback(drawTable);
@@ -57,7 +58,7 @@ $activity = wp_get_activity($project_id);
 </script>
 
 
-
+*/ ?>
 
 
 </div>
