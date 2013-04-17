@@ -566,11 +566,11 @@ input[type=checkbox] {
 
 #map-lightbox, #map-lightbox-bg{
   position: absolute;
-  top: 9.5em;
+  top: 8.0em;
   left: 6.5em;
   display: block;
   width: 44em;
-  height: 16em;
+  height: 17em;
   z-index: 1500;
 }
 
@@ -618,7 +618,6 @@ input[type=checkbox] {
 
 .map-lightbox-title{
   font-size: 1.2em;
-  padding-bottom: 0.4em;
 }
 
 #map-lightbox-text, #map-lightbox a{
@@ -632,9 +631,13 @@ input[type=checkbox] {
   padding-top: 1.4em;
 }
 
+#map-lightbox-text > p{
+  padding-bottom: 0.4em;
+}
+
 #map-lightbox a{
-  float:left;
-  margin-left: 1.2em;
+  display: inline-block;
+  margin: 0 0 0.4em 1.2em;
   padding: 0.8em 1.6em;
   border-radius: 7px;
   background: #2cac00; /* Old browsers */
@@ -1780,6 +1783,14 @@ label, input, button, select, textarea{
 
     .navbar-static-top.navbar .nav > li > .navbar-home-link{
       padding: 1.86em 0.6em;
+    }
+
+    #map{
+      height: 37em;
+    }
+
+    #brand-beta{
+      right: 1.2em;
     }
 
     .squaredThree{

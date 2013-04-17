@@ -4,15 +4,14 @@
   var circles = [];
   var maxdatavalue = 0;
   var maxcirclearea = 2000000000000;
-  var request_url = ""
-  var selected_type = "";
+  var request_url = "";
   var indicator_data;
 
   // We run this function on each filter save.
   function initialize_map(url, sel_year, type, indicator_id, countries, regions, cities){
     
     if(type){
-    selected_type = type;
+      selected_type = type;
     }
 
     //set max area depending on page
@@ -35,7 +34,7 @@
 
     // get data
     indicator_data = get_indicator_data(indicator_id, countries, regions, cities);
-    
+
     // check for what years data is available and add the right classes to the slider year blocks
     draw_available_data_blocks(indicator_data);
 
@@ -51,8 +50,6 @@
     // hide loader, show map
     $('#map').show(); 
     $('#map-loader').hide();
-    
-    
 
     //load filters depending on page
     if(type=='cpi'){

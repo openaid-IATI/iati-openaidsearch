@@ -1,11 +1,72 @@
+// Global variables
 var geojson;
 
-function initialize_projects_map(url){
+// Project filter options
+function initialize_project_filter_options(){
+  //set loading gif in case call takes long
+  var url = make_project_filter_options_url();
+  var options = get_project_filter_options(url);
+  draw_project_options(options);
+}
+
+function make_project_filter_options_url(){
+  var dlmtr = ",";
+  var str_country = reload_map_prepare_parameter_string("country", dlmtr);
+  var str_region = reload_map_prepare_parameter_string("region", dlmtr);
+  var str_sector = reload_map_prepare_parameter_string("sector", dlmtr);
+  var str_budget = reload_map_prepare_parameter_string("budget", dlmtr);
+  var url = 'http://dev.oipa.openaidsearch.org/json-project-filters?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
+  return url;
+}
+
+function get_project_filter_options(url){
+
+  var project_options;
+  $.ajax({
+        type: 'GET',
+         url: url,
+         async: false,
+         contentType: "application/json",
+         dataType: 'json',
+         success: function(data){
+          project_options = data;
+         }
+  });
+  return project_options;
+}
+
+function draw_project_options(options){
+
+  var budget_keys = {};
+  budget_keys['all'] = 'All';
+  budget_keys[''] = '> US$ 0';
+  budget_keys['10000'] = '> US$ 10.000';
+  budget_keys['50000'] = '> US$ 50.000';
+  budget_keys['100000'] = '> US$ 100.000';
+  budget_keys['500000'] = '> US$ 500.000';
+  budget_keys['1000000'] = '> US$ 1.000.000';
+
+  var country_html = create_filter_attributes(options.countries, 4);
+  $('#country-filters').html(country_html);
+  var region_html = create_filter_attributes(options.regions, 4);
+  $('#region-filters').html(region_html);
+  var sector_html = create_filter_attributes(options.sectors, 3);
+  $('#sector-filters').html(sector_html);
+  var budget_html = create_filter_attributes(budget_keys, 4);
+  $('#budget-filters').html(budget_html);
+}
+
+
+
+
+
+// init/reload the map
+function initialize_projects_map(url, type){
+    selected_type = type;
     var project_geojson = get_project_data(url);
     unload_project_map();
     load_project_map(project_geojson);
 }
-
 
 function get_project_data(url){
 
@@ -18,7 +79,7 @@ function get_project_data(url){
          contentType: "application/json",
          dataType: 'json',
          success: function(data){
-          indicator_json_data = data;
+          project_geojson = data;
          }
     });
 
@@ -27,20 +88,14 @@ function get_project_data(url){
 
 function unload_project_map(){
     // remove geojson layer from map
-}
-
-function load_project_map(project_geojson){
-    geojson = L.geoJson(countryData, {style: style,onEachFeature: function(feature,layer) {
-
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: showPopup
-    });
-    }}).addTo(map); 
+    if (geojson != null){
+      geojson.clearLayers();
+    }
 }
 
 
+
+// Map polygon styling
 
 
 function getColor(d) {
@@ -65,8 +120,8 @@ function getWeight(d) {
 
 function style(feature) {
     return {
-        fillColor: getColor(feature.properties.projects),
-        weight: getWeight(feature.properties.projects),
+        fillColor: getColor(feature.properties.project_amount),
+        weight: getWeight(feature.properties.project_amount),
         opacity: 1,
         color: '#FFF',
         dashArray: '',
@@ -105,10 +160,24 @@ function showPopup(e){
 
     var popup = L.popup()
     .setLatLng(pointToDraw)
-    .setContent('<div id="map-tip-header">' + layer.feature.properties.name + '</div><div id="map-tip-text">Total projects: '+ layer.feature.properties.projects + '</div><div id="map-tip-link"><a href="?s=&countries='+layer.feature.properties.iso+'">Click to view related projects</a></div>')
+    .setContent('<div id="map-tip-header">' + layer.feature.properties.name + '</div><div id="map-tip-text">Total projects: '+ layer.feature.properties.project_amount + '</div><div id="map-tip-link"><a href="?s=&countries='+layer.feature.id+'">Click to view related projects</a></div>')
     .openOn(map);
 }
 
 function resetHighlight(e) {
     geojson.resetStyle(e.target);
 }
+
+function load_project_map(project_geojson){
+    geojson = L.geoJson(project_geojson, {style: style,onEachFeature: function(feature,layer) {
+
+      layer.on({
+          mouseover: highlightFeature,
+          mouseout: resetHighlight,
+          click: showPopup
+      });
+    }});
+
+    geojson.addTo(map); 
+}
+

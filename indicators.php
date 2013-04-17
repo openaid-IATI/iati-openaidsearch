@@ -6,55 +6,6 @@ Template Name: Indicators page
 
 <?php get_header(); ?>
 
-
-<?php 
-/*
-      $regions = wp_get_regions(); 
-      
-      
-      
-//      $countries = wp_get_unique_result($indicator_results, 'country_name', 'dac_region_name');
-      $selected_region = $_GET['region'];
-      $selected_country = $_GET['countries'];
-      $selected_countryyear = $_GET['years'];
-      //@todo fix dynamic cities
-      $selected_city = '';
-      $selected_indicator = $_GET['indicator'];
-      
-      
-      
-      if(!strlen($selected_indicator)>0 || $selected_indicator == 'all'){
-          $selected_indicator = 'population';
-      }
-      
-      $countries = wp_get_countries($selected_region);
-      
-      $cities = wp_get_cities($selected_country);
-      
-      
-      
-      $indicator_results = wp_get_indicator_results($selected_region, $selected_country, $selected_year);
-      
-//      $indicator_relevant_results = wp_get_relevant_results($selected_indicator);
-      
-      $years = wp_get_unique_result(wp_get_relevant_results($selected_indicator), 'year');
-      if (!isset($selected_year)){
-          $selected_year = $years[0];
-      }
-      
-
-      $temp = array();
-    foreach ($indicator_results as $i) {
-        array_push($temp, $i[$selected_indicator]);
-    }
-    $max_indicator = max($temp);
-    //$factor = 400000 / 40000;
-    //$factor = 600000 / $max_pop;
-    $maxcircleradius = 3000000000000;
-    $factor = $maxcircleradius / $max_indicator;
-    */
-    
-?>  
 <?php get_template_part( "indicator", "filters" ); ?>
 <?php get_template_part( "indicator", "map" ); ?>
 
@@ -74,7 +25,6 @@ Template Name: Indicators page
 								<button id="dropdown-table-graph">TABLE GRAPH</button>
 							</div>
 						</a>
-						
 
 						<a href="#" id="project-share-export" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
@@ -125,14 +75,13 @@ Template Name: Indicators page
 
 
 <?php get_footer(); ?>
+
 <script type="text/javascript">
 $(document).ready(function(){
   initialize_map('http://dev.oipa.openaidsearch.org/json',2015,"indicator", "", "");
   current_selection.indicator = [];
   current_selection.indicator.push({"id":"population", "name":"Total population"});
   fill_selection_box();
-
 });
-
 
 </script>

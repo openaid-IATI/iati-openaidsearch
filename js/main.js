@@ -1,13 +1,14 @@
-// Global selection functions
+// Global variables
 var current_selection = new Object();
-
+var selected_type = '';
+var standard_mapheight = '45em';
 
 //HTML function to create filters
 function create_filter_attributes(objects, columns){
     var html = '';
     var counter = 0;
     var per_col = 20;
-// console.log(objects);
+
 //     var sortable = [];
 //     for (var key in objects){
 //       sortable.push([key, objects[key]]);
@@ -39,8 +40,9 @@ function create_filter_attributes(objects, columns){
 //         if ((i+1) > ((per_col * columns) - 1)) { break }
 
     // }
+
     $.each(objects, function(key, value){
-        
+
         if (counter%per_col == 0){
             html += '<div class="span' + (12 / columns) + '">';
         } 
@@ -115,6 +117,8 @@ jQuery(function($) {
 
 	function hide_map()
 	{
+    // TO DO: TEST IF THIS WORKS
+    standard_mapheight = $('#map').css('height');
   	$('#map-hide-show-button').removeClass('map-show');
 		$('#map-hide-show-button').addClass('map-hide');
 		$('#map-hide-show-text').html("SHOW MAP");
@@ -126,7 +130,7 @@ jQuery(function($) {
   	$('#map-hide-show-button').removeClass('map-hide');
 		$('#map-hide-show-button').addClass('map-show');
 		$('#map-hide-show-text').html("HIDE MAP");
-		animate_map('45em');
+		animate_map(standard_mapheight);
 		show_map_homepage();
 	}
 
@@ -180,19 +184,25 @@ jQuery(function($) {
     
     if($('#map-filter-overlay').is(":hidden")){
 
-      initialize_filters();
+      $('#map-filter-overlay').show("blind", { direction: "vertical" }, 600);         
+      $(this).addClass("filter-selected");
+      hide_all_filters();
 
       if($('#map-hide-show-button').hasClass("map-hide")){
         show_map();
       }
-      $('#map-filter-overlay').show("blind", { direction: "vertical" }, 1000);         
-      $(this).addClass("filter-selected");
-      hide_all_filters();
+
+      // load the project filter options based on the current selection
+      if(selected_type == 'projects'){
+        initialize_project_filter_options();
+      }
+
+      initialize_filters();
       $("#" + filterContainerName).show();
 
     } else {
       if($("#" + filterContainerName).is(":visible")){
-        $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
+        $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 600);
         hide_all_filters();
         save_selection();
       } else {
@@ -279,10 +289,6 @@ function reload_map(){
   
   var dlmtr = ',';
 
-  if ($('#project-filter-wrapper').length){ 
-      dlmtr = '|';
-  }
-
   var str_sector = reload_map_prepare_parameter_string("sector", dlmtr);
   var str_country = reload_map_prepare_parameter_string("country", dlmtr);
   var str_budget = reload_map_prepare_parameter_string("budget", dlmtr);
@@ -291,15 +297,13 @@ function reload_map(){
   var str_city = reload_map_prepare_parameter_string("city", dlmtr);
 
   // if project filter container is on the page (= projects page)
-  if ($('#project-filter-wrapper').length){ 
-    window.location = '?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
-    //initialize_projects_map('http://dev.oipa.openaidsearch.org/projects?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region);
+  if (selected_type=='projects'){
+  initialize_projects_map('http://dev.oipa.openaidsearch.org/json-activities?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region, 'projects');
   } else if (selected_type=='indicator'){
     initialize_map('http://dev.oipa.openaidsearch.org/json?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2015,'',"", "", "");
     move_slider_to_available_year(2015);
   } else if (selected_type=='cpi'){
     initialize_map('http://dev.oipa.openaidsearch.org/json-city?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2012,'',"", "", "");
-    
   }
 }
 
@@ -314,7 +318,6 @@ function reload_map_prepare_parameter_string(filtername, dlmtr){
       }
       str = str.substring(0, str.length-1);
     }
-    console.log(current_selection[filtername]);
   }
   return str;
 }

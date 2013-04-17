@@ -61,17 +61,22 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/map.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/main.js"></script>
 
-<?php if (is_page('indicators') or is_page('city-prosperity') or is_page('project')) {
+<?php 
+
+if (is_page('indicators') or is_page('city-prosperity') or is_page('project')) {
 	echo '<script src="https://www.google.com/jsapi"></script>';
-} ?>
-<?php if (is_page('indicators') or is_page('city-prosperity')) {
+}
+if (is_page('indicators') or is_page('city-prosperity')) {
 	echo '<script src="' . get_template_directory_uri() . '/js/indicators.js"></script>';
-} ?>
-
-<?php if (is_page('project')) {
-
+}
+if (is_page('project')) {
 	echo '<script src="' . get_template_directory_uri() . '/js/project.js"></script>';
-} ?>
+}
+if (is_page('projects')) {
+	echo '<script src="' . get_template_directory_uri() . '/js/projects.js"></script>';
+} 
+
+?>
 
 </body>
 </html>
