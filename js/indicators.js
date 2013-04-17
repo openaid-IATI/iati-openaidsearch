@@ -35,17 +35,23 @@
     // get data
     indicator_data = get_indicator_data(indicator_id, countries, regions, cities);
 
+    indicator_second = get_indicator_data('avg_annual_rate_change_percentage_urban', countries, regions, cities);
+    // console.log(indicator_second);
     // check for what years data is available and add the right classes to the slider year blocks
     draw_available_data_blocks(indicator_data);
 
     // draw the circles
-    draw_circles(indicator_data);
+    max_value_1 = draw_circles(indicator_data, 'red');
+
+    //draw second indicator
+    max_value_2 = draw_circles(indicator_second, 'blue');
 
     // set current year
     $( "#map-slider-tooltip div" ).html(sel_year);
     $( "#map-slider-tooltip" ).val(sel_year);
     $( "#year-" + sel_year).addClass("active");
-    refresh_circles(sel_year.toString());
+    refresh_circles(sel_year.toString(), max_value_1);
+    refresh_circles(sel_year.toString(), max_value_1);
 
     // hide loader, show map
     $('#map').show(); 
@@ -143,6 +149,10 @@
     
     var indicator_json_data = [];
     var url = request_url;
+    if (indicator_id){
+      url = url + '?indicator=' + indicator_id
+    }
+    console.log(url);
      $.ajax({
         type: 'GET',
          url: url,
@@ -176,19 +186,21 @@
     }
   }
 
-  function draw_circles(indicator_data){
-    $.each(indicator_data, function(key, value){
+  function draw_circles(data_indicators, color){
+    var max_data_value = 0;
+    $.each(data_indicators, function(key, value){
 
       try{
         if (value.max_value){
-            maxdatavalue = value.max_value;
+            max_data_value = value.max_value;
+            
 
         }
 
         var circle = L.circle(new L.LatLng(value.longitude, value.latitude), 1, {
-          color: 'red',
+          color: color,
           weight: '0',
-          fillColor: 'red',
+          fillColor: color,
           fillOpacity: 0.6
           }).addTo(map);
 
@@ -197,6 +209,7 @@
           singlecircleinfo.countryname = value.name;
           singlecircleinfo.values = value.years;
           singlecircleinfo.circleinfo = circle;
+          singlecircleinfo.max_data_value = max_data_value;
           singlecircleinfo.indicator = value.indicator;
           singlecircleinfo.friendly_label = value.indicator_friendly;
           
@@ -207,6 +220,7 @@
           //console.log(err);
       }
     });
+    return max_data_value;
   }
 
   
@@ -234,9 +248,6 @@
 
   function refresh_circles(year){
     var curyear = "y" + year;
-    var max = maxdatavalue;
-
-    var factor = Math.round(maxcirclearea / max);
 
     for (var i=0;i<circles.length;i++)
     { 
@@ -249,7 +260,7 @@
         if (value === undefined || value === null){
           //  circles[i].circleinfo.setRadius(0);
         } else {
-          circle_radius = Math.round(Math.sqrt((factor * value) / Math.PI));
+          circle_radius = Math.round(Math.sqrt(((Math.round(maxcirclearea / circles[i].max_data_value)) * value) / Math.PI));
           circles[i].circleinfo.setRadius(circle_radius); 
           if (circles[i].type_data == '1000'){
             value = value * 1000;
@@ -272,6 +283,7 @@
         //console.log(err);
       }
     }
+    // console.log(max);
     
   }
 
