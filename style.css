@@ -1115,13 +1115,13 @@ label, input, button, select, textarea{
 }
 
 /* charts */
-#line-chart-filter-title, #line-chart-title{
+#line-chart-filter-title, #line-chart-title, #table-chart-filter-title, #table-chart-title{
   margin-top: 2em;
   font-family:'HelveticaNeueW01-75Bold';
   font-size: 1em;
 }
 
-#line-chart-filter-title{
+#line-chart-filter-title, #table-chart-filter-title{
   margin-bottom: 1em;
 }
 
@@ -1132,8 +1132,12 @@ label, input, button, select, textarea{
 #line-chart-filter .google-visualization-controls-label{
   font-family: "HelveticaNeueW01-75Bold";
 
-
 }
+
+#table-chart-wrapper{
+  border-top:1px solid #CCC;
+}
+
 
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX CITY PROSPERITY PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */

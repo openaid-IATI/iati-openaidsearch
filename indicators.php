@@ -59,12 +59,18 @@ Template Name: Indicators page
 			</div>
 		</div>
 	</div>
-
-	<div class="container">
-		<div class="page-content">
-			<div clas="row-fluid">
-				<div class="span12">
-					<div id="table-chart-placeholder"></div>
+	<div id="table-chart-wrapper">
+		<div class="container">
+			<div class="page-content">
+				<div class="row-fluid">
+					<div class="span3">
+						<div id="table-chart-filter-title">Years</div>
+						<div id="table-chart-filter"></div>
+					</div>
+					<div class="span7">
+						<div id="table-chart-title">The table chart title</div>
+						<div id="table-chart-placeholder"></div>
+					</div>
 				</div>
 			</div>
 		</div>

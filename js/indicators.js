@@ -357,15 +357,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
       function drawLineChart(){
         var curyear = parseInt($(".ui-slider-handle").html());
         var currentData = [];
@@ -468,40 +459,19 @@
 
     }
       
-      
-      
-      
-
-
-
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-      function drawTableChart(){
-
-        
-
-        var indicator_data = get_indicator_data("", "", "", "");
-        
+      function getTableChartData(year){
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Country');
         data.addColumn('number', 'Value');
         
-        var curyear = "y" + $(".ui-slider-handle").html();
 
         for (var i=0;i<circles.length;i++)
         { 
           try{
 
-            var value = circles[i].values[curyear];
+            var value = circles[i].values["y" + year];
+            console.log(value);
+            console.log(year);
             if (value === undefined || value === null){
 
             } else {
@@ -511,22 +481,72 @@
           } catch (err){
           }
         }
-
-
-        var table = new google.visualization.Table(document.getElementById('table-chart-placeholder'));
-        table.draw(data, {
-          //showRowNumber: true,
-          sortColumn: 1,
-          sortAscending: false
-        });
+        return data;
       }
 
+      function drawTableChart(){
+
+        var curyear = $(".ui-slider-handle").html();
+        var data = getTableChartData(2015);
+        
+
+
+        var columnsTable = new google.visualization.DataTable();
+        columnsTable.addColumn('number', 'colIndex');
+        columnsTable.addColumn('string', 'colLabel');
+        var initState = {selectedValues: []};
+
+        $('.slider-year.slider-active').each(function(index, value){ 
+
+            columnsTable.addRow([index, value.id.replace("year-", "")]);
+        });
+
+        var tableChart = new google.visualization.ChartWrapper({
+          chartType: 'Table',
+          containerId: 'table-chart-placeholder',
+          dataTable: data,
+          options: {
+            showRowNumber: true,
+            sortColumn: 1,
+            sortAscending: false
+          }
+        });
+        tableChart.draw();
+
+        var columnFilter = new google.visualization.ControlWrapper({
+          controlType: 'CategoryFilter',
+          containerId: 'table-chart-filter',
+          dataTable: columnsTable,
+          options: {  
+              filterColumnLabel: 'colLabel',
+              ui: {
+                  caption: 'Choose a year', 
+                  label: '',
+                  allowTyping: false,
+                  allowMultiple: false,
+                  selectedValuesLayout: 'below',
+                  labelStacking: 'horizontal'
+              }
+          },
+          state: initState
+        });
+        columnFilter.draw();
+        
+        google.visualization.events.addListener(columnFilter, 'statechange', function () {
+
+            var state = columnFilter.getState();
+            var curyear = state.selectedValues[0];
+            var curdata = getTableChartData(curyear);
+            tableChart.draw(curdata);
+        });
+
+      }
 
 
 
       function initialize_charts(){
         google.load("visualization", "1", {packages:["corechart", "controls"], callback:drawLineChart});
-
+        google.load("visualization", "1", {packages:["table", "controls"], callback:drawTableChart});
       }
 
       // function init_dashboard(){
