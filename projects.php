@@ -46,14 +46,16 @@ Template Name: Projects page
 
                         <?php
                         $params = $_GET;
-                        $params['order_by'] = "budget";
+                        
                         ?>
                         
                         <div id="sort-type-budget" class="project-sort-type">
                             <span class="project-sort-text hneue-bold">BUDGET</span>
                             <span class="project-sort-icon"></span>
                             <div id="dropdown-project-budget" class="dropdown-project">
+                                <?php $params['order_by'] = "statistics__total_budget"; ?>
                                 <a href="?<?php echo http_build_query($params); ?>" id="dropdown-project-budget-asc">ASCENDING</a>
+                                <?php $params['order_by'] = "-statistics__total_budget"; ?>
                                 <a href="?<?php echo http_build_query($params); ?>" id="dropdown-project-budget-desc">DESCENDING</a>
                             </div>
                         </div>
