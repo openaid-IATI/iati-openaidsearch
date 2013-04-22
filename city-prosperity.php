@@ -16,35 +16,18 @@ Template Name: City prosperity page
 				<div class="span8">
 					<div class="project-share-container share-left">
 
-					<button id="project-share-export" class="project-share-button hneue-bold">
-						<div class="share-icon"></div>
-						<div class="share-text">EXPORT</div>
-					</button>
-					<button id="project-share-embed" class="project-share-button hneue-bold">
-						<div class="share-icon"></div>
-						<div class="share-text">EMBED</div>
-					</button>
-				</div>
-
-				</div>
-				<div class="span4">
-					<div class="project-share-container share-right">
-
-						<button id="project-share-share" class="project-share-button hneue-bold">
+						<button id="project-share-export" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
-							<div class="share-text">SHARE</div>
+							<div class="share-text">EXPORT</div>
 						</button>
-						<button id="project-share-whistleblower" class="project-share-button hneue-bold">
+						<button id="project-share-embed" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
-							<div class="share-text">WHISTLEBLOWER</div>
+							<div class="share-text">EMBED</div>
 						</button>
-						<button id="project-share-bookmark" class="project-share-button hneue-bold">
-							<div class="share-icon"></div>
-							<div class="share-text">BOOKMARK</div>
-						</button>
-
+						
 					</div>
 				</div>
+				<?php get_template_part("global", "page-navbar-right"); ?>
 			</div>
 		</div>
 	</div>

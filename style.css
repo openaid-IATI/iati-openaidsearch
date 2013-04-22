@@ -98,12 +98,20 @@ button{
 }
 
 
+#dropdown-share-page{
+  display: none;
+}
+
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX GLOBAL PAGE HEADER XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 .page-header{
   padding-bottom: 0.6em;
   border-bottom: 1px solid #CCC;
   margin: 0;
+}
+
+.page-header .row-fluid > div{
+  min-height:1.8em;
 }
 
 .share-left{
@@ -178,7 +186,7 @@ button{
 
 .navbar-static-top{
     position:relative;
-    z-index:5;
+    z-index:6;
     -moz-box-shadow: 0px 1px 3px #979791;
     -webkit-box-shadow: 0px 1px 3px #979791;
     box-shadow: 0px 1px 3px #979791;
@@ -346,7 +354,7 @@ input[type="text"]{
 
 #project-filter-wrapper, #indicator-filter-wrapper{
   position: relative;
-  z-index: 4;
+  z-index: 5;
   -moz-box-shadow: 0px 2px 3px #BBB;
   -webkit-box-shadow: 0px 2px 3px #BBB;
   box-shadow: 0px 2px 3px #BBB;
@@ -782,6 +790,7 @@ input[type=checkbox] {
   -moz-box-shadow: 0 8px 6px -6px #979791;
   box-shadow: 0 8px 6px -6px #979791;
   overflow: hidden;
+  z-index:4;
 }
 
 #map-graph-buttons{
@@ -875,6 +884,13 @@ input[type=checkbox] {
 
 #map-hide-show{
     background-color: #F1EEE8;
+    position: relative;
+    z-index:3;
+}
+
+#map-hide-show .span12{
+  height: 0.9em;
+  min-height: 0.9em;
 }
 
 #map-hide-show-button{
@@ -933,13 +949,13 @@ label, input, button, select, textarea{
 
 #map-border-bottom{
   position: absolute;
-  height: 0.34em;
+  height: 0.3em;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
   filter: alpha(opacity=60);
   opacity: 60;
   background-color: #777;
   width: 100%;
-  bottom: -1px;
+  bottom: 0;
 }
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX MAP INDICATOR PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -1094,11 +1110,30 @@ label, input, button, select, textarea{
   margin-top: 20px;
 }
 
+#dropdown-export-indicator{
+  display: none;
+}
+
+/* charts */
+#line-chart-filter-title, #line-chart-title{
+  margin-top: 2em;
+  font-family:'HelveticaNeueW01-75Bold';
+  font-size: 1em;
+}
+
+#line-chart-filter-title{
+  margin-bottom: 1em;
+}
+
 #line-chart-placeholder{
   height:36em;
 }
 
+#line-chart-filter .google-visualization-controls-label{
+  font-family: "HelveticaNeueW01-75Bold";
 
+
+}
 
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX CITY PROSPERITY PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -1550,7 +1585,7 @@ label, input, button, select, textarea{
   position: relative;
 }
 
-.project-share-button > div{
+.project-share-button .share-icon, .project-share-button .share-text{
   vertical-align: middle;
   display: inline-block;
 }
@@ -1560,10 +1595,10 @@ label, input, button, select, textarea{
   margin-left:0.8em;
 }
 
-#dropdown-type-graph{
+.dropdown-menu-page-header{
   background-color:#fff;
   position:absolute;
-  top:1.8em;
+  top:1.86em;
   right: 0;
   display: none;
   -webkit-box-shadow: 0 2px 3px #888;
@@ -1572,18 +1607,18 @@ label, input, button, select, textarea{
   z-index:1600;
 }
 
-#dropdown-type-graph button{
+.dropdown-menu-page-header button{
   font-size: 0.85em;
   color: #008CCC;
   font-family: "HelveticaNeueW01-75Bold";
-  padding: 0.2em 0 0.2em 0.7em;
+  padding: 0.2em 0.7em;
 }
 
-#dropdown-type-graph button:hover{
+.dropdown-menu-page-header button:hover{
   text-decoration: underline;
 }
 
-#dropdown-type-graph button.active{
+.dropdown-menu-page-header button.active{
   border-bottom: 1px solid #008CCC;
 }
 
@@ -1595,11 +1630,11 @@ label, input, button, select, textarea{
 
 /* XXXXXXXXXXXXXXXXXXXX TEMP: MAKE ALL NON CLICKABLE LINKS/BUTTONS GREY XXXXXXXXXXXXXXXXXXXX */
 
-#project-share-graph .share-text, #project-share-embed .share-text, #project-share-share .share-text, #project-share-export .share-text, #save-search-results, #sort-type-budget .project-sort-text, #sort-type-country .project-sort-text{
+#project-share-embed .share-text, #project-share-share .share-text, #project-share-export .share-text, #save-search-results, #sort-type-budget .project-sort-text, #sort-type-country .project-sort-text{
   color: #797974;
 }
 
-#graph-button-treemap, #graph-button-graph, #graph-button-table{
+#graph-button-treemap{
   display: none;
 }
 

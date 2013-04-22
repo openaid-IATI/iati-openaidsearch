@@ -14,24 +14,7 @@ Template Name: Standard page
 		<div class="container">
 			<div class="row-fluid">
 				<div class="span8"></div>
-				<div class="span4">
-					<div class="project-share-container">
-
-						<a id="project-share-share" class="project-share-button hneue-bold">
-							<div class="share-icon"></div>
-							<div class="share-text">SHARE</div>
-						</a>
-						<a href="<?php echo site_url(); ?>/whistleblower/" id="project-share-whistleblower" class="project-share-button hneue-bold">
-							<div class="share-icon"></div>
-							<div class="share-text">WHISTLEBLOWER</div>
-						</a>
-						<a href="<?php the_permalink(); ?>" alt="Bookmark <?php the_title(); ?>" id="project-share-bookmark" class="project-share-button hneue-bold">
-							<div class="share-icon"></div>
-							<div class="share-text">BOOKMARK</div>
-						</a>
-
-					</div>
-				</div>
+				<?php get_template_part("global", "page-navbar-right"); ?>
 			</div>
 		</div>
 	</div>

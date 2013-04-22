@@ -20,7 +20,7 @@ Template Name: Indicators page
 						<a href="#" id="project-share-graph" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
 							<div class="share-text">TYPE GRAPH</div>
-							<div id="dropdown-type-graph">
+							<div id="dropdown-type-graph" class="dropdown-menu-page-header">
 								<button id="dropdown-line-graph">LINE GRAPH</button>
 								<button id="dropdown-table-graph">TABLE GRAPH</button>
 							</div>
@@ -29,6 +29,10 @@ Template Name: Indicators page
 						<a href="#" id="project-share-export" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
 							<div class="share-text">EXPORT</div>
+							<div id="dropdown-export-indicator" class="dropdown-menu-page-header">
+								<button id="dropdown-png">AS IMAGE</button>
+								<button id="dropdown-csv">AS CSV</button>
+							</div>
 						</a>
 						<a href="#" id="project-share-embed" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
@@ -37,40 +41,35 @@ Template Name: Indicators page
 					</div>
 
 				</div>
-				<div class="span4">
-					<div class="project-share-container">
-
-						<a id="project-share-share" class="project-share-button hneue-bold">
-							<div class="share-icon"></div>
-							<div class="share-text">SHARE</div>
-						</a>
-						<a href="<?php echo site_url(); ?>/whistleblower/" id="project-share-whistleblower" class="project-share-button hneue-bold">
-							<div class="share-icon"></div>
-							<div class="share-text">WHISTLEBLOWER</div>
-						</a>
-						<a href="<?php the_permalink(); ?>" alt="Bookmark <?php the_title(); ?>" id="project-share-bookmark" class="project-share-button hneue-bold">
-							<div class="share-icon"></div>
-							<div class="share-text">BOOKMARK</div>
-						</a>
-
-					</div>
-				</div>
+				<?php get_template_part("global", "page-navbar-right"); ?>
 			</div>
 
 		</div>
 	</div>
 
 	<div class="container">
-		<div class="page-content">
-			<div class="row-fluid">
-				<div class="span12">
-					<div id="line-chart-placeholder"></div>
-					<div id="table-chart-placeholder"></div>
-				</div>
-				
+		<div class="row-fluid">
+			<div class="span3">
+				<div id="line-chart-filter-title">Countries</div>
+				<div id="line-chart-filter"></div>
+			</div>
+			<div class="span9">
+				<div id="line-chart-title">The line chart title</div>
+				<div id="line-chart-placeholder"></div>
 			</div>
 		</div>
 	</div>
+
+	<div class="container">
+		<div class="page-content">
+			<div clas="row-fluid">
+				<div class="span12">
+					<div id="table-chart-placeholder"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>
 
 
@@ -83,5 +82,7 @@ $(document).ready(function(){
   current_selection.indicator.push({"id":"population", "name":"Total population"});
   fill_selection_box();
 });
+
+initialize_charts();
 
 </script>

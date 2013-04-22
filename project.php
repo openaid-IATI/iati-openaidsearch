@@ -227,9 +227,6 @@ $activity = wp_get_activity($project_id);
 		</div>
 	</div>
 	</div>
-
-
-
 	<script type="text/javascript">
 
 	// PREPARE COUNTRIES FOR SHOWING ON MAP
@@ -250,3 +247,5 @@ $activity = wp_get_activity($project_id);
 
 
 	<?php get_footer(); ?>
+	
+	

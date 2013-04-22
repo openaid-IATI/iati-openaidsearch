@@ -1,7 +1,30 @@
 // Global variables
 var current_selection = new Object();
+var current_url = new Object();
 var selected_type = '';
 var standard_mapheight = '45em';
+
+function build_current_url(){
+
+  var url = '?s=';
+  if (!(typeof current_selection.sector === "undefined")) url += build_current_url_add_par("sector", current_selection.sector);
+  if (!(typeof current_selection.country === "undefined")) url += build_current_url_add_par("country", current_selection.country);
+  if (!(typeof current_selection.budget === "undefined")) url += build_current_url_add_par("budget", current_selection.budget);
+  if (!(typeof current_selection.region === "undefined")) url += build_current_url_add_par("region", current_selection.region);
+  if (!(typeof current_selection.indicator === "undefined")) url += build_current_url_add_par("indicator", current_selection.indicator);
+  if (!(typeof current_selection.city === "undefined")) url += build_current_url_add_par("city", current_selection.city);
+  if (!(typeof current_selection.offset === "undefined")) url += build_current_url_add_par("offset", current_selection.offset);
+  if (!(typeof current_selection.per_page === "undefined")) url += build_current_url_add_par("per_page", current_selection.per_page);
+
+}
+
+function build_current_url_add_par(name, values){
+
+  var par = '&=';
+  for(var i = 0; i < arr.length;i++){
+    par += arr[i].id.toString();
+  }
+}
 
 //HTML function to create filters
 function create_filter_attributes(objects, columns){
@@ -502,6 +525,28 @@ jQuery(function($){
 
 
 
+/* page header global dropdowns */
+   
+ $("#project-share-export").click(function(){
+
+   if($('#dropdown-export-indicator').is(":hidden")){
+       $('#dropdown-export-indicator').show("blind", { direction: "vertical" }, 200);
+   } else {
+       $('#dropdown-export-indicator').hide("blind", { direction: "vertical" }, 200);
+   }
+   return false;
+ });
+
+
+ $("#project-share-share").click(function(){
+
+   if($('#dropdown-share-page').is(":hidden")){
+       $('#dropdown-share-page').show("blind", { direction: "vertical" }, 200);
+   } else {
+       $('#dropdown-share-page').hide("blind", { direction: "vertical" }, 200);
+   }
+   return false;
+ });
 
 
 

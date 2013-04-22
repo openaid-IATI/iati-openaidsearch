@@ -99,4 +99,52 @@ L.geoJson(geocountries, {
 
 });
 
+/*
+var locarray = Array();
+var sqltext = '';
+var counter = 0;
+for (var i = 0;i < city_database.length;i++){
+
+	for(var y = 0;y < city_locations.features.length; y++){
+		
+		if(city_database[i].Name == city_locations.features[y].properties.nameascii || city_database[i].Name == city_locations.features[y].properties.namealt || city_database[i].Name == city_locations.features[y].properties.name){
+		
+			if(city_database[i].iso2 == city_locations.features[y].properties.iso_a2){
+				counter++;
+				
+				sqltext += "update data_city set latitude='"+ city_locations.features[y].properties.longitude +"', longitude='" +city_locations.features[y].properties.latitude+"' where id = "+city_database[i].id+";";
+				
+			}
+		}		
+	}
+}
+console.log(sqltext);
+
+double or 2 cities in same country with same name:
+Fuyang
+Teresina
+Natal
+Jining
+Liantungang
+Pingxiang
+Suzhou
+Yichun
+Yulin
+Aurangabad
+Bandar Lampung 
+Padang
+Windhoek
+Denpasar
+Columbus
+Aurora
+Jacksonville
+Kansas City
+Las vegas
+Portland
+Richmond
+Rochester
+
+
+*/
+
 
