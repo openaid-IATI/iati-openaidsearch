@@ -56,6 +56,7 @@ Template Name: Indicators page
 			<div class="span9">
 				<div id="line-chart-title">The line chart title</div>
 				<div id="line-chart-placeholder"></div>
+
 			</div>
 		</div>
 	</div>
@@ -83,12 +84,15 @@ Template Name: Indicators page
 
 <script type="text/javascript">
 $(document).ready(function(){
-  initialize_map('http://dev.oipa.openaidsearch.org/json',2015,"indicator", "", "");
-  current_selection.indicator = [];
-  current_selection.indicator.push({"id":"population", "name":"Total population"});
+  selected_type = "indicator";
+  query_string_to_selection();
+  if (typeof current_selection.indicator === "undefined"){
+  	current_selection.indicator = [];
+  	current_selection.indicator.push({"id":"population", "name":"Total population"});
+  }
+  reload_map();
+  initialize_filters();
   fill_selection_box();
+  initialize_charts();
 });
-
-initialize_charts();
-
 </script>

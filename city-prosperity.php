@@ -50,10 +50,7 @@ Template Name: City prosperity page
 		<div class="row-fluid">
 			<div class="span12">
 
-
-
 				<div id="table-city-prosperity"></div>
-
 
 			</div>
 		</div>
@@ -65,14 +62,17 @@ Template Name: City prosperity page
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		load_map('http://dev.oipa.openaidsearch.org/json-city');
-		function load_map(url){
-			data = initialize_map(url,2012,'cpi',"", "", "");
-			current_selection.indicator = [];
-		  	current_selection.indicator.push({"id":"cpi", "name":"City prosperity"});
-		  	fill_selection_box();
-		}
 
+	  selected_type = "cpi";
+	  query_string_to_selection();
+	  if (typeof current_selection.indicator === "undefined"){
+	  	current_selection.indicator = [];
+		current_selection.indicator.push({"id":"cpi_5_dimensions", "name":"City prosperity"});
+	  }
+	  reload_map();
+	  initialize_filters();
+	  fill_selection_box();
+	
 	});
 
 </script>

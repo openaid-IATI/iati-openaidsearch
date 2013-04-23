@@ -7,22 +7,46 @@ var standard_mapheight = '45em';
 function build_current_url(){
 
   var url = '?s=';
-  if (!(typeof current_selection.sector === "undefined")) url += build_current_url_add_par("sector", current_selection.sector);
-  if (!(typeof current_selection.country === "undefined")) url += build_current_url_add_par("country", current_selection.country);
-  if (!(typeof current_selection.budget === "undefined")) url += build_current_url_add_par("budget", current_selection.budget);
-  if (!(typeof current_selection.region === "undefined")) url += build_current_url_add_par("region", current_selection.region);
-  if (!(typeof current_selection.indicator === "undefined")) url += build_current_url_add_par("indicator", current_selection.indicator);
-  if (!(typeof current_selection.city === "undefined")) url += build_current_url_add_par("city", current_selection.city);
+  if (!(typeof current_selection.sectors === "undefined")) url += build_current_url_add_par("sectors", current_selection.sectors);
+  if (!(typeof current_selection.countries === "undefined")) url += build_current_url_add_par("countries", current_selection.countries);
+  if (!(typeof current_selection.budgets === "undefined")) url += build_current_url_add_par("budgets", current_selection.budgets);
+  if (!(typeof current_selection.regions === "undefined")) url += build_current_url_add_par("regions", current_selection.regions);
+  if (!(typeof current_selection.indicators === "undefined")) url += build_current_url_add_par("indicator", current_selection.indicators);
+  if (!(typeof current_selection.cities === "undefined")) url += build_current_url_add_par("city", current_selection.cities);
   if (!(typeof current_selection.offset === "undefined")) url += build_current_url_add_par("offset", current_selection.offset);
   if (!(typeof current_selection.per_page === "undefined")) url += build_current_url_add_par("per_page", current_selection.per_page);
-
+  if (!(typeof current_selection.order_by === "undefined")) url += build_current_url_add_par("order_by", current_selection.order_by);
+  return url;
 }
 
-function build_current_url_add_par(name, values){
+function build_current_url_add_par(name, arr){
+  if(arr.length == 0){return '';}
 
-  var par = '&=';
+  var par = '&' + name + '=';
   for(var i = 0; i < arr.length;i++){
-    par += arr[i].id.toString();
+    par += arr[i].id.toString() + ",";
+  }
+
+  par = par.substr(0, par.length - 1);
+
+  return par;
+}
+
+function query_string_to_selection(){
+
+  var query = window.location.search.substring(1);
+  if(query != ''){
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+      var pair = vars[i].split("=");
+      var vals = pair[1].split(",");
+
+      current_selection[pair[0]] = [];
+      for(var y=0;y<vals.length;y++){
+        current_selection[pair[0]].push({"id":vals[y], "name":"unknown"});
+      }
+      
+    } 
   }
 }
 
@@ -140,7 +164,6 @@ jQuery(function($) {
 
 	function hide_map()
 	{
-    // TO DO: TEST IF THIS WORKS
     standard_mapheight = $('#map').css('height');
   	$('#map-hide-show-button').removeClass('map-show');
 		$('#map-hide-show-button').addClass('map-hide');
@@ -239,28 +262,29 @@ jQuery(function($) {
   function initialize_filters(){
     $('#map-filter-overlay input:checked').prop('checked', false);
 
-    if (!(typeof current_selection.sector === "undefined")) init_filters_loop(current_selection.sector);
-    if (!(typeof current_selection.country === "undefined")) init_filters_loop(current_selection.country);
-    if (!(typeof current_selection.budget === "undefined")) init_filters_loop(current_selection.budget);
-    if (!(typeof current_selection.region === "undefined")) init_filters_loop(current_selection.region);
-    if (!(typeof current_selection.indicator === "undefined")) init_filters_loop(current_selection.indicator);
-    if (!(typeof current_selection.city === "undefined")) init_filters_loop(current_selection.city);
+    if (!(typeof current_selection.sectors === "undefined")) init_filters_loop(current_selection.sectors);
+    if (!(typeof current_selection.countries === "undefined")) init_filters_loop(current_selection.countries);
+    if (!(typeof current_selection.budgets === "undefined")) init_filters_loop(current_selection.budgets);
+    if (!(typeof current_selection.regions === "undefined")) init_filters_loop(current_selection.regions);
+    if (!(typeof current_selection.indicators === "undefined")) init_filters_loop(current_selection.indicators);
+    if (!(typeof current_selection.cities === "undefined")) init_filters_loop(current_selection.cities);
+
+
   }
 
   function init_filters_loop(arr){
     for(var i = 0; i < arr.length;i++){
-      var curId = arr[i].name.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc');
-      $('#'+curId).prop('checked', true);
+      $(':checkbox[value=' + arr[i].id + ']').prop('checked', true);
     }
   }
 
   function hide_all_filters(){
-    $('#country-filters').hide();
-    $('#region-filters').hide();
-    $('#budget-filters').hide();
-    $('#sector-filters').hide();
-    $('#indicator-filters').hide();
-    $('#city-filters').hide();
+    $('#countries-filters').hide();
+    $('#regions-filters').hide();
+    $('#budgets-filters').hide();
+    $('#sectors-filters').hide();
+    $('#indicators-filters').hide();
+    $('#cities-filters').hide();
   }
 
 	$('#map-filter-cancel').click(function(){
@@ -278,22 +302,22 @@ jQuery(function($) {
 function save_selection(){
     
     var new_selection = new Object();
-    new_selection.sector = [];
-    new_selection.country = [];
-    new_selection.budget = [];
-    new_selection.region = [];
-    new_selection.indicator = [];
-    new_selection.city = [];
+    new_selection.sectors = [];
+    new_selection.countries = [];
+    new_selection.budgets = [];
+    new_selection.regions = [];
+    new_selection.indicators = [];
+    new_selection.cities = [];
 
     // set selection as filter and load results
     $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
 
-    get_checked_by_filter("sector", new_selection);
-    get_checked_by_filter("country", new_selection);
-    get_checked_by_filter("budget", new_selection);
-    get_checked_by_filter("region", new_selection);
-    get_checked_by_filter("indicator", new_selection);
-    get_checked_by_filter("city", new_selection);
+    get_checked_by_filter("sectors", new_selection);
+    get_checked_by_filter("countries", new_selection);
+    get_checked_by_filter("budgets", new_selection);
+    get_checked_by_filter("regions", new_selection);
+    get_checked_by_filter("indicators", new_selection);
+    get_checked_by_filter("cities", new_selection);
     current_selection = new_selection;
 
     fill_selection_box();
@@ -309,15 +333,20 @@ function get_checked_by_filter(filtername, new_selection){
 // MAP RELOAD FUNCTIONS 
 
 function reload_map(){
-  
+
+  // hide map show loader
+  $('#map-loader').show();
+  $('#map').hide();
+
+
   var dlmtr = ',';
 
-  var str_sector = reload_map_prepare_parameter_string("sector", dlmtr);
-  var str_country = reload_map_prepare_parameter_string("country", dlmtr);
-  var str_budget = reload_map_prepare_parameter_string("budget", dlmtr);
-  var str_region = reload_map_prepare_parameter_string("region", dlmtr);
-  var str_indicator = reload_map_prepare_parameter_string("indicator", dlmtr);
-  var str_city = reload_map_prepare_parameter_string("city", dlmtr);
+  var str_sector = reload_map_prepare_parameter_string("sectors", dlmtr);
+  var str_country = reload_map_prepare_parameter_string("countries", dlmtr);
+  var str_budget = reload_map_prepare_parameter_string("budgets", dlmtr);
+  var str_region = reload_map_prepare_parameter_string("regions", dlmtr);
+  var str_indicator = reload_map_prepare_parameter_string("indicators", dlmtr);
+  var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
 
   // if project filter container is on the page (= projects page)
   if (selected_type=='projects'){
@@ -328,8 +357,12 @@ function reload_map(){
   } else if (selected_type=='cpi'){
     initialize_map('http://dev.oipa.openaidsearch.org/json-city?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&indicator=' + str_indicator + '&city=' + str_city,2012,'',"", "", "");
   }
-}
 
+  // show map hide loader
+  $('#map').show();
+  $('#map-loader').hide();
+  
+}
 
 function reload_map_prepare_parameter_string(filtername, dlmtr){
   var str = '';
@@ -382,19 +415,19 @@ function fill_selection_box(){
 
   var html = '';
   var indicatorhtml = '';
-  if (!(typeof current_selection.sector === "undefined") && (current_selection.sector.length > 0)) html += fill_selection_box_single_filter("SECTORS", "sector", current_selection.sector);
-  if (!(typeof current_selection.country === "undefined") && (current_selection.country.length > 0)) html += fill_selection_box_single_filter("COUNTRIES", "country", current_selection.country);
-  if (!(typeof current_selection.budget === "undefined") && (current_selection.budget.length > 0)) html += fill_selection_box_single_filter("BUDGETS","budget", current_selection.budget);
-  if (!(typeof current_selection.region === "undefined") && (current_selection.region.length > 0)) html += fill_selection_box_single_filter("REGIONS", "region", current_selection.region);
-  if (!(typeof current_selection.city === "undefined") && (current_selection.city.length > 0)) html += fill_selection_box_single_filter("CITIES", "city", current_selection.city);
-  if (!(typeof current_selection.indicator === "undefined") && (current_selection.indicator.length > 0)) indicatorhtml = fill_selection_box_single_filter("INDICATORS", "indicator", current_selection.indicator);
+  if (!(typeof current_selection.sectors === "undefined") && (current_selection.sectors.length > 0)) html += fill_selection_box_single_filter("SECTORS", current_selection.sectors);
+  if (!(typeof current_selection.countries === "undefined") && (current_selection.countries.length > 0)) html += fill_selection_box_single_filter("COUNTRIES", current_selection.countries);
+  if (!(typeof current_selection.budgets === "undefined") && (current_selection.budgets.length > 0)) html += fill_selection_box_single_filter("BUDGETS", current_selection.budgets);
+  if (!(typeof current_selection.regions === "undefined") && (current_selection.regions.length > 0)) html += fill_selection_box_single_filter("REGIONS", current_selection.regions);
+  if (!(typeof current_selection.cities === "undefined") && (current_selection.cities.length > 0)) html += fill_selection_box_single_filter("CITIES", current_selection.cities);
+  if (!(typeof current_selection.indicators === "undefined") && (current_selection.indicators.length > 0)) indicatorhtml = fill_selection_box_single_filter("INDICATORS", current_selection.indicators);
   $("#selection-box").html(html);
   $("#selection-box-indicators").html(indicatorhtml);
   init_remove_filters_from_selection_box();
 }
 
-function fill_selection_box_single_filter(header, singlename, arr){
-  var html = '<div class="select-box" id="selected-' + singlename + '">';
+function fill_selection_box_single_filter(header, arr){
+  var html = '<div class="select-box" id="selected-' + header.toLowerCase() + '">';
       html += '<div class="select-box-header">';
       if (header == "INDICATORS" && selected_type == "cpi"){ header = "DIMENSIONS";};
       html += header;
@@ -403,6 +436,11 @@ function fill_selection_box_single_filter(header, singlename, arr){
       for(var i = 0; i < arr.length; i++){
         html += '<div class="select-box-selected">';
         html += '<div id="selected-' + arr[i].id.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc') + '" class="selected-remove-button"></div>';
+        
+        if (arr[i].name.toString() == 'unknown'){
+          arr[i].name = $(':checkbox[value=' + arr[i].id + ']').attr("name");
+        }
+
         html += '<div>' + arr[i].name + '</div>';
         html += '</div>';
       }
@@ -442,80 +480,6 @@ $(".selection-clear-div").click(function(){
 jQuery(function($){
 
 
-  // load listeners at page initialisation:
-  load_projects_listeners();
-
-  
-
-  function load_new_page(link){
-    
-   $('#page-wrapper').fadeOut(100, function(){ //fade out the content area
-   $("#paginated-loader").show();
-   }).load(link + ' #page-wrapper', function(){ 
-    $("#paginated-loader").hide();
-    $('#page-wrapper').fadeIn(200, function(){
-      load_projects_listeners();
-
-   
-   }); });
-   $('html,body').animate({
-           scrollTop: ($("#map-hide-show").offset().top - 150)},
-           'slow');
-  }
-
-
-  function load_projects_listeners(){
-    
-    // Reload projects on pagination container click
-    $('#pagination a').click(function(){ 
-     var link = $(this).attr('href');
-     load_new_page(link);
-     return false;
-    });
-
-    // Reload projects on sort type click
-    $('.project-sort-type a').click(function(){ 
-     var link = $(this).attr('href');
-     load_new_page(link);
-     return false;
-    });
-
-    // XXXXXXX sort buttons project page XXXXX
-
-    $(".project-sort-type").click(function(){
-
-      if($('.dropdown-project', this).is(":hidden")){
-          $('.dropdown-project', this).show("blind", { direction: "vertical" }, 200);
-      } else {
-          $('.dropdown-project', this).hide("blind", { direction: "vertical" }, 200);
-      }
-
-      return false;
-    });
-
-
-      // plus - min button in project description 
-
-  $('.project-expand-button').click(function(e){
-    // TO DO: show the whole description.
-
-    var currentId = $(this).attr('id');
-
-    if($(this).hasClass("expand-plus")){
-      $('.project-project-spec-hidden.'+currentId).show();
-      $('.projects-project-description.'+currentId).css("height", "auto");
-      $(this).removeClass('expand-plus');
-      $(this).addClass('expand-min');
-    } else {
-      $('.project-project-spec-hidden.'+currentId).hide();
-      $('.projects-project-description.'+currentId).css("height", "6em");
-      $(this).removeClass('expand-min');
-      $(this).addClass('expand-plus');
-    }
-    
-    });
-  }
-
   // IE: prevent focus on internet explorer
   var _preventDefault = function(evt) { evt.preventDefault(); };
   $("#map-slider-tooltip div").bind("dragstart", _preventDefault).bind("selectstart", _preventDefault);
@@ -553,7 +517,8 @@ jQuery(function($){
   $("#project-share-bookmark").click(function(){
     var href = $(this).attr('href');
     var title = $(this).attr('alt');
-    title = title.substring(9);
+    title = "Open UN-Habitat - " + title.substring(9);
+    console.log(title);
     bookmarksite(title, href);
     return false;
   });
@@ -580,7 +545,32 @@ else if(document.all)// ie
 }
 
 
+$('#dropdown-share-facebook').click(function(){
 
+  var link = ' https://www.facebook.com/sharer/sharer.php?u=' + document.URL.toString().split("?")[0] + build_current_url();
+  window.open(link);
+  
+});
+
+$('#dropdown-share-twitter').click(function(){
+
+  var link = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(document.URL.toString().split("?")[0] + build_current_url());
+  console.log(link);
+  window.open(link);
+});
+
+$('#dropdown-share-linkedin').click(function(){
+
+  var link = 'http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL.toString().split("?")[0] + build_current_url());
+  console.log(link);
+  window.open(link);
+});
+
+$('#dropdown-share-email').click(function(){
+
+  var link = 'mailto:?Subject=' + encodeURIComponent('Shared to you from Open UN-Habitat') + '&body=' + encodeURIComponent('The following page was recommended to you on the Open UN-Habitat site. ' + document.URL.toString().split("?")[0] + build_current_url());
+  window.open(link);
+});
 
 
 //   $('.saveresults').click(function(){

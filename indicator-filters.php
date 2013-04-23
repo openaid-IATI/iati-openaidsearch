@@ -5,7 +5,7 @@
 				
 				<div class="filter-by">
 					<div class="filter-name hneue-bold">BY INDICATOR: </div>
-					<button id="indicator-filters-button" class="filter-button">
+					<button id="indicators-filters-button" class="filter-button">
 						<div class="filter-text">PLEASE SELECT..</div>
 						<div class="filter-button-icon"></div>
 					</button>
@@ -13,7 +13,7 @@
 
 				<div class="filter-by">
 					<div class="filter-name hneue-bold">BY REGION: </div>
-					<button id="region-filters-button" class="filter-button">
+					<button id="regions-filters-button" class="filter-button">
 						<div class="filter-text">PLEASE SELECT..</div>
 						<div class="filter-button-icon"></div>
 					</button>
@@ -21,7 +21,7 @@
 
 				<div class="filter-by">
 					<div class="filter-name hneue-bold">BY COUNTRY: </div>
-					<button id="country-filters-button" class="filter-button">
+					<button id="countries-filters-button" class="filter-button">
 						<div class="filter-text">PLEASE SELECT..</div>
 						<div class="filter-button-icon"></div>
 					</button>
@@ -29,7 +29,7 @@
 
 				<div class="filter-by">
 					<div class="filter-name hneue-bold">BY CITY: </div>
-					<button id="city-filters-button" class="filter-button">
+					<button id="cities-filters-button" class="filter-button">
 						<div class="filter-text">PLEASE SELECT..</div>
 						<div class="filter-button-icon"></div>
 					</button>

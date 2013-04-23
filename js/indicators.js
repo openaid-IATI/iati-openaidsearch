@@ -118,31 +118,31 @@
   function set_filters_indicator(data){
     
     region_html = create_filter_attributes(data['regions'], 4);
-    $('#region-filters').html(region_html);
+    $('#regions-filters').html(region_html);
 
     country_html = create_filter_attributes(data['countries'], 4);
-    $('#country-filters').html(country_html);
+    $('#countries-filters').html(country_html);
 
     // city_html = create_filter_attributes(data['cities'], 4);
-    // $('#city-filters').html(city_html);
+    // $('#cities-filters').html(city_html);
 
     indicator_html = create_filter_attributes(data['indicators'], 3);
-    $('#indicator-filters').html(indicator_html);
+    $('#indicators-filters').html(indicator_html);
   }
 
   function set_filters_cpi(data){
 
     region_html = create_filter_attributes(data['regions'], 4);
-    $('#region-filters').html(region_html);
+    $('#regions-filters').html(region_html);
 
     country_html = create_filter_attributes(data['countries'], 4);
-    $('#country-filters').html(country_html);
+    $('#countries-filters').html(country_html);
 
     city_html = create_filter_attributes(data['cities'], 4);
-    $('#city-filters').html(city_html);
+    $('#cities-filters').html(city_html);
 
     indicator_html = create_filter_attributes(data['indicators'], 4);
-    $('#indicator-filters').html(indicator_html);
+    $('#indicators-filters').html(indicator_html);
   }
 
   function get_indicator_data(indicator_id, countries, regions, cities){
@@ -152,7 +152,6 @@
     if (indicator_id){
       url = url + '?indicator=' + indicator_id
     }
-    console.log(url);
      $.ajax({
         type: 'GET',
          url: url,
@@ -470,8 +469,6 @@
           try{
 
             var value = circles[i].values["y" + year];
-            console.log(value);
-            console.log(year);
             if (value === undefined || value === null){
 
             } else {
@@ -513,7 +510,7 @@
         });
         tableChart.draw();
 
-        var columnFilter = new google.visualization.ControlWrapper({
+        var columnFilterT = new google.visualization.ControlWrapper({
           controlType: 'CategoryFilter',
           containerId: 'table-chart-filter',
           dataTable: columnsTable,
@@ -530,12 +527,13 @@
           },
           state: initState
         });
-        columnFilter.draw();
+        columnFilterT.draw();
         
-        google.visualization.events.addListener(columnFilter, 'statechange', function () {
+        google.visualization.events.addListener(columnFilterT, 'statechange', function () {
 
-            var state = columnFilter.getState();
+            var state = columnFilterT.getState();
             var curyear = state.selectedValues[0];
+
             var curdata = getTableChartData(curyear);
             tableChart.draw(curdata);
         });

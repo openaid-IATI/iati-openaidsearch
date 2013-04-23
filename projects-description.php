@@ -33,7 +33,7 @@ foreach($objects AS $idx=>$project) {
 						$countries = "";
 						$cSep = "";
 						foreach($project->recipient_country AS $country) {
-							echo  $sep . "<a href='".get_bloginfo('url')."/projects/?countries={$country->iso}'>" . $country->name . "</a>";
+							echo  $sep . "<a class='projects-description-link' href='?countries={$country->iso}'>" . $country->name . "</a>";
 							$countries .= $cSep . $country->iso;
 							$sep = ', ';
 							$cSep = '|';
@@ -54,7 +54,7 @@ foreach($objects AS $idx=>$project) {
 							if($sector->name=='No information available') {
 								echo $sector->name;
 							} else {
-								echo  $sep . "<a href='".get_bloginfo('url')."/projects/?sectors={$sector->code}'>" . $sector->name . "</a>";
+								echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->name . "</a>";
 							}
 								$sep = ', ';
 							}

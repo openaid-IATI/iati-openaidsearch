@@ -1031,39 +1031,46 @@ label, input, button, select, textarea{
 }
 
 #map-timeline{
-  position:absolute;
-  left: 2%;
+  position: absolute;
+  width: 1416px;
+  left: 50%;
+  margin-left:-708px;
   bottom:0;
-  width:96%;
   height:4em;
   padding: 0;
-  margin: 0;
 }
 
 #timeline-left, #timeline-right{
   position: absolute;
-  width: 2%;
+  width: 50%;
   background-color: #000;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
   filter: alpha(opacity=40);
   opacity: 0.4;
   height: 4em;
   display:block;
+  overflow: hidden;
 }
 
 #timeline-left{
   left: 0;
+  margin-left:-708px;
 }
 
 #timeline-right{
   right: 0;
+  margin-right:-708px;
+}
+
+#map-slider-left-filler{
+
 }
 
 .slider-year{
   display:inline-block;
   background-color: #000;
   height: 100%;
-  width:0.990099%;
+  width:14px;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
   filter: alpha(opacity=40);
   opacity: 0.4;
@@ -1074,6 +1081,20 @@ label, input, button, select, textarea{
   opacity: 0.9;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
   filter: alpha(opacity=90);
+}
+
+.slider-year-inner-left{
+  background-color: #FFF;
+  width: 2px;
+  float: left;
+  height:100%;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: alpha(opacity=70);
+  opacity: 0.7;
+}
+
+#year-1950{
+  width: 16px;
 }
 
 .slider-year-inner-white{
@@ -1096,6 +1117,10 @@ label, input, button, select, textarea{
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
   filter: alpha(opacity=90);
 }
+
+
+    
+
 
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX INDICATOR PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -1618,12 +1643,8 @@ label, input, button, select, textarea{
   padding: 0.2em 0.7em;
 }
 
-.dropdown-menu-page-header button:hover{
+.dropdown-menu-page-header button:hover, .dropdown-menu-page-header button.active{
   text-decoration: underline;
-}
-
-.dropdown-menu-page-header button.active{
-  border-bottom: 1px solid #008CCC;
 }
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAQ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -1634,7 +1655,7 @@ label, input, button, select, textarea{
 
 /* XXXXXXXXXXXXXXXXXXXX TEMP: MAKE ALL NON CLICKABLE LINKS/BUTTONS GREY XXXXXXXXXXXXXXXXXXXX */
 
-#project-share-embed .share-text, #project-share-share .share-text, #project-share-export .share-text, #save-search-results, #sort-type-budget .project-sort-text, #sort-type-country .project-sort-text{
+#project-share-embed .share-text, #save-search-results, #sort-type-budget .project-sort-text, #sort-type-country .project-sort-text{
   color: #797974;
 }
 

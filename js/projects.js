@@ -47,16 +47,14 @@ function draw_project_options(options){
   budget_keys['1000000'] = '> US$ 1.000.000';
 
   var country_html = create_filter_attributes(options.countries, 4);
-  $('#country-filters').html(country_html);
+  $('#countries-filters').html(country_html);
   var region_html = create_filter_attributes(options.regions, 4);
-  $('#region-filters').html(region_html);
+  $('#regions-filters').html(region_html);
   var sector_html = create_filter_attributes(options.sectors, 3);
-  $('#sector-filters').html(sector_html);
+  $('#sectors-filters').html(sector_html);
   var budget_html = create_filter_attributes(budget_keys, 4);
-  $('#budget-filters').html(budget_html);
+  $('#budgets-filters').html(budget_html);
 }
-
-
 
 
 
@@ -180,4 +178,129 @@ function load_project_map(project_geojson){
 
     geojson.addTo(map); 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // load listeners at page initialisation:
+  load_projects_listeners();
+
+  
+
+  function load_new_page(reloadmap,keepoffset){
+   if (reloadmap === undefined) reloadmap = true;
+   if (keepoffset === undefined) keepoffset = false;
+   if (!keepoffset){
+    current_selection.offset = [];
+   }
+
+   var link = document.URL.toString().split("?")[0] + build_current_url();
+   history.pushState(null, null, link);
+   $('#page-wrapper').fadeOut(100, function(){ //fade out the content area
+   $("#paginated-loader").show();
+   }).load(link + ' #page-wrapper', function(){ 
+    $("#paginated-loader").hide();
+    $('#page-wrapper').fadeIn(200, function(){
+      load_projects_listeners();
+
+   
+   }); });
+   $('html,body').animate({
+     scrollTop: ($("#map-hide-show").offset().top - 150)},
+     'slow', function(){
+        if(reloadmap){
+          reload_map();
+          initialize_filters();
+          fill_selection_box();
+        }
+     });
+  }
+
+
+  function load_projects_listeners(){
+    
+    // Reload projects on pagination container click
+    $('#pagination a').click(function(){ 
+     var href = $(this).attr('href');
+     var splitted = href.split("=");
+     var parkey = splitted[0].substr(1);
+     var parval = splitted[1];
+     current_selection[parkey] = [{"id":parval, "name":"unnamed"}];
+     load_new_page(false, true);
+     return false;
+    });
+
+    // Reload projects on sort type click
+    $('.project-sort-type a').click(function(){ 
+     var href = $(this).attr('href');
+     var splitted = href.split("=");
+     var parkey = splitted[0].substr(1);
+     var parval = splitted[1];
+     current_selection[parkey] = [{"id":parval, "name":"unnamed"}];
+     load_new_page();
+     return false;
+    });
+
+    $('.projects-description-link').click(function(){
+     var href = $(this).attr('href');
+     var splitted = href.split("=");
+     var parkey = splitted[0].substr(1);
+     var parval = splitted[1];
+     current_selection = new Object();
+     current_selection[parkey] = [{"id":parval, "name":"unnamed"}];
+     load_new_page(true, false);
+     return false;
+    });
+
+    // XXXXXXX sort buttons project page XXXXX
+
+    $(".project-sort-type").click(function(){
+
+      if($('.dropdown-project', this).is(":hidden")){
+          $('.dropdown-project', this).show("blind", { direction: "vertical" }, 200);
+      } else {
+          $('.dropdown-project', this).hide("blind", { direction: "vertical" }, 200);
+      }
+
+      return false;
+    });
+
+
+      // plus - min button in project description 
+
+  $('.project-expand-button').click(function(e){
+    // TO DO: show the whole description.
+
+    var currentId = $(this).attr('id');
+
+    if($(this).hasClass("expand-plus")){
+      $('.project-project-spec-hidden.'+currentId).show();
+      $('.projects-project-description.'+currentId).css("height", "auto");
+      $(this).removeClass('expand-plus');
+      $(this).addClass('expand-min');
+    } else {
+      $('.project-project-spec-hidden.'+currentId).hide();
+      $('.projects-project-description.'+currentId).css("height", "6em");
+      $(this).removeClass('expand-min');
+      $(this).addClass('expand-plus');
+    }
+    
+    });
+  }
+
+
+
+
 

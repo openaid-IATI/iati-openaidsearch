@@ -27,10 +27,10 @@ Template Name: Projects page
 
                             <div id="dropdown-project-amount" class="dropdown-project">
                                 <!-- TO DO: keep parameters -->
-                                <a href="<?php echo home_url(); ?>/projects/?offset=0&per_page=5" id="dropdown-project-amount-5">5</a>
-                                <a href="<?php echo home_url(); ?>/projects/?offset=0&per_page=10" id="dropdown-project-amount-10">10</a>
-                                <a href="<?php echo home_url(); ?>/projects/?offset=0&per_page=25" id="dropdown-project-amount-20">25</a>
-                                <a href="<?php echo home_url(); ?>/projects/?offset=0&per_page=50" id="dropdown-project-amount-20">50</a>
+                                <a href="?per_page=5" class="dropdown-project-amount-link">5</a>
+                                <a href="?per_page=10" class="dropdown-project-amount-link">10</a>
+                                <a href="?per_page=25" class="dropdown-project-amount-link">25</a>
+                                <a href="?per_page=50" class="dropdown-project-amount-link">50</a>
                             </div>
 
 						</div>
@@ -44,19 +44,12 @@ Template Name: Projects page
                             SORT BY:
                         </div>
 
-                        <?php
-                        $params = $_GET;
-                        
-                        ?>
-                        
                         <div id="sort-type-budget" class="project-sort-type">
                             <span class="project-sort-text hneue-bold">BUDGET</span>
                             <span class="project-sort-icon"></span>
                             <div id="dropdown-project-budget" class="dropdown-project">
-                                <?php $params['order_by'] = "statistics__total_budget"; ?>
-                                <a href="?<?php echo http_build_query($params); ?>" id="dropdown-project-budget-asc">ASCENDING</a>
-                                <?php $params['order_by'] = "-statistics__total_budget"; ?>
-                                <a href="?<?php echo http_build_query($params); ?>" id="dropdown-project-budget-desc">DESCENDING</a>
+                                <a href="?order_by=statistics__total_budget" class="project-sort-item">ASCENDING</a>
+                                <a href="?order_by=-statistics__total_budget" class="project-sort-item">DESCENDING</a>
                             </div>
                         </div>
 
@@ -66,22 +59,17 @@ Template Name: Projects page
                             <span class="project-sort-text hneue-bold">START DATE</span>
                             <span class="project-sort-icon"></span>
                             <div id="dropdown-project-startdate" class="dropdown-project">
-                                <?php $params['order_by'] = "start_planned"; ?>
-                                <a href="?<?php echo http_build_query($params); ?>" id="dropdown-project-startdate-asc">ASCENDING</a>
-                                <?php $params['order_by'] = "-start_planned"; ?>
-                                <a href="?<?php echo http_build_query($params); ?>" id="dropdown-project-startdate-desc">DESCENDING</a>
+                                <a href="?order_by=start_planned" class="project-sort-item">ASCENDING</a>
+                                <a href="?order_by=-start_planned" class="project-sort-item">DESCENDING</a>
                             </div>
                         </div>
 
-                        <?php
-                        $params['order_by'] = "country";
-                        ?>
                         <div id="sort-type-country" class="project-sort-type">
                             <span class="project-sort-text hneue-bold">COUNTRY</span>
                             <span class="project-sort-icon"></span>
                             <div id="dropdown-project-country" class="dropdown-project">
-                                <a href="?<?php echo http_build_query($params); ?>" id="dropdown-project-country-asc">ASCENDING</a>
-                                <a href="?<?php echo http_build_query($params); ?>" id="dropdown-project-country-desc">DESCENDING</a>
+                                <a href="?order_by=countries" class="project-sort-item">ASCENDING</a>
+                                <a href="?order_by=-countries" class="project-sort-item">DESCENDING</a>
                             </div>
                         </div>
 
@@ -93,10 +81,7 @@ Template Name: Projects page
 	<div class="page-content">
 		
 		
-			<?php get_template_part( "projects", "description" ); ?>
-	
-        
-
+		<?php get_template_part( "projects", "description" ); ?>
 
 		<div class="container">
 		<div class="row-fluid">
@@ -122,7 +107,11 @@ Template Name: Projects page
 <script type="text/javascript">
 
     $(document).ready(function() {
-        initialize_projects_map('http://dev.oipa.openaidsearch.org/json-activities',"projects");
+      selected_type = "projects";
+      query_string_to_selection();
+      reload_map();
+      initialize_filters();
+      fill_selection_box();
     });
 
 </script>

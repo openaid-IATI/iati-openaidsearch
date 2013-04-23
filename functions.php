@@ -127,18 +127,18 @@ function wp_generate_paging($meta) {
 	// if not on page 1, don't show back links
 	if ($cur_page > 1) {
 	   // show << link to go back to page 1
-		$params['offset'] = 0;
-	   $paging_block .=  "<li><a href='?" . http_build_query($params) . "' class='start'><span>&laquo;</span></a></li>";
+	   //$params['offset'] = 0;
+	   $paging_block .=  "<li><a href='?offset=0' class='start'><span>&laquo;</span></a></li>";
 	   // get previous page num
 	   $prevpage = $cur_page - 1;
 	   // show < link to go back to 1 page
-	   $params['offset'] = $offset - $limit;
-	   $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='limitstart'><span>&larr; </span></a></li>";
+	   //$params['offset'] = $offset - $limit;
+	   $paging_block .= "<li><a href='?offset=" . ($offset - $limit) . "' class='limitstart'><span>&larr; </span></a></li>";
 	} // end if 
 
 	if ($cur_page > (1 + $range)){
-	   $params['offset'] = 0;
-	   $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='page'><span>1</span></a></li>";
+	   //$params['offset'] = 0;
+	   $paging_block .= "<li><a href='?offset=0' class='page'><span>1</span></a></li>";
 	}
 
 	if ($cur_page > (2 + $range)){
@@ -156,8 +156,8 @@ function wp_generate_paging($meta) {
 	      // if not current page...
 	      } else {
 	         // make it a link
-	      	 $params['offset'] = ($x*$per_page) - $per_page;
-	      	 $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='page'><span>$x</span></a></li>";
+	      	 //$params['offset'] = ($x*$per_page) - $per_page;
+	      	 $paging_block .= "<li><a href='?offset=" . (($x*$per_page) - $per_page) . "' class='page'><span>$x</span></a></li>";
 	      } // end else
 	   } // end if 
 	} // end for
@@ -167,8 +167,8 @@ function wp_generate_paging($meta) {
 	}
 
 	if($cur_page < ($total_pages - $range)){
-	   $params['offset'] = $total_count - ($total_count % $per_page);
-	   $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='page'><span>$total_pages</span></a></li>";
+	   //$params['offset'] = $total_count - ($total_count % $per_page);
+	   $paging_block .= "<li><a href='?offset=" . ($total_count - ($total_count % $per_page)) . "' class='page'><span>$total_pages</span></a></li>";
 	}
 	               
 	// if not on last page, show forward and last page links        
@@ -177,11 +177,11 @@ function wp_generate_paging($meta) {
 	   // get next page
 	   $nextpage = $cur_page + 1;
 	    // echo forward link for next page 
-	   $params['offset'] = $offset + $limit;
-	   $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='endmilit'><span>&rarr; </span></a></li>";
-
-	   $params['offset'] = $total_count - ($total_count % $per_page);
-	   $paging_block .= "<li><a href='?" . http_build_query($params) . "' class='end'><span>&raquo;</span></a></li>";
+	   //$params['offset'] = $offset + $limit;
+	   $paging_block .= "<li><a href='?offset=" . ($offset + $limit) . "' class='endmilit'><span>&rarr; </span></a></li>";
+	   //http_build_query($params)
+	   //$params['offset'] = $total_count - ($total_count % $per_page);
+	   $paging_block .= "<li><a href='?offset=" . ($total_count - ($total_count % $per_page)) . "' class='end'><span>&raquo;</span></a></li>";
 	} // end if
 	/****** end build pagination links ******/
 

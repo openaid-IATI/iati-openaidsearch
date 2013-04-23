@@ -21,9 +21,11 @@
         <div id="timeline-left"></div>
         <div id="map-timeline">
             <div id="map-slider-tooltip"></div>
+
             <?php for ($i = 1950; $i < 2051;$i++){   
             echo '<div class="slider-year';
             echo '" id="year-' . $i . '">';
+            if ($i == 1950) { echo '<div class="slider-year-inner-left"></div>';}
             echo '<div class="slider-year-inner-white"></div></div>'; 
             } ?>
         </div>
@@ -38,11 +40,10 @@
         <div class="container">
 
 			<div class="row-fluid map-filter-list">
-                <div id="indicator-filters"></div>
-                <div id="region-filters"></div>
-                <div id="country-filters"></div>
-                <div id="city-filters"></div>
-                <div id="dimension-filters"></div>
+                <div id="indicators-filters"></div>
+                <div id="regions-filters"></div>
+                <div id="countries-filters"></div>
+                <div id="cities-filters"></div>
             </div>
 			
 		</div>
