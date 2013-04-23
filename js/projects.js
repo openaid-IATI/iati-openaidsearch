@@ -218,7 +218,7 @@ function load_project_map(project_geojson){
    
    }); });
    $('html,body').animate({
-     scrollTop: ($("#map-hide-show").offset().top - 150)},
+     scrollTop: ($("#map-hide-show").offset().top - 250)},
      'slow', function(){
         if(reloadmap){
           reload_map();

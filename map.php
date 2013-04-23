@@ -6,33 +6,28 @@
 
     <div id="map-filter-overlay">
         <div class="container">
-
             <div class="row-fluid map-filter-list">
                    
-                
                     <div id="countries-filters"></div>
                     <div id="regions-filters"></div>
                     <div id="sectors-filters"></div>
                     <div id="budgets-filters"></div>
 
             </div>
-
         </div>
+        <div id="map-filters-buttons">
+            <div class="container">
+                <div class="row-fluid">
+                    <div class="span12">
 
-    <div id="map-filters-buttons">
-        <div class="container">
-            <div class="row-fluid">
-                <div class="span12">
+                        <button id="map-filter-cancel" class="hneue-bold">CANCEL</button>
+                        <button id="map-filter-save" class="hneue-bold">SAVE</button>
 
-                    <button id="map-filter-cancel" class="hneue-bold">CANCEL</button>
-                    <button id="map-filter-save" class="hneue-bold">SAVE</button>
-
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-</div>
 
 <?php $hide_map = (!is_page("projects") && !is_home()); ?>
 

@@ -300,7 +300,15 @@ jQuery(function($) {
 // FILTER SAVE FUNCTIONS
 
 function save_selection(){
-    
+
+    if(selected_type == "projects"){
+      load_new_page(false);
+    }
+
+    // hide map show loader
+    $('#map-loader').show();
+    $('#map').hide();
+
     var new_selection = new Object();
     new_selection.sectors = [];
     new_selection.countries = [];
@@ -319,6 +327,9 @@ function save_selection(){
     get_checked_by_filter("indicators", new_selection);
     get_checked_by_filter("cities", new_selection);
     current_selection = new_selection;
+
+     var link = document.URL.toString().split("?")[0] + build_current_url();
+    history.pushState(null, null, link);
 
     fill_selection_box();
     reload_map();
@@ -515,10 +526,11 @@ jQuery(function($){
 
 
   $("#project-share-bookmark").click(function(){
-    var href = $(this).attr('href');
+    var href = document.URL.toString().split("?")[0] + build_current_url();
     var title = $(this).attr('alt');
     title = "Open UN-Habitat - " + title.substring(9);
     console.log(title);
+    console.log(href);
     bookmarksite(title, href);
     return false;
   });
@@ -547,7 +559,7 @@ else if(document.all)// ie
 
 $('#dropdown-share-facebook').click(function(){
 
-  var link = ' https://www.facebook.com/sharer/sharer.php?u=' + document.URL.toString().split("?")[0] + build_current_url();
+  var link = ' https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL.toString().split("?")[0] + build_current_url());
   window.open(link);
   
 });
@@ -573,10 +585,10 @@ $('#dropdown-share-email').click(function(){
 });
 
 
-//   $('.saveresults').click(function(){
-//     generate_download_file();
-//     return false;
-//   }); 
+  $('#save-search-results').click(function(){
+    generate_download_file();
+    return false;
+  }); 
   
 //   $('.export').click(function(){
 //     var id = $(this).attr('id');
@@ -585,74 +597,74 @@ $('#dropdown-share-email').click(function(){
 //   }); 
 
 
-// function generate_download_file(id) {
-//   var url = sThemePath + "/export.php?author=" + sBlogName,
-//       urlSep = "&", country_fltr = '', region_fltr = '', sector_fltr = '', budget_fltr = '', sep = '';
+function generate_download_file(id) {
+  var url = sThemePath + "/export.php?author=" + sBlogName,
+      urlSep = "&", country_fltr = '', region_fltr = '', sector_fltr = '', budget_fltr = '', sep = '';
   
-//   if(id) {
-//     url +=  urlSep + "id=" + id;
-//   }
+  if(id) {
+    url +=  urlSep + "id=" + id;
+  }
   
-//   $('.filterbox input[type=checkbox]:checked').each(function(){
-//     var control_name = $(this).attr('name');
-//     var key = $(this).val();
-//     switch(control_name) {
-//       case 'countries':
-//         if(country_fltr.length==0) sep = '';
-//         country_fltr += sep + key;
-//         sep = "|";
-//         break;
-//       case 'regions':
-//         if(region_fltr.length==0) sep = '';
-//         region_fltr += sep + key;
-//         sep = "|";
-//         break;
-//       case 'sectors':
-//         if(sector_fltr.length==0) sep = '';
-//         sector_fltr += sep + key;
-//         sep = "|";
-//         break;
-//       case 'budgets':
-//         if(budget_fltr.length==0) sep = '';
-//         budget_fltr += sep + key;
-//         sep = "|";
-//         break;
-//     }
-//   });
+  $('.filterbox input[type=checkbox]:checked').each(function(){
+    var control_name = $(this).attr('name');
+    var key = $(this).val();
+    switch(control_name) {
+      case 'countries':
+        if(country_fltr.length==0) sep = '';
+        country_fltr += sep + key;
+        sep = "|";
+        break;
+      case 'regions':
+        if(region_fltr.length==0) sep = '';
+        region_fltr += sep + key;
+        sep = "|";
+        break;
+      case 'sectors':
+        if(sector_fltr.length==0) sep = '';
+        sector_fltr += sep + key;
+        sep = "|";
+        break;
+      case 'budgets':
+        if(budget_fltr.length==0) sep = '';
+        budget_fltr += sep + key;
+        sep = "|";
+        break;
+    }
+  });
   
-//   country_fltr = country_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
-//   region_fltr = region_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
-//   sector_fltr = sector_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
-//   budget_fltr = budget_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
+  country_fltr = country_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
+  region_fltr = region_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
+  sector_fltr = sector_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
+  budget_fltr = budget_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
 
-//   var keyword = jQuery('#s').val();
-//   if(keyword) {
-//     url +=  urlSep + "query=" + encodeURI(keyword);
-//     urlSep = "&";
-//   }
+  var keyword = jQuery('#s').val();
+  if(keyword) {
+    url +=  urlSep + "query=" + encodeURI(keyword);
+    urlSep = "&";
+  }
   
   
-//   if(country_fltr.length>0) {
-//     url +=  urlSep + "countries=" + country_fltr;
-//     urlSep = "&";
-//     isFilter = true;
-//   }
-//   if(region_fltr.length>0) {
-//     url +=  urlSep + "regions=" + region_fltr;
-//     urlSep = "&";
-//     isFilter = true;
-//   }
-//   if(sector_fltr.length>0) {
-//     url +=  urlSep + "sectors=" + sector_fltr;
-//     urlSep = "&";
-//     isFilter = true;
-//   }
-//   if(budget_fltr.length>0) {
-//     url +=  urlSep + "budgets=" + budget_fltr;
-//     urlSep = "&";
-//     isFilter = true;
-//   }
+  if(country_fltr.length>0) {
+    url +=  urlSep + "countries=" + country_fltr;
+    urlSep = "&";
+    isFilter = true;
+  }
+  if(region_fltr.length>0) {
+    url +=  urlSep + "regions=" + region_fltr;
+    urlSep = "&";
+    isFilter = true;
+  }
+  if(sector_fltr.length>0) {
+    url +=  urlSep + "sectors=" + sector_fltr;
+    urlSep = "&";
+    isFilter = true;
+  }
+  if(budget_fltr.length>0) {
+    url +=  urlSep + "budgets=" + budget_fltr;
+    urlSep = "&";
+    isFilter = true;
+  }
   
   
-//   $("#secretIFrame").attr("src",url);
-// }
+  $("#secretIFrame").attr("src",url);
+}
