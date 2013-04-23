@@ -4,15 +4,14 @@
   var circles = [];
   var maxdatavalue = 0;
   var maxcirclearea = 2000000000000;
-  var request_url = ""
-  var selected_type = "";
+  var request_url = "";
   var indicator_data;
 
   // We run this function on each filter save.
   function initialize_map(url, sel_year, type, indicator_id, countries, regions, cities){
     
     if(type){
-    selected_type = type;
+      selected_type = type;
     }
 
     //set max area depending on page
@@ -35,17 +34,17 @@
 
     // get data
     indicator_data = get_indicator_data(indicator_id, countries, regions, cities);
-    
+
     indicator_second = get_indicator_data('avg_annual_rate_change_percentage_urban', countries, regions, cities);
     // console.log(indicator_second);
     // check for what years data is available and add the right classes to the slider year blocks
     draw_available_data_blocks(indicator_data);
 
     // draw the circles
-    max_value_1 = draw_circles(indicator_data, 'blue');
+    max_value_1 = draw_circles(indicator_data, 'red');
 
     //draw second indicator
-    max_value_2 = draw_circles(indicator_second, 'red');
+    max_value_2 = draw_circles(indicator_second, 'blue');
 
     // set current year
     $( "#map-slider-tooltip div" ).html(sel_year);
@@ -57,8 +56,6 @@
     // hide loader, show map
     $('#map').show(); 
     $('#map-loader').hide();
-    
-    
 
     //load filters depending on page
     if(type=='cpi'){
@@ -100,9 +97,9 @@
 
   var table = new google.visualization.Table(document.getElementById('table-city-prosperity'));
   table.draw(data, {
-    showRowNumber: false,
-    sortColumn: 0,
-    sortAscending: true
+    showRowNumber: true,
+    sortColumn: 1,
+    sortAscending: false
   });
     
   }
@@ -245,8 +242,6 @@
     refresh_circles(curval);
     $( ".slider-year").removeClass("active");
     $( "#year-" + curval).addClass("active");
-   // $( "#year-" + (ui.value+1)).removeClass("active");
-   // $( "#year-" + (ui.value-1)).removeClass("active");
   }
 
   function refresh_circles(year){
@@ -354,7 +349,6 @@
           showScale: false});
       }
 
-<<<<<<< HEAD
 
 
 
@@ -363,46 +357,52 @@
 
 
 
-=======
->>>>>>> no real update
       function drawLineChart(){
         var curyear = parseInt($(".ui-slider-handle").html());
         var currentData = [];
-        var minyear = curyear - 10;
-        var maxyear = curyear + 10;
         var lineChartData = [];
-        //var lineChartLines = new Object();
 
-        currentData.push(['Year', circles[0].countryiso2, circles[1].countryiso2, circles[2].countryiso2, circles[3].countryiso2, circles[4].countryiso2]);
+        var lineChartHeader = [];
+        lineChartHeader.push('Year');
+        for(var i = 0; i < circles.length;i++){
+          lineChartHeader.push(circles[i].countryname);
+        }
+        currentData.push(lineChartHeader);
 
+        var firstyear = 0;
+        var lastyear = 0;
 
-        for (var i=1950;i<2051;i++)
-        { 
-            var c1val;
-            var c2val;
-            var c3val;
-            var c4val;
-            var c5val;
-
-            var curvalue = circles[0].values["y" + i.toString()];
-            if (curvalue === undefined || curvalue === null){ c1val = null; } else { c1val = curvalue; }
-
-            var curvalue = circles[1].values["y" + i.toString()];
-            if (curvalue === undefined || curvalue === null){ c2val = null; } else { c2val = curvalue; }
-            
-            var curvalue = circles[2].values["y" + i.toString()];
-            if (curvalue === undefined || curvalue === null){ c3val = null; } else { c3val = curvalue; }
+        for (var i=1950;i<2051;i++){ 
+          var lineChartLine = [];
+          lineChartLine.push(i.toString());
           
-            var curvalue = circles[3].values["y" + i.toString()];
-            if (curvalue === undefined || curvalue === null){ c4val = null; } else { c4val = curvalue; }
+          for(var y = 0; y < circles.length;y++){
             
-            var curvalue = circles[4].values["y" + i.toString()];
-            if (curvalue === undefined || curvalue === null){ c5val = null; } else { c5val = curvalue; }
-            
-            currentData.push([i.toString(), c1val, c2val, c3val, c4val, c5val]);
+            var curvalue = circles[y].values["y" + i.toString()];
+            if (curvalue === undefined || curvalue === null){ curvalue = null; } else{
+              if(firstyear == 0){
+                firstyear = i;
+              }
+              lastyear = i;
+            }
+            lineChartLine.push(curvalue);
+          }
+
+          currentData.push(lineChartLine);
         }
 
-<<<<<<< HEAD
+        var data = google.visualization.arrayToDataTable(currentData);
+
+        var columnsTable = new google.visualization.DataTable();
+        columnsTable.addColumn('number', 'colIndex');
+        columnsTable.addColumn('string', 'colLabel');
+        var initState= {selectedValues: []};
+        // put the columns into this data table (skip column 0)
+        for (var i = 1; i < data.getNumberOfColumns(); i++) {
+            columnsTable.addRow([i, data.getColumnLabel(i)]);
+            //initState.selectedValues.push(data.getColumnLabel(i));  
+        }
+
         // Create a pie chart, passing some options
         var lineChart = new google.visualization.ChartWrapper({
           chartType: 'LineChart',
@@ -460,29 +460,6 @@
     }
       
       function getTableChartData(year){
-=======
-
-
-        var data = google.visualization.arrayToDataTable(currentData);
-
-        var options = {
-          title: 'Line chart header?',
-          backgroundColor: '#F1EEE8',
-          interpolateNulls: true
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('line-chart-placeholder'));
-        chart.draw(data, options);
-      
-      }
-
-      function drawTableChart(){
-
-        
-
-        var indicator_data = get_indicator_data("", "", "", "");
-        
->>>>>>> no real update
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Country');
         data.addColumn('number', 'Value');
@@ -524,7 +501,6 @@
             columnsTable.addRow([index, value.id.replace("year-", "")]);
         });
 
-<<<<<<< HEAD
         var tableChart = new google.visualization.ChartWrapper({
           chartType: 'Table',
           containerId: 'table-chart-placeholder',
@@ -689,18 +665,6 @@
 	     }
 	     return false;
 	   });
-=======
-// HIDDEN FOR GC MEETING
-  //   $("#project-share-graph").click(function(){
-
-  //   if($('#dropdown-type-graph').is(":hidden")){
-  //       $('#dropdown-type-graph').show("blind", { direction: "vertical" }, 200);
-  //   } else {
-  //       $('#dropdown-type-graph').hide("blind", { direction: "vertical" }, 200);
-  //   }
-  //   return false;
-  // });
->>>>>>> no real update
 
 
     $('#graph-button-treemap').click(function(){
@@ -751,7 +715,7 @@
       $('html, body').animate({
         scrollTop: ($('#line-chart-placeholder').offset().top - 150)
       }, 1000);
-      google.load("visualization", "1", {packages:["corechart"], callback:drawLineChart});
+      google.load("visualization", "1", {packages:["corechart", "controls"], callback:drawLineChart});
       
     }
 
