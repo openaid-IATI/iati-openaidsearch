@@ -62,6 +62,13 @@ Template Name: City prosperity page
 <script type="text/javascript">
 
 	$(document).ready(function(){
+		load_map(site + 'json-city');
+		function load_map(url){
+			data = initialize_map(url,2012,'cpi',"", "", "");
+			current_selection.indicator = [];
+		  	current_selection.indicator.push({"id":"cpi", "name":"City prosperity"});
+		  	fill_selection_box();
+		}
 
 	  selected_type = "cpi";
 	  query_string_to_selection();

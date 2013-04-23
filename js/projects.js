@@ -15,7 +15,7 @@ function make_project_filter_options_url(){
   var str_region = reload_map_prepare_parameter_string("region", dlmtr);
   var str_sector = reload_map_prepare_parameter_string("sector", dlmtr);
   var str_budget = reload_map_prepare_parameter_string("budget", dlmtr);
-  var url = 'http://dev.oipa.openaidsearch.org/json-project-filters?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
+  var url = site + 'json-project-filters?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
   return url;
 }
 

@@ -1,4 +1,6 @@
-
+<script type="text/javascript">
+var site = '<?php echo SITE_URL; ?>';
+</script>
 
 
 
