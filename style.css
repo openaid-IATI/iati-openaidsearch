@@ -126,6 +126,10 @@ button{
   margin-top: 0;
 }
 
+.page-share-container{
+  float: right;
+}
+
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX HEADER + FOOTER ADJUSTMENTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 .navbar-static-top .container { height: 5.8em; }
@@ -1578,12 +1582,21 @@ label, input, button, select, textarea{
   margin-right:0.4em;
 }
 
-.project-share-container .stButton .sharethis, .page-share-container .stButton .sharethis{
+.page-share-container .stButton .sharethis{
+  background: url("images/project-share-share.png") no-repeat scroll left center transparent;
+}
+
+.project-share-container .stButton .sharethis{
   background: url("images/project-share-share.png") no-repeat scroll left top transparent;
+}
+
+.project-share-container .stButton .sharethis, .page-share-container .stButton .sharethis{
   font-family: "HelveticaNeueW01-75Bold";
   color: #0086C8;
   font-size: 1.1em;
   padding-left:24px;
+  vertical-align: middle;
+  padding-top: 2px;
 }
 
 .share-text{

@@ -579,6 +579,9 @@ else if(document.all)// ie
 }
 
 
+
+
+
 // $('#dropdown-share-facebook').click(function(){
 
 //   var link = ' https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL.toString().split("?")[0] + build_current_url());
@@ -605,5 +608,14 @@ else if(document.all)// ie
 //   var link = 'mailto:?Subject=' + encodeURIComponent('Shared to you from Open UN-Habitat') + '&body=' + encodeURIComponent('The following page was recommended to you on the Open UN-Habitat site. ' + document.URL.toString().split("?")[0] + build_current_url());
 //   window.open(link);
 // });
+if (navigator.userAgent.indexOf('Chrome') != -1 && parseFloat(navigator.userAgent.substring(navigator.userAgent.indexOf('Chrome') + 7).split(' ')[0]) >= 15){//Chrome
+ $("#project-share-bookmark").css("display", "none");
+    $("#page-share-bookmark").css("display", "none");
+}
+
+if (navigator.userAgent.indexOf("Opera") != -1){
+  $("#project-share-bookmark").css("display", "none");
+    $("#page-share-bookmark").css("display", "none");
+}
 
 
