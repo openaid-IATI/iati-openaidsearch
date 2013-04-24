@@ -8,8 +8,8 @@ include 'inc/PHPExcel/Writer/Excel2007.php';
 $FILTER = getFilter($_GET);
 
 if(!empty($FILTER['id'])) {
+
 	$search_url = SEARCH_URL . "activities/{$FILTER['id']}/?format=json";
-	
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
 	$activity = objectToArray($result);
@@ -60,6 +60,7 @@ if(!empty($FILTER['id'])) {
 	$activities = objectToArray($objects);
 	if(empty($activities)) exit;
 	generate_search_export($activities);
+	console.log("works");
 }
 
 function generate_activity_export($activity) {

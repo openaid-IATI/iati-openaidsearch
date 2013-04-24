@@ -190,10 +190,6 @@ function load_project_map(project_geojson){
 
 
 
-
-
-
-
   // load listeners at page initialisation:
   load_projects_listeners();
 
@@ -297,9 +293,57 @@ function load_project_map(project_geojson){
       $(this).addClass('expand-plus');
     }
     
-    });
+  });
+
+  $('#save-search-results').click(function(){
+    generate_download_file();
+    return false;
+  }); 
+  
+  $('.projects-share-spec #project-share-export').click(function(){
+    var id = $(this).attr('name');
+    generate_download_file(id);
+    return false;
+  }); 
+
+
   }
 
+ 
+  
+
+
+function generate_download_file(id) {
+  var author = encodeURIComponent("Open UN-Habitat search results");
+  var url = "/wp-content/themes/unhabitat/export.php?author=";
+  if(id) {
+    author = encodeURIComponent("Open UN-Habitat project details of " + id);
+    url += author;
+    url += "&id=" + id;
+    window.open(url);
+    return false;
+  }
+
+  url += author;
+
+  var sectors = '', countries = '', budgets = '', regions = '', offset = '&offset=0', per_page = '&limit=5', query = ''
+  
+  if (!(typeof current_selection.sectors === "undefined")) sectors = build_current_url_add_par("sectors", current_selection.sectors, "|");
+  if (!(typeof current_selection.countries === "undefined")) countries = build_current_url_add_par("countries", current_selection.countries, "|");
+  if (!(typeof current_selection.budgets === "undefined")) budgets = build_current_url_add_par("budgets", current_selection.budgets, "|");
+  if (!(typeof current_selection.regions === "undefined")) regions = build_current_url_add_par("regions", current_selection.regions, "|");
+  if (!(typeof current_selection.offset === "undefined")) offset = build_current_url_add_par("offset", current_selection.offset);
+  if (!(typeof current_selection.per_page === "undefined")) per_page = build_current_url_add_par("per_page", current_selection.per_page);
+  if (!(typeof current_selection.s === "undefined")) query = build_current_url_add_par("s", current_selection.s);
+
+  per_page = per_page.replace("per_page", "limit");
+  query = query.replace("s=", "query="); 
+  query = encodeURIComponent(query);
+  url = url + offset + per_page + sectors + countries + budgets + regions + query;
+
+  window.open(url);
+  
+}
 
 
 

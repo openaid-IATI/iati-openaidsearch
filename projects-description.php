@@ -160,14 +160,13 @@ foreach($objects AS $idx=>$project) {
 
 				<div class="project-share-container projects-share-spec">
 
-					<button id="project-share-export" class="project-share-button hneue-bold">
+					<button id="project-share-export" class="project-share-button hneue-bold" name="<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>">
 						<div class="share-icon"></div>
 						<div class="share-text">EXPORT</div>
 					</button>
-					<button id="project-share-share" class="project-share-button hneue-bold">
-						<div class="share-icon"></div>
-						<div class="share-text">SHARE</div>
-					</button>
+
+					<span class="st_sharethis" st_url="<?php bloginfo('url'); ?>/project/?id=<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>" st_title="<?php echo $project->titles[0]->title; ?>" displayText="SHARE"></span>
+
 					<button id="project-share-bookmark" class="project-share-button hneue-bold">
 						<div class="share-icon"></div>
 						<div class="share-text">BOOKMARK</div>

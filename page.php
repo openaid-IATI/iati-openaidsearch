@@ -44,3 +44,14 @@ Template Name: Standard page
 </div>
 
 <?php get_footer(); ?>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+      selected_type = "projects";
+      query_string_to_selection();
+      reload_map();
+      initialize_filters();
+      fill_selection_box();
+    });
+
+</script>

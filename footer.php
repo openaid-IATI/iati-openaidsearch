@@ -56,10 +56,6 @@ var site = '<?php echo SITE_URL; ?>';
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery-ui.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/leaflet.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery.nouislider.min.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/countries.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/countries_loc.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jsonpath-0.8.0.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/countries_isos.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/map.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/main.js"></script>
 
@@ -72,13 +68,25 @@ if (is_page('indicators') or is_page('city-prosperity')) {
 	echo '<script src="' . get_template_directory_uri() . '/js/indicators.js"></script>';
 }
 if (is_page('project')) {
+	echo '<script src="' . get_template_directory_uri() . '/js/dependencies/countries.js"></script>';
 	echo '<script src="' . get_template_directory_uri() . '/js/project.js"></script>';
+
 }
-if (is_page('projects')) {
+if (!is_page('indicators') and !is_page('city-prosperity')) {
 	echo '<script src="' . get_template_directory_uri() . '/js/projects.js"></script>';
 } 
 
 ?>
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">
+
+stLight.options({
+	publisher: "6315865b-353c-419f-8f1d-2ef900de2fd0",
+	onhover: false
+});
+
+</script>
 
 </body>
 </html>

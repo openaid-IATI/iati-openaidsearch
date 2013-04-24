@@ -6,7 +6,7 @@ var standard_mapheight = '45em';
 
 function build_current_url(){
 
-  var url = '?s=';
+  var url = '?p=';
   if (!(typeof current_selection.sectors === "undefined")) url += build_current_url_add_par("sectors", current_selection.sectors);
   if (!(typeof current_selection.countries === "undefined")) url += build_current_url_add_par("countries", current_selection.countries);
   if (!(typeof current_selection.budgets === "undefined")) url += build_current_url_add_par("budgets", current_selection.budgets);
@@ -16,17 +16,24 @@ function build_current_url(){
   if (!(typeof current_selection.offset === "undefined")) url += build_current_url_add_par("offset", current_selection.offset);
   if (!(typeof current_selection.per_page === "undefined")) url += build_current_url_add_par("per_page", current_selection.per_page);
   if (!(typeof current_selection.order_by === "undefined")) url += build_current_url_add_par("order_by", current_selection.order_by);
+  if (!(typeof current_selection.s === "undefined")) url += build_current_url_add_par("s", current_selection.s);
+  if (url == '?p='){return '';}
+  url = url.replace("?p=&", "?");
   return url;
+
 }
 
-function build_current_url_add_par(name, arr){
-  if(arr.length == 0){return '';}
+function build_current_url_add_par(name, arr, dlmtr){
 
-  var par = '&' + name + '=';
-  for(var i = 0; i < arr.length;i++){
-    par += arr[i].id.toString() + ",";
+  if(dlmtr === undefined){
+    dlmtr = ","
   }
 
+  if(arr.length == 0){return '';}
+  var par = '&' + name + '=';
+  for(var i = 0; i < arr.length;i++){
+    par += arr[i].id.toString() + dlmtr;
+  }
   par = par.substr(0, par.length - 1);
 
   return par;
@@ -301,10 +308,6 @@ jQuery(function($) {
 
 function save_selection(){
 
-    if(selected_type == "projects"){
-      load_new_page(false);
-    }
-
     // hide map show loader
     $('#map-loader').show();
     $('#map').hide();
@@ -330,6 +333,10 @@ function save_selection(){
 
      var link = document.URL.toString().split("?")[0] + build_current_url();
     history.pushState(null, null, link);
+
+    if(selected_type == "projects"){
+      load_new_page(false);
+    }
 
     fill_selection_box();
     reload_map();
@@ -536,6 +543,13 @@ jQuery(function($){
     return false;
   });
 
+
+  $("#project-share-whistleblower").click(function(){
+    var url = "/whistleblower/?referrer=" + encodeURIComponent(document.URL.toString());
+    window.location = url;
+    return false;
+  });
+
 /***********************************************
 * Bookmark site script- © Dynamic Drive DHTML code library (www.dynamicdrive.com)
 * This notice MUST stay intact for legal use
@@ -558,114 +572,31 @@ else if(document.all)// ie
 }
 
 
-$('#dropdown-share-facebook').click(function(){
+// $('#dropdown-share-facebook').click(function(){
 
-  var link = ' https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL.toString().split("?")[0] + build_current_url());
-  window.open(link);
+//   var link = ' https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL.toString().split("?")[0] + build_current_url());
+//   window.open(link);
   
-});
+// });
 
-$('#dropdown-share-twitter').click(function(){
+// $('#dropdown-share-twitter').click(function(){
 
-  var link = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(document.URL.toString().split("?")[0] + build_current_url());
-  console.log(link);
-  window.open(link);
-});
+//   var link = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(document.URL.toString().split("?")[0] + build_current_url());
+//   console.log(link);
+//   window.open(link);
+// });
 
-$('#dropdown-share-linkedin').click(function(){
+// $('#dropdown-share-linkedin').click(function(){
 
-  var link = 'http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL.toString().split("?")[0] + build_current_url());
-  console.log(link);
-  window.open(link);
-});
+//   var link = 'http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL.toString().split("?")[0] + build_current_url());
+//   console.log(link);
+//   window.open(link);
+// });
 
-$('#dropdown-share-email').click(function(){
+// $('#dropdown-share-email').click(function(){
 
-  var link = 'mailto:?Subject=' + encodeURIComponent('Shared to you from Open UN-Habitat') + '&body=' + encodeURIComponent('The following page was recommended to you on the Open UN-Habitat site. ' + document.URL.toString().split("?")[0] + build_current_url());
-  window.open(link);
-});
-
-
-  $('#save-search-results').click(function(){
-    generate_download_file();
-    return false;
-  }); 
-  
-//   $('.export').click(function(){
-//     var id = $(this).attr('id');
-//     generate_download_file(id);
-//     return false;
-//   }); 
+//   var link = 'mailto:?Subject=' + encodeURIComponent('Shared to you from Open UN-Habitat') + '&body=' + encodeURIComponent('The following page was recommended to you on the Open UN-Habitat site. ' + document.URL.toString().split("?")[0] + build_current_url());
+//   window.open(link);
+// });
 
 
-function generate_download_file(id) {
-  var url = sThemePath + "/export.php?author=" + sBlogName,
-      urlSep = "&", country_fltr = '', region_fltr = '', sector_fltr = '', budget_fltr = '', sep = '';
-  
-  if(id) {
-    url +=  urlSep + "id=" + id;
-  }
-  
-  $('.filterbox input[type=checkbox]:checked').each(function(){
-    var control_name = $(this).attr('name');
-    var key = $(this).val();
-    switch(control_name) {
-      case 'countries':
-        if(country_fltr.length==0) sep = '';
-        country_fltr += sep + key;
-        sep = "|";
-        break;
-      case 'regions':
-        if(region_fltr.length==0) sep = '';
-        region_fltr += sep + key;
-        sep = "|";
-        break;
-      case 'sectors':
-        if(sector_fltr.length==0) sep = '';
-        sector_fltr += sep + key;
-        sep = "|";
-        break;
-      case 'budgets':
-        if(budget_fltr.length==0) sep = '';
-        budget_fltr += sep + key;
-        sep = "|";
-        break;
-    }
-  });
-  
-  country_fltr = country_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
-  region_fltr = region_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
-  sector_fltr = sector_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
-  budget_fltr = budget_fltr.replace(/(All\|)|(\|All)|(All)/g, '');
-
-  var keyword = jQuery('#s').val();
-  if(keyword) {
-    url +=  urlSep + "query=" + encodeURI(keyword);
-    urlSep = "&";
-  }
-  
-  
-  if(country_fltr.length>0) {
-    url +=  urlSep + "countries=" + country_fltr;
-    urlSep = "&";
-    isFilter = true;
-  }
-  if(region_fltr.length>0) {
-    url +=  urlSep + "regions=" + region_fltr;
-    urlSep = "&";
-    isFilter = true;
-  }
-  if(sector_fltr.length>0) {
-    url +=  urlSep + "sectors=" + sector_fltr;
-    urlSep = "&";
-    isFilter = true;
-  }
-  if(budget_fltr.length>0) {
-    url +=  urlSep + "budgets=" + budget_fltr;
-    urlSep = "&";
-    isFilter = true;
-  }
-  
-  
-  $("#secretIFrame").attr("src",url);
-}

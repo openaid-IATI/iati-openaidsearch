@@ -2,7 +2,7 @@
 Theme Name: Open UN-Habitat v2
 Theme URI: http://open.unhabitat.org/
 Description: Version 2 of the Open UN-Habitat theme
-Author: Zimmerman & Zimmerman dev team
+Author: Zimmerman & Zimmerman
 Author URI: http://www.zimmermanzimmerman.nl
 Version: 1.0
 License:
@@ -1572,6 +1572,18 @@ label, input, button, select, textarea{
 
 .projects-project-spec-value {
   width: 53%;
+}
+.project-share-container .st_sharethis{
+  display: inline-block;
+  margin-right:0.4em;
+}
+
+.project-share-container .stButton .sharethis{
+  background: url("images/project-share-share.png") no-repeat scroll left top transparent;
+  font-family: "HelveticaNeueW01-75Bold";
+  color: #0086C8;
+  font-size: 1.1em;
+  padding-left:24px;
 }
 
 .share-text{

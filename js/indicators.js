@@ -535,22 +535,24 @@
         return data;
       }
 
-      function drawTableChart(){
-
-        var curyear = $(".ui-slider-handle").html();
-        var data = getTableChartData(2015);
-        
-
-
+      function getTableYearOptions(){
         var columnsTable = new google.visualization.DataTable();
         columnsTable.addColumn('number', 'colIndex');
         columnsTable.addColumn('string', 'colLabel');
-        var initState = {selectedValues: []};
 
         $('.slider-year.slider-active').each(function(index, value){ 
 
             columnsTable.addRow([index, value.id.replace("year-", "")]);
         });
+        return columnsTable;
+      }
+
+      function drawTableChart(){
+
+        var curyear = $(".ui-slider-handle").html();
+        var data = getTableChartData(2015);
+        
+        var columnsTable = getTableYearOptions();
 
         var tableChart = new google.visualization.ChartWrapper({
           chartType: 'Table',
@@ -578,8 +580,7 @@
                   selectedValuesLayout: 'below',
                   labelStacking: 'horizontal'
               }
-          },
-          state: initState
+          }
         });
         columnFilterT.draw();
         
@@ -587,125 +588,21 @@
 
             var state = columnFilterT.getState();
             var curyear = state.selectedValues[0];
-
             var curdata = getTableChartData(curyear);
-            tableChart.draw(curdata);
+            tableChart.setDataTable(curdata);
+            tableChart.draw();
         });
-
       }
-
-
 
       function initialize_charts(){
         google.load("visualization", "1", {packages:["corechart", "controls"], callback:drawLineChart});
         google.load("visualization", "1", {packages:["table", "controls"], callback:drawTableChart});
       }
 
-      // function init_dashboard(){
-
-      //   var curyear = parseInt($(".ui-slider-handle").html());
-      //   var currentData = [];
-      //   var lineChartData = [];
-
-      //   var lineChartHeader = [];
-      //   lineChartHeader.push('Year');
-      //   for(var i = 0; i < circles.length;i++){
-      //     lineChartHeader.push(circles[i].countryname);
-      //   }
-      //   currentData.push(lineChartHeader);
-
-      //   var firstyear = 0;
-      //   var lastyear = 0;
-
-      //   for (var i=1950;i<2051;i++){ 
-      //     var lineChartLine = [];
-      //     lineChartLine.push(i.toString());
-          
-      //     for(var y = 0; y < circles.length;y++){
-            
-      //       var curvalue = circles[y].values["y" + i.toString()];
-      //       if (curvalue === undefined || curvalue === null){ curvalue = null; } else{
-      //         if(firstyear == 0){
-      //           firstyear = i;
-      //         }
-      //         lastyear = i;
-      //       }
-      //       lineChartLine.push(curvalue);
-      //     }
-
-      //     currentData.push(lineChartLine);
-      //   }
-
-
-      //   var data = google.visualization.arrayToDataTable(currentData);
-
-      //   var columnsTable = new google.visualization.DataTable();
-      //   columnsTable.addColumn('number', 'colIndex');
-      //   columnsTable.addColumn('string', 'colLabel');
-      //   var initState= {selectedValues: []};
-      //   // put the columns into this data table (skip column 0)
-      //   for (var i = 1; i < data.getNumberOfColumns(); i++) {
-      //       columnsTable.addRow([i, data.getColumnLabel(i)]);
-      //       //initState.selectedValues.push(data.getColumnLabel(i));  
-      //   }
-
-      //   // Create a pie chart, passing some options
-      //   var lineChart = new google.visualization.ChartWrapper({
-      //     chartType: 'LineChart',
-      //     containerId: 'chart1',
-      //     options: {
-      //       height: 500,
-      //       title: 'line chart header',
-      //       backgroundColor: '#F1EEE8',
-      //       interpolateNulls: true,
-      //     }
-      //   });
-
-      //   var columnFilter = new google.visualization.ControlWrapper({
-      //     controlType: 'CategoryFilter',
-      //     containerId: 'control1',
-      //     dataTable: columnsTable,
-      //     options: {  
-      //         filterColumnLabel: 'colLabel',
-      //         ui: {
-      //             caption: 'Choose a country', 
-      //             label: 'Countries',
-      //             allowTyping: true,
-      //             allowMultiple: true,
-      //             selectedValuesLayout: 'aside',
-      //             labelStacking: 'horizontal'
-      //         }
-      //     },
-      //     state: initState
-      //   });
-        
-      //   // google.visualization.events.addListener(columnFilter, 'statechange', function () {
-
-      //   //     var state = columnFilter.getState();
-      //   //     var row;
-      //   //     var columnIndices = [0];
-      //   //     for (var i = 0; i < state.selectedValues.length; i++) {
-      //   //         row = columnsTable.getFilteredRows([{column: 1, value: state.selectedValues[i]}])[0];
-      //   //         columnIndices.push(columnsTable.getValue(row, 0));
-      //   //     }
-      //   //     // sort the indices into their original order
-      //   //     columnIndices.sort(function (a, b) {
-      //   //         return (a - b);
-      //   //     });
-      //   //     chart.setView({columns: columnIndices});
-      //   //     chart.draw();
-      //   // });
 
 
 
 
-
-      //   // Create the dashboard.
-      //   var dashboard = new google.visualization.Dashboard(document.getElementById('chart-dashboard')).
-      //   bind(columnFilter, lineChart).
-      //   draw(data);
-
-      // }
       
       
      $("#project-share-graph").click(function(){

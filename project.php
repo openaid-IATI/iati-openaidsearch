@@ -199,25 +199,23 @@ $activity = wp_get_activity($project_id);
 
 						<div class="projects-project-divider"></div>
 
-						<div class="project-share-container">
+						<div class="project-share-container projects-share-spec">
 
-							<a id="project-share-export" class="project-share-button hneue-bold">
+							<button id="project-share-export" class="project-share-button hneue-bold" name="<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?>">
 								<div class="share-icon"></div>
 								<div class="share-text">EXPORT</div>
-							</a>
-							<a id="project-share-share" class="project-share-button hneue-bold">
-								<div class="share-icon"></div>
-								<div class="share-text">SHARE</div>
-							</a>
-							<a href="<?php echo site_url(); ?>/whistleblower/" id="project-share-whistleblower" class="project-share-button hneue-bold">
-								<div class="share-icon"></div>
-								<div class="share-text">WHISTLEBLOWER</div>
-							</a>
-							<a href="<?php the_permalink(); ?>" alt="Bookmark <?php the_title(); ?>" id="project-share-bookmark" class="project-share-button hneue-bold">
+							</button>
+
+							<span class="st_sharethis" st_url="<?php bloginfo('url'); ?>/project/?id=<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?>" st_title="<?php echo $activity->titles[0]->title; ?>" displayText="SHARE"></span>
+
+							<button id="project-share-bookmark" class="project-share-button hneue-bold">
 								<div class="share-icon"></div>
 								<div class="share-text">BOOKMARK</div>
-							</a>
-
+							</button>
+							<button id="project-share-whistleblower" class="project-share-button hneue-bold">
+								<div class="share-icon"></div>
+								<div class="share-text">WHISTLEBLOWER</div>
+							</button>
 
 						</div>
 					</div>
