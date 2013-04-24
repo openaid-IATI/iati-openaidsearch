@@ -338,7 +338,7 @@ function refresh_circles(year){
             
                 if (circles[i].first_or_second_indicator == 1){
                     //check if there is a match with a second indicator, if so we need to make a popup with the second indicator
-                    if (integrate_second_indicator_data_into_first_indicator(i, curyear)){
+                    if (integrate_second_indicator_data_into_first_indicator(i, curyear, 2)){
                         circles[i].circleinfo.bindPopup('<h4>'+circles[i].countryname+'</h4><p>' + circles[i].friendly_label + ': ' + value + '</p><p>' + circles[i].second_indicator_name + ': ' + circles[i].second_indicator_value);
                         circles[i].circleinfo.on('mouseover', function(evt) {
                             evt.target.openPopup();
@@ -355,7 +355,7 @@ function refresh_circles(year){
           
                 }else{
                     //check if the second indicator does not match with the first indicator. If not, create a popup with only data of the second indicator
-                    if(circles[i].second_indicator_value == ''){
+                    if(!integrate_second_indicator_data_into_first_indicator(i, curyear, 1)){
                         circles[i].circleinfo.bindPopup('<h4>'+circles[i].countryname+'</h4><p>' + circles[i].friendly_label + ': ' + value + '</p>');
             
                         circles[i].circleinfo.on('mouseover', function(evt) {
@@ -373,11 +373,11 @@ function refresh_circles(year){
 // console.log(max);
     
 }
-function integrate_second_indicator_data_into_first_indicator(number_circle, curyear){
+function integrate_second_indicator_data_into_first_indicator(number_circle, curyear, compare_to){
     //check if first indicator has a match with a second indicator
     //if there is a match, we have to add this information to the first indicator
     for (var i = circles.length - 1; i >= 0; i--) {
-        if (circles[i].first_or_second_indicator == 2){
+        if (circles[i].first_or_second_indicator == compare_to){
 
             if (circles[number_circle].countryiso2 == circles[i].countryiso2){
                 //add information to the first indicator about the second indicator
