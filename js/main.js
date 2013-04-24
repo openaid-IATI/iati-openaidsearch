@@ -544,8 +544,15 @@ jQuery(function($){
   });
 
 
-  $("#project-share-whistleblower").click(function(){
+  $("#page-share-whistleblower").click(function(){
     var url = "/whistleblower/?referrer=" + encodeURIComponent(document.URL.toString());
+    window.location = url;
+    return false;
+  });
+
+  $("#project-share-whistleblower").click(function(){
+    var id = $(this).attr("name");
+    var url = "/whistleblower/?referrer=" + encodeURIComponent("http://open.unhabitat.org/project/?id=" + id);
     window.location = url;
     return false;
   });

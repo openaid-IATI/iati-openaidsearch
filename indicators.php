@@ -10,7 +10,7 @@ Template Name: Indicators page
 <?php get_template_part( "indicator", "map" ); ?>
 
 <div id="page-wrapper">
-	<div class="page-header page-header-less-margin">
+	<div class="page-header">
 		<div class="container">
 			<div class="row-fluid">
 				<div class="span8">

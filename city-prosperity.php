@@ -16,18 +16,18 @@ Template Name: City prosperity page
 				<div class="span8">
 					<div class="project-share-container share-left">
 
-						<button id="project-share-export" class="project-share-button hneue-bold">
+						<a href="#" id="project-share-export" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
 							<div class="share-text">EXPORT</div>
 							<div id="dropdown-export-indicator" class="dropdown-menu-page-header">
 								<button id="dropdown-png">AS IMAGE</button>
 								<button id="dropdown-csv">AS CSV</button>
 							</div>
-						</button>
-						<button id="project-share-embed" class="project-share-button hneue-bold">
+						</a>
+						<a id="project-share-embed" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
 							<div class="share-text">EMBED</div>
-						</button>
+						</a>
 						
 					</div>
 				</div>

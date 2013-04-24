@@ -85,7 +85,6 @@ add_action( 'init', 'faq_items_post_type' );
 
 
 
-
 function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	global $_PER_PAGE;
 	// get amount of activities per page

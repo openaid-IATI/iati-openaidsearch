@@ -105,7 +105,7 @@ button{
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX GLOBAL PAGE HEADER XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 .page-header{
-  padding-bottom: 0.6em;
+  padding-bottom: 0em;
   border-bottom: 1px solid #CCC;
   margin: 0;
 }
@@ -122,7 +122,7 @@ button{
   float: right;
 }
 
-.page-header .project-share-container{
+.page-header .project-share-container, .page-share-container{
   margin-top: 0;
 }
 
@@ -1573,12 +1573,12 @@ label, input, button, select, textarea{
 .projects-project-spec-value {
   width: 53%;
 }
-.project-share-container .st_sharethis{
+.project-share-container .st_sharethis, .page-share-container .st-sharethis{
   display: inline-block;
   margin-right:0.4em;
 }
 
-.project-share-container .stButton .sharethis{
+.project-share-container .stButton .sharethis, .page-share-container .stButton .sharethis{
   background: url("images/project-share-share.png") no-repeat scroll left top transparent;
   font-family: "HelveticaNeueW01-75Bold";
   color: #0086C8;
@@ -1604,11 +1604,11 @@ label, input, button, select, textarea{
   margin-top: 1px ;
 }
 
-#project-share-bookmark .share-icon {
+#project-share-bookmark .share-icon, #page-share-bookmark .share-icon {
   background-position: -36px 0;
 }
 
-#project-share-whistleblower .share-icon {
+#project-share-whistleblower .share-icon, #page-share-whistleblower .share-icon {
   background-position: -54px 0;
 }
 
@@ -1803,11 +1803,11 @@ label, input, button, select, textarea{
       margin-top: 0px;
     }
 
-    #project-share-bookmark .share-icon {
+    #project-share-bookmark .share-icon, #page-share-bookmark .share-icon {
       background-position: -28px 0;
     }
 
-    #project-share-whistleblower .share-icon {
+    #project-share-whistleblower .share-icon, #page-share-whistleblower .share-icon {
       background-position: -42px 0;
     }
 

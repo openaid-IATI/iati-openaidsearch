@@ -12,7 +12,7 @@ Template Name: Projects page
 
 <div id="page-wrapper">
 
-	<div class="page-header page-header-less-margin">
+	<div class="page-header">
 		<div class="container">
 			<div id="projects-search-navbar" class="row-fluid">
 				<div class="span7">
