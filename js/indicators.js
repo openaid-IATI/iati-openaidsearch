@@ -32,26 +32,50 @@
     clear_circles();
     circles = [];
 
-    // get data
-    indicator_data = get_indicator_data(indicator_id, countries, regions, cities);
-
-    indicator_second = get_indicator_data('avg_annual_rate_change_percentage_urban', countries, regions, cities);
-    // console.log(indicator_second);
-    // check for what years data is available and add the right classes to the slider year blocks
-    draw_available_data_blocks(indicator_data);
-
-    // draw the circles
-    max_value_1 = draw_circles(indicator_data, 'red');
-
-    //draw second indicator
-    max_value_2 = draw_circles(indicator_second, 'blue');
-
+       
     // set current year
     $( "#map-slider-tooltip div" ).html(sel_year);
     $( "#map-slider-tooltip" ).val(sel_year);
     $( "#year-" + sel_year).addClass("active");
-    refresh_circles(sel_year.toString(), max_value_1);
-    refresh_circles(sel_year.toString(), max_value_1);
+    indicator_str_filter = get_param_query_string('indicator', 'city', request_url);
+    console.log(indicator_str_filter);
+    
+    if (indicator_str_filter.length > 0){
+      var indicator_param = indicator_str_filter;
+      for (var i = indicator_param.length - 1; i >= 0; i--) {
+          
+          if (i == 0){
+              // get data
+              indicator_data = get_indicator_data(request_url, indicator_param[i], countries, regions, cities);
+              // check for what years data is available and add the right classes to the slider year blocks
+              draw_available_data_blocks(indicator_data);
+              // draw the circles
+              max_value_1 = draw_circles(indicator_data, 'red');            
+              refresh_circles(sel_year.toString(), max_value_1);
+
+          }
+          if (i==1){
+            // //getting data for second indicator
+            indicator_second = get_indicator_data(request_url,indicator_param[i], countries, regions, cities);
+            // //draw second indicator
+            max_value_2 = draw_circles(indicator_second, 'blue');
+            // //refresh second indicator
+            refresh_circles(sel_year.toString(), max_value_2);
+          }
+      };
+    }else{
+      // get data
+              indicator_data = get_indicator_data(request_url,indicator_id, countries, regions, cities);            
+              // console.log(indicator_second);
+              // check for what years data is available and add the right classes to the slider year blocks
+              draw_available_data_blocks(indicator_data);
+              // draw the circles
+              max_value_1 = draw_circles(indicator_data, 'red');
+              refresh_circles(sel_year.toString(), max_value_1);
+    }
+    
+    
+    
 
     // hide loader, show map
     $('#map').show(); 
@@ -69,6 +93,34 @@
     return indicator_data;
   }
 
+  function get_param_query_string(begin, end, query_string){
+    length_begin = begin.length;
+    length_end = end.length;
+    
+    start_pos = query_string.indexOf(begin);
+    start_pos = start_pos + length_begin + 1;
+
+    end_pos = query_string.indexOf(end);
+
+    //changing the global request url, we are removing the indicator parameter
+    //getting the first part
+    start_url = request_url.substring(0, request_url.indexOf(begin) - 1);
+    //getting the end part
+    end_url = request_url.substring(request_url.indexOf(end) -1, request_url.length);
+    //creating the new global request url
+    request_url = start_url + end_url;
+    
+    end_pos = end_pos - 1;
+    console.log(start_pos + ' '+ end_pos);
+    result = query_string.substring(start_pos, end_pos);
+    //if there is no indicator data, just return nothing, population will be displayed as the default indicator
+    if (end_pos - start_pos == 0){
+      return ''
+    }else{
+      //return all the indicator values in an array, so 2 different indicators could be drawn
+      return result.split(',');
+    }
+  }
   function create_cpi_table(){
     google.load('visualization', '1', {packages:['table'], callback:drawCityPropTable});
 
@@ -145,13 +197,15 @@
     $('#indicators-filters').html(indicator_html);
   }
 
-  function get_indicator_data(indicator_id, countries, regions, cities){
+  function get_indicator_data(url, indicator_id, countries, regions, cities){
     
     var indicator_json_data = [];
-    var url = request_url;
+    
+
     if (indicator_id){
-      url = url + '?indicator=' + indicator_id
+      url = url + '&indicator=' + indicator_id
     }
+    console.log(url);
      $.ajax({
         type: 'GET',
          url: url,

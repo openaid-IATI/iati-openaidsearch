@@ -357,6 +357,7 @@ function reload_map(){
   var str_budget = reload_map_prepare_parameter_string("budgets", dlmtr);
   var str_region = reload_map_prepare_parameter_string("regions", dlmtr);
   var str_indicator = reload_map_prepare_parameter_string("indicators", dlmtr);
+  console.log(str_indicator + ' indicator filter string');
   var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
 
   // if project filter container is on the page (= projects page)
