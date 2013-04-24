@@ -408,54 +408,52 @@ $(".slider-year").click(
 
 // });
 
-
 // XXXXXXXXXXXXXXXX INDICATOR GRAPHS XXXXXXXXXXXXXXXX 
-function drawTreemap() {
+      function drawTreemap() {
 
 
 
-    // Create and populate the data table.
-    var data = google.visualization.arrayToDataTable([
-        ['Location', 'Parent', 'Market trade volume (size)'],
-        ['Global',    null,                 0],
-        ['America',   'Global',             0],
-        ['Europe',    'Global',             0],
-        ['Asia',      'Global',             0],
-        ['Australia', 'Global',             0],
-        ['Africa',    'Global',             0],
-        ['Brazil',    'America',            11],
-        ['USA',       'America',            52],
-        ['Mexico',    'America',            24],
-        ['Canada',    'America',            16],
-        ['France',    'Europe',             42],
-        ['Germany',   'Europe',             31],
-        ['Sweden',    'Europe',             22],
-        ['Italy',     'Europe',             17],
-        ['UK',        'Europe',             21],
-        ['China',     'Asia',               36],
-        ['Japan',     'Asia',               20],
-        ['India',     'Asia',               40],
-        ['Laos',      'Asia',               4],
-        ['Mongolia',  'Asia',               1],
-        ['Israel',    'Asia',               12],
-        ['Iran',      'Asia',               18],
-        ['Pakistan',  'Asia',               11],
-        ['Egypt',     'Africa',             21],
-        ['S. Africa', 'Africa',             30],
-        ['Sudan',     'Africa',             12],
-        ['Congo',     'Africa',             10],
-        ['Zair',      'Africa',             8]
+        // Create and populate the data table.
+        var data = google.visualization.arrayToDataTable([
+          ['Location', 'Parent', 'Market trade volume (size)'],
+          ['Global',    null,                 0],
+          ['America',   'Global',             0],
+          ['Europe',    'Global',             0],
+          ['Asia',      'Global',             0],
+          ['Australia', 'Global',             0],
+          ['Africa',    'Global',             0],
+          ['Brazil',    'America',            11],
+          ['USA',       'America',            52],
+          ['Mexico',    'America',            24],
+          ['Canada',    'America',            16],
+          ['France',    'Europe',             42],
+          ['Germany',   'Europe',             31],
+          ['Sweden',    'Europe',             22],
+          ['Italy',     'Europe',             17],
+          ['UK',        'Europe',             21],
+          ['China',     'Asia',               36],
+          ['Japan',     'Asia',               20],
+          ['India',     'Asia',               40],
+          ['Laos',      'Asia',               4],
+          ['Mongolia',  'Asia',               1],
+          ['Israel',    'Asia',               12],
+          ['Iran',      'Asia',               18],
+          ['Pakistan',  'Asia',               11],
+          ['Egypt',     'Africa',             21],
+          ['S. Africa', 'Africa',             30],
+          ['Sudan',     'Africa',             12],
+          ['Congo',     'Africa',             10],
+          ['Zair',      'Africa',             8]
         ]);
-    // Create and draw the visualization.
-    var tree = new google.visualization.TreeMap(document.getElementById('treemap-placeholder'));
-    tree.draw(data, {
-        headerHeight: 0,
-        fontColor: '#797974',
-        fontFamily: 'HelveticaNeueW01-45Ligh',
-        fontSize: 24,
-        showScale: false
-    });
-}
+      // Create and draw the visualization.
+        var tree = new google.visualization.TreeMap(document.getElementById('treemap-placeholder'));
+        tree.draw(data, {
+          headerHeight: 0,
+          fontColor: '#797974',
+          fontFamily: 'HelveticaNeueW01-45Ligh',
+          fontSize: 24,
+          showScale: false});
+      }
 
 
 
@@ -465,164 +463,138 @@ function drawTreemap() {
 
 
 
-function drawLineChart(){
-    var curyear = parseInt($(".ui-slider-handle").html());
-    var currentData = [];
-    var lineChartData = [];
+      function drawLineChart(){
+        var curyear = parseInt($(".ui-slider-handle").html());
+        var currentData = [];
+        var lineChartData = [];
 
-    var lineChartHeader = [];
-    lineChartHeader.push('Year');
-    for(var i = 0; i < circles.length;i++){
-        lineChartHeader.push(circles[i].countryname);
-    }
-    currentData.push(lineChartHeader);
+        var lineChartHeader = [];
+        lineChartHeader.push('Year');
+        for(var i = 0; i < circles.length;i++){
+          lineChartHeader.push(circles[i].countryname);
+        }
+        currentData.push(lineChartHeader);
 
-    var firstyear = 0;
-    var lastyear = 0;
+        var firstyear = 0;
+        var lastyear = 0;
 
-    for (var i=1950;i<2051;i++){ 
-        var lineChartLine = [];
-        lineChartLine.push(i.toString());
+        for (var i=1950;i<2051;i++){ 
+          var lineChartLine = [];
+          lineChartLine.push(i.toString());
           
-        for(var y = 0; y < circles.length;y++){
+          for(var y = 0; y < circles.length;y++){
             
             var curvalue = circles[y].values["y" + i.toString()];
-            if (curvalue === undefined || curvalue === null){
-                curvalue = null;
-            } else{
-                if(firstyear == 0){
-                    firstyear = i;
-                }
-                lastyear = i;
+            if (curvalue === undefined || curvalue === null){ curvalue = null; } else{
+              if(firstyear == 0){
+                firstyear = i;
+              }
+              lastyear = i;
             }
             lineChartLine.push(curvalue);
+          }
+
+          currentData.push(lineChartLine);
         }
 
-        currentData.push(lineChartLine);
-    }
+        var data = google.visualization.arrayToDataTable(currentData);
 
-    var data = google.visualization.arrayToDataTable(currentData);
+        var columnsTable = new google.visualization.DataTable();
+        columnsTable.addColumn('number', 'colIndex');
+        columnsTable.addColumn('string', 'colLabel');
+        var initState= {selectedValues: []};
+        // put the columns into this data table (skip column 0)
+        for (var i = 1; i < data.getNumberOfColumns(); i++) {
+            columnsTable.addRow([i, data.getColumnLabel(i)]);
+            //initState.selectedValues.push(data.getColumnLabel(i));  
+        }
 
-    var columnsTable = new google.visualization.DataTable();
-    columnsTable.addColumn('number', 'colIndex');
-    columnsTable.addColumn('string', 'colLabel');
-    var initState= {
-        selectedValues: []
-    };
-    // put the columns into this data table (skip column 0)
-    for (var i = 1; i < data.getNumberOfColumns(); i++) {
-        columnsTable.addRow([i, data.getColumnLabel(i)]);
-    //initState.selectedValues.push(data.getColumnLabel(i));  
-    }
-
-    // Create a pie chart, passing some options
-    var lineChart = new google.visualization.ChartWrapper({
-        chartType: 'LineChart',
-        containerId: 'line-chart-placeholder',
-        dataTable: data,
-        options: {
+        // Create a pie chart, passing some options
+        var lineChart = new google.visualization.ChartWrapper({
+          chartType: 'LineChart',
+          containerId: 'line-chart-placeholder',
+          dataTable: data,
+          options: {
             chartArea: {
-                left: 100,
-                top: 20
+              left: 100,
+              top: 20
             },
             backgroundColor: '#F1EEE8',
             interpolateNulls: true,
             fontName: 'HelveticaNeueW02-55Roma' 
-        }
-    });
-    lineChart.draw();
-        
-
-    var columnFilter = new google.visualization.ControlWrapper({
-        controlType: 'CategoryFilter',
-        containerId: 'line-chart-filter',
-        dataTable: columnsTable,
-        options: {  
-            filterColumnLabel: 'colLabel',
-            ui: {
-                caption: 'Choose a country', 
-                label: '',
-                allowTyping: false,
-                allowMultiple: true,
-                selectedValuesLayout: 'below',
-                labelStacking: 'horizontal'
-            }
-        },
-        state: initState
-    });
-    columnFilter.draw();
-        
-    google.visualization.events.addListener(columnFilter, 'statechange', function () {
-
-        var state = columnFilter.getState();
-        var row;
-        var columnIndices = [0];
-        for (var i = 0; i < state.selectedValues.length; i++) {
-            row = columnsTable.getFilteredRows([{
-                column: 1, 
-                value: state.selectedValues[i]
-                }])[0];
-            columnIndices.push(columnsTable.getValue(row, 0));
-        }
-        // sort the indices into their original order
-        columnIndices.sort(function (a, b) {
-            return (a - b);
-        });
-        lineChart.setView({
-            columns: columnIndices
+          }
         });
         lineChart.draw();
-    });
-
-}
-      
-function getTableChartData(year){
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Country');
-    data.addColumn('number', 'Value');
         
 
-    for (var i=0;i<circles.length;i++)
-    { 
-        try{
+        var columnFilter = new google.visualization.ControlWrapper({
+          controlType: 'CategoryFilter',
+          containerId: 'line-chart-filter',
+          dataTable: columnsTable,
+          options: {  
+              filterColumnLabel: 'colLabel',
+              ui: {
+                  caption: 'Choose a country', 
+                  label: '',
+                  allowTyping: false,
+                  allowMultiple: true,
+                  selectedValuesLayout: 'below',
+                  labelStacking: 'horizontal'
+              }
+          },
+          state: initState
+        });
+        columnFilter.draw();
+        
+        google.visualization.events.addListener(columnFilter, 'statechange', function () {
+
+            var state = columnFilter.getState();
+            var row;
+            var columnIndices = [0];
+            for (var i = 0; i < state.selectedValues.length; i++) {
+                row = columnsTable.getFilteredRows([{column: 1, value: state.selectedValues[i]}])[0];
+                columnIndices.push(columnsTable.getValue(row, 0));
+            }
+            // sort the indices into their original order
+            columnIndices.sort(function (a, b) {
+                return (a - b);
+            });
+            lineChart.setView({columns: columnIndices});
+            lineChart.draw();
+        });
+
+    }
+      
+      function getTableChartData(year){
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Country');
+        data.addColumn('number', 'Value');
+        
+
+        for (var i=0;i<circles.length;i++)
+        { 
+          try{
 
             var value = circles[i].values["y" + year];
             if (value === undefined || value === null){
 
             } else {
-                data.addRow([circles[i].countryname, parseInt(value)]);
+              data.addRow([circles[i].countryname, parseInt(value)]);
             }
 
-        } catch (err){
+          } catch (err){
+          }
         }
-    }
-    return data;
-}
+        return data;
+      }
 
-<<<<<<< HEAD
       function getTableYearOptions(){
         var columnsTable = new google.visualization.DataTable();
         columnsTable.addColumn('number', 'colIndex');
         columnsTable.addColumn('string', 'colLabel');
-=======
-function drawTableChart(){
 
-    var curyear = $(".ui-slider-handle").html();
-    var data = getTableChartData(2015);
-        
+        $('.slider-year.slider-active').each(function(index, value){ 
 
-
-    var columnsTable = new google.visualization.DataTable();
-    columnsTable.addColumn('number', 'colIndex');
-    columnsTable.addColumn('string', 'colLabel');
-    var initState = {
-        selectedValues: []
-    };
->>>>>>> add popup with second indicator information
-
-    $('.slider-year.slider-active').each(function(index, value){ 
-
-<<<<<<< HEAD
             columnsTable.addRow([index, value.id.replace("year-", "")]);
         });
         return columnsTable;
@@ -634,20 +606,15 @@ function drawTableChart(){
         var data = getTableChartData(2015);
         
         var columnsTable = getTableYearOptions();
-=======
-        columnsTable.addRow([index, value.id.replace("year-", "")]);
-    });
->>>>>>> add popup with second indicator information
 
-    var tableChart = new google.visualization.ChartWrapper({
-        chartType: 'Table',
-        containerId: 'table-chart-placeholder',
-        dataTable: data,
-        options: {
+        var tableChart = new google.visualization.ChartWrapper({
+          chartType: 'Table',
+          containerId: 'table-chart-placeholder',
+          dataTable: data,
+          options: {
             showRowNumber: true,
             sortColumn: 1,
             sortAscending: false
-<<<<<<< HEAD
           }
         });
         tableChart.draw();
@@ -669,34 +636,9 @@ function drawTableChart(){
           }
         });
         columnFilterT.draw();
-=======
-        }
-    });
-    tableChart.draw();
-
-    var columnFilterT = new google.visualization.ControlWrapper({
-        controlType: 'CategoryFilter',
-        containerId: 'table-chart-filter',
-        dataTable: columnsTable,
-        options: {  
-            filterColumnLabel: 'colLabel',
-            ui: {
-                caption: 'Choose a year', 
-                label: '',
-                allowTyping: false,
-                allowMultiple: false,
-                selectedValuesLayout: 'below',
-                labelStacking: 'horizontal'
-            }
-        },
-        state: initState
-    });
-    columnFilterT.draw();
->>>>>>> add popup with second indicator information
         
-    google.visualization.events.addListener(columnFilterT, 'statechange', function () {
+        google.visualization.events.addListener(columnFilterT, 'statechange', function () {
 
-<<<<<<< HEAD
             var state = columnFilterT.getState();
             var curyear = state.selectedValues[0];
             var curdata = getTableChartData(curyear);
@@ -714,221 +656,79 @@ function drawTableChart(){
 
 
 
-=======
-        var state = columnFilterT.getState();
-        var curyear = state.selectedValues[0];
-
-        var curdata = getTableChartData(curyear);
-        tableChart.draw(curdata);
-    });
-
-}
-
-
-
-function initialize_charts(){
-    google.load("visualization", "1", {
-        packages:["corechart", "controls"], 
-        callback:drawLineChart
-    });
-    google.load("visualization", "1", {
-        packages:["table", "controls"], 
-        callback:drawTableChart
-    });
-}
-
-// function init_dashboard(){
-
-//   var curyear = parseInt($(".ui-slider-handle").html());
-//   var currentData = [];
-//   var lineChartData = [];
-
-//   var lineChartHeader = [];
-//   lineChartHeader.push('Year');
-//   for(var i = 0; i < circles.length;i++){
-//     lineChartHeader.push(circles[i].countryname);
-//   }
-//   currentData.push(lineChartHeader);
-
-//   var firstyear = 0;
-//   var lastyear = 0;
-
-//   for (var i=1950;i<2051;i++){ 
-//     var lineChartLine = [];
-//     lineChartLine.push(i.toString());
-          
-//     for(var y = 0; y < circles.length;y++){
-            
-//       var curvalue = circles[y].values["y" + i.toString()];
-//       if (curvalue === undefined || curvalue === null){ curvalue = null; } else{
-//         if(firstyear == 0){
-//           firstyear = i;
-//         }
-//         lastyear = i;
-//       }
-//       lineChartLine.push(curvalue);
-//     }
-
-//     currentData.push(lineChartLine);
-//   }
-
-
-//   var data = google.visualization.arrayToDataTable(currentData);
-
-//   var columnsTable = new google.visualization.DataTable();
-//   columnsTable.addColumn('number', 'colIndex');
-//   columnsTable.addColumn('string', 'colLabel');
-//   var initState= {selectedValues: []};
-//   // put the columns into this data table (skip column 0)
-//   for (var i = 1; i < data.getNumberOfColumns(); i++) {
-//       columnsTable.addRow([i, data.getColumnLabel(i)]);
-//       //initState.selectedValues.push(data.getColumnLabel(i));  
-//   }
-
-//   // Create a pie chart, passing some options
-//   var lineChart = new google.visualization.ChartWrapper({
-//     chartType: 'LineChart',
-//     containerId: 'chart1',
-//     options: {
-//       height: 500,
-//       title: 'line chart header',
-//       backgroundColor: '#F1EEE8',
-//       interpolateNulls: true,
-//     }
-//   });
-
-//   var columnFilter = new google.visualization.ControlWrapper({
-//     controlType: 'CategoryFilter',
-//     containerId: 'control1',
-//     dataTable: columnsTable,
-//     options: {  
-//         filterColumnLabel: 'colLabel',
-//         ui: {
-//             caption: 'Choose a country', 
-//             label: 'Countries',
-//             allowTyping: true,
-//             allowMultiple: true,
-//             selectedValuesLayout: 'aside',
-//             labelStacking: 'horizontal'
-//         }
-//     },
-//     state: initState
-//   });
-        
-//   // google.visualization.events.addListener(columnFilter, 'statechange', function () {
-
-//   //     var state = columnFilter.getState();
-//   //     var row;
-//   //     var columnIndices = [0];
-//   //     for (var i = 0; i < state.selectedValues.length; i++) {
-//   //         row = columnsTable.getFilteredRows([{column: 1, value: state.selectedValues[i]}])[0];
-//   //         columnIndices.push(columnsTable.getValue(row, 0));
-//   //     }
-//   //     // sort the indices into their original order
-//   //     columnIndices.sort(function (a, b) {
-//   //         return (a - b);
-//   //     });
-//   //     chart.setView({columns: columnIndices});
-//   //     chart.draw();
-//   // });
-
-
-
-
-
-//   // Create the dashboard.
-//   var dashboard = new google.visualization.Dashboard(document.getElementById('chart-dashboard')).
-//   bind(columnFilter, lineChart).
-//   draw(data);
-
-// }
->>>>>>> add popup with second indicator information
       
       
-$("#project-share-graph").click(function(){
+     $("#project-share-graph").click(function(){
 
-    if($('#dropdown-type-graph').is(":hidden")){
-        $('#dropdown-type-graph').show("blind", {
-            direction: "vertical"
-        }, 200);
-    } else {
-        $('#dropdown-type-graph').hide("blind", {
-            direction: "vertical"
-        }, 200);
+       if($('#dropdown-type-graph').is(":hidden")){
+           $('#dropdown-type-graph').show("blind", { direction: "vertical" }, 200);
+       } else {
+           $('#dropdown-type-graph').hide("blind", { direction: "vertical" }, 200);
+       }
+       return false;
+     });
+
+
+    $('#graph-button-treemap').click(function(){
+      $('#treemap-placeholder').show();
+      google.load("visualization", "1", {packages:["treemap"], callback:drawTreemap});
+      $('#map').hide();
+      return false;
+    });
+
+    $('#graph-button-map').click(function(){
+      $('#map').show();
+      $('#treemap-placeholder').hide();
+      return false;
+    });
+
+    $('#graph-button-graph').click(function(){
+      show_line_graph();
+      return false;
+    });
+
+    $('#dropdown-line-graph').click(function(){
+      show_line_graph();
+      $('#dropdown-type-graph').hide();
+      return false;
+    });
+
+    $('#graph-button-table').click(function(){
+      show_table_graph();
+      return false;
+    });
+
+    $('#dropdown-table-graph').click(function(){
+      show_table_graph();
+      $('#dropdown-type-graph').hide();
+      return false;
+    });
+
+    function hide_all_graphs(){
+      $('#line-chart-placeholder').hide();
+      $('#table-chart-placeholder').hide();
+      $('#treemap-placeholder').hide();
+      $('#map').show();
     }
-    return false;
-});
 
-
-$('#graph-button-treemap').click(function(){
-    $('#treemap-placeholder').show();
-    google.load("visualization", "1", {
-        packages:["treemap"], 
-        callback:drawTreemap
-    });
-    $('#map').hide();
-    return false;
-});
-
-$('#graph-button-map').click(function(){
-    $('#map').show();
-    $('#treemap-placeholder').hide();
-    return false;
-});
-
-$('#graph-button-graph').click(function(){
-    show_line_graph();
-    return false;
-});
-
-$('#dropdown-line-graph').click(function(){
-    show_line_graph();
-    $('#dropdown-type-graph').hide();
-    return false;
-});
-
-$('#graph-button-table').click(function(){
-    show_table_graph();
-    return false;
-});
-
-$('#dropdown-table-graph').click(function(){
-    show_table_graph();
-    $('#dropdown-type-graph').hide();
-    return false;
-});
-
-function hide_all_graphs(){
-    $('#line-chart-placeholder').hide();
-    $('#table-chart-placeholder').hide();
-    $('#treemap-placeholder').hide();
-    $('#map').show();
-}
-
-function show_line_graph(){
-    hide_all_graphs();
-    $('#line-chart-placeholder').show();
-    $('html, body').animate({
+    function show_line_graph(){
+      hide_all_graphs();
+      $('#line-chart-placeholder').show();
+      $('html, body').animate({
         scrollTop: ($('#line-chart-placeholder').offset().top - 150)
-    }, 1000);
-    google.load("visualization", "1", {
-        packages:["corechart", "controls"], 
-        callback:drawLineChart
-    });
+      }, 1000);
+      google.load("visualization", "1", {packages:["corechart", "controls"], callback:drawLineChart});
       
-}
+    }
 
-function show_table_graph(){
-    hide_all_graphs();
-    $('#table-chart-placeholder').show();
-    $('html, body').animate({
+    function show_table_graph(){
+      hide_all_graphs();
+      $('#table-chart-placeholder').show();
+      $('html, body').animate({
         scrollTop: ($('#table-chart-placeholder').offset().top - 150)
-    }, 1000);
-    google.load("visualization", "1", {
-        packages:["table"], 
-        callback:drawTableChart
-    });
-}
+      }, 1000);
+      google.load("visualization", "1", {packages:["table"], callback:drawTableChart});
+    }
 
     
     
