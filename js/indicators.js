@@ -340,14 +340,14 @@ function refresh_circles(year){
                     //check if there is a match with a second indicator, if so we need to make a popup with the second indicator
                     if (integrate_second_indicator_data_into_first_indicator(i, curyear, 2)){
                         circles[i].circleinfo.bindPopup('<h4>'+circles[i].countryname+'</h4><p>' + circles[i].friendly_label + ': ' + value + '</p><p>' + circles[i].second_indicator_name + ': ' + circles[i].second_indicator_value);
-                        circles[i].circleinfo.on('mouseover', function(evt) {
+                        circles[i].circleinfo.on('click', function(evt) {
                             evt.target.openPopup();
                         });
                     //if there is not a match, we will create a popup with only information of the first selected indicator
                     }else{
                         circles[i].circleinfo.bindPopup('<h4>'+circles[i].countryname+'</h4><p>' + circles[i].friendly_label + ': ' + value + '</p>');
             
-                        circles[i].circleinfo.on('mouseover', function(evt) {
+                        circles[i].circleinfo.on('click', function(evt) {
                             evt.target.openPopup();
                         });
                     }
@@ -358,7 +358,7 @@ function refresh_circles(year){
                     if(!integrate_second_indicator_data_into_first_indicator(i, curyear, 1)){
                         circles[i].circleinfo.bindPopup('<h4>'+circles[i].countryname+'</h4><p>' + circles[i].friendly_label + ': ' + value + '</p>');
             
-                        circles[i].circleinfo.on('mouseover', function(evt) {
+                        circles[i].circleinfo.on('click', function(evt) {
                             evt.target.openPopup();
                         });
                     }
