@@ -37,8 +37,13 @@ function initialize_map(url, sel_year, type, indicator_id, countries, regions, c
     $( "#map-slider-tooltip div" ).html(sel_year);
     $( "#map-slider-tooltip" ).val(sel_year);
     $( "#year-" + sel_year).addClass("active");
-    indicator_str_filter = get_param_query_string('indicator', 'city', request_url);
-    console.log(indicator_str_filter);
+    if (type=='cpi'){
+        indicator_str_filter = '';
+    }else{
+        indicator_str_filter = get_param_query_string('indicator', 'city', request_url);
+        console.log(indicator_str_filter);
+    }
+    
     
     if (indicator_str_filter.length > 0){
         var indicator_param = indicator_str_filter;
