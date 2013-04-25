@@ -707,8 +707,8 @@ function hide_all_graphs(){
 }
 
 function show_line_graph(){
-  hide_all_graphs();
-  $('#line-chart-placeholder').show();
+  // hide_all_graphs();
+  // $('#line-chart-placeholder').show();
   $('html, body').animate({
     scrollTop: ($('#line-chart-placeholder').offset().top - 150)
   }, 1000);
@@ -717,8 +717,8 @@ function show_line_graph(){
 }
 
 function show_table_graph(){
-  hide_all_graphs();
-  $('#table-chart-placeholder').show();
+  // hide_all_graphs();
+  // $('#table-chart-placeholder').show();
   $('html, body').animate({
     scrollTop: ($('#table-chart-placeholder').offset().top - 150)
   }, 1000);

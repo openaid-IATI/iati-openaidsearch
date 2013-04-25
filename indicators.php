@@ -49,6 +49,19 @@ Template Name: Indicators page
 
 	<div class="container">
 		<div class="row-fluid">
+			<div id="charts-column-1" class="span7">
+				<div id="line-chart-filter"></div>
+				<div id="line-chart-placeholder"></div>
+			</div>
+			<div id="charts-column-2" class="span5">
+				<div id="table-chart-filter"></div>
+				<div id="table-chart-placeholder"></div>
+			</div>
+		</div>
+	</div>
+<!-- 
+	<div class="container">
+		<div class="row-fluid">
 			<div class="span3">
 				<div id="line-chart-filter-title">Countries</div>
 				<div id="line-chart-filter"></div>
@@ -75,7 +88,7 @@ Template Name: Indicators page
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 </div>
 

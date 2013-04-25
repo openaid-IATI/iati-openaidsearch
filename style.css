@@ -638,7 +638,7 @@ input[type=checkbox] {
 }
 
 .home-page .drop-shadow{
-  min-height:260px;
+  min-height:440px;
 }
 
 .map-lightbox-title{
@@ -1141,6 +1141,11 @@ label, input, button, select, textarea{
 
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX INDICATOR PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+#charts-column-1, #charts-column-2{
+  margin-top: 2em;
+}
+
 #treemap-placeholder{
   display: none;
   height: 45em;
@@ -1702,6 +1707,7 @@ label, input, button, select, textarea{
   color: #008CCC;
   font-family: "HelveticaNeueW01-75Bold";
   padding: 0.2em 0.7em;
+  white-space: nowrap;
 }
 
 .dropdown-menu-page-header button:hover, .dropdown-menu-page-header button.active{
@@ -1722,7 +1728,7 @@ label, input, button, select, textarea{
 
 
 
-#sort-type-country, #project-related-indicators-link, #project-located-in-link, #project-related-projects-link{
+#sort-type-country, #project-related-indicators-link, #project-located-in-link, #project-related-projects-link, #project-share-embed{
   display: none;
 }
 
