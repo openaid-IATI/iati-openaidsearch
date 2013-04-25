@@ -18,7 +18,7 @@ $activity = wp_get_activity($project_id);
 	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
-				<button id="project-back-button">BACK TO SEARCH RESULTS</button>
+				<a href="<?php echo bloginfo('url'); ?>/projects/" id="project-back-button">BACK TO SEARCH RESULTS</a>
 			</div>
 		</div>
 	</div>
@@ -224,26 +224,32 @@ $activity = wp_get_activity($project_id);
 			</div>
 		</div>
 	</div>
-	</div>
-	<script type="text/javascript">
+</div>
 
-	// PREPARE COUNTRIES FOR SHOWING ON MAP
+<script type="text/javascript">
 
-		<?php if(!empty($activity->recipient_country)) {
-			$sep = '';
-			$countries = "";
-			foreach($activity->recipient_country AS $country) {
-				$countries .=  $sep . '"' . $country->iso . '"';
-				$sep = ', ';
-			}
+// PREPARE COUNTRIES FOR SHOWING ON MAP
+
+	<?php if(!empty($activity->recipient_country)) {
+		$sep = '';
+		$countries = "";
+		foreach($activity->recipient_country AS $country) {
+			$countries .=  $sep . '"' . $country->iso . '"';
+			$sep = ', ';
 		}
-		?>
+	}
+	?>
 
-		var project_countries = new Array(<?php echo $countries; ?>);
+	var project_countries = new Array(<?php echo $countries; ?>);
 
-	</script>
+</script>
 
+<?php get_footer(); ?>
 
-	<?php get_footer(); ?>
+<script>
+  $(document).ready(function() {
+      sanitize_project_url();
+    });
+</script>
 	
 	

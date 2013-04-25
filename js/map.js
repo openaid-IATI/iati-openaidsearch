@@ -14,4 +14,5 @@ var currently_selected_country = "none";
 
 function set_currently_selected_country(value){
     currently_selected_country = value;
+    console.log(currently_selected_country);
 }

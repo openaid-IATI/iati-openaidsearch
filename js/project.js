@@ -1,7 +1,32 @@
 
 // XXXXXXX PROJECT DETAIL PAGE XXXXXXXXXXX
-jQuery(function($) {
 
+function sanitize_project_url(){
+  var parameters = new Object();
+  var query = window.location.search.substring(1);
+  //console.log(window.location.search.substring(1));
+  if(query != ''){
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+      var pair = vars[i].split("=");
+      var vals = pair[1].split(",");
+
+      parameters[pair[0]] = [];
+      for(var y=0;y<vals.length;y++){
+        parameters[pair[0]] = vals[y];
+      }
+      
+    } 
+  }
+  var link = home_url + "/project/?id=" + parameters["id"];
+  if (!(parameters["backlink"] === undefined)){
+  	$("#project-back-button").attr("href", decodeURIComponent(parameters["backlink"]));
+  }
+  history.pushState(null, null, link);
+}
+
+
+jQuery(function($) {
 
 
   function change_tab(curlink, newtab){

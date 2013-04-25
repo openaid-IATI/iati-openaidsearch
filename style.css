@@ -568,6 +568,19 @@ input[type=checkbox] {
 */
 
 /* homepage only */
+.homepage-link{
+  display:block;
+  color: #666;
+}
+
+.home-page{
+  margin-top: 2em;
+}
+
+.home-page .postit:hover{
+  background-color: #C9C8C2;
+}
+
 #map-lightbox-bg{
   background-color: #000;
   opacity:0.70;
@@ -1377,7 +1390,7 @@ label, input, button, select, textarea{
 
 .projects-pagination-info > div, .project-pagination-info > a, .project-pagination-info > button{
   vertical-align: middle;
-}
+} 
 
 #pagination-totals{
   display:inline-block;
@@ -1500,9 +1513,7 @@ label, input, button, select, textarea{
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PROJECT DETAILED DESCRIPTION PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
-#project-back-button{
-  color: #797972;
-}
+
 
 .page-full-width-line{
   border-bottom: 1px solid #CCC;
@@ -1558,6 +1569,28 @@ label, input, button, select, textarea{
   height:6em;
 }
 
+.project-document-block{
+  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.project-document-icon{
+  background-image:url('images/doc-pdf.png');
+  background-repeat:no-repeat;
+  width: 16px;
+  height:16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+
+.project-document-title{
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 90%;
+}
+
 .projects-project-divider{
   border-top: 1px solid #CCC;
   clear: both;
@@ -1596,6 +1629,9 @@ label, input, button, select, textarea{
   font-size: 1.1em;
   padding-left:24px;
   vertical-align: middle;
+}
+
+.project-share-container .stButton .sharethis{
   padding-top: 2px;
 }
 
@@ -1682,6 +1718,12 @@ label, input, button, select, textarea{
 
 #project-share-embed .share-text, #sort-type-country .project-sort-text{
   color: #797974;
+}
+
+
+
+#sort-type-country, #project-related-indicators-link, #project-located-in-link, #project-related-projects-link{
+  display: none;
 }
 
 #graph-button-treemap{

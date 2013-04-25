@@ -3,6 +3,8 @@ var current_selection = new Object();
 var current_url = new Object();
 var selected_type = '';
 var standard_mapheight = '45em';
+var home_url = '';
+var template_directory = '';
 
 function build_current_url(){
 
@@ -545,12 +547,7 @@ jQuery(function($){
     return false;
   });
 
-  $("#project-share-whistleblower").click(function(){
-    var id = $(this).attr("name");
-    var url = "/whistleblower/?referrer=" + encodeURIComponent("http://open.unhabitat.org/project/?id=" + id);
-    window.location = url;
-    return false;
-  });
+  
 
 /***********************************************
 * Bookmark site script- © Dynamic Drive DHTML code library (www.dynamicdrive.com)

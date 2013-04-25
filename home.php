@@ -23,13 +23,13 @@
 			 	$row1_posts_array = get_posts( $args );
 
  				foreach( $row1_posts_array as $post ) :	setup_postdata($post); ?>
-
+ 				<a class="homepage-link" href="<?php echo bloginfo("url"); ?>/projects/">
 					<div class="drop-shadow postit">
 						<div class="postit-title hneue-light"><?php the_title(); ?></div>
 						<div class="postit-text"><?php the_content(); ?></div>
 						<div class="postit-thumb"><?php the_post_thumbnail(); ?></div>
 					</div>
-
+				</a>
 				<?php endforeach; ?>
 
 					
@@ -52,13 +52,13 @@
 			 	$row1_posts_array = get_posts( $args );
 
  				foreach( $row1_posts_array as $post ) :	setup_postdata($post); ?>
-
+ 				<a class="homepage-link" href="<?php echo bloginfo("url"); ?>/indicators/">
 					<div class="drop-shadow postit">
 						<div class="postit-title hneue-light"><?php the_title(); ?></div>
 						<div class="postit-text"><?php the_content(); ?></div>
 						<div class="postit-thumb"><?php the_post_thumbnail(); ?></div>
 					</div>
-
+				</a>
 				<?php endforeach; ?>
 				</div>
 				<div class="span4">
@@ -78,13 +78,13 @@
 			 	$row1_posts_array = get_posts( $args );
 
  				foreach( $row1_posts_array as $post ) :	setup_postdata($post); ?>
-
+ 				<a class="homepage-link" href="<?php echo bloginfo("url"); ?>/city-prosperity/">
 					<div class="drop-shadow postit">
 						<div class="postit-title hneue-light"><?php the_title(); ?></div>
 						<div class="postit-text"><?php the_content(); ?></div>
 						<div class="postit-thumb"><?php the_post_thumbnail(); ?></div>
 					</div>
-
+				</a>
 				<?php endforeach; ?>
 				</div>
 			</div>

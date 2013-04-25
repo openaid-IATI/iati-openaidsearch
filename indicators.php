@@ -30,8 +30,8 @@ Template Name: Indicators page
 							<div class="share-icon"></div>
 							<div class="share-text">EXPORT</div>
 							<div id="dropdown-export-indicator" class="dropdown-menu-page-header">
-								<button id="dropdown-png">AS IMAGE</button>
-								<button id="dropdown-csv">AS CSV</button>
+								<button id="dropdown-png">MAP TO IMAGE</button>
+								<button id="dropdown-csv">DATA TO CSV</button>
 							</div>
 						</a>
 						<a href="#" id="project-share-embed" class="project-share-button hneue-bold">

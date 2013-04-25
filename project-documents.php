@@ -6,16 +6,16 @@ $activity = wp_get_activity($project_id);
 <div id="project-documents">
 	<?php if(empty($activity->documents)) {?>
 		No information available
-		<?php } else { ?>
-									
-		<ul>
-		<?php
+		<?php } else { 
 			foreach($activity->documents AS $doc) {
 				$class	= "";
 				if(!empty($doc->format)) {
 					$class = " class='" . str_replace('application/', '', $doc->format) . "'";
 				}
-				echo "<li{$class}>";
+				echo "<div class='project-document-block'>";
+				echo "<div class='project-document-icon'></div>";
+				echo "<div class='project-document-title'>";
+
 				echo "<a target='_blank' href='{$doc->url}'>";
 				if(empty($doc->title)) {
 					echo $activity->titles[0]->title;
@@ -28,12 +28,9 @@ $activity = wp_get_activity($project_id);
 							 
 				//CREATE COMPLETED OUTPUT
 				$filesize = sprintf('%.2f '.$s[$e], ($bytes/pow(1024, floor($e))));
-				echo "<span>" . $filesize . "</span>";
+				echo " (" . $filesize . ")";
 				echo "</a>";
-				echo "</li>";
+				echo "</div></div>";
 			} 
-		?>
-		</ul>
-									
-	<?php } ?>
+		} ?>
 </div>

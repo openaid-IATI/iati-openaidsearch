@@ -130,7 +130,7 @@ function style(feature) {
 function highlightFeature(e) {
     var layer = e.target;
     
-    if(typeof layer.feature.properties.projects != "undefined"){
+    if(typeof layer.feature.properties.project_amount != "undefined"){
         
         if (currently_selected_country != layer.feature.properties.name){
             set_currently_selected_country(layer.feature.properties.name);
@@ -186,10 +186,6 @@ function load_project_map(project_geojson){
 
 
 
-
-
-
-
   // load listeners at page initialisation:
   load_projects_listeners();
 
@@ -226,6 +222,23 @@ function load_project_map(project_geojson){
 
 
   function load_projects_listeners(){
+
+
+    $('.projects-project-title a').click(function(){
+      var link = $(this).attr("href");
+      var backlink = build_current_url();
+      var newlink = link + "&backlink=" + encodeURIComponent(home_url + "/projects/" + backlink);
+      console.log(newlink);
+      window.location = newlink;
+      return false;
+    });
+
+    $("#project-share-whistleblower").click(function(){
+      var id = $(this).attr("name");
+      var url = "/whistleblower/?referrer=" + encodeURIComponent(home_url + "/project/?id=" + id);
+      window.location = url;
+      return false;
+    });
     
     // Reload projects on pagination container click
     $('#pagination a').click(function(){ 
@@ -315,7 +328,7 @@ function load_project_map(project_geojson){
 
 function generate_download_file(id) {
   var author = encodeURIComponent("Open UN-Habitat search results");
-  var url = "/wp-content/themes/OPEN-UN-HABITAT-V2/export.php?author=";
+  var url = template_url + "/export.php?author=";
   if(id) {
     author = encodeURIComponent("Open UN-Habitat project details of " + id);
     url += author;
