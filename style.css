@@ -1976,29 +1976,339 @@ label, input, button, select, textarea{
      
     /* Landscape phone to portrait tablet */
     @media (max-width: 767px) {
+      
+    body {
+      font-size:11px;
+    }
+
+    .navbar-static-top .input-large{
+      width: 13em;
+    }
+
+   /* .projects-share-spec #project-share-export, .projects-share-spec #project-share-bookmark{
+      width: 40%;
+      text-align: left;
+    }
+    .projects-share-spec{
+      padding-bottom: 0.4em;
+    }*/
+
+    /* font size 11 test */
+
+    .share-text{
+      font-size: 0.87em;
+    }
+
+    .navbar-static-top.navbar .nav > li > a{
+      padding: 1.70em 0.6em;
+    }
+
+    .navbar .brand{
+      width: 19em;
+      padding: 1.7em 0.5em 1.7em 0.8em;
+    }    
+
+    .filter-text{
+      padding-right: 2.2em;
+    }
+
+    .project-sort-type, #sort-type-header{
+      margin-right: 1.1em;
+    }
+
+    .share-text{
+      margin-left:0;
+      margin-right:0.2em;
+    }
+
+    .share-icon {
+      width: 14px;
+      height: 14px;
+      background-image: url('images/project-share-980-1440.png');
+    }
+
+    #project-share-share .share-icon {
+      background-position: -14px 0;
+      margin-top: 0px;
+    }
+
+    #project-share-bookmark .share-icon, #page-share-bookmark .share-icon {
+      background-position: -28px 0;
+    }
+
+    #project-share-whistleblower .share-icon, #page-share-whistleblower .share-icon {
+      background-position: -42px 0;
+    }
+
+    #project-share-embed .share-icon{
+      background-position: -56px 0;
+    }
+
+    #project-share-graph .share-icon{
+      background-position: -70px 0;
+    }
+
+    #dropdown-type-graph{
+      right:auto;
+      left:0;
+      top: 2.24em;
+    }
+
+    #dropdown-type-graph button{
+      padding: 0.4em 0.7em;
+      white-space: nowrap;
+      font-size: 1em;
+    }
+
+
+    .dropdown-project{
+      top:2.24em;
+
+    }
+
+    .dropdown-project button, .dropdown-project a{
+      font-size: 1em;
+    }
+
+    #brand-image{
+      background-image: url('images/logo-980-1440.png');
+      width: 209px;
+      height: 26px;
+    }
+
+    #header-home-img{
+      background-image: url('images/home-980-1440.png');
+      width: 17px;
+      height: 15px;
+    }
+
+    .navbar-static-top.navbar .nav > li > .navbar-home-link{
+      padding: 1.86em 0.6em;
+    }
+
+    #map{
+      height: 37em;
+    }
+
+    #brand-beta{
+      right: 1.2em;
+    }
+
+    .squaredThree{
+      margin: 0.3em 0 0;
+    }
+
+    .squaredThree label {
+      width: 15px;
+      height: 16px;
+      border-radius: 3px;
+    }
+
+    .squaredThree label:after {
+      height: 3px;
+      left: 2px;
+      width: 8px;
+    }
+
+    .slider-year{
+      width: 10px;
+    }
+
+    #map-timeline{
+      width: 1010px;
+      left: 50%;
+      margin-left:-505px;
+    }
+
+    #timeline-left, #timeline-right{
+      min-height: 4em;
+      overflow: hidden;
+      width: 50%;
+      background-color: #000;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+      filter: alpha(opacity=40);
+      opacity: 0.4;
+    }
+
+    #timeline-left{
+      left:0;
+      margin-left:-505px;
+    }
+
+    #timeline-right{
+      right: 0;
+      margin-right:-505px;
+    }
+
+  }
+
+
+
+    /* Portrait tablet to landscape and desktop */
+    @media (min-width: 768px) and (max-width: 979px) { 
 
       body {
-        font-size:10px;
-      }
+      font-size:11px;
+    }
 
-      .projects-project-spec {
-        margin-top: 2em;
-        margin-left: 0;
-      }
+    .navbar-static-top .input-large{
+      width: 13em;
+    }
 
-      #map{
-        display: none;
-      }
+   /* .projects-share-spec #project-share-export, .projects-share-spec #project-share-bookmark{
+      width: 40%;
+      text-align: left;
+    }
+    .projects-share-spec{
+      padding-bottom: 0.4em;
+    }*/
 
-      .ipad-newrow{
-        clear:left;
-      }
+    /* font size 11 test */
 
-      #sort-type-header{
-        width: 100%;
-        padding-bottom:0.4em;
-      }
+    .share-text{
+      font-size: 0.87em;
+    }
 
+    .navbar-static-top.navbar .nav > li > a{
+      padding: 1.70em 0.6em;
+    }
+
+    .navbar .brand{
+      width: 19em;
+      padding: 1.7em 0.5em 1.7em 0.8em;
+    }    
+
+    .filter-text{
+      padding-right: 2.2em;
+    }
+
+    .project-sort-type, #sort-type-header{
+      margin-right: 1.1em;
+    }
+
+    .share-text{
+      margin-left:0;
+      margin-right:0.2em;
+    }
+
+    .share-icon {
+      width: 14px;
+      height: 14px;
+      background-image: url('images/project-share-980-1440.png');
+    }
+
+    #project-share-share .share-icon {
+      background-position: -14px 0;
+      margin-top: 0px;
+    }
+
+    #project-share-bookmark .share-icon, #page-share-bookmark .share-icon {
+      background-position: -28px 0;
+    }
+
+    #project-share-whistleblower .share-icon, #page-share-whistleblower .share-icon {
+      background-position: -42px 0;
+    }
+
+    #project-share-embed .share-icon{
+      background-position: -56px 0;
+    }
+
+    #project-share-graph .share-icon{
+      background-position: -70px 0;
+    }
+
+    #dropdown-type-graph{
+      right:auto;
+      left:0;
+      top: 2.24em;
+    }
+
+    #dropdown-type-graph button{
+      padding: 0.4em 0.7em;
+      white-space: nowrap;
+      font-size: 1em;
+    }
+
+
+    .dropdown-project{
+      top:2.24em;
+
+    }
+
+    .dropdown-project button, .dropdown-project a{
+      font-size: 1em;
+    }
+
+    #brand-image{
+      background-image: url('images/logo-980-1440.png');
+      width: 209px;
+      height: 26px;
+    }
+
+    #header-home-img{
+      background-image: url('images/home-980-1440.png');
+      width: 17px;
+      height: 15px;
+    }
+
+    .navbar-static-top.navbar .nav > li > .navbar-home-link{
+      padding: 1.86em 0.6em;
+    }
+
+    #map{
+      height: 37em;
+    }
+
+    #brand-beta{
+      right: 1.2em;
+    }
+
+    .squaredThree{
+      margin: 0.3em 0 0;
+    }
+
+    .squaredThree label {
+      width: 15px;
+      height: 16px;
+      border-radius: 3px;
+    }
+
+    .squaredThree label:after {
+      height: 3px;
+      left: 2px;
+      width: 8px;
+    }
+
+    .slider-year{
+      width: 10px;
+    }
+
+    #map-timeline{
+      width: 1010px;
+      left: 50%;
+      margin-left:-505px;
+    }
+
+    #timeline-left, #timeline-right{
+      min-height: 4em;
+      overflow: hidden;
+      width: 50%;
+      background-color: #000;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+      filter: alpha(opacity=40);
+      opacity: 0.4;
+    }
+
+    #timeline-left{
+      left:0;
+      margin-left:-505px;
+    }
+
+    #timeline-right{
+      right: 0;
+      margin-right:-505px;
+    }
 
 
     }
@@ -2008,11 +2318,166 @@ label, input, button, select, textarea{
     @media (max-width: 480px) { 
 
       body {
-        font-size:10px;
-      }
+      font-size:11px;
+    }
 
-      #map{
-        display: none;
-      }
+    .navbar-static-top .input-large{
+      width: 13em;
+    }
+
+   /* .projects-share-spec #project-share-export, .projects-share-spec #project-share-bookmark{
+      width: 40%;
+      text-align: left;
+    }
+    .projects-share-spec{
+      padding-bottom: 0.4em;
+    }*/
+
+    /* font size 11 test */
+
+    .share-text{
+      font-size: 0.87em;
+    }
+
+    .navbar-static-top.navbar .nav > li > a{
+      padding: 1.70em 0.6em;
+    }
+
+    .navbar .brand{
+      width: 19em;
+      padding: 1.7em 0.5em 1.7em 0.8em;
+    }    
+
+    .filter-text{
+      padding-right: 2.2em;
+    }
+
+    .project-sort-type, #sort-type-header{
+      margin-right: 1.1em;
+    }
+
+    .share-text{
+      margin-left:0;
+      margin-right:0.2em;
+    }
+
+    .share-icon {
+      width: 14px;
+      height: 14px;
+      background-image: url('images/project-share-980-1440.png');
+    }
+
+    #project-share-share .share-icon {
+      background-position: -14px 0;
+      margin-top: 0px;
+    }
+
+    #project-share-bookmark .share-icon, #page-share-bookmark .share-icon {
+      background-position: -28px 0;
+    }
+
+    #project-share-whistleblower .share-icon, #page-share-whistleblower .share-icon {
+      background-position: -42px 0;
+    }
+
+    #project-share-embed .share-icon{
+      background-position: -56px 0;
+    }
+
+    #project-share-graph .share-icon{
+      background-position: -70px 0;
+    }
+
+    #dropdown-type-graph{
+      right:auto;
+      left:0;
+      top: 2.24em;
+    }
+
+    #dropdown-type-graph button{
+      padding: 0.4em 0.7em;
+      white-space: nowrap;
+      font-size: 1em;
+    }
+
+
+    .dropdown-project{
+      top:2.24em;
+
+    }
+
+    .dropdown-project button, .dropdown-project a{
+      font-size: 1em;
+    }
+
+    #brand-image{
+      background-image: url('images/logo-980-1440.png');
+      width: 209px;
+      height: 26px;
+    }
+
+    #header-home-img{
+      background-image: url('images/home-980-1440.png');
+      width: 17px;
+      height: 15px;
+    }
+
+    .navbar-static-top.navbar .nav > li > .navbar-home-link{
+      padding: 1.86em 0.6em;
+    }
+
+    #map{
+      height: 37em;
+    }
+
+    #brand-beta{
+      right: 1.2em;
+    }
+
+    .squaredThree{
+      margin: 0.3em 0 0;
+    }
+
+    .squaredThree label {
+      width: 15px;
+      height: 16px;
+      border-radius: 3px;
+    }
+
+    .squaredThree label:after {
+      height: 3px;
+      left: 2px;
+      width: 8px;
+    }
+
+    .slider-year{
+      width: 10px;
+    }
+
+    #map-timeline{
+      width: 1010px;
+      left: 50%;
+      margin-left:-505px;
+    }
+
+    #timeline-left, #timeline-right{
+      min-height: 4em;
+      overflow: hidden;
+      width: 50%;
+      background-color: #000;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+      filter: alpha(opacity=40);
+      opacity: 0.4;
+    }
+
+    #timeline-left{
+      left:0;
+      margin-left:-505px;
+    }
+
+    #timeline-right{
+      right: 0;
+      margin-right:-505px;
+    }
 
     }

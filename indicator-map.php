@@ -10,13 +10,15 @@
     <div id="map-graph-wrapper">
         <div id="map-graph-buttons">
             <a href="#" class="hneue-bold" id="graph-button-map"></a>
+            <?php if(is_page("indicators")){ ?>
             <a href="#" class="hneue-bold" id="graph-button-graph"></a> 
+            <?php } ?>
             <a href="#" class="hneue-bold" id="graph-button-table"></a>
             <a href="#" class="hneue-bold" id="graph-button-treemap"></a>
         </div>
     </div>
 
-    
+    <?php if(is_page("indicators")){ ?>
     <div id="map-timeline-wrapper">
         <div id="timeline-left"></div>
         <div id="map-timeline">
@@ -31,7 +33,7 @@
         </div>
         <div id="timeline-right"></div>
     </div>
-
+    <?php } ?>
 
 
 

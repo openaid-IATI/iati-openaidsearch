@@ -146,7 +146,7 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-value">
 
 							<?php if(!empty($activity->
-							activity_sectors[0]->code)) { echo $activity->activity_sectors[0]->code; } ?>
+							activity_sectors[0]->code)) { echo "<a href='".get_bloginfo('url')."/projects/?sectors={$sector->code}'>" . $activity->activity_sectors[0]->code . "</a>"; } ?>
 						</div>
 
 						<div class="projects-project-divider"></div>

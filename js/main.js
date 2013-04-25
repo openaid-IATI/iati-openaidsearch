@@ -60,56 +60,52 @@ function query_string_to_selection(){
 //HTML function to create filters
 function create_filter_attributes(objects, columns){
     var html = '';
-    var counter = 0;
     var per_col = 20;
 
-//     var sortable = [];
-//     for (var key in objects){
-//       sortable.push([key, objects[key]]);
-//     }
+    var sortable = [];
+    for (var key in objects){
+       sortable.push([key, objects[key]]);
+     }
+     
+    sortable.sort(function(a, b){
+     var nameA=a[1].toString().toLowerCase(), nameB=b[1].toString().toLowerCase()
+     if (nameA < nameB) //sort string ascending
+      return -1 
+     if (nameA > nameB)
+      return 1
+     return 0 //default return value (no sorting)
+    });
 
-//     sortable.sort(function(a, b){
-//      var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
-//      if (nameA < nameB) //sort string ascending
-//       return -1 
-//      if (nameA > nameB)
-//       return 1
-//      return 0 //default return value (no sorting)
-//     });
-//     console.log(sortable);
+    for (var i = 0;i < sortable.length;i++){
 
-//     for (var i = 0; i < sortable.length; i++) {
-//       if (i%per_col == 0){
-//             html += '<div class="span' + (12 / columns) + '">';
-//         } 
-//         html += '<div class="squaredThree"><div>';
-//         html += '<input type="checkbox" value="'+ sortable[i][0] +'" id="land'+sortable[i][1]+'" name="check" />';
-//         html += '<label class="map-filter-cb-value" for="land'+sortable[i][1]+'"></label>';
-//         html += '</div><div><span>'+sortable[i][1]+'</span></div></div>';
-
-//         if (i%per_col == (per_col - 1)){
-//           html += '</div>';
-//         }
-
-//         if ((i+1) > ((per_col * columns) - 1)) { break }
-
-    // }
-
-    $.each(objects, function(key, value){
-
-        if (counter%per_col == 0){
+      if (i%per_col == 0){
             html += '<div class="span' + (12 / columns) + '">';
         } 
         html += '<div class="squaredThree"><div>';
-        html += '<input type="checkbox" value="'+ key +'" id="'+value.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'" name="'+value+'" />';
-        html += '<label class="map-filter-cb-value" for="'+value.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'"></label>';
-        html += '</div><div><span>'+value+'</span></div></div>';
-        if (counter%per_col == (per_col - 1)){
+        html += '<input type="checkbox" value="'+ sortable[i][0] +'" id="'+sortable[i][1].toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'" name="'+sortable[i][1]+'" />';
+        html += '<label class="map-filter-cb-value" for="'+sortable[i][1].toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'"></label>';
+        html += '</div><div><span>'+sortable[i][1]+'</span></div></div>';
+        if (i%per_col == (per_col - 1)){
           html += '</div>';
         }
-        counter++;
-        if (counter > ((per_col * columns) - 1)) { return false; }
-    });
+        if ((i + 1) > ((per_col * columns) - 1)) { break; }
+
+    }
+    // $.each(objects, function(key, value){
+
+    //     if (counter%per_col == 0){
+    //         html += '<div class="span' + (12 / columns) + '">';
+    //     } 
+    //     html += '<div class="squaredThree"><div>';
+    //     html += '<input type="checkbox" value="'+ key +'" id="'+value.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'" name="'+value+'" />';
+    //     html += '<label class="map-filter-cb-value" for="'+value.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'"></label>';
+    //     html += '</div><div><span>'+value+'</span></div></div>';
+    //     if (counter%per_col == (per_col - 1)){
+    //       html += '</div>';
+    //     }
+    //     counter++;
+    //     if (counter > ((per_col * columns) - 1)) { return false; }
+    // });
     return html;
 }
 
@@ -364,7 +360,6 @@ function reload_map(){
   var str_budget = reload_map_prepare_parameter_string("budgets", dlmtr);
   var str_region = reload_map_prepare_parameter_string("regions", dlmtr);
   var str_indicator = reload_map_prepare_parameter_string("indicators", dlmtr);
-  console.log(str_indicator + ' indicator filter string');
   var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
 
   // if project filter container is on the page (= projects page)
