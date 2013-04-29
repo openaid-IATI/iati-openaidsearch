@@ -212,7 +212,7 @@ $activity = wp_get_activity($project_id);
 								<div class="share-icon"></div>
 								<div class="share-text">BOOKMARK</div>
 							</button>
-							<button id="project-share-whistleblower" class="project-share-button hneue-bold">
+							<button id="project-share-whistleblower" class="project-share-button hneue-bold" name="<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?>">
 								<div class="share-icon"></div>
 								<div class="share-text">WHISTLEBLOWER</div>
 							</button>

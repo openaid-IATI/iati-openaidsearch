@@ -59,37 +59,6 @@ Template Name: Indicators page
 			</div>
 		</div>
 	</div>
-<!-- 
-	<div class="container">
-		<div class="row-fluid">
-			<div class="span3">
-				<div id="line-chart-filter-title">Countries</div>
-				<div id="line-chart-filter"></div>
-			</div>
-			<div class="span9">
-				<div id="line-chart-title">The line chart title</div>
-				<div id="line-chart-placeholder"></div>
-
-			</div>
-		</div>
-	</div>
-	<div id="table-chart-wrapper">
-		<div class="container">
-			<div class="page-content">
-				<div class="row-fluid">
-					<div class="span3">
-						<div id="table-chart-filter-title">Years</div>
-						<div id="table-chart-filter"></div>
-					</div>
-					<div class="span7">
-						<div id="table-chart-title">The table chart title</div>
-						<div id="table-chart-placeholder"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
-
 </div>
 
 
@@ -99,9 +68,9 @@ Template Name: Indicators page
 $(document).ready(function(){
   selected_type = "indicator";
   query_string_to_selection();
-  if (typeof current_selection.indicator === "undefined"){
-  	current_selection.indicator = [];
-  	current_selection.indicator.push({"id":"population", "name":"Total population"});
+  if (typeof current_selection.indicators === "undefined"){
+  	current_selection.indicators = [];
+  	current_selection.indicators.push({"id":"population", "name":"Total population"});
   }
   reload_map();
   initialize_filters();

@@ -445,7 +445,7 @@ function fill_selection_box(){
 function fill_selection_box_single_filter(header, arr){
   var html = '<div class="select-box" id="selected-' + header.toLowerCase() + '">';
       html += '<div class="select-box-header">';
-      if (header == "INDICATORS" && selected_type == "cpi"){ header = "DIMENSIONS";};
+      if (header == "INDICATORS" && selected_type == "cpi"){ header = "DIMENSIONS";}
       html += header;
       html += '</div>';
 
@@ -458,6 +458,9 @@ function fill_selection_box_single_filter(header, arr){
         }
 
         html += '<div>' + arr[i].name + '</div>';
+        if (header == "INDICATORS"){
+          html += '<div class="selected-indicator-color-filler"></div><div class="selected-indicator' + (i + 1).toString() + '-color"></div>';
+        }
         html += '</div>';
       }
 

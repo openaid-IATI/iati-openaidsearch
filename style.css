@@ -51,6 +51,7 @@ body {
   font-family:"HelveticaNeueW02-55Roma","Helvetica Neue",Helvetica,Arial,sans-serif;
   line-height: 100%;
   background-color: #F1EEE8;
+  font-size: 14px;
 }
 
 #page-wrapper{
@@ -638,7 +639,7 @@ input[type=checkbox] {
 }
 
 .home-page .drop-shadow{
-  min-height:440px;
+  min-height:400px;
 }
 
 .map-lightbox-title{
@@ -720,18 +721,44 @@ input[type=checkbox] {
   padding: 0.3em 0.8em 0.1em 0.4em;
 }
 
-#selection-box{
-  display: none;
-}
-
 .select-box{
   padding-top: 0.2em;
-  padding-bottom: 0.8em;
+  padding-bottom: 0.5em;
   border-bottom: 1px solid #CCC;
 }
 
+#selected-indicators .select-box-selected{
+  border-top: 1px solid #ccc;
+  padding-top: 0em;
+  padding-bottom: 0em;
+}
+
+#selected-indicators .selected-indicator-color-filler{
+  width: 1em;
+  height: 2.5em;
+}
+
+#selected-indicators .selected-indicator1-color{
+  width: 1em;
+  height: 2.5em;
+  float: right;
+  background-color: #2B5A70;
+}
+
+#selected-indicators .selected-indicator2-color{
+  width: 1em;
+  height: 2.5em;
+  float: right;
+  background-color: DarkGreen;
+}
+
+
+#selected-indicators .select-box-header{
+  padding-bottom: 0.4em;
+}
+
 #selected-indicators{
-  border-bottom: 0;
+  padding-bottom: 0em;
 }
 
 #selection-box-indicators, #selected-clear{
@@ -742,10 +769,6 @@ input[type=checkbox] {
   background-color: #000;
   opacity:0.60;
   filter:alpha(opacity=60); /* For IE8 and earlier */
-}
-
-#selected-clear{
-  display: none;
 }
 
 #selection-hide-show-button:hover{
@@ -1144,6 +1167,7 @@ label, input, button, select, textarea{
 
 #charts-column-1, #charts-column-2{
   margin-top: 2em;
+  margin-bottom: 4em;
 }
 
 #treemap-placeholder{

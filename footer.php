@@ -59,6 +59,11 @@ var site = '<?php echo SITE_URL; ?>';
 <script src="<?php echo get_template_directory_uri(); ?>/js/map.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/main.js"></script>
 
+<script type="text/javascript">
+home_url = "<?php echo bloginfo("url"); ?>";
+template_directory = "<?php echo bloginfo("template_url"); ?>";
+</script>
+
 <?php 
 
 if (is_page('indicators') or is_page('city-prosperity') or is_page('project')) {
@@ -77,10 +82,7 @@ if (!is_page('indicators') and !is_page('city-prosperity')) {
 } 
 
 ?>
-<script type="text/javascript">
-home_url = "<?php echo bloginfo("url"); ?>";
-template_directory = "<?php echo bloginfo("template_url"); ?>";
-</script>
+
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">
