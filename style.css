@@ -1209,6 +1209,8 @@ label, input, button, select, textarea{
   border-top:1px solid #CCC;
 }
 
+.goog-menu-vertical {overflow:scroll; max-height:440px}
+
 
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX CITY PROSPERITY PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
