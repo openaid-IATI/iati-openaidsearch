@@ -51,7 +51,7 @@ body {
   font-family:"HelveticaNeueW02-55Roma","Helvetica Neue",Helvetica,Arial,sans-serif;
   line-height: 100%;
   background-color: #F1EEE8;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 #page-wrapper{
@@ -133,14 +133,16 @@ button{
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX HEADER + FOOTER ADJUSTMENTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
-.navbar-static-top .container { height: 5.8em; }
-
 .navbar .brand { 
   padding: 1.5em 0.8em;
   font-size: 100%;
   margin-left: -0.8em;
   height: 2.8em;
-  width: 22.2em;
+  width: 25.2em;
+}
+
+.navbar .btn, .navbar .btn-group{
+  margin-top: 0;
 }
 
 #brand-image{
@@ -197,10 +199,7 @@ button{
     box-shadow: 0px 1px 3px #979791;
 }
 
-.navbar .btn, .navbar .btn-group{
-  margin-top: 0;
-  padding: 0.4em 1.2em 0.15em 0.2em;
-}
+
 
 .btn.header-btn-search > img{
   margin: 0.2em 0.1em 0.3em 0.5em;
@@ -216,6 +215,16 @@ button{
 input[type="text"]{
   font-size: 100%;
 }
+
+.navbar .btn-navbar{
+  background: #006492;
+  margin-top: 1.4em;
+}
+
+.navbar .btn-navbar:hover{
+  background: #008DCD;
+}
+
 
 .header-btn-search, .header-btn-search:hover, .header-btn-search:focus{
   background: #0070A2;
@@ -238,12 +247,20 @@ input[type="text"]{
     height:20em;
 }
 
+.footer .navbar{
+  font-size: 1.1em;
+}
 .navbar-static-bottom{
     margin: 0;
 }
 .navbar-static-bottom .container { 
     height:100%;
 }
+
+.navbar .nav{
+  margin: 0;
+}
+
 .navbar-static-top .navbar .brand{
   padding: 20px;
 }
@@ -367,7 +384,7 @@ input[type="text"]{
 }
 
 .project-filter, .indicator-filter{
-  height:5.72em;
+  padding-bottom: 1.5em;
 }
 
 .filter-by{
@@ -427,12 +444,10 @@ input[type="text"]{
   padding-left: 0;
 }
 
-
-
-
-
 input[type=checkbox] {
   visibility: hidden;
+  width: 16px;
+  height: 16px;
 }
 
 
@@ -442,7 +457,7 @@ input[type=checkbox] {
 
 /* SQUARED THREE */
 .squaredThree { 
-  margin: 0.5em 0 0;
+  margin: 0.34em 0 0;
   position: relative;
   display: inline-block;
   vertical-align: middle;
@@ -639,7 +654,7 @@ input[type=checkbox] {
 }
 
 .home-page .drop-shadow{
-  min-height:400px;
+  min-height:30.6em;
 }
 
 .map-lightbox-title{
@@ -1216,13 +1231,10 @@ label, input, button, select, textarea{
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX CITY PROSPERITY PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 #table-city-prosperity{
-  width: 20%;
+  width: 100%;
   margin: 2em auto;
 }
 
-#table-city-prosperity .google-visualization-table-tr-head,#table-city-prosperity .google-visualization-table-tr-head td,#table-city-prosperity .google-visualization-table-tr-head-nonstrict {
-  background: #DDDBD6;
-}
 
 
 
@@ -1530,6 +1542,16 @@ label, input, button, select, textarea{
   font-family: "HelveticaNeueW01-45Ligh";
 }
 
+#no-projects-found{
+  text-align: center;
+  display: block;
+  margin-top: 5em;
+}
+
+.project-share-container .stButton .sharethis, .page-share-container .stButton .sharethis{
+      font-size: 0.9em;
+    }
+    
 /* pagination */
 #pagination ul {list-style: none; display: inline-block; float: none;}
 #pagination { margin:20px auto 10px auto; text-align:center; }
@@ -1539,6 +1561,7 @@ label, input, button, select, textarea{
 .pagination li a.start,.pagination li a.limitstart, .pagination li a.endmilit, .pagination li a.end{ background:#a8b6ae; color:#fff; padding:0px 5px 4px 5px;}
 .pagination li a.active{ background:#42604f;color:#fff;}
 .pagination li a.start,.pagination li a.limitstart, .pagination li a.endmilit, .pagination li a.end,.pagination li a.active{-moz-border-radius: 2px; -webkit-border-radius: 2px; -khtml-border-radius: 2px; border-radius: 2px; behavior: url(http://localhost/Open-UNH/HTML/css/border-radius.htc);}
+
 
 
 
@@ -1657,13 +1680,13 @@ label, input, button, select, textarea{
 .project-share-container .stButton .sharethis, .page-share-container .stButton .sharethis{
   font-family: "HelveticaNeueW01-75Bold";
   color: #0086C8;
-  font-size: 1.1em;
+  font-size: 1em;
   padding-left:24px;
   vertical-align: middle;
 }
 
 .project-share-container .stButton .sharethis{
-  padding-top: 2px;
+  padding-top: 1px;
 }
 
 .share-text{
@@ -1684,11 +1707,11 @@ label, input, button, select, textarea{
   margin-top: 1px ;
 }
 
-#project-share-bookmark .share-icon, #page-share-bookmark .share-icon {
+.project-share-bookmark .share-icon, #page-share-bookmark .share-icon {
   background-position: -36px 0;
 }
 
-#project-share-whistleblower .share-icon, #page-share-whistleblower .share-icon {
+.project-share-whistleblower .share-icon, #page-share-whistleblower .share-icon {
   background-position: -54px 0;
 }
 
@@ -1843,7 +1866,7 @@ label, input, button, select, textarea{
       width: 13em;
     }
 
-   /* .projects-share-spec #project-share-export, .projects-share-spec #project-share-bookmark{
+   /* .projects-share-spec #project-share-export, .projects-share-spec .project-share-bookmark{
       width: 40%;
       text-align: left;
     }
@@ -1890,11 +1913,11 @@ label, input, button, select, textarea{
       margin-top: 0px;
     }
 
-    #project-share-bookmark .share-icon, #page-share-bookmark .share-icon {
+    .project-share-bookmark .share-icon, #page-share-bookmark .share-icon {
       background-position: -28px 0;
     }
 
-    #project-share-whistleblower .share-icon, #page-share-whistleblower .share-icon {
+    .project-share-whistleblower .share-icon, #page-share-whistleblower .share-icon {
       background-position: -42px 0;
     }
 
@@ -1917,7 +1940,6 @@ label, input, button, select, textarea{
       white-space: nowrap;
       font-size: 1em;
     }
-
 
     .dropdown-project{
       top:2.24em;
@@ -1968,14 +1990,22 @@ label, input, button, select, textarea{
       width: 8px;
     }
 
-    .slider-year{
+    .slider-year-inner-left, .slider-year-inner-white{
+      width: 1px;
+    }
+
+    #year-1950{
       width: 10px;
     }
 
+    .slider-year{
+      width: 9px;
+    }
+
     #map-timeline{
-      width: 1010px;
+      width: 910px;
       left: 50%;
-      margin-left:-505px;
+      margin-left:-455px;
     }
 
     #timeline-left, #timeline-right{
@@ -1990,12 +2020,12 @@ label, input, button, select, textarea{
 
     #timeline-left{
       left:0;
-      margin-left:-505px;
+      margin-left:-455px;
     }
 
     #timeline-right{
       right: 0;
-      margin-right:-505px;
+      margin-right:-455px;
     }
 
   }
@@ -2003,71 +2033,44 @@ label, input, button, select, textarea{
 
 
     /* Portrait tablet to landscape and desktop */
-    @media (min-width: 768px) and (max-width: 979px) { 
+    @media (max-width: 979px) { 
 
-      body {
-        font-size:10px;
-      }
-
-      .navbar-static-top .input-large{
-        width: 13em;
-      }
-
-      .ipad-newrow{
-        clear:left;
-      }
-
-      .projects-share-spec #project-share-export, .projects-share-spec #project-share-bookmark{
-        width: 40%;
-        text-align: left;
-      }
-
-    .squaredThree{
-      margin: 0.3em 0 0;
-    }
-
-    .squaredThree label {
-      width: 15px;
-      height: 16px;
-      border-radius: 3px;
-    }
-
-    .squaredThree label:after {
-      height: 3px;
-      left: 2px;
-      width: 8px;
-    }
-
-
-
-
-
-
-
-
-
-  }
-     
-    /* Landscape phone to portrait tablet */
-    @media (max-width: 767px) {
-      
     body {
       font-size:11px;
     }
 
-    .navbar-static-top .input-large{
-      width: 13em;
+    .filter-name{
+      width: 8em;
     }
 
-   /* .projects-share-spec #project-share-export, .projects-share-spec #project-share-bookmark{
+    .filter-by{
+      margin-right: 4em;
+    }
+
+    .projects-share-spec #project-share-export, .projects-share-spec .project-share-bookmark{
       width: 40%;
       text-align: left;
     }
-    .projects-share-spec{
-      padding-bottom: 0.4em;
-    }*/
 
-    /* font size 11 test */
+    .navbar-static-top.navbar .nav > li > .navbar-home-link:hover{
+
+    }
+
+    .navbar-static-top.navbar .in.collapse .nav > li > a {
+      padding: 0.5em 0.3em 0.5em 1em;
+    }
+
+    .navbar-static-top.navbar .in.collapse .navbar-form{
+      padding: 0 0 0 1em;
+    }
+
+    .navbar-static-top .in.collapse .input-large{
+      padding: 0.3em 0.3em 0.3em 1em;
+    }
+
+    .navbar-static-top .input-large{
+      width: 20 em;
+    }
 
     .share-text{
       font-size: 0.87em;
@@ -2106,11 +2109,11 @@ label, input, button, select, textarea{
       margin-top: 0px;
     }
 
-    #project-share-bookmark .share-icon, #page-share-bookmark .share-icon {
+    .project-share-bookmark .share-icon, #page-share-bookmark .share-icon {
       background-position: -28px 0;
     }
 
-    #project-share-whistleblower .share-icon, #page-share-whistleblower .share-icon {
+    .project-share-whistleblower .share-icon, #page-share-whistleblower .share-icon {
       background-position: -42px 0;
     }
 
@@ -2133,7 +2136,6 @@ label, input, button, select, textarea{
       white-space: nowrap;
       font-size: 1em;
     }
-
 
     .dropdown-project{
       top:2.24em;
@@ -2164,6 +2166,10 @@ label, input, button, select, textarea{
       height: 37em;
     }
 
+    #map-hide-show{
+      padding-bottom: 1em;
+    }
+
     #brand-beta{
       right: 1.2em;
     }
@@ -2184,374 +2190,55 @@ label, input, button, select, textarea{
       width: 8px;
     }
 
+    #year-1950{
+      width: 8px;
+    }
+
+    .slider-year-inner-left, .slider-year-inner-white{
+      width: 1px;
+    }
+
     .slider-year{
-      width: 10px;
+      width: 7px;
     }
 
     #map-timeline{
-      width: 1010px;
+      width: 708px;
       left: 50%;
-      margin-left:-505px;
-    }
-
-    #timeline-left, #timeline-right{
-      min-height: 4em;
-      overflow: hidden;
-      width: 50%;
-      background-color: #000;
-      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
-      filter: alpha(opacity=40);
-      opacity: 0.4;
+      margin-left:-354px;
     }
 
     #timeline-left{
       left:0;
-      margin-left:-505px;
+      margin-left:-354px;
     }
 
     #timeline-right{
       right: 0;
-      margin-right:-505px;
+      margin-right:-354px;
     }
+
+    .footer{
+      margin-left: -20px;
+      margin-right: -20px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    #selection-box-wrapper{
+      left: 2em;
+    }
+
 
   }
-
-
-
-    /* Portrait tablet to landscape and desktop */
-    @media (min-width: 768px) and (max-width: 979px) { 
-
-      body {
-      font-size:11px;
-    }
-
-    .navbar-static-top .input-large{
-      width: 13em;
-    }
-
-   /* .projects-share-spec #project-share-export, .projects-share-spec #project-share-bookmark{
-      width: 40%;
-      text-align: left;
-    }
-    .projects-share-spec{
-      padding-bottom: 0.4em;
-    }*/
-
-    /* font size 11 test */
-
-    .share-text{
-      font-size: 0.87em;
-    }
-
-    .navbar-static-top.navbar .nav > li > a{
-      padding: 1.70em 0.6em;
-    }
-
-    .navbar .brand{
-      width: 19em;
-      padding: 1.7em 0.5em 1.7em 0.8em;
-    }    
-
-    .filter-text{
-      padding-right: 2.2em;
-    }
-
-    .project-sort-type, #sort-type-header{
-      margin-right: 1.1em;
-    }
-
-    .share-text{
-      margin-left:0;
-      margin-right:0.2em;
-    }
-
-    .share-icon {
-      width: 14px;
-      height: 14px;
-      background-image: url('images/project-share-980-1440.png');
-    }
-
-    #project-share-share .share-icon {
-      background-position: -14px 0;
-      margin-top: 0px;
-    }
-
-    #project-share-bookmark .share-icon, #page-share-bookmark .share-icon {
-      background-position: -28px 0;
-    }
-
-    #project-share-whistleblower .share-icon, #page-share-whistleblower .share-icon {
-      background-position: -42px 0;
-    }
-
-    #project-share-embed .share-icon{
-      background-position: -56px 0;
-    }
-
-    #project-share-graph .share-icon{
-      background-position: -70px 0;
-    }
-
-    #dropdown-type-graph{
-      right:auto;
-      left:0;
-      top: 2.24em;
-    }
-
-    #dropdown-type-graph button{
-      padding: 0.4em 0.7em;
-      white-space: nowrap;
-      font-size: 1em;
-    }
-
-
-    .dropdown-project{
-      top:2.24em;
-
-    }
-
-    .dropdown-project button, .dropdown-project a{
-      font-size: 1em;
-    }
-
-    #brand-image{
-      background-image: url('images/logo-980-1440.png');
-      width: 209px;
-      height: 26px;
-    }
-
-    #header-home-img{
-      background-image: url('images/home-980-1440.png');
-      width: 17px;
-      height: 15px;
-    }
-
-    .navbar-static-top.navbar .nav > li > .navbar-home-link{
-      padding: 1.86em 0.6em;
-    }
-
-    #map{
-      height: 37em;
-    }
-
-    #brand-beta{
-      right: 1.2em;
-    }
-
-    .squaredThree{
-      margin: 0.3em 0 0;
-    }
-
-    .squaredThree label {
-      width: 15px;
-      height: 16px;
-      border-radius: 3px;
-    }
-
-    .squaredThree label:after {
-      height: 3px;
-      left: 2px;
-      width: 8px;
-    }
-
-    .slider-year{
-      width: 10px;
-    }
-
-    #map-timeline{
-      width: 1010px;
-      left: 50%;
-      margin-left:-505px;
-    }
-
-    #timeline-left, #timeline-right{
-      min-height: 4em;
-      overflow: hidden;
-      width: 50%;
-      background-color: #000;
-      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
-      filter: alpha(opacity=40);
-      opacity: 0.4;
-    }
-
-    #timeline-left{
-      left:0;
-      margin-left:-505px;
-    }
-
-    #timeline-right{
-      right: 0;
-      margin-right:-505px;
-    }
-
-
-    }
-     
+    
+   
 
     /* Landscape phones and down */
     @media (max-width: 480px) { 
 
-      body {
-      font-size:11px;
-    }
-
-    .navbar-static-top .input-large{
-      width: 13em;
-    }
-
-   /* .projects-share-spec #project-share-export, .projects-share-spec #project-share-bookmark{
-      width: 40%;
-      text-align: left;
-    }
-    .projects-share-spec{
-      padding-bottom: 0.4em;
-    }*/
-
-    /* font size 11 test */
-
-    .share-text{
-      font-size: 0.87em;
-    }
-
-    .navbar-static-top.navbar .nav > li > a{
-      padding: 1.70em 0.6em;
-    }
-
-    .navbar .brand{
-      width: 19em;
-      padding: 1.7em 0.5em 1.7em 0.8em;
-    }    
-
-    .filter-text{
-      padding-right: 2.2em;
-    }
-
-    .project-sort-type, #sort-type-header{
-      margin-right: 1.1em;
-    }
-
-    .share-text{
-      margin-left:0;
-      margin-right:0.2em;
-    }
-
-    .share-icon {
-      width: 14px;
-      height: 14px;
-      background-image: url('images/project-share-980-1440.png');
-    }
-
-    #project-share-share .share-icon {
-      background-position: -14px 0;
-      margin-top: 0px;
-    }
-
-    #project-share-bookmark .share-icon, #page-share-bookmark .share-icon {
-      background-position: -28px 0;
-    }
-
-    #project-share-whistleblower .share-icon, #page-share-whistleblower .share-icon {
-      background-position: -42px 0;
-    }
-
-    #project-share-embed .share-icon{
-      background-position: -56px 0;
-    }
-
-    #project-share-graph .share-icon{
-      background-position: -70px 0;
-    }
-
-    #dropdown-type-graph{
-      right:auto;
-      left:0;
-      top: 2.24em;
-    }
-
-    #dropdown-type-graph button{
-      padding: 0.4em 0.7em;
-      white-space: nowrap;
-      font-size: 1em;
-    }
-
-
-    .dropdown-project{
-      top:2.24em;
-
-    }
-
-    .dropdown-project button, .dropdown-project a{
-      font-size: 1em;
-    }
-
-    #brand-image{
-      background-image: url('images/logo-980-1440.png');
-      width: 209px;
-      height: 26px;
-    }
-
-    #header-home-img{
-      background-image: url('images/home-980-1440.png');
-      width: 17px;
-      height: 15px;
-    }
-
-    .navbar-static-top.navbar .nav > li > .navbar-home-link{
-      padding: 1.86em 0.6em;
-    }
-
-    #map{
-      height: 37em;
-    }
-
-    #brand-beta{
-      right: 1.2em;
-    }
-
-    .squaredThree{
-      margin: 0.3em 0 0;
-    }
-
-    .squaredThree label {
-      width: 15px;
-      height: 16px;
-      border-radius: 3px;
-    }
-
-    .squaredThree label:after {
-      height: 3px;
-      left: 2px;
-      width: 8px;
-    }
-
-    .slider-year{
-      width: 10px;
-    }
-
-    #map-timeline{
-      width: 1010px;
-      left: 50%;
-      margin-left:-505px;
-    }
-
-    #timeline-left, #timeline-right{
-      min-height: 4em;
-      overflow: hidden;
-      width: 50%;
-      background-color: #000;
-      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
-      filter: alpha(opacity=40);
-      opacity: 0.4;
-    }
-
-    #timeline-left{
-      left:0;
-      margin-left:-505px;
-    }
-
-    #timeline-right{
-      right: 0;
-      margin-right:-505px;
-    }
+      #map{
+        display:none;
+      }
 
     }

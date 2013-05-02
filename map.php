@@ -10,7 +10,7 @@
                    
                     <div id="countries-filters"></div>
                     <div id="regions-filters"></div>
-                    <div id="sectors-filters"></div>
+                    <div id="sectors-filters" class="ipad-newrow"></div>
                     <div id="budgets-filters"></div>
 
             </div>

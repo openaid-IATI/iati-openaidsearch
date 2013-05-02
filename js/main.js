@@ -67,7 +67,7 @@ function create_filter_attributes(objects, columns){
     var sortable = [];
     for (var key in objects){
        sortable.push([key, objects[key]]);
-     }
+    }
      
     sortable.sort(function(a, b){
      var nameA=a[1].toString().toLowerCase(), nameB=b[1].toString().toLowerCase()
@@ -93,21 +93,6 @@ function create_filter_attributes(objects, columns){
         if ((i + 1) > ((per_col * columns) - 1)) { break; }
 
     }
-    // $.each(objects, function(key, value){
-
-    //     if (counter%per_col == 0){
-    //         html += '<div class="span' + (12 / columns) + '">';
-    //     } 
-    //     html += '<div class="squaredThree"><div>';
-    //     html += '<input type="checkbox" value="'+ key +'" id="'+value.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'" name="'+value+'" />';
-    //     html += '<label class="map-filter-cb-value" for="'+value.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'"></label>';
-    //     html += '</div><div><span>'+value+'</span></div></div>';
-    //     if (counter%per_col == (per_col - 1)){
-    //       html += '</div>';
-    //     }
-    //     counter++;
-    //     if (counter > ((per_col * columns) - 1)) { return false; }
-    // });
     return html;
 }
 
@@ -334,6 +319,8 @@ function save_selection(){
 
     if(selected_type == "projects"){
       load_new_page(false);
+    } else if(selected_type == "indicator" || selected_type == "cpi"){
+      reload_graphs(); // TO DO
     }
 
     fill_selection_box();
@@ -458,7 +445,7 @@ function fill_selection_box_single_filter(header, arr){
         }
 
         html += '<div>' + arr[i].name + '</div>';
-        if (header == "INDICATORS"){
+        if (header == "INDICATORS" || header == "DIMENSIONS"){
           html += '<div class="selected-indicator-color-filler"></div><div class="selected-indicator' + (i + 1).toString() + '-color"></div>';
         }
         html += '</div>';
@@ -604,12 +591,12 @@ else if(document.all)// ie
 //   window.open(link);
 // });
 if (navigator.userAgent.indexOf('Chrome') != -1 && parseFloat(navigator.userAgent.substring(navigator.userAgent.indexOf('Chrome') + 7).split(' ')[0]) >= 15){//Chrome
- $("#project-share-bookmark").css("display", "none");
+ $(".project-share-bookmark").css("display", "none");
     $("#page-share-bookmark").css("display", "none");
 }
 
 if (navigator.userAgent.indexOf("Opera") != -1){
-  $("#project-share-bookmark").css("display", "none");
+  $(".project-share-bookmark").css("display", "none");
     $("#page-share-bookmark").css("display", "none");
 }
 

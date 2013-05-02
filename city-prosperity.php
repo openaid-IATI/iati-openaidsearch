@@ -35,9 +35,9 @@ Template Name: City prosperity page
 			</div>
 		</div>
 	</div>
-
+	<?php /*
 	<div class="container">
-		<?php /* <div class="row-fluid">
+		 <div class="row-fluid">
 			<div class="span8">
 
 				<div class="drop-shadow unhabitat-page">
@@ -50,7 +50,7 @@ Template Name: City prosperity page
 			<div class="span4">
 				<?php get_sidebar( 'unhabitat-pages' ); ?>
 			</div>
-		</div> */ ?>
+		</div> 
 		<div class="row-fluid">
 			<div class="span12">
 
@@ -59,6 +59,19 @@ Template Name: City prosperity page
 			</div>
 		</div>
 
+	</div>		
+	*/ ?>
+	<div class="container">
+		<div class="row-fluid">
+			<div id="charts-column-1" class="span7">
+				<div id="line-chart-filter"></div>
+				<div id="line-chart-placeholder"></div>
+			</div>
+			<div id="charts-column-2" class="span5">
+				<div id="table-chart-filter"></div>
+				<div id="table-city-prosperity"></div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -69,16 +82,16 @@ Template Name: City prosperity page
 		load_map(site + 'json-city');
 		function load_map(url){
 			data = initialize_map(url,2012,'cpi',"", "", "");
-			current_selection.indicator = [];
-		  	current_selection.indicator.push({"id":"cpi", "name":"City prosperity"});
+			current_selection.indicators = [];
+		  	current_selection.indicators.push({"id":"cpi", "name":"City prosperity"});
 		  	fill_selection_box();
 		}
 
 	  selected_type = "cpi";
 	  query_string_to_selection();
-	  if (typeof current_selection.indicator === "undefined"){
-	  	current_selection.indicator = [];
-		current_selection.indicator.push({"id":"cpi_5_dimensions", "name":"City prosperity"});
+	  if (typeof current_selection.indicators === "undefined"){
+	  	current_selection.indicators = [];
+		current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"City prosperity"});
 	  }
 	  reload_map();
 	  initialize_filters();

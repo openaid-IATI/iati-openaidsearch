@@ -19,7 +19,7 @@
 					</button>
 				</div>
 
-				<div class="filter-by">
+				<div class="filter-by ipad-newrow">
 					<div class="filter-name hneue-bold">BY COUNTRY: </div>
 					<button id="countries-filters-button" class="filter-button">
 						<div class="filter-text">PLEASE SELECT..</div>

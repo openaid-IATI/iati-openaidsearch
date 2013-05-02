@@ -12,6 +12,7 @@ Template Name: Projects page
 
 <div id="page-wrapper">
 
+    <?php if ($meta->total_count > 0){ ?>
 	<div class="page-header">
 		<div class="container">
 			<div id="projects-search-navbar" class="row-fluid">
@@ -78,11 +79,15 @@ Template Name: Projects page
 			</div>
 		</div>
 	</div>
+    <?php } // close if projects > 0 ?>
+
+
 	<div class="page-content">
 		
 		
 		<?php get_template_part( "projects", "description" ); ?>
 
+        <?php if ($meta->total_count > 0){ ?>
 		<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
@@ -91,7 +96,11 @@ Template Name: Projects page
 				</div>
 			</div>
 		</div>
+        <?php } else {
 
+            echo '<div id="no-projects-found">Your selection didn\'t find any matches.</div>';
+
+        } ?>
 
 
 		</div>

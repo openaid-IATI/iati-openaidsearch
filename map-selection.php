@@ -15,7 +15,7 @@
               <div class="selection-clear-div">CLEAR ALL</div>
             </div>
           </div>
-          <button id="selection-hide-show-button" class="selection-show"><img class="hide-show-icon" src="<?php echo get_template_directory_uri(); ?>/images/hide-show.png" alt="" /><span id="selection-hide-show-text" class="hneue-bold">SHOW SELECTION</span></button>
+          <button id="selection-hide-show-button" class="selection-show"><img class="hide-show-icon" src="<?php echo get_template_directory_uri(); ?>/images/hide-show.png" alt="" /><span id="selection-hide-show-text" class="hneue-bold">HIDE SELECTION</span></button>
         </div>
 			</div>
 		</div>

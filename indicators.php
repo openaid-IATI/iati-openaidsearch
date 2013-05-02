@@ -32,6 +32,7 @@ Template Name: Indicators page
 							<div id="dropdown-export-indicator" class="dropdown-menu-page-header">
 								<button id="dropdown-png">MAP TO IMAGE</button>
 								<button id="dropdown-csv">DATA TO CSV</button>
+								<button id="dropdown-line-graph-png">LINE GRAPH TO IMAGE</button>
 							</div>
 						</a>
 						<a href="#" id="project-share-embed" class="project-share-button hneue-bold">

@@ -167,11 +167,11 @@ foreach($objects AS $idx=>$project) {
 
 					<span class="st_sharethis" st_url="<?php bloginfo('url'); ?>/project/?id=<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>" st_title="<?php echo $project->titles[0]->title; ?>" displayText="SHARE"></span>
 
-					<button id="project-share-bookmark" class="project-share-button hneue-bold">
+					<button class="project-share-bookmark project-share-button hneue-bold">
 						<div class="share-icon"></div>
 						<div class="share-text">BOOKMARK</div>
 					</button>
-					<button id="project-share-whistleblower" class="project-share-button hneue-bold" name="<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>">
+					<button class="project-share-whistleblower project-share-button hneue-bold" name="<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>">
 						<div class="share-icon"></div>
 						<div class="share-text">WHISTLEBLOWER</div>
 					</button>
