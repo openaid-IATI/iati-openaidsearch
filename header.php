@@ -16,7 +16,7 @@
     <![endif]-->
 
     <link href="<?php echo get_template_directory_uri(); ?>/style.css" rel="stylesheet" media="screen">
-    <?php wp_head(); ?>
+    
 </head>
 <body>
 

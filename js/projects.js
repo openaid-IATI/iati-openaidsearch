@@ -187,9 +187,6 @@ function load_project_map(project_geojson){
 
 
 
-
-
-
   // load listeners at page initialisation:
   load_projects_listeners();
 
