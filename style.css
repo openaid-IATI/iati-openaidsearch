@@ -1551,7 +1551,7 @@ label, input, button, select, textarea{
 .project-share-container .stButton .sharethis, .page-share-container .stButton .sharethis{
       font-size: 0.9em;
     }
-    
+
 /* pagination */
 #pagination ul {list-style: none; display: inline-block; float: none;}
 #pagination { margin:20px auto 10px auto; text-align:center; }
@@ -1967,7 +1967,7 @@ label, input, button, select, textarea{
     }
 
     #map{
-      height: 37em;
+      height: 39em;
     }
 
     #brand-beta{
@@ -1975,13 +1975,18 @@ label, input, button, select, textarea{
     }
 
     .squaredThree{
-      margin: 0.3em 0 0;
+      margin: 0.1em 0 0;
+    }
+
+    .squaredThree input{
+      margin: 1px 0 0 0;
     }
 
     .squaredThree label {
       width: 15px;
       height: 16px;
       border-radius: 3px;
+      margin-bottom: 0;
     }
 
     .squaredThree label:after {
@@ -2163,8 +2168,35 @@ label, input, button, select, textarea{
     }
 
     #map{
-      height: 37em;
+      height: 39em;
     }
+
+    .squaredThree input{
+      margin: 1px 0 0 0;
+    }
+
+    .squaredThree label {
+      width: 15px;
+      height: 16px;
+      border-radius: 3px;
+      margin-bottom: 0;
+    }
+
+    .squaredThree label:after {
+      height: 3px;
+      left: 2px;
+      width: 8px;
+    }
+
+    .squaredThree-fname{
+      max-width: 80%;
+      margin-left: 0.8em;
+    }
+
+    .squaredThree span{
+      margin-left: 0;
+    }
+
 
     #map-hide-show{
       padding-bottom: 1em;
@@ -2175,19 +2207,7 @@ label, input, button, select, textarea{
     }
 
     .squaredThree{
-      margin: 0.3em 0 0;
-    }
-
-    .squaredThree label {
-      width: 15px;
-      height: 16px;
-      border-radius: 3px;
-    }
-
-    .squaredThree label:after {
-      height: 3px;
-      left: 2px;
-      width: 8px;
+      margin: 0.1em 0 0;
     }
 
     #year-1950{

@@ -83,10 +83,16 @@ function create_filter_attributes(objects, columns){
       if (i%per_col == 0){
             html += '<div class="span' + (12 / columns) + '">';
         } 
+
+        var sortablename = sortable[i][1];
+        if (sortablename.length > 35 && columns == 4){
+          sortablename = sortablename.substr(0,33) + "...";
+        }
+
         html += '<div class="squaredThree"><div>';
         html += '<input type="checkbox" value="'+ sortable[i][0] +'" id="'+sortable[i][1].toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'" name="'+sortable[i][1]+'" />';
         html += '<label class="map-filter-cb-value" for="'+sortable[i][1].toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'"></label>';
-        html += '</div><div><span>'+sortable[i][1]+'</span></div></div>';
+        html += '</div><div class="squaredThree-fname"><span>'+sortablename+'</span></div></div>';
         if (i%per_col == (per_col - 1)){
           html += '</div>';
         }
@@ -560,36 +566,6 @@ else if(document.all)// ie
   window.external.AddFavorite(url, title);
 }
 
-
-
-
-
-// $('#dropdown-share-facebook').click(function(){
-
-//   var link = ' https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL.toString().split("?")[0] + build_current_url());
-//   window.open(link);
-  
-// });
-
-// $('#dropdown-share-twitter').click(function(){
-
-//   var link = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(document.URL.toString().split("?")[0] + build_current_url());
-//   console.log(link);
-//   window.open(link);
-// });
-
-// $('#dropdown-share-linkedin').click(function(){
-
-//   var link = 'http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL.toString().split("?")[0] + build_current_url());
-//   console.log(link);
-//   window.open(link);
-// });
-
-// $('#dropdown-share-email').click(function(){
-
-//   var link = 'mailto:?Subject=' + encodeURIComponent('Shared to you from Open UN-Habitat') + '&body=' + encodeURIComponent('The following page was recommended to you on the Open UN-Habitat site. ' + document.URL.toString().split("?")[0] + build_current_url());
-//   window.open(link);
-// });
 if (navigator.userAgent.indexOf('Chrome') != -1 && parseFloat(navigator.userAgent.substring(navigator.userAgent.indexOf('Chrome') + 7).split(' ')[0]) >= 15){//Chrome
  $(".project-share-bookmark").css("display", "none");
     $("#page-share-bookmark").css("display", "none");
