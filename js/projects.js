@@ -332,7 +332,7 @@ function load_project_map(project_geojson){
 
 function generate_download_file(id) {
   var author = encodeURIComponent("Open UN-Habitat search results");
-  var url = template_url + "/export.php?author=";
+  var url = template_directory + "/export.php?author=";
   if(id) {
     author = encodeURIComponent("Open UN-Habitat project details of " + id);
     url += author;

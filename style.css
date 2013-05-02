@@ -46,6 +46,11 @@ src:url("Fonts/0b3a3fca-0fad-402b-bd38-fdcbad1ef776.eot?#iefix") format("eot"),u
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX GLOBAL PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
+html{
+  margin-top: 0;
+  margin: 0;
+}
+
 body {
   color: #666;
   font-family:"HelveticaNeueW02-55Roma","Helvetica Neue",Helvetica,Arial,sans-serif;
