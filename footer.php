@@ -71,6 +71,8 @@ if (is_page('indicators') or is_page('city-prosperity') or is_page('project')) {
 	echo '<script src="https://www.google.com/jsapi"></script>';
 	echo '<script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/rgbcolor.js"></script>';
     echo '<script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script>';
+    echo '<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/html2canvas.min.js"></script>';
+	echo '<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery.plugin.html2canvas.js"></script>';
 }
 if (is_page('indicators') or is_page('city-prosperity')) {
 	echo '<script src="' . get_template_directory_uri() . '/js/indicators.js"></script>';

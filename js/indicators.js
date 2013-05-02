@@ -767,4 +767,26 @@ $('#dropdown-line-graph-png').click(function(){
 });
 
 
+        
+$('#dropdown-png').click(function() {
+    
+    setTimeout(function() {
+        $('#map').html2canvas({
+            flashcanvas: "/wp-content/themes/OPEN-UN-HABITAT-V2/js/dependencies/flashcanvas.min.js",
+            logging: false,
+            profile: false,
+            useCORS: true
+        });
+    }, 1000);
+    
+});
+
+function manipulateCanvasFunction(savedMap) {
+    dataURL = savedMap.toDataURL("image/png");
+    dataURL = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+    $.post("/wp-content/themes/OPEN-UN-HABITAT-V2/ajax/saveMap.php", { savedMap: dataURL }, function(data) {
+        alert('Image Saved to : ' + data);
+    });
+}
+
     
