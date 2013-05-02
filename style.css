@@ -457,7 +457,7 @@ input[type=checkbox] {
 
 /* SQUARED THREE */
 .squaredThree { 
-  margin: 0.34em 0 0;
+  margin: 0.30em 0 0;
   position: relative;
   display: inline-block;
   vertical-align: middle;
@@ -1548,10 +1548,6 @@ label, input, button, select, textarea{
   margin-top: 5em;
 }
 
-.project-share-container .stButton .sharethis, .page-share-container .stButton .sharethis{
-      font-size: 0.9em;
-    }
-
 /* pagination */
 #pagination ul {list-style: none; display: inline-block; float: none;}
 #pagination { margin:20px auto 10px auto; text-align:center; }
@@ -1680,7 +1676,7 @@ label, input, button, select, textarea{
 .project-share-container .stButton .sharethis, .page-share-container .stButton .sharethis{
   font-family: "HelveticaNeueW01-75Bold";
   color: #0086C8;
-  font-size: 1em;
+  font-size: 0.9em;
   padding-left:24px;
   vertical-align: middle;
 }

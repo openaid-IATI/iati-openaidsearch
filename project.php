@@ -222,6 +222,38 @@ $activity = wp_get_activity($project_id);
 				</div>
 
 			</div>
+
+			<div class="page-full-width-line"></div>
+
+
+			<div class="container">
+				<div class="page-content project-page-content">
+					<div class="row-fluid">
+						<div class="span7">
+							<div id="disqus_thread"></div>
+						    <script type="text/javascript">
+						        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+						        var disqus_shortname = 'openunhabitat'; // required: replace example with your forum shortname
+						 		var disqus_identifier = '<?php echo $activity->iati_identifier; ?>';
+    							var disqus_title = '<?php echo $activity->titles[0]->title; ?>';
+    							var disqus_url = '<?php echo "http://open.unhabitat.org/project/?id=" . $activity->iati_identifier; ?>';
+
+						        /* * * DON'T EDIT BELOW THIS LINE * * */
+						        (function() {
+						            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+						            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+						            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+						        })();
+						    </script>
+						    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+						    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
 		</div>
 	</div>
 </div>

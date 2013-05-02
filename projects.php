@@ -119,8 +119,8 @@ Template Name: Projects page
       selected_type = "projects";
       query_string_to_selection();
       reload_map();
-      initialize_filters();
-      fill_selection_box();
+      initialize_project_filter_options(fill_selection_box);
+
     });
 
 </script>

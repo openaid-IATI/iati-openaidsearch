@@ -42,7 +42,6 @@ function initialize_map(url, sel_year, type, indicator_id, countries, regions, c
         indicator_str_filter = '';
     }else{
         indicator_str_filter = get_param_query_string('indicator', 'city', request_url);
-        console.log(indicator_str_filter);
     }
     
     
@@ -114,7 +113,6 @@ function get_param_query_string(begin, end, query_string){
     request_url = start_url + end_url;
     
     end_pos = end_pos - 1;
-    console.log(start_pos + ' '+ end_pos);
     result = query_string.substring(start_pos, end_pos);
     //if there is no indicator data, just return nothing, population will be displayed as the default indicator
     if (end_pos - start_pos == 0){
@@ -145,8 +143,8 @@ function set_filters_indicator(data){
     country_html = create_filter_attributes(data['countries'], 4);
     $('#countries-filters').html(country_html);
 
-    // city_html = create_filter_attributes(data['cities'], 4);
-    // $('#cities-filters').html(city_html);
+    city_html = create_filter_attributes(data['cities'], 4);
+    $('#cities-filters').html(city_html);
 
     indicator_html = create_filter_attributes(data['indicators'], 3);
     $('#indicators-filters').html(indicator_html);
@@ -209,6 +207,7 @@ function draw_available_data_blocks(indicator_data){
 
 function draw_circles(data_indicators, color, first_or_second_indicator){
     var max_data_value = 0;
+    
     $.each(data_indicators, function(key, value){
 
         try{
@@ -485,6 +484,11 @@ function drawCityPropTable() {
             firstyear = i;
           }
           lastyear = i;
+
+
+          if (circles[y].type_data == '1000'){
+            curvalue = curvalue * 1000;
+          }
         }
         lineChartLine.push(curvalue);
       }
@@ -563,7 +567,7 @@ function drawCityPropTable() {
   function getTableChartData(year){
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Country');
-    data.addColumn('number', 'Value');
+    data.addColumn('number', circles[0].friendly_label);
     
 
     for (var i=0;i<circles.length;i++)
@@ -574,7 +578,12 @@ function drawCityPropTable() {
         if (value === undefined || value === null){
 
         } else {
-          data.addRow([circles[i].countryname, parseInt(value)]);
+          if (circles[i].type_data == '1000'){
+            value = value * 1000;
+          }
+          var frmttd = CommaFormatted(value+'.');
+          data.addRow([circles[i].countryname, {v: value,  f: frmttd}]);
+          
         }
 
       } catch (err){
@@ -656,8 +665,7 @@ function drawCityPropTable() {
     var canvas = doc.createElement('canvas');
     canvas.setAttribute('width', chartArea.offsetWidth);
     canvas.setAttribute('height', chartArea.offsetHeight);
-    
-    
+
     canvas.setAttribute(
         'style',
         'position: absolute; ' +
@@ -675,7 +683,8 @@ function drawCityPropTable() {
     
     // Replacing the mime-type will force the browser to trigger a download
     // rather than displaying the image in the browser window.
-    window.location = imgData.replace("image/png", "image/octet-stream");
+    //window.location = imgData.replace("image/png", "image/octet-stream");
+    window.open(imgData, 'new_window');
   }
   
   function toImg(chartContainer, imgContainer) { 

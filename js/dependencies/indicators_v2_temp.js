@@ -1,7 +1,7 @@
 // XXXXXXXXXXXXX INDICATOR INITIALIZATION XXXXXXXXXXX
   
 // global variables
-var circles = [];
+var circles = new Object();
 var maxdatavalue = 0;
 var maxcirclearea = 2000000000000;
 var request_url = "";
@@ -95,89 +95,85 @@ function initialize_map(url, type){
 
 
 //  circles structure:
-//  circle.indicator1.id
-//  circle.indicator1.name
-//  circle.indicator1.color
-//  circle.indicator2.id
-//  circle.indicator2.name
-//  circle.indicator2.color
+//  circle.indicators.[indicator1]
+//  circle.indicators.[indicator1].name
+//  circle.indicators.[indicator1].color
+//  circle.indicators.[indicator1].max_value
+//  circle.indicators.[indicator1].description
+
+//  circle.indicators.indicator2
+//  circle.indicators.indicator2.name
+//  circle.indicators.indicator2.color
+//  circle.indicators.indicator2.max_value
+//  circle.indicators.indicator2.description
+
 //  circle.countries <-- loop through this. Key is iso2 code.
 //  circle.countries.AF.countryname
 //  circle countries.AF.region <-- TO BE ADDED
-//  circle.countries.AF.yearsindicator1
-//  circle.countries.AF.yearsindicator1.1950
-//  circle.countries.AF.yearsindicator1.1951
-//  circle.countries.AF.yearsindicator2
-//  circle.countries.AF.yearsindicator2.1950
-//  circle.countries.AF.yearsindicator2.1951
+//  circle.countries.AF.[indicator1].circle
+//  circle.countries.AF.[indicator1].years.1950
+//  circle.countries.AF.[indicator1].years.1951
+//  circle.countries.AF.[indicator2].circle
+//  circle.countries.AF.[indicator2].years.1950
+//  circle.countries.AF.[indicator2].years.1951
 
 
 
 
 function init_circle_main_info(){
     
-    init_circle_main_info_ind(0);
-    init_circle_main_info_ind(1);
+    init_circle_main_info_indicator(0, "#2B5A70");
+    init_circle_main_info_indicator(1, "DarkGreen");
 }
 
-function init_circle_main_info_ind(arrid){
+function init_circle_main_info_indicator(arrid, color){
 
     if(!(current_selection.indicators[arrid].id === undefined)){
         var ind_id = current_selection.indicators[arrid].id;
-        circle.indicators[ind_id].name = current_selection.indicators[arrid].name;
-        circle.indicators[ind_id].maxvalue = 100000;
+        circles.indicators[ind_id].name = current_selection.indicators[arrid].name;
+        circles.indicators[ind_id].color = color;
     }
 }
 
 function init_circles(data_indicators){
 
-    circles.
-
-
-    var max_data_value = 0;
     $.each(data_indicators, function(key, value){
 
+
         try{
+            // this shouldnt have to be done for every circle but with the current API call it is:
+            //main indicator info
+            circles.indicators[value.indicator].description = value.indicator_friendly;
+            circles.indicators[value.indicator].type_data = value.type_data;
+            if (value.max_value){
+                circles.indicators[value.indicator].max_valuemax_data_value = value.max_value;
+            }
+
+
+            // circle info
+            circles.countries[key][value.indicator].years = value.years;
 
             var circle = L.circle(new L.LatLng(value.longitude, value.latitude), 1, {
-                color: color,
+                color: circles.indicators[value.indicator].color,
                 weight: '0',
                 fillColor: color,
                 fillOpacity: 0.7
             }).addTo(map);
 
+            circles.countries[key][value.indicator].circle = circle;
 
 
-
-
-
-
-            if (value.max_value){
-                max_data_value = value.max_value;
-            }
-
-            
-
-            var singlecircleinfo = new Object();
-            singlecircleinfo.countryiso2 = key;
-            singlecircleinfo.countryname = value.name;
-            singlecircleinfo.values = value.years;
-            singlecircleinfo.circleinfo = circle;
-            singlecircleinfo.max_data_value = max_data_value;
-            singlecircleinfo.indicator = value.indicator;
-            singlecircleinfo.friendly_label = value.indicator_friendly;
-            singlecircleinfo.first_or_second_indicator = first_or_second_indicator;
-            singlecircleinfo.second_indicator_name = '';
-            singlecircleinfo.second_indicator_value = '';
+            // main country info
+            circles.countries[key].countryname = value.name;
+            //circles.countries[key].countryregion = value.region;
           
-            singlecircleinfo.type_data = value.type_data;
-            circles.push(singlecircleinfo);
 
         }catch(err){
         //console.log(err);
         }
     });
-    return max_data_value;
+
+    console.log(circles);
 }
 
 
@@ -233,48 +229,6 @@ function draw_available_data_blocks(indicator_data){
         });
     }
 }
-
-function draw_circles(data_indicators, color, first_or_second_indicator){
-    var max_data_value = 0;
-    $.each(data_indicators, function(key, value){
-
-        try{
-            if (value.max_value){
-                max_data_value = value.max_value;
-            }
-
-            var circle = L.circle(new L.LatLng(value.longitude, value.latitude), 1, {
-                color: color,
-                weight: '0',
-                fillColor: color,
-                fillOpacity: 0.7
-            }).addTo(map);
-
-            var singlecircleinfo = new Object();
-            singlecircleinfo.countryiso2 = key;
-            singlecircleinfo.countryname = value.name;
-            singlecircleinfo.values = value.years;
-            singlecircleinfo.circleinfo = circle;
-            singlecircleinfo.max_data_value = max_data_value;
-            singlecircleinfo.indicator = value.indicator;
-            singlecircleinfo.friendly_label = value.indicator_friendly;
-            singlecircleinfo.first_or_second_indicator = first_or_second_indicator;
-            singlecircleinfo.second_indicator_name = '';
-            singlecircleinfo.second_indicator_value = '';
-          
-            singlecircleinfo.type_data = value.type_data;
-            circles.push(singlecircleinfo);
-
-        }catch(err){
-        //console.log(err);
-        }
-    });
-    return max_data_value;
-}
-
-
-
-
 
 
 function set_filters_indicator(data){
@@ -335,8 +289,11 @@ function refresh_circles(year){
     for (var i=0;i<circles.length;i++)
     { 
         try{
-            //circles[i].unbindPopup();
-            //circles[i].bindPopup(circles[i].values[curyear]);
+
+
+
+
+
 
             var value = circles[i].values[curyear];
 

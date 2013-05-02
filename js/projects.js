@@ -2,11 +2,15 @@
 var geojson;
 
 // Project filter options
-function initialize_project_filter_options(){
+function initialize_project_filter_options(callback){
   //set loading gif in case call takes long
   var url = make_project_filter_options_url();
   var options = get_project_filter_options(url);
   draw_project_options(options);
+
+  if(callback){
+    callback();
+  }
 }
 
 function make_project_filter_options_url(){
@@ -233,7 +237,7 @@ function load_project_map(project_geojson){
       return false;
     });
 
-    $("#project-share-whistleblower").click(function(){
+    $(".project-share-whistleblower").click(function(){
       var id = $(this).attr("name");
       var url = "/whistleblower/?referrer=" + encodeURIComponent(home_url + "/project/?id=" + id);
       window.location = url;

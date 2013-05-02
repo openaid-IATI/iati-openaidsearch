@@ -13,8 +13,8 @@ function build_current_url(){
   if (!(typeof current_selection.countries === "undefined")) url += build_current_url_add_par("countries", current_selection.countries);
   if (!(typeof current_selection.budgets === "undefined")) url += build_current_url_add_par("budgets", current_selection.budgets);
   if (!(typeof current_selection.regions === "undefined")) url += build_current_url_add_par("regions", current_selection.regions);
-  if (!(typeof current_selection.indicators === "undefined")) url += build_current_url_add_par("indicator", current_selection.indicators);
-  if (!(typeof current_selection.cities === "undefined")) url += build_current_url_add_par("city", current_selection.cities);
+  if (!(typeof current_selection.indicators === "undefined")) url += build_current_url_add_par("indicators", current_selection.indicators);
+  if (!(typeof current_selection.cities === "undefined")) url += build_current_url_add_par("cities", current_selection.cities);
   if (!(typeof current_selection.offset === "undefined")) url += build_current_url_add_par("offset", current_selection.offset);
   if (!(typeof current_selection.per_page === "undefined")) url += build_current_url_add_par("per_page", current_selection.per_page);
   if (!(typeof current_selection.order_by === "undefined")) url += build_current_url_add_par("order_by", current_selection.order_by);
@@ -28,7 +28,7 @@ function build_current_url(){
 function build_current_url_add_par(name, arr, dlmtr){
 
   if(dlmtr === undefined){
-    dlmtr = ","
+    dlmtr = ",";
   }
 
   if(arr.length == 0){return '';}
@@ -49,13 +49,13 @@ function query_string_to_selection(){
     for (var i=0;i<vars.length;i++) {
       var pair = vars[i].split("=");
       var vals = pair[1].split(",");
-
       current_selection[pair[0]] = [];
+
       for(var y=0;y<vals.length;y++){
         current_selection[pair[0]].push({"id":vals[y], "name":"unknown"});
       }
       
-    } 
+    }
   }
 }
 
@@ -265,7 +265,6 @@ jQuery(function($) {
     if (!(typeof current_selection.indicators === "undefined")) init_filters_loop(current_selection.indicators);
     if (!(typeof current_selection.cities === "undefined")) init_filters_loop(current_selection.cities);
 
-
   }
 
   function init_filters_loop(arr){
@@ -326,7 +325,7 @@ function save_selection(){
     if(selected_type == "projects"){
       load_new_page(false);
     } else if(selected_type == "indicator" || selected_type == "cpi"){
-      reload_graphs(); // TO DO
+      //reload_graphs(); // TO DO
     }
 
     fill_selection_box();
@@ -481,8 +480,8 @@ function init_remove_filters_from_selection_box(){
 
 $(".selection-clear-div").click(function(){
   current_selection = new Object();
-  current_selection.indicator = [];
-  current_selection.indicator.push({"id":"population", "name":"Total population"});
+  current_selection.indicators = [];
+  current_selection.indicators.push({"id":"population", "name":"Total population"});
   fill_selection_box();
   reload_map();
 });
