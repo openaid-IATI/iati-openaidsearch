@@ -333,8 +333,10 @@ function reload_page(){
 function reload_below_map(){
   if(selected_type == "projects"){
       load_new_page(false);
-    } else if(selected_type == "indicator" || selected_type == "cpi"){
+    } else if(selected_type == "indicator"){
       initialize_charts();
+    } else if(selected_type == "cpi"){
+      initialize_cpi_charts();
     }
 }
 

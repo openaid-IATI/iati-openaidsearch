@@ -40,13 +40,13 @@ function initialize_map(url){
     circles = {};
     
     
-      // set current year
-      $( "#map-slider-tooltip div" ).html(sel_year);
-      $( "#map-slider-tooltip" ).val(sel_year);
-      $( "#year-" + sel_year).addClass("active");
+    // set current year
+    $( "#map-slider-tooltip div" ).html(sel_year);
+    $( "#map-slider-tooltip" ).val(sel_year);
+    $( "#year-" + sel_year).addClass("active");
 
-      init_circle_structure();
-      init_circle_main_info();
+    init_circle_structure();
+    init_circle_main_info();
 
     if (selected_type=='indicator'){
       if(!(typeof current_selection.indicators === 'undefined')){
@@ -185,8 +185,8 @@ function init_circles_by_country(data_indicators){
             if (!(value.indicator_friendly === undefined && value.type_data === undefined)){
             circles.indicators[value.indicator].description = value.indicator_friendly;
             circles.indicators[value.indicator].type_data = value.type_data;
-            } else {
-              circles.indicators[value.indicator].description = "City prosperity";
+            } else { // TO DO: this is temp untill city prosperity has friendly labels in the API call
+              circles.indicators[value.indicator].description = circles.indicators[value.indicator].name;
               circles.indicators[value.indicator].type_data = "p";
             }
 
@@ -533,7 +533,6 @@ function getLineChartData(indicatorname){
         data.addColumn('number', value.description);  
     });
 
-
     if(!(circles.countries === undefined)){
         $.each(circles.countries, function(ckey, cvalue){
 
@@ -574,6 +573,7 @@ function getLineChartData(indicatorname){
 
         });
     }
+    
     return data;
   }
 
