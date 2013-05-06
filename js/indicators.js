@@ -416,7 +416,6 @@ function getLineChartData(indicatorname){
     }
     
   }
-  console.log(currentData);
 
   return currentData;
 }
@@ -431,8 +430,7 @@ function getLineChartData(indicatorname){
       $('#line-chart-placeholder' + indicatornumber).css('height', '36em');
       $('#line-chart-name' + indicatornumber).text(value.description);
 
-      data = google.visualization.arrayToDataTable(getLineChartData(key)); 
-
+      data = google.visualization.arrayToDataTable(getLineChartData(key));  
 
       var columnsTable = new google.visualization.DataTable();
       columnsTable.addColumn('number', 'colIndex');
@@ -494,12 +492,20 @@ function getLineChartData(indicatorname){
           });
           lineChart.setView({columns: columnIndices});
           lineChart.draw();
+          $.each( $("#line-chart-placeholder1 text"), function() {
+            var text = $(this).text();
+            $(this).text(text.replace(/,/g,"."));
+          });
       });
 
 
 
 
 
+      $.each( $("#line-chart-placeholder1 text"), function() {
+         var text = $(this).text();
+         $(this).text(text.replace(/,/g,"."));
+      });
 
 
 

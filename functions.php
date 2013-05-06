@@ -12,6 +12,8 @@ register_sidebar(array('name' => 'Unhabitat pages'));
 
 add_theme_support( 'post-thumbnails' );
 
+function my_function_admin_bar(){ return false; }
+add_filter( 'show_admin_bar' , 'my_function_admin_bar');
 
 function register_my_menus() {
   register_nav_menus(
