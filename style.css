@@ -152,8 +152,8 @@ button{
 
 #brand-image{
   background-image: url('images/logo.png');
-  width: 309px;
-  height: 39px;
+  width: 287px;
+  height: 36px;
   display: block;
 }
 
@@ -772,6 +772,13 @@ input[type=checkbox] {
   background-color: DarkGreen;
 }
 
+#selected-indicators .selected-indicator3-color{
+  width: 1em;
+  height: 2.5em;
+  float: right;
+  background-color: Orange;
+}
+
 
 #selected-indicators .select-box-header{
   padding-bottom: 0.4em;
@@ -822,7 +829,8 @@ input[type=checkbox] {
 .selected-remove-button, .selection-clear-button{
   width: 12px;
   margin-left:0.3em;
-  margin-top:0.2em;
+  margin-top:0.1em;
+  margin-bottom: 0.1em;
   margin-right: 0.32em;
   background-image:url('images/select-remove.png');
   background-repeat: no-repeat;
@@ -1090,6 +1098,9 @@ label, input, button, select, textarea{
   z-index: 1500;
 }
 
+.timeline-cpi{
+  display: none;
+}
 #map-timeline{
   position: absolute;
   width: 1416px;
@@ -1197,7 +1208,7 @@ label, input, button, select, textarea{
   background-color:#F1EEE8;
 }
 
-#line-chart-placeholder, #table-chart-placeholder{
+#line-chart-placeholder1, #line-chart-placeholder2, #line-chart-placeholder3, #line-chart-placeholder4, #line-chart-placeholder5, #table-chart-placeholder{
   margin-top: 20px;
 }
 
@@ -1216,9 +1227,9 @@ label, input, button, select, textarea{
   margin-bottom: 1em;
 }
 
-#line-chart-placeholder{
+/*#line-chart-placeholder1,#line-chart-placeholder2, #line-chart-placeholder3, #line-chart-placeholder4, #line-chart-placeholder5{
   height:36em;
-}
+}*/
 
 #line-chart-filter .google-visualization-controls-label{
   font-family: "HelveticaNeueW01-75Bold";

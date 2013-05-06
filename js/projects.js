@@ -63,8 +63,8 @@ function draw_project_options(options){
 
 
 // init/reload the map
-function initialize_projects_map(url, type){
-    selected_type = type;
+function initialize_projects_map(url){
+    selected_type = "projects";
     var project_geojson = get_project_data(url);
     unload_project_map();
     load_project_map(project_geojson);
@@ -162,7 +162,7 @@ function showPopup(e){
 
     var popup = L.popup()
     .setLatLng(pointToDraw)
-    .setContent('<div id="map-tip-header">' + layer.feature.properties.name + '</div><div id="map-tip-text">Total projects: '+ layer.feature.properties.project_amount + '</div><div id="map-tip-link"><a href="/projects/?s=&countries='+layer.feature.id+'">Click to view related projects</a></div>')
+    .setContent('<div id="map-tip-header">' + layer.feature.properties.name + '</div><div id="map-tip-text">Total projects: '+ layer.feature.properties.project_amount + '</div><div id="map-tip-link"><a href="/projects/?s=&countries='+layer.feature.id+'">View projects</a></div>')
     .openOn(map);
 }
 

@@ -68,8 +68,8 @@ Template Name: City prosperity page
 				<div id="line-chart-placeholder"></div>
 			</div>
 			<div id="charts-column-2" class="span5">
-				<div id="table-chart-filter"></div>
-				<div id="table-city-prosperity"></div>
+				<h2>City prosperity in 2012</h2>
+				<div id="table-chart-placeholder"></div>
 			</div>
 		</div>
 	</div>
@@ -79,24 +79,17 @@ Template Name: City prosperity page
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		load_map(site + 'json-city');
-		function load_map(url){
-			data = initialize_map(url,2012,'cpi',"", "", "");
-			current_selection.indicators = [];
-		  	current_selection.indicators.push({"id":"cpi", "name":"City prosperity"});
-		  	fill_selection_box();
-		}
-
-	  selected_type = "cpi";
+	  selected_type = 'cpi';
 	  query_string_to_selection();
-	  if (typeof current_selection.indicators === "undefined"){
+
+	  if (current_selection.indicators === undefined){
 	  	current_selection.indicators = [];
 		current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"City prosperity"});
 	  }
 	  reload_map();
 	  initialize_filters();
 	  fill_selection_box();
-	
+	  initialize_cpi_charts();
 	});
 
 </script>

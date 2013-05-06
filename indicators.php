@@ -51,10 +51,28 @@ Template Name: Indicators page
 	<div class="container">
 		<div class="row-fluid">
 			<div id="charts-column-1" class="span7">
-				<div id="line-chart-filter"></div>
-				<div id="line-chart-placeholder"></div>
+				<h2 id="line-chart-name1"></h2>
+				<div id="line-chart-filter1"></div>
+				<div id="line-chart-placeholder1"></div>
+
+				<h2 id="line-chart-name2"></h2>
+				<div id="line-chart-filter2"></div>
+				<div id="line-chart-placeholder2"></div>
+
+				<h2 id="line-chart-name3"></h2>
+				<div id="line-chart-filter3"></div>
+				<div id="line-chart-placeholder3"></div>
+
+				<h2 id="line-chart-name4"></h2>
+				<div id="line-chart-filter4"></div>
+				<div id="line-chart-placeholder4"></div>
+
+				<h2 id="line-chart-name5"></h2>
+				<div id="line-chart-filter5"></div>
+				<div id="line-chart-placeholder5"></div>
 			</div>
 			<div id="charts-column-2" class="span5">
+				<h2>Selection data by year</h2>
 				<div id="table-chart-filter"></div>
 				<div id="table-chart-placeholder"></div>
 			</div>
@@ -69,7 +87,8 @@ Template Name: Indicators page
 $(document).ready(function(){
   selected_type = "indicator";
   query_string_to_selection();
-  if (typeof current_selection.indicators === "undefined"){
+
+  if (current_selection.indicators === undefined){
   	current_selection.indicators = [];
   	current_selection.indicators.push({"id":"population", "name":"Total population"});
   }

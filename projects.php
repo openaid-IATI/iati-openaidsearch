@@ -7,7 +7,7 @@ Template Name: Projects page
 <?php wp_generate_results_v2($objects, $meta); ?>
 
 <?php get_header(); ?>
-<?php get_template_part( "project", "filters" ); ?>
+<?php get_template_part( "projects", "filters" ); ?>
 <?php get_template_part( "map" ); ?>
 
 <div id="page-wrapper">
@@ -27,7 +27,6 @@ Template Name: Projects page
                             <span class="project-sort-icon"></span>
 
                             <div id="dropdown-project-amount" class="dropdown-project">
-                                <!-- TO DO: keep parameters -->
                                 <a href="?per_page=5" class="dropdown-project-amount-link">5</a>
                                 <a href="?per_page=10" class="dropdown-project-amount-link">10</a>
                                 <a href="?per_page=25" class="dropdown-project-amount-link">25</a>
@@ -53,8 +52,6 @@ Template Name: Projects page
                                 <a href="?order_by=-statistics__total_budget" class="project-sort-item">DESCENDING</a>
                             </div>
                         </div>
-
-                        
 
                         <div id="sort-type-startdate" class="project-sort-type">
                             <span class="project-sort-text hneue-bold">START DATE</span>
