@@ -477,6 +477,14 @@ input[type="text"]{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FA8C47', endColorstr='#FF7A16',GradientType=0 );
 }
 
+#map-filter-errorbox{
+  display:inline-block;
+  margin: 0 0.3em;
+  vertical-align: middle;
+  font-size: 1.3em;
+  color: #fff;
+}
+
 
 input[type=checkbox] {
   visibility: hidden;

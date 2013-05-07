@@ -36,6 +36,9 @@ $activity = wp_get_activity($project_id);
 						<a id="project-commitments-link" href="#project-commitments">Commitments</a>
 					</li>
 					<li>
+						<a id="project-disbursement-link" href="#project-disbursements">Disbursements</a>
+					</li>
+					<li>
 						<a id="project-documents-link" href="#project-documents">Documents</a>
 					</li>
 					<li>
