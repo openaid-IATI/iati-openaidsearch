@@ -182,14 +182,14 @@ function init_circles_by_country(data_indicators){
             // this shouldnt have to be done for every circle but with the current API call it is:
 
             //main indicator info
-            if (!(value.indicator_friendly === undefined && value.type_data === undefined)){
             circles.indicators[value.indicator].description = value.indicator_friendly;
             circles.indicators[value.indicator].type_data = value.type_data;
-            } else { // TO DO: this is temp untill city prosperity has friendly labels in the API call
+
+            // TO DO: this is temp untill city prosperity has friendly labels in the API call  
+            if(circles.indicators[value.indicator].description === undefined){
               circles.indicators[value.indicator].description = circles.indicators[value.indicator].name;
               circles.indicators[value.indicator].type_data = "p";
             }
-
 
             if (value.max_value){
                 circles.indicators[value.indicator].max_value = value.max_value;
@@ -238,7 +238,21 @@ function refresh_circles(year){
 
 
                     var score = cvalue[pkey].years[curyear];
+                    if (score === undefined){
+                      score = "Not available";
+                    } else {
 
+                      
+                      if(pvalue.type_data == "1000"){
+                        score = CommaFormatted((score * 1000) + '.');
+            
+                      }
+                      if(pvalue.type_data == "p"){
+                        score = score + "%";
+                      }
+
+
+                    }
                     popuptext += '<p>' + pvalue.description + ': ' + score + '</p>';
                 }
             });
@@ -251,7 +265,7 @@ function refresh_circles(year){
                     var score = cvalue[ikey].years[curyear];
                     if (!(score === undefined)){
                         circle_radius = Math.round(Math.sqrt(((Math.round(maxcirclearea / ivalue.max_value)) * score) / Math.PI));
-                        circle.setRadius(circle_radius); 
+                        circle.setRadius(circle_radius);
                     } else {
                       circle.setRadius(1);
                     }
@@ -455,7 +469,7 @@ function drawLineChart(){
         },
         backgroundColor: '#F1EEE8',
         interpolateNulls: true,
-        fontName: 'HelveticaNeueW02-55Roma' 
+        fontName: 'HelveticaNeueW02-55Roma'
       }
     });
     lineChart.draw();
