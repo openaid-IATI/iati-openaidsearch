@@ -51,8 +51,8 @@ jQuery(function($) {
 	  return false;
   });
 
-  $("#project-commitments-link").click(function(){
-	  change_tab(this, "commitments");
+  $("#project-financials-link").click(function(){
+	  change_tab(this, "financials");
 	  return false;
   });
 
