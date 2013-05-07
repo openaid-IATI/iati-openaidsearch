@@ -1,4 +1,4 @@
-// XXXXXXXXXXXXX INDICATOR INITIALIZATION XXXXXXXXXXX
+// XXXXXXXXXXXXX INDICATOR INITIALIZATION XXXXXXXXXXX this is a test for openaid-dev
   
 // global variables
 var circles = {};
