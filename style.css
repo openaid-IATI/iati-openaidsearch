@@ -164,7 +164,7 @@ button{
   height: 19px;
 }
 
-.navbar-static-top.navbar .nav > li > .navbar-home-link{
+.navbar-static-top.navbar .nav > li > .navbar-home-link a{
   padding: 1.72em 0.6em;
 }
 
@@ -281,14 +281,14 @@ input[type="text"]{
     padding: 1.70em 0.8em;
 }
 
-.navbar-static-top .active a{
+.navbar-static-top .current-menu-item a{
     background: #006492;
     -webkit-box-shadow:inset 0 3px 8px rgba(0, 0, 0, 0.125);
     -moz-box-shadow:inset 0 3px 8px rgba(0, 0, 0, 0.125);
     box-shadow:inset 0 3px 8px rgba(0, 0, 0, 0.125);
 }
 
-.navbar.navbar-static-top .active a:hover, .navbar.navbar-static-top .active a:focus{
+.navbar.navbar-static-top .current-menu-item a:hover, .navbar.navbar-static-top .current-menu-item a:focus{
     background: #006492;  
     color: #FFF;
 }
@@ -1625,7 +1625,7 @@ label, input, button, select, textarea{
   padding-top: 0.4em;
 }
 
-#project-commitments, #project-documents, #project-related-projects, #project-related-indicators, #project-located-in{
+#project-financials, #project-documents, #project-related-projects, #project-related-indicators, #project-located-in{
   display: none;
 }
 
@@ -2000,7 +2000,7 @@ label, input, button, select, textarea{
       height: 15px;
     }
 
-    .navbar-static-top.navbar .nav > li > .navbar-home-link{
+    .navbar-static-top.navbar .nav > li > .navbar-home-link a{
       padding: 1.86em 0.6em;
     }
 
@@ -2095,7 +2095,7 @@ label, input, button, select, textarea{
       text-align: left;
     }
 
-    .navbar-static-top.navbar .nav > li > .navbar-home-link:hover{
+    .navbar-static-top.navbar .nav > li > .navbar-home-link a:hover{
 
     }
 
@@ -2201,7 +2201,7 @@ label, input, button, select, textarea{
       height: 15px;
     }
 
-    .navbar-static-top.navbar .nav > li > .navbar-home-link{
+    .navbar-static-top.navbar .nav > li > .navbar-home-link a{
       padding: 1.86em 0.6em;
     }
 

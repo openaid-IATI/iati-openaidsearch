@@ -5,25 +5,34 @@ $activity = wp_get_activity($project_id);
 ?>
 <div id="project-financials">
 	<div id="financials-placeholder"></div>
-	 <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
 
-	  <script type='text/javascript'>
-      google.load('visualization', '1', {packages:['table']});
-      google.setOnLoadCallback(drawTable);
-      function drawTable() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Transaction type');
-        data.addColumn('string', 'Provider org');
-        data.addColumn('string', 'Receiver org');
-        data.addColumn('number', 'Value');
-        data.addColumn('string', 'Transaction date');
+	<script type='text/javascript'>
 
+	function DotFormattedProjectFinancials(n) {
+	  	var sRegExp = new RegExp('(-?[0-9]+)([0-9]{3})'),
+		sValue=n+'';
+		var sep='.';
+		while(sRegExp.test(sValue)) {
+			sValue = sValue.replace(sRegExp, '$1'+sep+'$2');
+		}
+		return sValue;
+	}
+
+	google.load('visualization', '1', {packages:['table']});
+	google.setOnLoadCallback(drawTable);
+
+	function drawTable() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Transaction type');
+		data.addColumn('string', 'Provider org');
+		data.addColumn('string', 'Receiver org');
+		data.addColumn('number', 'Value');
+		data.addColumn('string', 'Transaction date');
 
         <?php
 
 	foreach($activity->activity_transactions AS $at) {
-		echo $at->transaction_type;
-
 		$type = '';
 		switch($at->transaction_type){
 			case 'C':
@@ -54,6 +63,7 @@ $activity = wp_get_activity($project_id);
 		}
 
 		$value = $at->value;
+		$value = str_replace(".00", "", $value);
 		$provider_org = '';
 		if(!empty($activity->reporting_organisation->org_name)) {
 			$provider_org = (string)$activity->reporting_organisation->org_name;
@@ -63,20 +73,19 @@ $activity = wp_get_activity($project_id);
 			$receiver_org = (string)$activity->participating_organisations[0]->org_name;
 		}
 
-
-		echo 'data.addRow([' . $type . ',' . $provider_org . ',' . $receiver_org; ?>", "{v: " + <?php echo $at->value; ?> + ", f: '" + <?php echo $currency; echo "test"; ?> + "'}", "<?php echo $at->transaction_date; ?>" ]);
+		echo 'var stringvalue = "' . $currency . '" + DotFormattedProjectFinancials(' . $value . ');';
+		echo 'data.addRow(["' . $type . '", "' . $provider_org . '", "' . $receiver_org . '", {v: ' . $value . ', f: stringvalue }, "' . $at->transaction_date . '"]);';
      
 	}
 
 	
 	?>
-	console.log(" {v: 7000,  f: '$7,000'}");
 
     
+	var test = {}
 
-
-    var table = new google.visualization.Table(document.getElementById('commitments-placeholder'));
-    table.draw(data, {showRowNumber: true});
+    var table = new google.visualization.Table(document.getElementById('financials-placeholder'));
+    table.draw(data, {showRowNumber: false});
 }
 </script>
 
