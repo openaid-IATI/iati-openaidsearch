@@ -33,7 +33,7 @@ $activity = wp_get_activity($project_id);
 						<a id="project-description-link" href="#project-description">Description</a>
 					</li>
 					<li>
-						<a id="project-commitments-link" href="#project-commitments">Commitments</a>
+						<a id="project-financials-link" href="#project-financials">Financials</a>
 					</li>
 					<li>
 						<a id="project-documents-link" href="#project-documents">Documents</a>
@@ -60,7 +60,7 @@ $activity = wp_get_activity($project_id);
 				<div class="span7 project-tabs-wrapper">
 
 					<?php get_template_part( 'project', 'description' ); ?>
-					<?php get_template_part( 'project', 'commitments' ); ?>
+					<?php get_template_part( 'project', 'financials' ); ?>
 					<?php get_template_part( 'project', 'documents' ); ?>
 					<?php get_template_part( 'project', 'related-indicators' ); ?>
 					<?php get_template_part( 'project', 'related-projects' ); ?>

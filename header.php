@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Unhabitat main</title>
+    <meta charset="<?php bloginfo( 'charset' ); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Unhabitat main</title>
+   
+
     <!-- Bootstrap -->
 
     <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" type="image/vnd.microsoft.icon"/>
@@ -16,7 +20,11 @@
     <![endif]-->
 
     <link href="<?php echo get_template_directory_uri(); ?>/style.css" rel="stylesheet" media="screen">
+
     
+
+
+    <?php wp_head(); ?>
 </head>
 <body>
 
@@ -35,15 +43,18 @@
                 </a>
 
                 <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li <?php if (is_home()) {echo 'class="active"';} ?>><a class="navbar-home-link" href="<?php echo site_url(); ?>"><div id="header-home-img"></div></a></li>
-                        <li <?php if (is_page('projects')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/projects/">Projects</a></li>
-                        <li <?php if (is_page('indicators')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/indicators/">Indicators</a></li>
-                        <li <?php if (is_page('city-prosperity')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/city-prosperity/">City Prosperity</a></li>
-                        <li <?php if (is_page('faq')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/faq/">FAQ</a></li>
-                        <li <?php if (is_page('about')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/about/">About</a></li>
-                        <li <?php if (is_page('contact')) {echo 'class="active"';} ?>><a href="<?php echo site_url(); ?>/contact/">Contact</a></li>
-                    </ul>
+                    
+
+                        
+                        <?php $navmenargs = array(
+                            'menu' => 'Header menu',
+                            'container' => '',
+                            'container_class' => '',
+                            'menu_class' => 'nav',
+                            );
+                        wp_nav_menu($navmenargs); ?>
+
+
 
                     <form action='projects' method='GET' class="navbar-form pull-right">
                         <input type="text" class="input-large" placeholder="What are you looking for?" name='query'></li>

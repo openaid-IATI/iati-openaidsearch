@@ -164,7 +164,7 @@ button{
   height: 19px;
 }
 
-.navbar-static-top.navbar .nav > li > .navbar-home-link{
+.navbar-static-top.navbar .nav > li > .navbar-home-link a{
   padding: 1.72em 0.6em;
 }
 
@@ -281,14 +281,14 @@ input[type="text"]{
     padding: 1.70em 0.8em;
 }
 
-.navbar-static-top .active a{
+.navbar-static-top .current-menu-item a{
     background: #006492;
     -webkit-box-shadow:inset 0 3px 8px rgba(0, 0, 0, 0.125);
     -moz-box-shadow:inset 0 3px 8px rgba(0, 0, 0, 0.125);
     box-shadow:inset 0 3px 8px rgba(0, 0, 0, 0.125);
 }
 
-.navbar.navbar-static-top .active a:hover, .navbar.navbar-static-top .active a:focus{
+.navbar.navbar-static-top .current-menu-item a:hover, .navbar.navbar-static-top .current-menu-item a:focus{
     background: #006492;  
     color: #FFF;
 }
@@ -445,9 +445,46 @@ input[type="text"]{
   color: #F1EEE8;
 }
 
-#map-filters-buttons #map-filter-cancel{
-  padding-left: 0;
+
+#map-filters-buttons button{
+  color: white;
+  display: inline-block;
+  margin: 0.5em 0.5em 0.5em 0;
+  padding: 0.6em 1.6em;
+  border-radius: 3px;
 }
+
+#map-filter-save{
+  background: #2cac00; /* Old browsers */
+  background: -moz-linear-gradient(top, #82dc82 0%, #2cac00 38%, #56aa38 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#82dc82), color-stop(38%,#2cac00), color-stop(100%,#56aa38)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #82dc82 0%,#2cac00 38%,#56aa38 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #82dc82 0%,#2cac00 38%,#56aa38 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #82dc82 0%,#2cac00 38%,#56aa38 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #82dc82 0%,#2cac00 38%,#56aa38 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2cac00', endColorstr='#56aa38',GradientType=0 );
+}
+
+#map-filter-cancel{
+  padding: 0.7em 1em;
+  background: #FF7F00; /* Old browsers */
+  background: -moz-linear-gradient(top, #FFAE78 0%, #FF7F00 38%, #FF7A16 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFAE78), color-stop(38%,#FF7F00), color-stop(100%,#FF7A16)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #FFAE78 0%,#FF7F00 38%,#FF7A16 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #FFAE78 0%,#FF7F00 38%,#FF7A16 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #FFAE78 0%,#FF7F00 38%,#FF7A16 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #FFAE78 0%,#FF7F00 38%,#FF7A16 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FA8C47', endColorstr='#FF7A16',GradientType=0 );
+}
+
+#map-filter-errorbox{
+  display:inline-block;
+  margin: 0 0.3em;
+  vertical-align: middle;
+  font-size: 1.3em;
+  color: #fff;
+}
+
 
 input[type=checkbox] {
   visibility: hidden;
@@ -935,19 +972,8 @@ input[type=checkbox] {
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 3em;
+    height: 3.4em;
     border-top: 1px solid #ddd;
-}
-
-#map-filters-buttons button{
-    display: inline-block;
-    color: #ddd;
-    padding: 1em 1.2em;
-    background: transparent;
-}
-
-#map-filters-buttons button:hover, #map-filters-buttons button:focus{
-    color: #aaa;
 }
 
 #map-hide-show{
@@ -1599,7 +1625,7 @@ label, input, button, select, textarea{
   padding-top: 0.4em;
 }
 
-#project-commitments, #project-documents, #project-related-projects, #project-related-indicators, #project-located-in{
+#project-financials, #project-documents, #project-related-projects, #project-related-indicators, #project-located-in{
   display: none;
 }
 
@@ -1974,7 +2000,7 @@ label, input, button, select, textarea{
       height: 15px;
     }
 
-    .navbar-static-top.navbar .nav > li > .navbar-home-link{
+    .navbar-static-top.navbar .nav > li > .navbar-home-link a{
       padding: 1.86em 0.6em;
     }
 
@@ -2069,7 +2095,7 @@ label, input, button, select, textarea{
       text-align: left;
     }
 
-    .navbar-static-top.navbar .nav > li > .navbar-home-link:hover{
+    .navbar-static-top.navbar .nav > li > .navbar-home-link a:hover{
 
     }
 
@@ -2175,7 +2201,7 @@ label, input, button, select, textarea{
       height: 15px;
     }
 
-    .navbar-static-top.navbar .nav > li > .navbar-home-link{
+    .navbar-static-top.navbar .nav > li > .navbar-home-link a{
       padding: 1.86em 0.6em;
     }
 

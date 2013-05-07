@@ -220,7 +220,8 @@ jQuery(function($) {
     var curId = $(this).attr('id');
     var filterContainerName = curId.replace("-button", "");
     $('.filter-button.filter-selected').removeClass("filter-selected");
-    
+    $('#map-filter-errorbox').text("");
+
     if($('#map-filter-overlay').is(":hidden")){
 
       $('#map-filter-overlay').show("blind", { direction: "vertical" }, 600);         
@@ -241,8 +242,6 @@ jQuery(function($) {
 
     } else {
       if($("#" + filterContainerName).is(":visible")){
-        $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 600);
-        hide_all_filters();
         save_selection();
       } else {
         $(this).addClass("filter-selected");
@@ -296,28 +295,37 @@ function save_selection(){
     // hide map show loader
     $('#map-loader').show();
     $('#map').hide();
-    $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000, function(){
-      var new_selection = new Object();
-      new_selection.sectors = [];
-      new_selection.countries = [];
-      new_selection.budgets = [];
-      new_selection.regions = [];
-      new_selection.indicators = [];
-      new_selection.cities = [];
-
-      // set selection as filter and load results
-      get_checked_by_filter("sectors", new_selection);
-      get_checked_by_filter("countries", new_selection);
-      get_checked_by_filter("budgets", new_selection);
-      get_checked_by_filter("regions", new_selection);
-      get_checked_by_filter("indicators", new_selection);
-      get_checked_by_filter("cities", new_selection);
-      current_selection = new_selection;
-
-      reload_page();
-    });
-
     
+    var new_selection = new Object();
+    new_selection.sectors = [];
+    new_selection.countries = [];
+    new_selection.budgets = [];
+    new_selection.regions = [];
+    new_selection.indicators = [];
+    new_selection.cities = [];
+
+    // set selection as filter and load results
+    get_checked_by_filter("sectors", new_selection);
+    get_checked_by_filter("countries", new_selection);
+    get_checked_by_filter("budgets", new_selection);
+    get_checked_by_filter("regions", new_selection);
+    get_checked_by_filter("indicators", new_selection);
+    get_checked_by_filter("cities", new_selection);
+    console.log(new_selection);
+    console.log(new_selection.indicators);
+    console.log(new_selection.indicators.length);
+    if(new_selection.indicators.length > 2){
+        too_many_indicators_error(new_selection.indicators.length - 2);
+    } else {
+      $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000, function(){
+        current_selection = new_selection;
+        reload_page();
+      });
+    }
+}
+
+function too_many_indicators_error(count){
+    $('#map-filter-errorbox').text("You can only select 2 indicators at the same time, please remove "+count+".");
 }
 
 function reload_page(){
@@ -325,16 +333,15 @@ function reload_page(){
     set_current_url();
     fill_selection_box();
     reload_map(reload_below_map);
-
-    // TO DO: make this a callback function
-    
 }
 
 function reload_below_map(){
   if(selected_type == "projects"){
       load_new_page(false);
-    } else if(selected_type == "indicator" || selected_type == "cpi"){
+    } else if(selected_type == "indicator"){
       initialize_charts();
+    } else if(selected_type == "cpi"){
+      initialize_cpi_charts();
     }
 }
 
@@ -388,6 +395,7 @@ function create_api_url(){
   var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
 
   if (selected_type=='projects'){
+    console.log(site + 'json-activities?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region);
     return site + 'json-activities?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
   } else if (selected_type=='indicator'){
     return site + 'json?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&city=' + str_city;

@@ -12,6 +12,8 @@ register_sidebar(array('name' => 'Unhabitat pages'));
 
 add_theme_support( 'post-thumbnails' );
 
+function my_function_admin_bar(){ return false; }
+add_filter( 'show_admin_bar' , 'my_function_admin_bar');
 
 function register_my_menus() {
   register_nav_menus(
@@ -87,6 +89,8 @@ add_action( 'init', 'faq_items_post_type' );
 
 function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	global $_PER_PAGE;
+	global $_DEFAULT_ORGANISATION_ID;
+
 	// get amount of activities per page
 	$activities_per_page = $_PER_PAGE;
 	if(isset($_GET['per_page'])){	$activities_per_page = $_GET['per_page']; }
@@ -96,7 +100,8 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	if(isset($_REQUEST['offset'])){	$activities_offset = rawurlencode($_REQUEST['offset']);	}
 	//if($offsetpar != ""){ $activities_offset = $offsetpar; }
 
-	$search_url = SEARCH_URL . "activities/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset."&organisations=41120";;
+	$org_id = $_DEFAULT_ORGANISATION_ID;
+	$search_url = SEARCH_URL . "activities/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset."&organisations=".$org_id;
     
     $search_url = wp_filter_request($search_url);
 	$content = file_get_contents($search_url);

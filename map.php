@@ -20,8 +20,9 @@
                 <div class="row-fluid">
                     <div class="span12">
 
-                        <button id="map-filter-cancel" class="hneue-bold">CANCEL</button>
                         <button id="map-filter-save" class="hneue-bold">SAVE</button>
+                        <button id="map-filter-cancel" class="hneue-bold">CANCEL</button>
+                        <div id="map-filter-errorbox"></div>
 
                     </div>
                 </div>
