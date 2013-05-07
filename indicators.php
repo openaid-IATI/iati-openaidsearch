@@ -72,7 +72,7 @@ Template Name: Indicators page
 				<div id="line-chart-placeholder5"></div>
 			</div>
 			<div id="charts-column-2" class="span5">
-				<h2>Selection data by year</h2>
+				<h2>Selection data by year <span></span></h2>
 				<div id="table-chart-filter"></div>
 				<div id="table-chart-placeholder"></div>
 			</div>

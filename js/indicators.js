@@ -609,7 +609,9 @@ function getTableYearOptions(){
 function drawTableChart(){
 
   var curyear = $(".ui-slider-handle").html();
+
   var first_available_year = get_first_available_year(2015);
+  $('#charts-column-2 h2 span').text("(" + first_available_year + ")");
   var data = getTableChartData(first_available_year);
   
   var columnsTable = getTableYearOptions();
@@ -651,6 +653,7 @@ function drawTableChart(){
       var curyear = state.selectedValues[0];
       var curdata = getTableChartData(curyear);
       tableChart.setDataTable(curdata);
+      $('#charts-column-2 h2 span').text("(" + curyear + ")");
       tableChart.draw();
   });
 }
