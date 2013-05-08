@@ -1216,9 +1216,25 @@ label, input, button, select, textarea{
 }
 
 
-    
+.filter-page-2, .filter-page-3, .filter-page-4, .filter-page-5, #filter-total-pages{
+  display: none;
+}
 
+#map-filter-pagination{
+  display: inline-block;
+  color: #DEDEDE;
+  margin: 0.5em 0.5em 0.5em 0;
+}
 
+#filter-next-page, #filter-previous-page, #filter-pagination-overview{
+  display: inline-block;
+  padding: 0.6em 1.6em 0.6em 0;
+  font-size: 1.1em;
+}
+
+#filter-next-page, #filter-previous-page{
+  cursor: pointer;
+}
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX INDICATOR PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
@@ -1278,7 +1294,9 @@ label, input, button, select, textarea{
 }
 
 
-
+#bubble-chart-placeholder{
+  height: 50em;
+}
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAQ AND HOME PAGE POST-ITS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 

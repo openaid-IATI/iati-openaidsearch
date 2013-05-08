@@ -64,8 +64,8 @@ Template Name: City prosperity page
 	<div class="container">
 		<div class="row-fluid">
 			<div id="charts-column-1" class="span7">
-				<div id="line-chart-filter"></div>
-				<div id="line-chart-placeholder"></div>
+				<div id="bubble-chart-filter"></div>
+				<div id="bubble-chart-placeholder"></div>
 			</div>
 			<div id="charts-column-2" class="span5">
 				<h2>City prosperity in 2012</h2>
@@ -84,12 +84,11 @@ Template Name: City prosperity page
 
 	  if (current_selection.indicators === undefined){
 	  	current_selection.indicators = [];
-		current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"City prosperity"});
+		current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"Five dimensions of city prosperity"});
 	  }
 	  reload_map();
-	  initialize_filters();
-	  fill_selection_box();
-	  initialize_cpi_charts();
+	  initialize_filters(fill_selection_box, initialize_cpi_charts);
+	  
 	});
 
 </script>

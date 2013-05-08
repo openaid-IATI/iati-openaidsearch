@@ -48,23 +48,23 @@ function initialize_map(url){
     init_circle_structure();
     init_circle_main_info();
 
-    if (selected_type=='indicator'){
-      if(!(typeof current_selection.indicators === 'undefined')){
-          var arr = current_selection.indicators;
-          if(arr.length > 0){
-              for(var i = 0; i < arr.length; i++){
-                  var cururl = create_api_url_indicator(arr[i].id);
-                  var indicator_data = get_indicator_data(cururl);
-                  draw_available_data_blocks(indicator_data, i);
-                  init_circles(indicator_data);
-              }
-          }
-      }
-    } else {
-      var indicator_data = get_indicator_data(url);
-      init_circles(indicator_data);
+   
+    if(!(typeof current_selection.indicators === 'undefined')){
+        var arr = current_selection.indicators;
+        if(arr.length > 0){
+            for(var i = 0; i < arr.length; i++){
+                var cururl = create_api_url_indicator(arr[i].id);
+                var indicator_data = get_indicator_data(cururl);
+                draw_available_data_blocks(indicator_data, i);
+                init_circles(indicator_data);
+            }
+        }
+    }
+
+    if(selected_type = "cpi"){
       refresh_circles(2012);
     }
+    
 
     // hide loader, show map
     $('#map').show(); 
@@ -609,7 +609,9 @@ function getTableYearOptions(){
 function drawTableChart(){
 
   var curyear = $(".ui-slider-handle").html();
+
   var first_available_year = get_first_available_year(2015);
+  $('#charts-column-2 h2 span').text("(" + first_available_year + ")");
   var data = getTableChartData(first_available_year);
   
   var columnsTable = getTableYearOptions();
@@ -651,8 +653,84 @@ function drawTableChart(){
       var curyear = state.selectedValues[0];
       var curdata = getTableChartData(curyear);
       tableChart.setDataTable(curdata);
+      $('#charts-column-2 h2 span').text("(" + curyear + ")");
       tableChart.draw();
   });
+}
+
+function getCpiBubbleChartData(year){
+
+  var curyear = "y" + year;
+  var data = new google.visualization.DataTable();
+
+  data.addColumn('string', 'ID');
+  $.each(circles.indicators, function(key, value){
+
+      data.addColumn('number', value.description);  
+  });
+  
+
+  if(!(circles.countries === undefined)){
+      $.each(circles.countries, function(ckey, cvalue){
+
+        var current_row = [];
+        current_row.push(cvalue.countryname);
+
+        $.each(circles.indicators, function(key, value){
+            if(!(cvalue[key] === undefined)){
+
+                var score = null;
+
+                if(!(cvalue[key].years[curyear] === undefined)){
+                  
+                  score = cvalue[key].years[curyear];
+                  if (value.type_data == '1000'){
+                    score = score * 1000;
+                  }
+                }
+                
+                current_row.push(score);
+            } else{
+              current_row.push(null);
+            }
+        });
+        
+        // dont add if all values are null, else add row
+        if (!(current_row[1] == null && current_row[2] == null)){
+          data.addRow(current_row);
+        }
+
+      });
+  }
+  return data;
+}
+
+function drawCpiBubbleChart(){
+
+
+  var data = getCpiBubbleChartData(2012);
+
+  var hAxisTitle = current_selection.indicators[0].name;
+  var vAxisTitle = current_selection.indicators[1].name;
+
+  var bubbleChart = new google.visualization.ChartWrapper({
+    chartType: 'BubbleChart',
+    containerId: 'bubble-chart-placeholder',
+    dataTable: data,
+    options: {
+      backgroundColor: 'transparent',
+      chartArea: {width: '80%', height: '80%', top: 20},
+      sizeAxis: {maxSize: 20},
+      fontName: 'HelveticaNeueW01-45Ligh',
+      title: '',
+      hAxis: {title: hAxisTitle},
+      vAxis: {title: vAxisTitle},
+      bubble: {textStyle: {fontSize: 11, color: '#fff'}}
+
+    }
+  });
+  bubbleChart.draw();
+    
 }
 
 function drawCpiTableChart(){
@@ -679,10 +757,9 @@ function initialize_charts(){
 }
 
 function initialize_cpi_charts(){
+  google.load("visualization", "1", {packages:["corechart"], callback:drawCpiBubbleChart});
   google.load("visualization", "1", {packages:["table", "controls"], callback:drawCpiTableChart});
 }
-
-
 
 function getImgData(chartContainer) {
   var chartArea = chartContainer.getElementsByTagName('svg')[0].parentNode;    

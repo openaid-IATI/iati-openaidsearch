@@ -100,8 +100,7 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	if(isset($_REQUEST['offset'])){	$activities_offset = rawurlencode($_REQUEST['offset']);	}
 	//if($offsetpar != ""){ $activities_offset = $offsetpar; }
 
-	$org_id = $_DEFAULT_ORGANISATION_ID;
-	$search_url = SEARCH_URL . "activities/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset."&organisations=".$org_id;
+	$search_url = SEARCH_URL . "activities/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset."&organisations=".$_DEFAULT_ORGANISATION_ID;
     
     $search_url = wp_filter_request($search_url);
 	$content = file_get_contents($search_url);
