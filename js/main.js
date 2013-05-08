@@ -76,7 +76,7 @@ function create_filter_attributes(objects, columns){
     });
 
     var page_counter = 1;
-
+        html += '<div class="filter-page filter-page-1">'
     for (var i = 0;i < sortable.length;i++){
 
       if (i%per_col == 0){
@@ -97,12 +97,10 @@ function create_filter_attributes(objects, columns){
         }
         if ((i + 1) > ((page_counter * (per_col * columns))) - 1) { 
           
-          if (page_counter > 1){
-            html += '</div>';
-          }
-
+       
+          html += '</div>';
           page_counter = page_counter + 1;
-          html += '<div class="filter-page-' + page_counter + '">';
+          html += '<div class="filter-page filter-page-' + page_counter + '">';
         }
         
     }
@@ -240,18 +238,39 @@ jQuery(function($) {
     if (curpage < total){
       text += '<div id="filter-next-page">Next page</div>';
     }
-    text += '<div id="filter-pagination-overview">Page 1 / ' + total + '</div>';
-    console.log(text);
+    text += '<div id="filter-pagination-overview">Page ' + curpage + ' / ' + total + '</div>';
+
     $('#map-filter-pagination').html(text);
+
+    $('#filter-next-page').click(function(){
+
+      var total_pages = parseInt($("#filter-pagination-overview").text().substr(9,1));
+      var nextpage = parseInt($("#filter-pagination-overview").text().substr(5,1)) + 1;
+      filter_pagination(total_pages, nextpage);
+      $('.filter-page').hide();
+      $('.filter-page-'+nextpage).show();
+      
+    });
+
+    $('#filter-previous-page').click(function(){
+
+      var total_pages = parseInt($("#filter-pagination-overview").text().substr(9,1));
+      var nextpage = parseInt($("#filter-pagination-overview").text().substr(5,1)) - 1;
+      filter_pagination(total_pages, nextpage);
+      $('.filter-page').hide();
+      $('.filter-page-'+nextpage).show();
+    });
+
   }
 
-  $('#filter-next-page').click(function(e){
-    console.log("tetstt");
-    var total_pages = $("#filter-total-pages").attr("name");
-    var curpage = $("#filter-pagination-overview").text().substr(7,1);
-    console.log(curpage);
-    filter_pagination(total_pages, curpage);
-  });
+$(document).keyup(function(e) {
+  if (e.keyCode == 27) { 
+    if($("#map-filter-overlay").is(":visible")){
+      save_selection();
+    } 
+  } 
+});
+  
 
   $('.filter-button').click(function(e){
 
@@ -259,14 +278,21 @@ jQuery(function($) {
     var filterContainerName = curId.replace("-button", "");
     $('.filter-button.filter-selected').removeClass("filter-selected");
     $('#map-filter-errorbox').text("");
+    $('.filter-page').hide();
+    $('.filter-page-1').show();
+
+    var total_pages = $("#" + filterContainerName + " .filter-total-pages").attr("name");
+    if (total_pages > 1){
+      filter_pagination(total_pages, 1);
+    } else{
+      $('#map-filter-pagination').html('');
+    }
+
 
     if($('#map-filter-overlay').is(":hidden")){
 
       $('#map-filter-overlay').show("blind", { direction: "vertical" }, 600, function(){
-        var total_pages = $("#" + filterContainerName + " .filter-total-pages").attr("name");
-        if (total_pages > 1){
-          filter_pagination(total_pages, 1);
-        }
+        
       });
 
       $(this).addClass("filter-selected");

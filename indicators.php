@@ -63,13 +63,10 @@ Template Name: Indicators page
 				<div id="line-chart-filter3"></div>
 				<div id="line-chart-placeholder3"></div>
 
-				<h2 id="line-chart-name4"></h2>
-				<div id="line-chart-filter4"></div>
-				<div id="line-chart-placeholder4"></div>
-
-				<h2 id="line-chart-name5"></h2>
-				<div id="line-chart-filter5"></div>
-				<div id="line-chart-placeholder5"></div>
+				<h2 id="bubble-chart-name">Bubble chart</h2>
+				<div id="bubble-chart-filter"></div>
+				<div id="bubble-chart-placeholder"></div>
+			
 			</div>
 			<div id="charts-column-2" class="span5">
 				<h2>Selection data by year <span></span></h2>
