@@ -93,8 +93,6 @@ $(document).ready(function(){
   	current_selection.indicators.push({"id":"population", "name":"Total population"});
   }
   reload_map();
-  initialize_filters();
-  fill_selection_box();
-  initialize_charts();
+  initialize_filters(fill_selection_box, initialize_charts);
 });
 </script>
