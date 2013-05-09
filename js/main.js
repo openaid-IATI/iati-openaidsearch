@@ -517,8 +517,6 @@ function get_first_available_year(standard_year){
   return 1950;
 }
 
-
-
 // SELECTION BOX FUNCTIONS
 
   $("#selection-hide-show-button").click(function(){
@@ -593,9 +591,14 @@ function init_remove_filters_from_selection_box(){
 }
 
 $(".selection-clear-div").click(function(){
+
   current_selection = new Object();
   current_selection.indicators = [];
-  current_selection.indicators.push({"id":"population", "name":"Total population"});
+  if(selected_type == 'indicators'){
+    current_selection.indicators.push({"id":"population", "name":"Total population"});
+  } else if(selected_type == 'cpi'){
+    current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"Five dimensions of city prosperity"});
+  }
   fill_selection_box();
   reload_map();
 });
@@ -604,11 +607,9 @@ $(".selection-clear-div").click(function(){
 // XXXXXXXXX Ajax wordpress simple pagination XXXXXXXX
 jQuery(function($){
 
-
   // IE: prevent focus on internet explorer
   var _preventDefault = function(evt) { evt.preventDefault(); };
   $("#map-slider-tooltip div").bind("dragstart", _preventDefault).bind("selectstart", _preventDefault);
-
 
 });
 

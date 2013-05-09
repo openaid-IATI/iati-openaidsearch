@@ -623,10 +623,10 @@ function drawTableChart(){
     options: {
       showRowNumber: true,
       sortColumn: 1,
-      sortAscending: false
+      sortAscending: false,
+      cssClassNames: {headerRow: 'unh-table-header', tableRow: 'unh-table-cells'}
     }
   });
-
   tableChart.draw();
 
   var columnFilterT = new google.visualization.ControlWrapper({
@@ -699,7 +699,7 @@ function getCpiBubbleChartData(year){
         if (!(current_row[1] == null || current_row[2] == null)){
           data.addRow(current_row);
         }
-
+        
       });
   }
   return data;
@@ -732,6 +732,75 @@ function drawCpiBubbleChart(){
     
 }
 
+function getIndicatorMotionChartData(){
+
+  var data = new google.visualization.DataTable();
+  
+  data.addColumn('string', 'Country');
+  data.addColumn('number', 'Year');
+
+  $.each(circles.indicators, function(key, value){
+
+      data.addColumn('number', value.description);  
+  });
+
+  if(!(circles.countries === undefined)){
+      $.each(circles.countries, function(ckey, cvalue){
+        for (var i = 1950;i < 2051;i++){
+          var current_row = [];
+          current_row.push(cvalue.countryname);
+          current_row.push(i);
+          var curyear = "y"+i;
+          $.each(circles.indicators, function(key, value){
+              if(!(cvalue[key] === undefined)){
+
+                  var score = null;
+
+                  if(!(cvalue[key].years[curyear] === undefined)){
+                    score = cvalue[key].years[curyear];
+
+                    if (value.type_data == '1000'){
+                      score = score * 1000;
+                    }
+                  }
+                  
+                  current_row.push(score);
+              } else{
+                current_row.push(null);
+              }
+          });
+
+          // dont add if all values are null, else add row
+          
+          if (current_row[2] != null || current_row[3] != null){
+            data.addRow(current_row);
+          }
+        }
+
+      });
+  }
+
+  return data;
+}
+
+function drawIndicatorMotionChart(){
+
+  var data = getIndicatorMotionChartData();
+
+  var bubbleChart = new google.visualization.ChartWrapper({
+    chartType: 'MotionChart',
+    containerId: 'motion-chart-placeholder',
+    dataTable: data,
+    options: {
+      width: '80%'
+    }
+  });
+  bubbleChart.draw();
+
+}
+
+
+
 function drawCpiTableChart(){
 
   var data = getTableChartData(2012, true);
@@ -743,7 +812,8 @@ function drawCpiTableChart(){
     options: {
       showRowNumber: true,
       sortColumn: 1,
-      sortAscending: false
+      sortAscending: false,
+      cssClassNames: {headerRow: 'unh-table-header', tableRow: 'unh-table-cells'}
     }
   });
 
@@ -754,7 +824,9 @@ function initialize_charts(){
   
   google.load("visualization", "1", {packages:["table", "controls"], callback:drawTableChart});
   google.load("visualization", "1", {packages:["corechart", "controls"], callback:drawLineChart});
-  
+  if (current_selection.indicators.length > 1){
+  google.load("visualization", "1", {packages:["motionchart"], callback:drawIndicatorMotionChart});
+  } 
 }
 
 function initialize_cpi_charts(){

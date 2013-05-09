@@ -108,6 +108,15 @@ button{
   display: none;
 }
 
+.unh-table-header{
+  background-color: #DDDBD6;
+  font-family: "HelveticaNeueW01-75Bold";
+}
+
+.unh-table-cells{
+  font-family:"HelveticaNeueW01-65Medi";
+}
+
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX GLOBAL PAGE HEADER XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 .page-header{

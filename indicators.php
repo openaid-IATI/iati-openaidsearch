@@ -63,9 +63,9 @@ Template Name: Indicators page
 				<div id="line-chart-filter3"></div>
 				<div id="line-chart-placeholder3"></div>
 
-				<h2 id="bubble-chart-name">Bubble chart</h2>
-				<div id="bubble-chart-filter"></div>
-				<div id="bubble-chart-placeholder"></div>
+				<h2 id="motion-chart-name"></h2>
+				<div id="motion-chart-filter"></div>
+				<div id="motion-chart-placeholder"></div>
 			
 			</div>
 			<div id="charts-column-2" class="span5">
