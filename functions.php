@@ -8,8 +8,6 @@ add_theme_support( 'automatic-feed-links' );
 // WORDPRESS THEME FUNCTIONS
 add_theme_support( 'menus' );
 
-register_sidebar(array('name' => 'Unhabitat pages'));
-
 add_theme_support( 'post-thumbnails' );
 
 function my_function_admin_bar(){ return false; }
