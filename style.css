@@ -185,12 +185,12 @@ button{
 
 .navbar-static-top .navbar-inner{
     background: #008ecb; /* Old browsers */
-    background: -moz-linear-gradient(top, #008ecb 19%, #007ab2 79%); /* FF3.6+ */
+    background: -moz-linear-gradient(top, #f90 19%, #007ab2 79%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(19%,#008ecb), color-stop(79%,#007ab2)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #008ecb 19%,#007ab2 79%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #008ecb 19%,#007ab2 79%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #008ecb 19%,#007ab2 79%); /* IE10+ */
-    background: linear-gradient(to bottom, #008ecb 19%,#007ab2 79%); /* W3C */
+    background: -webkit-linear-gradient(top, #f90 19%,#007ab2 79%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #f90 19%,#007ab2 79%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #f90 19%,#007ab2 79%); /* IE10+ */
+    background: linear-gradient(to bottom, #f90 19%,#007ab2 79%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008ecb', endColorstr='#007ab2',GradientType=0 ); /* IE6-9 */
 
     border: 0;
