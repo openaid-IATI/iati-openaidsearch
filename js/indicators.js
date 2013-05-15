@@ -267,7 +267,7 @@ function refresh_circles(year){
                         circle_radius = Math.round(Math.sqrt(((Math.round(maxcirclearea / ivalue.max_value)) * score) / Math.PI));
                         circle.setRadius(circle_radius);
                     } else {
-                      circle.setRadius(1);
+                      //circle.setRadius(1);
                     }
                     circle.bindPopup(popuptext);
                     

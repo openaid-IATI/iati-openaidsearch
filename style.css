@@ -1840,17 +1840,13 @@ label, input, button, select, textarea{
   color: #797974;
 }
 
-
-
-#sort-type-country, #project-related-indicators-link, #project-located-in-link, #project-related-projects-link, #project-share-embed{
+#sort-type-country, #project-related-indicators-link, #project-located-in-link, #project-related-projects-link, #project-share-embed, #motion-chart-name, #motion-chart-filter, #motion-chart-placeholder{
   display: none;
 }
 
 #graph-button-treemap{
   display: none;
 }
-
-
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FORMS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 .wpcf7-form{
