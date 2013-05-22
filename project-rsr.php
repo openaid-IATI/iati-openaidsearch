@@ -6,8 +6,8 @@
 	echo $rsrfilename;
 	
 	
-	include( $rsrfilename );
-	echo $rsrdata1;
+	//include( $rsrfilename );
+	//echo $rsrdata1;
 
 
 	// echo $_test;
