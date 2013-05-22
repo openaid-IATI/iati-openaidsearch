@@ -116,7 +116,7 @@ $activity = wp_get_activity($project_id);
 						</div>
 
 						<div class="projects-project-divider"></div>
-
+	<?php /* 
 						<div class="projects-project-spec-key">Budget:</div>
 						<div class="projects-project-spec-value">
 
@@ -126,7 +126,7 @@ $activity = wp_get_activity($project_id);
 							<?php } ?></div>
 
 						<div class="projects-project-divider"></div>
-
+*/ ?>
 						<div class="projects-project-spec-key">IATI identifier:</div>
 						<div class="projects-project-spec-value">
 

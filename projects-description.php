@@ -63,6 +63,7 @@ foreach($objects AS $idx=>$project) {
 
 				<div class="projects-project-divider"></div>
 
+				<?php /* 
 				<div class="projects-project-spec-key">Budget:</div>
 				<div class="projects-project-spec-value">
 
@@ -72,8 +73,10 @@ foreach($objects AS $idx=>$project) {
 
 				</div>
 
-				<div class="projects-project-divider"></div>
+				
 
+				<div class="projects-project-divider"></div>
+*/ ?>
 				<div class="projects-project-spec-key">IATI identifier:</div>
 				<div class="projects-project-spec-value">
 

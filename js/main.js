@@ -76,7 +76,7 @@ function create_filter_attributes(objects, columns){
     });
 
     var page_counter = 1;
-
+        html += '<div class="filter-page filter-page-1">'
     for (var i = 0;i < sortable.length;i++){
 
       if (i%per_col == 0){
@@ -97,12 +97,10 @@ function create_filter_attributes(objects, columns){
         }
         if ((i + 1) > ((page_counter * (per_col * columns))) - 1) { 
           
-          if (page_counter > 1){
-            html += '</div>';
-          }
-
+       
+          html += '</div>';
           page_counter = page_counter + 1;
-          html += '<div class="filter-page-' + page_counter + '">';
+          html += '<div class="filter-page filter-page-' + page_counter + '">';
         }
         
     }
@@ -157,77 +155,77 @@ jQuery(function($) {
       map.setZoom(2);
   }
 
-	$('#map-lightbox-close').click(function(){
-		$('#map-lightbox').hide();
-		$('#map-lightbox-bg').hide();
-	});
+  $('#map-lightbox-close').click(function(){
+    $('#map-lightbox').hide();
+    $('#map-lightbox-bg').hide();
+  });
 
-	$('#map-hide-show-button').click(function(){
-		if($(this).hasClass("map-show")){
-			if ($('#map-filter-overlay').is(":visible")){
-				$('#map-filter-overlay').hide('slow');
-			}
-			hide_map();
-		} else {
-			show_map();
-		}
-	});
+  $('#map-hide-show-button').click(function(){
+    if($(this).hasClass("map-show")){
+      if ($('#map-filter-overlay').is(":visible")){
+        $('#map-filter-overlay').hide('slow');
+      }
+      hide_map();
+    } else {
+      show_map();
+    }
+  });
 
-	function hide_map()
-	{
+  function hide_map()
+  {
     standard_mapheight = $('#map').css('height');
-  	$('#map-hide-show-button').removeClass('map-show');
-		$('#map-hide-show-button').addClass('map-hide');
-		$('#map-hide-show-text').html("SHOW MAP");
-		animate_map('13.5em');
-		hide_map_homepage();
-	}
+    $('#map-hide-show-button').removeClass('map-show');
+    $('#map-hide-show-button').addClass('map-hide');
+    $('#map-hide-show-text').html("SHOW MAP");
+    animate_map('13.5em');
+    hide_map_homepage();
+  }
 
-	function show_map(){
-  	$('#map-hide-show-button').removeClass('map-hide');
-		$('#map-hide-show-button').addClass('map-show');
-		$('#map-hide-show-text').html("HIDE MAP");
-		animate_map(standard_mapheight);
-		show_map_homepage();
-	}
+  function show_map(){
+    $('#map-hide-show-button').removeClass('map-hide');
+    $('#map-hide-show-button').addClass('map-show');
+    $('#map-hide-show-text').html("HIDE MAP");
+    animate_map(standard_mapheight);
+    show_map_homepage();
+  }
 
-	function animate_map(mapheight){
-		$('#map').animate({
-			height: mapheight
-		}, 1000, function() {
-		 map.invalidateSize();
-	});
-	}
+  function animate_map(mapheight){
+    $('#map').animate({
+      height: mapheight
+    }, 1000, function() {
+     map.invalidateSize();
+  });
+  }
 
-	function hide_map_homepage(){
-		$('#map-lightbox').animate({
-			fontSize: "0.7em",
-			top: "3em"
-		}, 1000, function() {
-		// Animation complete.
-	});
-	$('#map-lightbox-bg').animate({
-			fontSize: "0.7em",
-			top: "3em"
-		}, 1000, function() {
-		// Animation complete.
-	});
-	}
+  function hide_map_homepage(){
+    $('#map-lightbox').animate({
+      fontSize: "0.7em",
+      top: "3em"
+    }, 1000, function() {
+    // Animation complete.
+  });
+  $('#map-lightbox-bg').animate({
+      fontSize: "0.7em",
+      top: "3em"
+    }, 1000, function() {
+    // Animation complete.
+  });
+  }
 
-	function show_map_homepage(){
-		$('#map-lightbox').animate({
-			fontSize: "1em",
-			top: "10.5em"
-		}, 1000, function() {
-		// Animation complete.
-	});
-	$('#map-lightbox-bg').animate({
-			fontSize: "1em",
-			top: "10.5em"
-		}, 1000, function() {
-		// Animation complete.
-	});
-	}
+  function show_map_homepage(){
+    $('#map-lightbox').animate({
+      fontSize: "1em",
+      top: "10.5em"
+    }, 1000, function() {
+    // Animation complete.
+  });
+  $('#map-lightbox-bg').animate({
+      fontSize: "1em",
+      top: "10.5em"
+    }, 1000, function() {
+    // Animation complete.
+  });
+  }
 });
 
 
@@ -240,18 +238,39 @@ jQuery(function($) {
     if (curpage < total){
       text += '<div id="filter-next-page">Next page</div>';
     }
-    text += '<div id="filter-pagination-overview">Page 1 / ' + total + '</div>';
-    console.log(text);
+    text += '<div id="filter-pagination-overview">Page ' + curpage + ' / ' + total + '</div>';
+
     $('#map-filter-pagination').html(text);
+
+    $('#filter-next-page').click(function(){
+
+      var total_pages = parseInt($("#filter-pagination-overview").text().substr(9,1));
+      var nextpage = parseInt($("#filter-pagination-overview").text().substr(5,1)) + 1;
+      filter_pagination(total_pages, nextpage);
+      $('.filter-page').hide();
+      $('.filter-page-'+nextpage).show();
+      
+    });
+
+    $('#filter-previous-page').click(function(){
+
+      var total_pages = parseInt($("#filter-pagination-overview").text().substr(9,1));
+      var nextpage = parseInt($("#filter-pagination-overview").text().substr(5,1)) - 1;
+      filter_pagination(total_pages, nextpage);
+      $('.filter-page').hide();
+      $('.filter-page-'+nextpage).show();
+    });
+
   }
 
-  $('#filter-next-page').click(function(e){
-    console.log("tetstt");
-    var total_pages = $("#filter-total-pages").attr("name");
-    var curpage = $("#filter-pagination-overview").text().substr(7,1);
-    console.log(curpage);
-    filter_pagination(total_pages, curpage);
-  });
+$(document).keyup(function(e) {
+  if (e.keyCode == 27) { 
+    if($("#map-filter-overlay").is(":visible")){
+      save_selection();
+    } 
+  } 
+});
+  
 
   $('.filter-button').click(function(e){
 
@@ -259,14 +278,21 @@ jQuery(function($) {
     var filterContainerName = curId.replace("-button", "");
     $('.filter-button.filter-selected').removeClass("filter-selected");
     $('#map-filter-errorbox').text("");
+    $('.filter-page').hide();
+    $('.filter-page-1').show();
+
+    var total_pages = $("#" + filterContainerName + " .filter-total-pages").attr("name");
+    if (total_pages > 1){
+      filter_pagination(total_pages, 1);
+    } else{
+      $('#map-filter-pagination').html('');
+    }
+
 
     if($('#map-filter-overlay').is(":hidden")){
 
       $('#map-filter-overlay').show("blind", { direction: "vertical" }, 600, function(){
-        var total_pages = $("#" + filterContainerName + " .filter-total-pages").attr("name");
-        if (total_pages > 1){
-          filter_pagination(total_pages, 1);
-        }
+        
       });
 
       $(this).addClass("filter-selected");
@@ -329,12 +355,12 @@ jQuery(function($) {
     $('#cities-filters').hide();
   }
 
-	$('#map-filter-cancel').click(function(){
+  $('#map-filter-cancel').click(function(){
     $('.filter-button.filter-selected').removeClass("filter-selected");
-		$('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
-	});
+    $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
+  });
 
-	$('#map-filter-save').click(function(){
+  $('#map-filter-save').click(function(){
     $('.filter-button.filter-selected').removeClass("filter-selected");
     save_selection();
   });
@@ -491,8 +517,6 @@ function get_first_available_year(standard_year){
   return 1950;
 }
 
-
-
 // SELECTION BOX FUNCTIONS
 
   $("#selection-hide-show-button").click(function(){
@@ -567,9 +591,14 @@ function init_remove_filters_from_selection_box(){
 }
 
 $(".selection-clear-div").click(function(){
+
   current_selection = new Object();
   current_selection.indicators = [];
-  current_selection.indicators.push({"id":"population", "name":"Total population"});
+  if(selected_type == 'indicators'){
+    current_selection.indicators.push({"id":"population", "name":"Total population"});
+  } else if(selected_type == 'cpi'){
+    current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"Five dimensions of city prosperity"});
+  }
   fill_selection_box();
   reload_map();
 });
@@ -578,11 +607,9 @@ $(".selection-clear-div").click(function(){
 // XXXXXXXXX Ajax wordpress simple pagination XXXXXXXX
 jQuery(function($){
 
-
   // IE: prevent focus on internet explorer
   var _preventDefault = function(evt) { evt.preventDefault(); };
   $("#map-slider-tooltip div").bind("dragstart", _preventDefault).bind("selectstart", _preventDefault);
-
 
 });
 
@@ -617,6 +644,8 @@ jQuery(function($){
     var href = document.URL.toString().split("?")[0] + build_current_url();
     var title = $(this).attr('alt');
     title = "openaidNL - " + title.substring(9);
+    console.log(title);
+    console.log(href);
     bookmarksite(title, href);
     return false;
   });
