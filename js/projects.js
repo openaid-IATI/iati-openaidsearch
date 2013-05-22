@@ -102,9 +102,9 @@ function unload_project_map(){
 
 
 function getColor(d) {
-    return d > 6  ? '#045A8D' :
-           d > 1   ? '#2476A2' :
-           d > 0   ? '#2B8CBE' :
+    return d > 40  ? '#E27724' :
+           d > 10   ? '#F27730' :
+           d > 0   ? '#FF872B' :
     // return d > 8  ? '#FE6305' :
     //        d > 4   ? '#FE7421' :
     //        d > 0   ? '#FE8236' :

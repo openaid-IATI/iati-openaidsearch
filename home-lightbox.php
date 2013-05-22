@@ -6,7 +6,7 @@
                 <div id="map-lightbox" class="hneue-light">
                     <div id="map-lightbox-text">
                         <p class="map-lightbox-title hneue-bold">Publicly available open data</p>
-                        <p>This website provides UN-Habitat project information, statistical indicators from cities across the world and the Cities Prosperity Index as open data.</p>
+                        <p>The Dutch Ministry of Foreign Affairs started publishingdata on all the development aid projects it finances.</p>
                     </div>
                     <button id="map-lightbox-close"></button>
                     <a href="/projects/">All projects</a>
