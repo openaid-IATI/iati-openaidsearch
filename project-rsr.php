@@ -2,13 +2,12 @@
 
 <?php
 	
-	$rsrfilename = get_stylesheet_directory() . '/rsrdata.php';
+	$rsrfilename = TEMPLATEPATH . '/rsrdata.php';
 	echo $rsrfilename;
 	
 	
 	include( $rsrfilename );
-
-	echo $_test;
+	echo $rsrdata1;
 
 
 	// echo $_test;
