@@ -1411,7 +1411,8 @@ label, input, button, select, textarea{
   padding: 2% 7.2% 2% 3.8%;
   margin-left: auto;
   margin-right: auto;
-  line-height:1.5em;
+  line-height:1.2em;
+  font-size: 1.21em;
 }
 
 .popular-search-item{
