@@ -1878,6 +1878,12 @@ label, input, button, select, textarea{
   font-size: 1.2em;
 }
 
+.rsr-project-block .span2{
+  padding-top: 2.2em;
+  font-size: 1.2em;
+  line-height: 1.2em;
+}
+
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAQ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
