@@ -90,6 +90,14 @@ button {
   font-family:"HelveticaNeueW01-65Medi";
 }
 
+strong{
+  font-weight: normal;
+}
+
+#page-wrapper strong {
+  font-family: "HelveticaNeueW01-75Bold";
+}
+
 a:hover, a:focus{
   text-decoration: none;
 }
@@ -161,7 +169,7 @@ button{
   width: 214px;
   height: 38px;
   display: block;
-  margin-top: 0.6em;
+  margin-top: 0.3em;
   margin-left: 0.3em;
 }
 
@@ -654,7 +662,7 @@ input[type=checkbox] {
 }
 
 .home-page .postit:hover{
-  background-color: #C9C8C2;
+  background-color: #D5CCB9;
 }
 
 #map-lightbox-bg{

@@ -4,13 +4,13 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Unhabitat main</title>
+    <title>Demo openaidNL</title>
    
 
     <!-- Bootstrap -->
 
-    <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" type="image/vnd.microsoft.icon"/>
-    <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" type="image/x-ico"/>
+    <!-- <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" type="image/vnd.microsoft.icon"/>-->
+    <!-- <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" type="image/x-ico"/>-->
 
     <link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/leaflet.css" />
@@ -43,18 +43,17 @@
                 </a>
 
                 <div class="nav-collapse collapse">
-                    
+                                            
+                        <?php 
 
-                        
-                        <?php $navmenargs = array(
+                        $navmenargs = array(
                             'menu' => 'Header menu',
                             'container' => '',
                             'container_class' => '',
                             'menu_class' => 'nav',
                             );
-                        wp_nav_menu($navmenargs); ?>
-
-
+                        wp_nav_menu($navmenargs);
+                        ?>
 
                     <form action='projects' method='GET' class="navbar-form pull-right">
                         <input type="text" class="input-large" placeholder="What are you looking for?" name='query'></li>

@@ -144,7 +144,7 @@ function highlightFeature(e) {
 
         layer.setStyle({
             weight: 2,
-            fillOpacity: 0.9
+            fillOpacity: 0.78
         });
 
         if (!L.Browser.ie && !L.Browser.opera) {
