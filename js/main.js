@@ -616,9 +616,7 @@ jQuery(function($){
   $("#project-share-bookmark").click(function(){
     var href = document.URL.toString().split("?")[0] + build_current_url();
     var title = $(this).attr('alt');
-    title = "Open UN-Habitat - " + title.substring(9);
-    console.log(title);
-    console.log(href);
+    title = "openaidNL - " + title.substring(9);
     bookmarksite(title, href);
     return false;
   });
