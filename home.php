@@ -23,7 +23,7 @@
 			 	$row1_posts_array = get_posts( $args );
 
  				foreach( $row1_posts_array as $post ) :	setup_postdata($post); ?>
- 				<a class="homepage-link" href="<?php echo bloginfo("url"); ?>/projects/">
+ 				<a class="homepage-link" href="<?php echo bloginfo("url"); ?>/about/">
 					<div class="drop-shadow postit">
 						<div class="postit-title hneue-light"><?php the_title(); ?></div>
 						<div class="postit-text"><?php the_content(); ?></div>
@@ -52,7 +52,7 @@
 			 	$row1_posts_array = get_posts( $args );
 
  				foreach( $row1_posts_array as $post ) :	setup_postdata($post); ?>
- 				<a class="homepage-link" href="<?php echo bloginfo("url"); ?>/indicators/">
+ 				<a class="homepage-link" href="<?php echo bloginfo("url"); ?>/iati-toolkit/">
 					<div class="drop-shadow postit">
 						<div class="postit-title hneue-light"><?php the_title(); ?></div>
 						<div class="postit-text"><?php the_content(); ?></div>
@@ -78,7 +78,7 @@
 			 	$row1_posts_array = get_posts( $args );
 
  				foreach( $row1_posts_array as $post ) :	setup_postdata($post); ?>
- 				<a class="homepage-link" href="<?php echo bloginfo("url"); ?>/city-prosperity/">
+ 				<a class="homepage-link" href="<?php echo bloginfo("url"); ?>/partners/">
 					<div class="drop-shadow postit">
 						<div class="postit-title hneue-light"><?php the_title(); ?></div>
 						<div class="postit-text"><?php the_content(); ?></div>
