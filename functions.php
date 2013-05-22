@@ -1,5 +1,4 @@
 <?php 
-
 include( TEMPLATEPATH .'/constants.php' );
 	
 // Add RSS links to <head> section

@@ -55,7 +55,7 @@ $activity = wp_get_activity($project_id);
 				$currency = 'US$ ';
 				break;
 			case 'EUR':
-				$currency = '&euro; ';
+				$currency = '€ ';
 				break;
 			case 'GBP':
 				$currency = '£ ';

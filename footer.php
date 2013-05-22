@@ -29,10 +29,9 @@
 		<div class="row-fluid footer-info">
 			<div class="span12">
 				<div class="footer-info-text">
-					Open UN-Habitat Transparency Initiative.
-					<a href="http://www.unhabitat.org">Back to main website of UN-Habitat</a>
-					<br/>
-					Content licensed under a Creative Commons Attribution 3.0 Unported License
+					<div id="footer-powered-by">Powered by</div>
+					<a href="http://www.akvo.org"><img src="<?php echo get_template_directory_uri(); ?>/images/logo-akvo.png" width="145" height="34" alt=""/></a>
+					<a href="http://www.zimmermanzimmerman.nl"><img src="<?php echo get_template_directory_uri(); ?>/images/logo-zimmerman.png" width="136" height="32" alt=""/></a>
 				</div>
 			</div>
 		</div>

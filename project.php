@@ -47,6 +47,9 @@ $activity = wp_get_activity($project_id);
 					<li>
 						<a id="project-located-in-link" href="#project-located-in">Located in</a>
 					</li>
+					<li>
+						<a id="project-rsr-link" href="#project-rsr">RSR / Local projects</a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -65,6 +68,7 @@ $activity = wp_get_activity($project_id);
 					<?php get_template_part( 'project', 'related-indicators' ); ?>
 					<?php get_template_part( 'project', 'related-projects' ); ?>
 					<?php get_template_part( 'project', 'located-in' ); ?>
+					<?php get_template_part( 'project', 'rsr'); ?>
 				</div>
 				<div class="span5">
 					<div class="project-spec">
@@ -96,8 +100,7 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Principal sector:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->
-							activity_sectors)) {
+							<?php if(!empty($activity->activity_sectors)) {
 					$sep = '';
 					foreach($activity->activity_sectors AS $sector) {
 						if($sector->name=='No information available') {
@@ -117,11 +120,9 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Budget:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->
-							statistics->total_budget)) {?>
+							<?php if(!empty($activity->statistics->total_budget)) {?>
 							US$
-							<?php echo format_custom_number($activity->
-							statistics->total_budget);  ?>
+							<?php echo format_custom_number($activity->statistics->total_budget);  ?>
 							<?php } ?></div>
 
 						<div class="projects-project-divider"></div>
@@ -136,8 +137,7 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Reporting organisation:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->
-							reporting_organisation->org_name)) { echo $activity->reporting_organisation->org_name; } ?>
+							<?php if(!empty($activity->reporting_organisation->org_name)) { echo $activity->reporting_organisation->org_name; } ?>
 						</div>
 
 						<div class="projects-project-divider"></div>
@@ -145,8 +145,7 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Sector code:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->
-							activity_sectors[0]->code)) { echo "<a href='".get_bloginfo('url')."/projects/?sectors={$sector->code}'>" . $activity->activity_sectors[0]->code . "</a>"; } ?>
+							<?php if(!empty($activity->activity_sectors[0]->code)) { echo "<a href='".get_bloginfo('url')."/projects/?sectors={$sector->code}'>" . $activity->activity_sectors[0]->code . "</a>"; } ?>
 						</div>
 
 						<div class="projects-project-divider"></div>
@@ -175,8 +174,7 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Activity status:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->
-							activity_status->name)) { echo $activity->activity_status->name; } ?>
+							<?php if(!empty($activity->activity_status->name)) { echo $activity->activity_status->name; } ?>
 						</div>
 
 						<div class="projects-project-divider"></div>
@@ -184,8 +182,7 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Name participating organisation:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->
-							reporting_organisation->org_name)) { echo $activity->reporting_organisation->org_name; } ?>
+							<?php if(!empty($activity->reporting_organisation->org_name)) { echo $activity->reporting_organisation->org_name; } ?>
 						</div>
 
 						<div class="projects-project-divider"></div>
@@ -193,8 +190,7 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Organisation reference code:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->
-							reporting_organisation->ref)) { echo $activity->reporting_organisation->ref; } ?>
+							<?php if(!empty($activity->reporting_organisation->ref)) { echo $activity->reporting_organisation->ref; } ?>
 						</div>
 
 						<div class="projects-project-divider"></div>
@@ -273,7 +269,6 @@ $activity = wp_get_activity($project_id);
 	?>
 
 	var project_countries = new Array(<?php echo $countries; ?>);
-
 </script>
 
 <?php get_footer(); ?>

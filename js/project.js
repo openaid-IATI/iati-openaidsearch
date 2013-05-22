@@ -76,51 +76,43 @@ jQuery(function($) {
 	  return false;
   });
 
-
-var geocountries = {"type":"FeatureCollection","features":[]};
-
-for(var i = 0; i < countryData.features.length; i++)
-{	
-	// for(var y = 0; y <country_info.length;y++){
-	// 	if(country_info[y].ISO3 == countryData.features[i].id){
-	// 		countryData.features[i].properties.iso2 = country_info[y].ISO2;
-	// 	}
+  $("#project-rsr-link").click(function(){
+	  change_tab(this, "rsr");
+	  return false;
+  });
 
 
-	// }
+	var geocountries = {"type":"FeatureCollection","features":[]};
 
-	// var geocountries = new Array();
-	
-	// console.log(project_countries);
+	for(var i = 0; i < countryData.features.length; i++)
+	{	
+		if(jQuery.inArray(countryData.features[i].properties.iso2, project_countries) != -1){
+			
+			var geocountry = {
+			    "type": "Feature",
+			    "geometry": {
+			        "type": "Polygon",
+			        "coordinates": countryData.features[i].geometry.coordinates
+			    }
+			}
 
-	if(jQuery.inArray(countryData.features[i].properties.iso2, project_countries) != -1){
-		//alert(countryData.features[i].properties.name);
-
-		var geocountry = {
-		    "type": "Feature",
-		    "geometry": {
-		        "type": "Polygon",
-		        "coordinates": countryData.features[i].geometry.coordinates
-		    }
+			geocountries.features.push(geocountry);
 		}
 
-		geocountries.features.push(geocountry);
 	}
 
-}
 
 
-
-L.geoJson(geocountries, {
-    style: function(feature) {
-        	return {color: "orange"};
-        	return {fillColor: "orange"};
-    }
-		
+	L.geoJson(geocountries, {
+	    style: function(feature) {
+	        	return {color: "orange"};
+	        	return {fillColor: "orange"};
+	    }
+			
 
 	}).addTo(map);
 
-//map.setView([10.505, 25.09], 4);
+	//map.setView([10.505, 25.09], 4);
 
 });
 
