@@ -57,7 +57,7 @@ $activity = wp_get_activity($project_id);
 
 	<div class="page-full-width-line"></div>
 
-	<div class="container">
+	<div class="container project-detail-block">
 		<div class="page-content project-page-content">
 			<div class="row-fluid">
 				<div class="span7 project-tabs-wrapper">
@@ -68,7 +68,7 @@ $activity = wp_get_activity($project_id);
 					<?php get_template_part( 'project', 'related-indicators' ); ?>
 					<?php get_template_part( 'project', 'related-projects' ); ?>
 					<?php get_template_part( 'project', 'located-in' ); ?>
-					<?php get_template_part( 'project', 'rsr'); ?>
+					
 				</div>
 				<div class="span5">
 					<div class="project-spec">
@@ -204,11 +204,11 @@ $activity = wp_get_activity($project_id);
 
 							<span class="st_sharethis" st_url="<?php bloginfo('url'); ?>/project/?id=<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?>" st_title="<?php echo $activity->titles[0]->title; ?>" displayText="SHARE"></span>
 
-							<button id="project-share-bookmark" class="project-share-button hneue-bold">
+							<button class="project-share-bookmark" class="project-share-button hneue-bold">
 								<div class="share-icon"></div>
 								<div class="share-text">BOOKMARK</div>
 							</button>
-							<button id="project-share-whistleblower" class="project-share-button hneue-bold" name="<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?>">
+							<button class="project-share-whistleblower" class="project-share-button hneue-bold" name="<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?>">
 								<div class="share-icon"></div>
 								<div class="share-text">WHISTLEBLOWER</div>
 							</button>
@@ -219,7 +219,15 @@ $activity = wp_get_activity($project_id);
 
 			</div>
 
-			<div class="page-full-width-line"></div>
+		</div>
+	</div>
+
+
+	<?php 
+	// rsr info
+	get_template_part( 'project', 'rsr'); 
+	?>
+
 
 
 			<div class="container">
@@ -248,10 +256,6 @@ $activity = wp_get_activity($project_id);
 				</div>
 			</div>
 
-
-
-		</div>
-	</div>
 </div>
 
 <script type="text/javascript">

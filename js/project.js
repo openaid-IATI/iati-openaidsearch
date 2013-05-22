@@ -33,6 +33,10 @@ jQuery(function($) {
 
   	// hide all tab content
   	$(".project-tabs-wrapper > div").hide();
+  	// show the project detail block (hidden on rsr info)
+  	$(".project-detail-block").show();
+  	$("#project-rsr").hide();
+
   	// remove active tab
   	$(".nav-pills > li").removeClass("active");
   	// make link of current tab active
@@ -78,6 +82,7 @@ jQuery(function($) {
 
   $("#project-rsr-link").click(function(){
 	  change_tab(this, "rsr");
+	  $(".project-detail-block").hide();
 	  return false;
   });
 
