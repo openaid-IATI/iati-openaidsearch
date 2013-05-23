@@ -2083,14 +2083,18 @@ label, input, button, select, textarea{
 
     #brand-image{
       background-image: url('images/logo-980-1440.png');
-      width: 209px;
-      height: 26px;
+      width: 196px;
+      height: 35px;
     }
 
     #header-home-img{
       background-image: url('images/home-980-1440.png');
       width: 17px;
       height: 15px;
+    }
+
+    .navbar-static-top.navbar .nav .navbar-home-link a{
+      padding: 1.88em 0.8em;
     }
 
     #map{
@@ -2276,8 +2280,8 @@ label, input, button, select, textarea{
 
     #brand-image{
       background-image: url('images/logo-980-1440.png');
-      width: 209px;
-      height: 26px;
+      width: 196px;
+      height: 35px;
     }
 
     #header-home-img{
@@ -2286,8 +2290,8 @@ label, input, button, select, textarea{
       height: 15px;
     }
 
-    .navbar-static-top.navbar .nav > li > .navbar-home-link a{
-      padding: 1.86em 0.6em;
+    .navbar-static-top.navbar .nav .navbar-home-link a{
+      padding: 1.88em 0.8em;
     }
 
     #map{
