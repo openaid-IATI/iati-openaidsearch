@@ -54,7 +54,7 @@
                             'container_class' => '',
                             'menu_class' => 'nav',
                             );
-                        wp_nav_menu($navmenargs); ?>
+                        wp_nav_menu($navmenargs);?>
 
                     <form action='projects' method='GET' class="navbar-form pull-right">
                         <input type="text" class="input-large" placeholder="What are you looking for?" name='query'>

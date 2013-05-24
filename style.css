@@ -2023,7 +2023,7 @@ label, input, button, select, textarea{
       height: 15px;
     }
 
-    .navbar-static-top.navbar .nav > li > .navbar-home-link a{
+   .navbar-static-top.navbar .nav .navbar-home-link a{
       padding: 1.86em 0.6em;
     }
 
