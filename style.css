@@ -122,15 +122,6 @@ button{
   display: none;
 }
 
-.unh-table-header{
-  background-color: #DDDBD6;
-  font-family: "HelveticaNeueW01-75Bold";
-}
-
-.unh-table-cells{
-  font-family:"HelveticaNeueW01-65Medi";
-}
-
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX GLOBAL PAGE HEADER XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 .page-header{
@@ -316,7 +307,7 @@ input[type="text"]{
 
 .navbar-static-top.navbar .nav > li > a {
     font-size: 1.29em;
-    padding: 1.72em 0.8em;
+    padding: 1.70em 0.8em;
 }
 
 .navbar-static-top .current-menu-item a{
@@ -1915,13 +1906,17 @@ label, input, button, select, textarea{
   color: #797974;
 }
 
-#sort-type-country, #project-related-indicators-link, #project-located-in-link, #project-related-projects-link, #project-share-embed, #motion-chart-name, #motion-chart-filter, #motion-chart-placeholder{
+
+
+#sort-type-country, #project-related-indicators-link, #project-located-in-link, #project-related-projects-link, #project-share-embed{
   display: none;
 }
 
 #graph-button-treemap{
   display: none;
 }
+
+
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FORMS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 .wpcf7-form{
@@ -2098,13 +2093,8 @@ label, input, button, select, textarea{
       height: 15px;
     }
 
-<<<<<<< HEAD
     .navbar-static-top.navbar .nav .navbar-home-link a{
       padding: 1.88em 0.8em;
-=======
-   .navbar-static-top.navbar .nav .navbar-home-link a{
-      padding: 1.86em 0.6em;
->>>>>>> master
     }
 
     #map{

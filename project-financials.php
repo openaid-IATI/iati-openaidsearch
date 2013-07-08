@@ -81,18 +81,11 @@ $activity = wp_get_activity($project_id);
 	
 	?>
 
-	var tableChart = new google.visualization.ChartWrapper({
-	    chartType: 'Table',
-	    containerId: 'financials-placeholder',
-	    dataTable: data,
-	    options: {
-	      showRowNumber: false,
-	      cssClassNames: {headerRow: 'unh-table-header', tableRow: 'unh-table-cells'}
-	    }
-	  });
+    
+	var test = {}
 
-	  tableChart.draw();
-
+    var table = new google.visualization.Table(document.getElementById('financials-placeholder'));
+    table.draw(data, {showRowNumber: false});
 }
 </script>
 

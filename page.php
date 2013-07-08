@@ -36,11 +36,7 @@ Template Name: Standard page
 
 				</div>
 				<div class="span4">
-				 <?php 
-				if ( dynamic_sidebar('unh-page-sidebar') ) : 
-				else : 
-				?>
-				<?php endif; ?>
+				 <?php get_sidebar( 'unhabitat-pages' ); ?> 
 				</div>
 			</div>
 		</div>
