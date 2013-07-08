@@ -16,11 +16,11 @@
 
 				<div id="footer-social-media-wrapper">
 
-					<a class="footer-social-media-icon footer-facebook" href="https://www.facebook.com/pages/UN-HABITAT/127012777443" alt=""></a>
-					<a class="footer-social-media-icon footer-flickr" href="http://www.flickr.com/photos/66729176@N02/" alt=""></a>
-					<a class="footer-social-media-icon footer-twitter" href="https://twitter.com/#!/unhabitat" alt=""></a>
-					<a class="footer-social-media-icon footer-youtube" href="http://www.youtube.com/user/epitunhabitat" alt=""></a>
-					<a class="footer-social-media-icon footer-scribd" href="http://www.scribd.com/UN-HABITAT" alt=""></a>
+					<a class="footer-social-media-icon footer-facebook" href="https://www.facebook.com/pages/UN-HABITAT/127012777443"></a>
+					<a class="footer-social-media-icon footer-flickr" href="http://www.flickr.com/photos/66729176@N02/"></a>
+					<a class="footer-social-media-icon footer-twitter" href="https://twitter.com/#!/unhabitat"></a>
+					<a class="footer-social-media-icon footer-youtube" href="http://www.youtube.com/user/epitunhabitat"></a>
+					<a class="footer-social-media-icon footer-scribd" href="http://www.scribd.com/UN-HABITAT"></a>
 
 				</div>
 

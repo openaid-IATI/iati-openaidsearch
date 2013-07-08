@@ -7,8 +7,6 @@ add_theme_support( 'automatic-feed-links' );
 // WORDPRESS THEME FUNCTIONS
 add_theme_support( 'menus' );
 
-register_sidebar(array('name' => 'Unhabitat pages'));
-
 add_theme_support( 'post-thumbnails' );
 
 function my_function_admin_bar(){ return false; }
@@ -24,6 +22,17 @@ function register_my_menus() {
 }
 add_action( 'init', 'register_my_menus' );
 
+function unh_widgets_init() {
+	register_sidebar(array(
+		'name' => __( 'UN-Habitat page sidebar' ),
+	  	'id' => 'unh-page-sidebar',
+	    'before_widget' => '<div class="drop-shadow postit page-sidebar-item">',
+	    'after_widget' => '</div>',
+	    'before_title' => '<div class="postit-title hneue-light">',
+	    'after_title' => '</div>',
+	));
+}
+add_action( 'widgets_init', 'unh_widgets_init' );
 
 function homepage_items_post_type() {
 	$labels = array(
@@ -196,33 +205,15 @@ function wp_generate_paging($meta) {
 
 
 
-	// Clean up the <head>
-	function removeHeadLinks() {
-    	remove_action('wp_head', 'rsd_link');
-    	remove_action('wp_head', 'wlwmanifest_link');
-    }
-    add_action('init', 'removeHeadLinks');
-    remove_action('wp_head', 'wp_generator');
-    
-    if (function_exists('register_sidebar')) {
-    	register_sidebar(array(
-    		'name' => 'Sidebar Widgets',
-    		'id'   => 'sidebar-widgets',
-    		'description'   => 'These are widgets for the sidebar.',
-    		'before_widget' => '<div id="%1$s" class="leftmenu %2$s">',
-    		'after_widget'  => '</div>',
-    		'before_title'  => '<h4>',
-    		'after_title'   => '</h4>'
-    	));
-    }
 	
-	add_filter( 'request', 'my_request_filter' );
-	function my_request_filter( $query_vars ) {
-		if( isset( $_GET['s'] ) && empty( $_GET['s'] ) ) {
-			$query_vars['s'] = " ";
-		}
-		return $query_vars;
+	
+add_filter( 'request', 'my_request_filter' );
+function my_request_filter( $query_vars ) {
+	if( isset( $_GET['s'] ) && empty( $_GET['s'] ) ) {
+		$query_vars['s'] = " ";
 	}
+	return $query_vars;
+}
 
 
 function wp_filter_request($search_url){

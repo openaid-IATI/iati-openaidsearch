@@ -14,12 +14,16 @@
 
     <link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/leaflet.css" />
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>
-    /css/leaflet.ie.css" />
-    <![endif]-->
 
     <link href="<?php echo get_template_directory_uri(); ?>/style.css" rel="stylesheet" media="screen">
+
+    
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/leaflet.ie.css" />
+     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/ie-8-and-down.css" />
+    <![endif]-->
+
+    
 
     
 
@@ -43,26 +47,32 @@
                 </a>
 
                 <div class="nav-collapse collapse">
+<<<<<<< HEAD
                                             
                         <?php 
 
                         $navmenargs = array(
+=======
+                    
+                        <?php $navmenargs = array(
+>>>>>>> master
                             'menu' => 'Header menu',
                             'container' => '',
                             'container_class' => '',
                             'menu_class' => 'nav',
                             );
+<<<<<<< HEAD
                         wp_nav_menu($navmenargs);
                         ?>
+=======
+                        wp_nav_menu($navmenargs);?>
+>>>>>>> master
 
                     <form action='projects' method='GET' class="navbar-form pull-right">
-                        <input type="text" class="input-large" placeholder="What are you looking for?" name='query'></li>
+                        <input type="text" class="input-large" placeholder="What are you looking for?" name='query'>
                         <button type="submit" class="btn header-btn-search hneue-bold"><img src="<?php echo get_template_directory_uri(); ?>/images/search-icon.png" alt=""/> Search</button>                   
                     </form>
                 </div>
-                <?php        
-                    //wp_nav_menu( array('menu' =>'header-menu', 'container' => 'div', 'container_class' => 'nav-collapse collapse','menu_class' => 'menu','items_wrap' => '<ul class="nav pull-left">%3$s</ul>') ); 
-                ?>
 
             </div>
         </div>
