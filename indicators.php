@@ -38,6 +38,15 @@ Template Name: Indicators page
 						<a href="#" id="project-share-embed" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
 							<div class="share-text">EMBED</div>
+							<div id="dropdown-type-embed" class="dropdown-menu-page-header">
+								<button id="dropdown-embed-map">MAP</button>
+								<button id="dropdown-embed-line-graph">LINE GRAPH</button>
+							</div>
+							<div id="dropdown-embed-url" class="dropdown-menu-page-header">
+								Code to embed: <br>
+								<input type="text" name="embed-url" value="">
+								<div id="project-share-embed-close">close</div>
+							</div>
 						</a>
 					</div>
 

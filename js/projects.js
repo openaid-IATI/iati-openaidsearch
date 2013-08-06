@@ -275,6 +275,23 @@ function load_project_map(project_geojson){
      return false;
     });
 
+
+    $("#project-share-embed").click(function(){
+      if($('#dropdown-embed-url').is(":hidden")){
+        embed_url = get_embed_url('projects-map');
+        $('#dropdown-embed-url input').val(embed_url);
+        $('#dropdown-embed-url').show("blind", { direction: "vertical" }, 200);
+      } 
+
+      return false;
+    });
+
+    $("#project-share-embed-close").click(function(){
+      $('#dropdown-embed-url').hide("blind", { direction: "vertical" }, 200);
+      return false;
+    });
+    
+
     // XXXXXXX sort buttons project page XXXXX
 
     $(".project-sort-type").click(function(){
@@ -341,21 +358,20 @@ function generate_download_file(id) {
 
   url += author;
 
-  var sectors = '', countries = '', budgets = '', regions = '', offset = '&offset=0', per_page = '&limit=5', query = ''
+  var sectors = '', countries = '', budgets = '', regions = '', offset = '&offset=0', per_page = '&limit=200', query = ''
   
   if (!(typeof current_selection.sectors === "undefined")) sectors = build_current_url_add_par("sectors", current_selection.sectors, "|");
   if (!(typeof current_selection.countries === "undefined")) countries = build_current_url_add_par("countries", current_selection.countries, "|");
   if (!(typeof current_selection.budgets === "undefined")) budgets = build_current_url_add_par("budgets", current_selection.budgets, "|");
   if (!(typeof current_selection.regions === "undefined")) regions = build_current_url_add_par("regions", current_selection.regions, "|");
-  if (!(typeof current_selection.offset === "undefined")) offset = build_current_url_add_par("offset", current_selection.offset);
-  if (!(typeof current_selection.per_page === "undefined")) per_page = build_current_url_add_par("per_page", current_selection.per_page);
-  if (!(typeof current_selection.s === "undefined")) query = build_current_url_add_par("s", current_selection.s);
+  //if (!(typeof current_selection.offset === "undefined")) offset = build_current_url_add_par("offset", current_selection.offset);
+  //if (!(typeof current_selection.per_page === "undefined")) per_page = build_current_url_add_par("per_page", current_selection.per_page);
+  if (!(typeof current_selection.query === "undefined")) query = build_current_url_add_par("query", current_selection.query);
 
   per_page = per_page.replace("per_page", "limit");
-  query = query.replace("s=", "query="); 
   query = encodeURIComponent(query);
   url = url + offset + per_page + sectors + countries + budgets + regions + query;
-
+  console.log(url);
   window.open(url);
   
 }
