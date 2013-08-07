@@ -58,10 +58,6 @@ echo 'var organisation_id = "' . $_DEFAULT_ORGANISATION_ID . '"';
 <script src="<?php echo get_template_directory_uri(); ?>/js/map.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/main.js"></script>
 
-<?php 
-
-if (is_page('indicators') or is_page('city-prosperity')) { ?>
-
 	<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery.nouislider.min.js"></script>
 
 	<script src="https://www.google.com/jsapi"></script>
@@ -73,7 +69,7 @@ if (is_page('indicators') or is_page('city-prosperity')) { ?>
 
 	<script src="<?php echo get_template_directory_uri(); ?>/js/indicators.js"></script>
 	<?php
-}
+
 if (is_page('project')) {
 	echo '<script src="' . get_template_directory_uri() . '/js/dependencies/countries.js"></script>';
 	echo '<script src="' . get_template_directory_uri() . '/js/project.js"></script>';

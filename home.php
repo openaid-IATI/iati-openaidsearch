@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<?php get_template_part( "map" ); ?>
+<?php get_template_part( "indicator", "map" ); ?>
 
 <div id="page-wrapper">
 	<div class="container">
@@ -94,10 +94,15 @@
 <?php get_footer(); ?>
 
 <script type="text/javascript">
+$(document).ready(function(){
+  selected_type = "indicator";
+  query_string_to_selection();
 
-    $(document).ready(function() {
-      selected_type = "projects";
-      reload_map();
-    });
-
+  if (current_selection.indicators === undefined){
+  	current_selection.indicators = [];
+  	current_selection.indicators.push({"id":"population", "name":"Total population"});
+  }
+  reload_map();
+  initialize_filters(fill_selection_box, initialize_charts);
+});
 </script>

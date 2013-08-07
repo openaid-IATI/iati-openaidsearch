@@ -4,8 +4,11 @@
 
 
     <!-- Show selection button --> 
-    <?php get_template_part( "map", "selection" ); ?>
+    <?php if(!is_home()){ get_template_part( "map", "selection" ); } ?>
 
+    <?php if(is_home()){ get_template_part( "home", "lightbox" ); } ?>
+
+    <?php if(is_page("indicators") | is_page("city-prosperity")){ ?>
     <!-- The 4 graph buttons in right top --> 
     <div id="map-graph-wrapper">
         <div id="map-graph-buttons">
@@ -17,8 +20,9 @@
             <a href="#" class="hneue-bold" id="graph-button-treemap"></a>
         </div>
     </div>
+    <?php } ?>
 
-    <?php if(is_page("indicators")){ ?>
+    <?php if(!is_page("city-prosperity")){ ?>
     <div id="map-timeline-wrapper">
         <div id="timeline-left"></div>
         <div id="map-timeline">
