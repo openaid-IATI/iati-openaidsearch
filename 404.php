@@ -7,7 +7,6 @@ Template Name: Projects page
 <?php wp_generate_results_v2($objects, $meta); ?>
 
 <?php get_header(); ?>
-<?php get_template_part( "projects", "filters" ); ?>
 <?php get_template_part( "map" ); ?>
 
 <div id="page-wrapper">
@@ -34,16 +33,8 @@ Template Name: Projects page
                             </div>
 
 						</div>
-						<a id="save-search-results" href="#save-search-results">EXPORT SEARCH RESULTS</a>
-                        <a href="#" id="project-share-embed" class="project-page project-share-button hneue-bold">
-                            <div class="share-icon"></div>
-                            <div class="share-text">EMBED MAP</div>
-                            <div id="dropdown-embed-url" class="dropdown-menu-page-header">
-                                Code to embed: <br>
-                                <input type="text" name="embed-url" value="">
-                                <div id="project-share-embed-close">close</div>
-                            </div>
-                        </a>
+						<a id="save-search-results" href="#save-search-results">SAVE SEARCH RESULTS</a>
+
 					</div>
 				</div>
 				<div class="span5">
@@ -90,22 +81,7 @@ Template Name: Projects page
 	<div class="page-content">
 		
 		
-		<?php get_template_part( "projects", "description" ); ?>
-
-        <?php if ($meta->total_count > 0){ ?>
-		<div class="container">
-		<div class="row-fluid">
-			<div class="span12">
-				<div id="pagination">
-					<?php wp_generate_paging($meta); ?>
-				</div>
-			</div>
-		</div>
-        <?php } else {
-
-            echo '<div id="no-projects-found">Your selection didn\'t find any matches.</div>';
-
-        } ?>
+		<div id="no-projects-found">Page not found.</div>
 
 
 		</div>

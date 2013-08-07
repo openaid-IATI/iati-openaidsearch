@@ -15,7 +15,7 @@ function build_current_url(){
   if (!(typeof current_selection.offset === "undefined")) url += build_current_url_add_par("offset", current_selection.offset);
   if (!(typeof current_selection.per_page === "undefined")) url += build_current_url_add_par("per_page", current_selection.per_page);
   if (!(typeof current_selection.order_by === "undefined")) url += build_current_url_add_par("order_by", current_selection.order_by);
-  if (!(typeof current_selection.s === "undefined")) url += build_current_url_add_par("s", current_selection.s);
+  if (!(typeof current_selection.query === "undefined")) url += build_current_url_add_par("query", current_selection.query);
   if (url == '?p='){return '';}
   url = url.replace("?p=&", "?");
   return url;
@@ -49,7 +49,12 @@ function query_string_to_selection(){
       current_selection[pair[0]] = [];
 
       for(var y=0;y<vals.length;y++){
-        current_selection[pair[0]].push({"id":vals[y], "name":"unknown"});
+        if (pair[0] != "query"){
+          current_selection[pair[0]].push({"id":vals[y], "name":"unknown"});
+        } else{
+          current_selection[pair[0]].push({"id":vals[y], "name":vals[y]});
+        }
+        
       }
       
     }
@@ -542,6 +547,7 @@ function fill_selection_box(){
   if (!(typeof current_selection.regions === "undefined") && (current_selection.regions.length > 0)) html += fill_selection_box_single_filter("REGIONS", current_selection.regions);
   if (!(typeof current_selection.cities === "undefined") && (current_selection.cities.length > 0)) html += fill_selection_box_single_filter("CITIES", current_selection.cities);
   if (!(typeof current_selection.indicators === "undefined") && (current_selection.indicators.length > 0)) indicatorhtml = fill_selection_box_single_filter("INDICATORS", current_selection.indicators);
+  if (!(typeof current_selection.query === "undefined") && (current_selection.query.length > 0)) html += fill_selection_box_single_filter("QUERY", current_selection.query);
   $("#selection-box").html(html);
   $("#selection-box-indicators").html(indicatorhtml);
   init_remove_filters_from_selection_box();
@@ -551,6 +557,7 @@ function fill_selection_box_single_filter(header, arr){
   var html = '<div class="select-box" id="selected-' + header.toLowerCase() + '">';
       html += '<div class="select-box-header">';
       if (header == "INDICATORS" && selected_type == "cpi"){ header = "DIMENSIONS";}
+      if (header == "QUERY"){header = "SEARCH"}
       html += header;
       html += '</div>';
 
@@ -627,6 +634,22 @@ jQuery(function($){
    return false;
  });
 
+ $("#project-share-embed").click(function(){
+   if($('#dropdown-embed-url').is(":hidden")) {
+     if($('#dropdown-type-embed').is(":hidden")){
+         $('#dropdown-type-embed').show("blind", { direction: "vertical" }, 200);
+     } else {
+         $('#dropdown-type-embed').hide("blind", { direction: "vertical" }, 200);
+     }
+   } 
+   return false;
+ });
+
+
+ $("#project-share-embed-close").click(function(){
+   $('#dropdown-embed-url').hide("blind", { direction: "vertical" }, 200); 
+   return false;
+ });
 
  $("#project-share-share").click(function(){
 
@@ -658,6 +681,34 @@ jQuery(function($){
   });
 
   
+function get_embed_url(type){
+  baseurl = ''; 
+  width = '';
+  height = '';
+  if(type == 'projects-map'){
+    baseurl = "http://www.open.unhabitat.org/embed-projects/";
+    width = '600';
+    height = '290';
+  } else if(type == 'indicator-map'){
+    baseurl = "http://www.open.unhabitat.org/embed-indicators-map/";
+    width = '600';
+    height = '350';
+  } else if(type == 'line-graph'){
+    baseurl = "http://www.open.unhabitat.org/embed-indicator-line-graph/";
+    width = '600';
+    height = '400';
+  } else if(type == 'table-graph'){
+    baseurl = "http://www.open.unhabitat.org/embed-indicator-table-graph/";
+    width = '600';
+    height = '400';
+  }
+  iframeurl = baseurl + build_current_url();
+  iframecode = '<iframe width="'+width+'" height="'+height+'" src="' + iframeurl + '" frameborder="0" allowfullscreen></iframe>';
+  return iframecode;
+}
+
+
+
 
 /***********************************************
 * Bookmark site script- © Dynamic Drive DHTML code library (www.dynamicdrive.com)
