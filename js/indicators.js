@@ -924,6 +924,44 @@ $('#dropdown-table-graph').click(function(){
   return false;
 });
 
+$('#dropdown-embed-map').click(function(){
+  show_embed_map();
+  $('#dropdown-type-embed').hide();
+  return false;
+});
+
+$('#dropdown-embed-line-graph').click(function(){
+  show_embed_linegraph();
+  $('#dropdown-type-embed').hide();
+  return false;
+});
+
+$('#dropdown-embed-table-graph').click(function(){
+  show_embed_tablegraph();
+  $('#dropdown-type-embed').hide();
+  return false;
+});
+
+function show_embed_map(){
+  embed_url = get_embed_url('indicator-map');
+  $('#dropdown-embed-url input').val(embed_url);
+  $('#dropdown-embed-url').show();
+}
+
+function show_embed_linegraph(){
+  embed_url = get_embed_url('line-graph');
+  $('#dropdown-embed-url input').val(embed_url);
+  $('#dropdown-embed-url').show();
+}
+
+function show_embed_tablegraph(){
+  embed_url = get_embed_url('table-graph');
+  $('#dropdown-embed-url input').val(embed_url);
+  $('#dropdown-embed-url').show();
+}
+
+
+
 function hide_all_graphs(){
   $('#line-chart-placeholder').hide();
   $('#table-chart-placeholder').hide();
