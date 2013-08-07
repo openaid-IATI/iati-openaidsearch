@@ -26,9 +26,8 @@
     
 
     
+<?php wp_head(); ?>
 
-
-    <?php wp_head(); ?>
 </head>
 <body>
 
@@ -55,11 +54,12 @@
                             'menu_class' => 'nav',
                             );
                         wp_nav_menu($navmenargs);?>
-
+                    <div style="display:none;">
                     <form action='projects' method='GET' class="navbar-form pull-right">
                         <input type="text" class="input-large" placeholder="What are you looking for?" name='query'>
                         <button type="submit" class="btn header-btn-search hneue-bold"><img src="<?php echo get_template_directory_uri(); ?>/images/search-icon.png" alt=""/> Search</button>                   
                     </form>
+                </div>
                 </div>
 
             </div>

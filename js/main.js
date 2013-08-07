@@ -182,7 +182,7 @@ jQuery(function($) {
   	$('#map-hide-show-button').removeClass('map-show');
 		$('#map-hide-show-button').addClass('map-hide');
 		$('#map-hide-show-text').html("SHOW MAP");
-		animate_map('13.5em');
+		animate_map('15em');
 		hide_map_homepage();
 	}
 

@@ -40,7 +40,7 @@
     <div id="map-loader-text">Reloading project map</div>
     <img src="<?php echo get_template_directory_uri(); ?>/images/ajax-loader.gif" alt="" />
 </div>
-<div id="map" <?php if($hide_map){ echo 'style="height:13.5em"'; }?>></div>
+<div id="map" <?php if($hide_map){ echo 'style="height:15em"'; }?>></div>
 <div id="map-border-bottom"></div>
 </div>
 

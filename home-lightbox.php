@@ -9,7 +9,7 @@
                         <p>This website provides UN-Habitat project information, statistical indicators from cities across the world and the Cities Prosperity Index as open data.</p>
                     </div>
                     <button id="map-lightbox-close"></button>
-                    <a href="/projects/">All projects</a>
+                    <a href="/indicators/">All indicators</a>
                 </div>
            </div>
         </div>
