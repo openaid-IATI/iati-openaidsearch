@@ -28,16 +28,40 @@ function get_project_filter_options(url){
   $.support.cors = true; 
 
   var project_options;
-  $.ajax({
-        type: 'GET',
-         url: url,
-         async: false,
-         contentType: "application/json",
-         dataType: 'json',
-         success: function(data){
-          project_options = data;
-         }
-  });
+  
+
+
+
+  if(window.XDomainRequest){
+    var xdr = new XDomainRequest();
+    xdr.open("get", url);
+    xdr.onprogress = function () { };
+    xdr.ontimeout = function () { };
+    xdr.onerror = function () { };
+    xdr.onload = function() {
+       var JSON = $.parseJSON(xdr.responseText);
+       if (JSON == null || typeof (JSON) == 'undefined')
+       {
+            JSON = $.parseJSON(data.firstChild.textContent);
+       }
+       project_options = JSON;
+    }
+    setTimeout(function () {xdr.send();}, 0);
+  } else {
+    $.ajax({
+          type: 'GET',
+           url: url,
+           async: false,
+           contentType: "application/json",
+           dataType: 'json',
+           success: function(data){
+            project_options = data;
+           }
+    });
+  }
+
+
+
   return project_options;
 }
 
@@ -77,6 +101,24 @@ function get_project_data(url){
     
     var project_geojson = [];
 
+    
+
+    if(window.XDomainRequest){
+    var xdr = new XDomainRequest();
+    xdr.open("get", url);
+    xdr.onprogress = function () { };
+    xdr.ontimeout = function () { };
+    xdr.onerror = function () { };
+    xdr.onload = function() {
+       var JSON = $.parseJSON(xdr.responseText);
+       if (JSON == null || typeof (JSON) == 'undefined')
+       {
+            JSON = $.parseJSON(data.firstChild.textContent);
+       }
+       project_geojson = JSON;
+    }
+    setTimeout(function () {xdr.send();}, 0);
+  } else {
     $.ajax({
         type: 'GET',
          url: url,
@@ -87,6 +129,7 @@ function get_project_data(url){
           project_geojson = data;
          }
     });
+  }
 
     return project_geojson;
 }
