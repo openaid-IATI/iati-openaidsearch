@@ -250,7 +250,9 @@ function load_project_map(project_geojson){
    }
 
    var link = document.URL.toString().split("?")[0] + build_current_url();
-   history.pushState(null, null, link);
+   if (history.pushState){
+    history.pushState(null, null, link);
+   }
    $('#page-wrapper').fadeOut(100, function(){ //fade out the content area
    $("#paginated-loader").show();
    }).load(link + ' #page-wrapper', function(){ 
