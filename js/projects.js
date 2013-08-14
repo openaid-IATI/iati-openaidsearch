@@ -25,6 +25,7 @@ function make_project_filter_options_url(){
 }
 
 function get_project_filter_options(url){
+  $.support.cors = true; 
 
   var project_options;
   $.ajax({
@@ -72,7 +73,8 @@ function initialize_projects_map(url){
 }
 
 function get_project_data(url){
-
+    $.support.cors = true; 
+    
     var project_geojson = [];
 
     $.ajax({

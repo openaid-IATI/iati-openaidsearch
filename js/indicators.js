@@ -110,7 +110,7 @@ function clear_circles(){
 }
 
 function get_indicator_data(url){
-    
+    $.support.cors = true; 
     var indicator_json_data = [];
 
     $.ajax({
