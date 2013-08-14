@@ -172,3 +172,11 @@ body {
   right: 0;
   margin-right:-455px;
 }
+
+input[type=checkbox] {
+  visibility: visible;
+  }
+
+.squaredThree label{
+  display:none;
+}
