@@ -45,7 +45,7 @@ body {
 .share-icon {
   width: 14px;
   height: 14px;
-  background-image: url('images/project-share-980-1440.png');
+  background-image: url('http://open.unhabitat.org/wp-content/themes/OPEN-UN-HABITAT-V2/images/project-share-980-1440.png');
 }
 
 #project-share-share .share-icon {
@@ -91,13 +91,13 @@ body {
 }
 
 #brand-image{
-  background-image: url('images/logo-980-1440.png');
+  background-image: url('http://open.unhabitat.org/wp-content/themes/OPEN-UN-HABITAT-V2/images/logo-980-1440.png');
   width: 209px;
   height: 26px;
 }
 
 #header-home-img{
-  background-image: url('images/home-980-1440.png');
+  background-image: url('http://open.unhabitat.org/wp-content/themes/OPEN-UN-HABITAT-V2/images/home-980-1440.png');
   width: 17px;
   height: 15px;
 }
