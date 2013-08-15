@@ -190,3 +190,10 @@ input[type=checkbox] {
   margin: auto;
   margin-left: 460px;
 }
+
+.btn.header-btn-search > img{
+  top: -6px;
+}
+.btn.header-btn-search #header-search-text{
+  top: -6px;
+}
