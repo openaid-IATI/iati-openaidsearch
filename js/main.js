@@ -427,7 +427,9 @@ function reload_below_map(){
 
 function set_current_url(){
   var link = document.URL.toString().split("?")[0] + build_current_url();
-  history.pushState(null, null, link);
+  if (history.pushState) {
+    history.pushState(null, null, link);
+  }
 }
 
 function get_checked_by_filter(filtername, new_selection){

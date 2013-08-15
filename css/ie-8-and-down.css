@@ -45,7 +45,7 @@ body {
 .share-icon {
   width: 14px;
   height: 14px;
-  background-image: url('images/project-share-980-1440.png');
+  background-image: url('http://open.unhabitat.org/wp-content/themes/OPEN-UN-HABITAT-V2/images/project-share-980-1440.png');
 }
 
 #project-share-share .share-icon {
@@ -91,13 +91,13 @@ body {
 }
 
 #brand-image{
-  background-image: url('images/logo-980-1440.png');
+  background-image: url('http://open.unhabitat.org/wp-content/themes/OPEN-UN-HABITAT-V2/images/logo-980-1440.png');
   width: 209px;
   height: 26px;
 }
 
 #header-home-img{
-  background-image: url('images/home-980-1440.png');
+  background-image: url('http://open.unhabitat.org/wp-content/themes/OPEN-UN-HABITAT-V2/images/home-980-1440.png');
   width: 17px;
   height: 15px;
 }
@@ -116,6 +116,7 @@ body {
 
 .squaredThree{
   margin: 0.1em 0 0;
+  height: 16px;
 }
 
 .squaredThree input{
@@ -171,4 +172,21 @@ body {
 #timeline-right{
   right: 0;
   margin-right:-455px;
+}
+
+input[type=checkbox] {
+  visibility: visible;
+  }
+
+.squaredThree label{
+  display:none;
+}
+
+#map-hide-show .span12{
+  min-height: 30px;
+}
+
+#map-hide-show-button{
+  margin: auto;
+  margin-left: 460px;
 }

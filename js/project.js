@@ -22,7 +22,9 @@ function sanitize_project_url(){
   if (!(parameters["backlink"] === undefined)){
   	$("#project-back-button").attr("href", decodeURIComponent(parameters["backlink"]));
   }
-  history.pushState(null, null, link);
+  if (history.pushState){
+  	history.pushState(null, null, link);
+  }
 }
 
 

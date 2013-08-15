@@ -57,7 +57,7 @@
                     <div style="display:none;">
                     <form action='projects' method='GET' class="navbar-form pull-right">
                         <input type="text" class="input-large" placeholder="What are you looking for?" name='query'>
-                        <button type="submit" class="btn header-btn-search hneue-bold"><img src="<?php echo get_template_directory_uri(); ?>/images/search-icon.png" alt=""/> Search</button>                   
+                        <button type="submit" class="btn header-btn-search hneue-bold"><img src="<?php echo get_template_directory_uri(); ?>/images/search-icon.png" alt="" /><div id="header-search-text"> Search</div></button>                   
                     </form>
                 </div>
                 </div>
