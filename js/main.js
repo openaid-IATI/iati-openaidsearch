@@ -453,7 +453,6 @@ function reload_map(callback){
     initialize_projects_map(url);
   } else if (selected_type=='indicator'){
     initialize_map(url);
-    move_slider_to_available_year(2015);
   } else if (selected_type=='cpi'){
     initialize_map(url);
   }

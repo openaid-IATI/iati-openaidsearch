@@ -131,6 +131,7 @@ function get_indicator_data(url, i, last){
 
        if (last){
         show_map(indicator_json_data);
+        move_slider_to_available_year(2015);
        }
     }
     setTimeout(function () {xdr.send();}, 0);
@@ -148,6 +149,7 @@ function get_indicator_data(url, i, last){
 
             if (last){
               show_map(indicator_json_data);
+              move_slider_to_available_year(2015);
             }
         }
     });
