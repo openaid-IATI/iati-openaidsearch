@@ -56,7 +56,7 @@ function initialize_map(url){
                 var cururl = create_api_url_indicator(arr[i].id);
                 var last = false;
                 if ((i+1)==arr.length){last = true}
-                  console.log(last);
+                
                 var indicator_data = get_indicator_data(cururl, i, last);
                 
             }
@@ -128,6 +128,10 @@ function get_indicator_data(url, i, last){
        indicator_json_data = $.parseJSON(xdr.responseText);
        draw_available_data_blocks(indicator_json_data, i);
        init_circles(indicator_json_data);
+
+       if (last){
+        show_map(indicator_json_data);
+       }
     }
     setTimeout(function () {xdr.send();}, 0);
   } else {
