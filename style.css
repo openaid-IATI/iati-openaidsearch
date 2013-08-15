@@ -1912,6 +1912,7 @@ label, input, button, select, textarea{
 .contact-label{
   width: 20%;
   float:left;
+  padding: 6px 0;
 }
 
 .contact-input{
@@ -1923,12 +1924,20 @@ label, input, button, select, textarea{
 }
 
 .contact-input-textarea{
-  width: 100%;
+  width: 80%;
   display: inline-block;
 }
 
 .contact-input-textarea textarea{
   width: 100%;
+}
+
+.unhabitat-page .wpcf7-form > p{
+  margin-bottom: 10px;
+}
+
+.unhabitat-page .wpcf7-form .wpcf7-submit{
+  margin-left: 20%;
 }
 
 .clearfix:after {
