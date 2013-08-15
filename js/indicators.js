@@ -56,6 +56,7 @@ function initialize_map(url){
                 var cururl = create_api_url_indicator(arr[i].id);
                 var last = false;
                 if ((i+1)==arr.length){last = true}
+                  console.log(last);
                 var indicator_data = get_indicator_data(cururl, i, last);
                 
             }
