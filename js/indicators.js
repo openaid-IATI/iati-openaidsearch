@@ -112,7 +112,7 @@ function clear_circles(){
       });
   }
 }
-
+ 
 function get_indicator_data(url, i, last){
   $.support.cors = true; 
   var indicator_json_data = [];
