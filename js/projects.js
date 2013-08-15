@@ -5,13 +5,10 @@ var geojson;
 function initialize_project_filter_options(callback){
   //set loading gif in case call takes long
   var url = make_project_filter_options_url();
-  var options = get_project_filter_options(url);
-  draw_project_options(options);
-
-  if(callback){
-    callback();
-  }
+  get_project_filter_options(url, callback);
+  
 }
+
 
 function make_project_filter_options_url(){
   var dlmtr = ",";
@@ -24,14 +21,11 @@ function make_project_filter_options_url(){
   return url;
 }
 
-function get_project_filter_options(url){
+function get_project_filter_options(url, callback){
   $.support.cors = true; 
 
   var project_options;
   
-
-
-
   if(window.XDomainRequest){
     var xdr = new XDomainRequest();
     xdr.open("get", url);
@@ -45,6 +39,11 @@ function get_project_filter_options(url){
             JSON = $.parseJSON(data.firstChild.textContent);
        }
        project_options = JSON;
+       draw_project_options(project_options);
+
+       if(callback){
+        callback();
+       }
     }
     setTimeout(function () {xdr.send();}, 0);
   } else {
@@ -55,14 +54,18 @@ function get_project_filter_options(url){
            contentType: "application/json",
            dataType: 'json',
            success: function(data){
+
+
             project_options = data;
+            draw_project_options(project_options);
+
+            if(callback){
+              callback();
+            }
            }
     });
   }
 
-
-
-  return project_options;
 }
 
 function draw_project_options(options){
@@ -91,9 +94,7 @@ function draw_project_options(options){
 // init/reload the map
 function initialize_projects_map(url){
     selected_type = "projects";
-    var project_geojson = get_project_data(url);
-    unload_project_map();
-    load_project_map(project_geojson);
+    get_project_data(url);
 }
 
 function get_project_data(url){
@@ -116,6 +117,8 @@ function get_project_data(url){
             JSON = $.parseJSON(data.firstChild.textContent);
        }
        project_geojson = JSON;
+       unload_project_map();
+       load_project_map(project_geojson);
     }
     setTimeout(function () {xdr.send();}, 0);
   } else {
@@ -127,11 +130,12 @@ function get_project_data(url){
          dataType: 'json',
          success: function(data){
           project_geojson = data;
+          unload_project_map();
+          load_project_map(project_geojson);
          }
     });
   }
 
-    return project_geojson;
 }
 
 function unload_project_map(){
@@ -246,7 +250,9 @@ function load_project_map(project_geojson){
    }
 
    var link = document.URL.toString().split("?")[0] + build_current_url();
-   history.pushState(null, null, link);
+   if (history.pushState){
+    history.pushState(null, null, link);
+   }
    $('#page-wrapper').fadeOut(100, function(){ //fade out the content area
    $("#paginated-loader").show();
    }).load(link + ' #page-wrapper', function(){ 

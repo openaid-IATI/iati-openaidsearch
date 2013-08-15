@@ -116,6 +116,7 @@ body {
 
 .squaredThree{
   margin: 0.1em 0 0;
+  height: 16px;
 }
 
 .squaredThree input{
@@ -171,4 +172,21 @@ body {
 #timeline-right{
   right: 0;
   margin-right:-455px;
+}
+
+input[type=checkbox] {
+  visibility: visible;
+  }
+
+.squaredThree label{
+  display:none;
+}
+
+#map-hide-show .span12{
+  min-height: 30px;
+}
+
+#map-hide-show-button{
+  margin: auto;
+  margin-left: 460px;
 }
