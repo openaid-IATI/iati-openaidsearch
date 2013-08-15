@@ -145,6 +145,10 @@ button{
   float: right;
 }
 
+#header-search-text{
+  display: inline-block;
+}
+
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX HEADER + FOOTER ADJUSTMENTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 .navbar .brand { 

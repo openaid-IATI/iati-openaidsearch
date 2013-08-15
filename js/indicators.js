@@ -54,13 +54,19 @@ function initialize_map(url){
         if(arr.length > 0){
             for(var i = 0; i < arr.length; i++){
                 var cururl = create_api_url_indicator(arr[i].id);
-                var indicator_data = get_indicator_data(cururl);
-                draw_available_data_blocks(indicator_data, i);
-                init_circles(indicator_data);
+                var last = false;
+                if ((i+1)==arr.length){last = true}
+                var indicator_data = get_indicator_data(cururl, i, last);
+                
             }
         }
+    } else {
+      show_map(null);
     }
 
+}
+
+function show_map(indicator_data){
     if(selected_type == "cpi"){
       refresh_circles(2012);
     }
@@ -77,8 +83,6 @@ function initialize_map(url){
     if (selected_type=='indicator'){
         set_filters_indicator(indicator_data);
     }
-
-    return indicator_data;
 }
 
 function create_api_url_indicator(indicatorid){
@@ -109,10 +113,23 @@ function clear_circles(){
   }
 }
 
-function get_indicator_data(url){
-    $.support.cors = true; 
-    var indicator_json_data = [];
-
+function get_indicator_data(url, i, last){
+  $.support.cors = true; 
+  var indicator_json_data = [];
+  
+  if(window.XDomainRequest){
+    var xdr = new XDomainRequest();
+    xdr.open("get", url);
+    xdr.onprogress = function () { };
+    xdr.ontimeout = function () { };
+    xdr.onerror = function () { };
+    xdr.onload = function() {
+       indicator_json_data = $.parseJSON(xdr.responseText);
+       draw_available_data_blocks(indicator_json_data, i);
+       init_circles(indicator_json_data);
+    }
+    setTimeout(function () {xdr.send();}, 0);
+  } else {
     $.ajax({
         type: 'GET',
         url: url,
@@ -121,9 +138,15 @@ function get_indicator_data(url){
         dataType: 'json',
         success: function(data){
             indicator_json_data = data;
+            draw_available_data_blocks(indicator_json_data, i);
+            init_circles(indicator_json_data);
+
+            if (last){
+              show_map(indicator_json_data);
+            }
         }
     });
-    return indicator_json_data;
+  }
 }
 
 function draw_available_data_blocks(indicator_data, keep_active){
