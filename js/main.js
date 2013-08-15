@@ -2,6 +2,7 @@
 var current_selection = new Object();
 var selected_type = '';
 var standard_mapheight = '45em';
+var cursite = '';
 
 function build_current_url(){
 
@@ -418,7 +419,7 @@ function reload_page(){
 function reload_below_map(){
   if(selected_type == "projects"){
       load_new_page(false);
-    } else if(selected_type == "indicator"){
+    } else if(selected_type == "indicator" && cursite != "unhabitatdata"){
       initialize_charts();
     } else if(selected_type == "cpi"){
       initialize_cpi_charts();

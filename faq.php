@@ -112,6 +112,7 @@ Template Name: FAQ page
 <script type="text/javascript">
 $(document).ready(function(){
   selected_type = "indicator";
+  cursite = "unhabitatdata";
   query_string_to_selection();
 
   if (current_selection.indicators === undefined){
@@ -119,6 +120,6 @@ $(document).ready(function(){
   	current_selection.indicators.push({"id":"population", "name":"Total population"});
   }
   reload_map();
-  initialize_filters(fill_selection_box, initialize_charts);
+  initialize_filters(fill_selection_box);
 });
 </script>
