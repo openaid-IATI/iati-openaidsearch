@@ -197,3 +197,7 @@ input[type=checkbox] {
 .btn.header-btn-search #header-search-text{
   top: -6px;
 }
+
+.navbar-home-link a{
+  height: 20px;
+}
