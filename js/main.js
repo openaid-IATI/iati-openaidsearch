@@ -89,8 +89,8 @@ function create_filter_attributes(objects, columns){
         } 
 
         var sortablename = sortable[i][1];
-        if (sortablename.length > 35 && columns == 4){
-          sortablename = sortablename.substr(0,33) + "...";
+        if (sortablename.length > 32 && columns == 4){
+          sortablename = sortablename.substr(0,30) + "...";
         }
 
         html += '<div class="squaredThree"><div>';
