@@ -194,35 +194,13 @@ function wp_generate_paging($meta) {
 	echo $paging_block; 
 }
 
-
-
-	// Clean up the <head>
-	function removeHeadLinks() {
-    	remove_action('wp_head', 'rsd_link');
-    	remove_action('wp_head', 'wlwmanifest_link');
-    }
-    add_action('init', 'removeHeadLinks');
-    remove_action('wp_head', 'wp_generator');
-    
-    if (function_exists('register_sidebar')) {
-    	register_sidebar(array(
-    		'name' => 'Sidebar Widgets',
-    		'id'   => 'sidebar-widgets',
-    		'description'   => 'These are widgets for the sidebar.',
-    		'before_widget' => '<div id="%1$s" class="leftmenu %2$s">',
-    		'after_widget'  => '</div>',
-    		'before_title'  => '<h4>',
-    		'after_title'   => '</h4>'
-    	));
-    }
 	
-	add_filter( 'request', 'my_request_filter' );
-	function my_request_filter( $query_vars ) {
-		if( isset( $_GET['s'] ) && empty( $_GET['s'] ) ) {
-			$query_vars['s'] = " ";
-		}
-		return $query_vars;
+add_filter( 'request', 'my_request_filter' );
+function my_request_filter( $query_vars ) {
+	if( isset( $_GET['s'] ) && empty( $_GET['s'] ) ) {
+		$query_vars['s'] = " ";
 	}
+}
 
 
 function wp_filter_request($search_url){
@@ -256,6 +234,8 @@ function wp_filter_request($search_url){
 		// foreach($regions AS &$c) $c = trim($c);
 		// $regions = implode('|', $regions);
 		$search_url .= "&query=".$_REQUEST['query'];
+		$curquery = $_REQUEST['query'];
+		add_popular_search($curquery);
 		$has_filter = false;
 	}
 	
@@ -283,22 +263,43 @@ function wp_filter_request($search_url){
     return $search_url;
 }
 
-function wp_get_activities() {
-//	if(empty($identifier)) return null;
-	$search_url = SEARCH_URL . "activities/?format=json&limit=200&organisations=41120";//
-        
-        $search_url = wp_filter_request($search_url);
-	
-	
-	
-	$content = file_get_contents($search_url);
-        
-	$result = json_decode($content);
-        $objects = $result->objects;
-        return objectToArray($objects);
-      
-	
+function add_popular_search($query){
+	global $wpdb;
+	$table_name = $wpdb->prefix . "popular_searches";
+	$alreadyasked = $wpdb->get_row($wpdb->prepare("SELECT phrase, count FROM {$table_name} WHERE phrase = %s", $query));
+	if ($alreadyasked){
+		$newcount = $alreadyasked->count + 1;
 
+		$wpdb->update( 
+			$table_name, 
+			array( 
+				'count' => $newcount	// integer (number) 
+			), 
+			array( 'phrase' => $query ), 
+			array( '%d' ), 
+			array( '%s' ) 
+		);
+	} else{
+
+		$wpdb->insert( 
+			$table_name, 
+			array( 
+				'phrase' => $query, 
+				'count' => 1 
+			)
+		);
+	}
+}
+
+function wp_get_activities() {
+	//	if(empty($identifier)) return null;
+	$search_url = SEARCH_URL . "activities/?format=json&limit=200&organisations=41120";//
+    $search_url = wp_filter_request($search_url);
+	$content = file_get_contents($search_url);
+	$result = json_decode($content);
+    $objects = $result->objects;
+    return objectToArray($objects);
+      
 }
 
 function wp_get_activity($identifier) {
@@ -1324,6 +1325,55 @@ function objectToArray($d) {
 		return $d;
 	}
 }
+
+
+class PopularSearchWidget extends WP_Widget {
+
+	function PopularSearchWidget() {
+		// Instantiate the parent object
+		parent::__construct( false, 'Popular Search widget' );
+	}
+
+	function widget( $args, $instance ) {
+		
+		global $wpdb;
+		
+		$table_name = $wpdb->prefix . "popular_searches";
+		$popularsearches = $wpdb->get_results( 
+			"
+			SELECT * 
+			FROM {$table_name}
+			ORDER BY count desc
+			LIMIT 5
+			"
+		);
+
+		echo '<div class="drop-shadow postit page-sidebar-item"><div class="postit-title hneue-light">Popular searches</div><div class="textwidget">';
+		echo '<div class="postit-text">';
+		foreach ( $popularsearches as $popularsearch ) 
+		{	
+			echo '<div class="popular-search-item"><div class="pop-search-icon"></div><div><a href="/projects/?query=' . $popularsearch->phrase . '">' . $popularsearch->phrase . '</a></div></div>';
+		}
+
+		echo '</div></div></div>';
+	}
+
+	function update( $new_instance, $old_instance ) {
+		// Save widget options
+	}
+
+	function form( $instance ) {
+		// Output admin widget options form
+	}
+}
+
+function myplugin_register_widgets() {
+	register_widget( 'PopularSearchWidget' );
+}
+
+add_action( 'widgets_init', 'myplugin_register_widgets' );
+
+
 
 function chart_scripts_method() {
     	wp_deregister_script( 'jsapi' );

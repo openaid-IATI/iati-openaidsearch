@@ -5,13 +5,10 @@ var geojson;
 function initialize_project_filter_options(callback){
   //set loading gif in case call takes long
   var url = make_project_filter_options_url();
-  var options = get_project_filter_options(url);
-  draw_project_options(options);
-
-  if(callback){
-    callback();
-  }
+  get_project_filter_options(url, callback);
+  
 }
+
 
 function make_project_filter_options_url(){
   var dlmtr = ",";
@@ -24,20 +21,51 @@ function make_project_filter_options_url(){
   return url;
 }
 
-function get_project_filter_options(url){
+function get_project_filter_options(url, callback){
+  $.support.cors = true; 
 
   var project_options;
-  $.ajax({
-        type: 'GET',
-         url: url,
-         async: false,
-         contentType: "application/json",
-         dataType: 'json',
-         success: function(data){
-          project_options = data;
-         }
-  });
-  return project_options;
+  
+  if(window.XDomainRequest){
+    var xdr = new XDomainRequest();
+    xdr.open("get", url);
+    xdr.onprogress = function () { };
+    xdr.ontimeout = function () { };
+    xdr.onerror = function () { };
+    xdr.onload = function() {
+       var JSON = $.parseJSON(xdr.responseText);
+       if (JSON == null || typeof (JSON) == 'undefined')
+       {
+            JSON = $.parseJSON(data.firstChild.textContent);
+       }
+       project_options = JSON;
+       draw_project_options(project_options);
+
+       if(callback){
+        callback();
+       }
+    }
+    setTimeout(function () {xdr.send();}, 0);
+  } else {
+    $.ajax({
+          type: 'GET',
+           url: url,
+           async: false,
+           contentType: "application/json",
+           dataType: 'json',
+           success: function(data){
+
+
+            project_options = data;
+            draw_project_options(project_options);
+
+            if(callback){
+              callback();
+            }
+           }
+    });
+  }
+
 }
 
 function draw_project_options(options){
@@ -66,15 +94,34 @@ function draw_project_options(options){
 // init/reload the map
 function initialize_projects_map(url){
     selected_type = "projects";
-    var project_geojson = get_project_data(url);
-    unload_project_map();
-    load_project_map(project_geojson);
+    get_project_data(url);
 }
 
 function get_project_data(url){
-
+    $.support.cors = true; 
+    
     var project_geojson = [];
 
+    
+
+    if(window.XDomainRequest){
+    var xdr = new XDomainRequest();
+    xdr.open("get", url);
+    xdr.onprogress = function () { };
+    xdr.ontimeout = function () { };
+    xdr.onerror = function () { };
+    xdr.onload = function() {
+       var JSON = $.parseJSON(xdr.responseText);
+       if (JSON == null || typeof (JSON) == 'undefined')
+       {
+            JSON = $.parseJSON(data.firstChild.textContent);
+       }
+       project_geojson = JSON;
+       unload_project_map();
+       load_project_map(project_geojson);
+    }
+    setTimeout(function () {xdr.send();}, 0);
+  } else {
     $.ajax({
         type: 'GET',
          url: url,
@@ -83,10 +130,12 @@ function get_project_data(url){
          dataType: 'json',
          success: function(data){
           project_geojson = data;
+          unload_project_map();
+          load_project_map(project_geojson);
          }
     });
+  }
 
-    return project_geojson;
 }
 
 function unload_project_map(){
@@ -201,7 +250,9 @@ function load_project_map(project_geojson){
    }
 
    var link = document.URL.toString().split("?")[0] + build_current_url();
-   history.pushState(null, null, link);
+   if (history.pushState){
+    history.pushState(null, null, link);
+   }
    $('#page-wrapper').fadeOut(100, function(){ //fade out the content area
    $("#paginated-loader").show();
    }).load(link + ' #page-wrapper', function(){ 
@@ -275,6 +326,23 @@ function load_project_map(project_geojson){
      return false;
     });
 
+
+    $("#project-share-embed").click(function(){
+      if($('#dropdown-embed-url').is(":hidden")){
+        embed_url = get_embed_url('projects-map');
+        $('#dropdown-embed-url input').val(embed_url);
+        $('#dropdown-embed-url').show("blind", { direction: "vertical" }, 200);
+      } 
+
+      return false;
+    });
+
+    $("#project-share-embed-close").click(function(){
+      $('#dropdown-embed-url').hide("blind", { direction: "vertical" }, 200);
+      return false;
+    });
+    
+
     // XXXXXXX sort buttons project page XXXXX
 
     $(".project-sort-type").click(function(){
@@ -339,21 +407,20 @@ function generate_download_file(id) {
 
   url += author;
 
-  var sectors = '', countries = '', budgets = '', regions = '', offset = '&offset=0', per_page = '&limit=5', query = ''
+  var sectors = '', countries = '', budgets = '', regions = '', offset = '&offset=0', per_page = '&limit=200', query = ''
   
   if (!(typeof current_selection.sectors === "undefined")) sectors = build_current_url_add_par("sectors", current_selection.sectors, "|");
   if (!(typeof current_selection.countries === "undefined")) countries = build_current_url_add_par("countries", current_selection.countries, "|");
   if (!(typeof current_selection.budgets === "undefined")) budgets = build_current_url_add_par("budgets", current_selection.budgets, "|");
   if (!(typeof current_selection.regions === "undefined")) regions = build_current_url_add_par("regions", current_selection.regions, "|");
-  if (!(typeof current_selection.offset === "undefined")) offset = build_current_url_add_par("offset", current_selection.offset);
-  if (!(typeof current_selection.per_page === "undefined")) per_page = build_current_url_add_par("per_page", current_selection.per_page);
-  if (!(typeof current_selection.s === "undefined")) query = build_current_url_add_par("s", current_selection.s);
+  //if (!(typeof current_selection.offset === "undefined")) offset = build_current_url_add_par("offset", current_selection.offset);
+  //if (!(typeof current_selection.per_page === "undefined")) per_page = build_current_url_add_par("per_page", current_selection.per_page);
+  if (!(typeof current_selection.query === "undefined")) query = build_current_url_add_par("query", current_selection.query);
 
   per_page = per_page.replace("per_page", "limit");
-  query = query.replace("s=", "query="); 
   query = encodeURIComponent(query);
   url = url + offset + per_page + sectors + countries + budgets + regions + query;
-
+  console.log(url);
   window.open(url);
   
 }

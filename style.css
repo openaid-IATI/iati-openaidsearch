@@ -150,6 +150,10 @@ button{
   float: right;
 }
 
+#header-search-text{
+  display: inline-block;
+}
+
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX HEADER + FOOTER ADJUSTMENTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 .navbar .brand { 
@@ -223,10 +227,23 @@ button{
     box-shadow: 0px 1px 3px #979791;
 }
 
+.btn.header-btn-search{
+  width: 70px;
+  height: 30px;
+  position: relative;
+}
 
 
 .btn.header-btn-search > img{
   margin: 0.2em 0.1em 0.3em 0.5em;
+  position: absolute;
+  left: 2px;
+  top: 6px;
+}
+.btn.header-btn-search #header-search-text{
+  position: absolute;
+  right: 7px;
+  top: 6px;
 }
 
 .navbar-static-top .input-large{
@@ -1535,6 +1552,14 @@ label, input, button, select, textarea{
 .project-sort-text, #save-search-results, #sort-type-header{
   vertical-align: middle;
 }
+.project-page#project-share-embed{
+  padding-left:1.5em;
+}
+
+.project-page#project-share-embed .share-text{
+  font-size: 1em;
+  padding-left: 0;
+}
 
 .project-sort-text{
   color: #FF7F00;
@@ -1841,13 +1866,31 @@ label, input, button, select, textarea{
 .dropdown-menu-page-header{
   background-color:#fff;
   position:absolute;
-  top:1.86em;
+  top:1.88em;
   right: 0;
   display: none;
   -webkit-box-shadow: 0 2px 3px #888;
   -moz-box-shadow: 0 2px 3px #888;
   box-shadow: 0 2px 3px #888;
   z-index:1600;
+}
+
+#dropdown-embed-url{
+  right: auto;
+  left: 0;
+  width: 320px;
+  padding: 10px 6px;
+}
+
+#dropdown-embed-url input{
+  width: 300px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+#dropdown-embed-url-close{
+  text-align right;
+  margin-bottom: 8px;
 }
 
 .dropdown-menu-page-header button{
@@ -1902,13 +1945,12 @@ label, input, button, select, textarea{
 
 /* XXXXXXXXXXXXXXXXXXXX TEMP: MAKE ALL NON CLICKABLE LINKS/BUTTONS GREY XXXXXXXXXXXXXXXXXXXX */
 
-#project-share-embed .share-text, #sort-type-country .project-sort-text{
+#sort-type-country .project-sort-text{
   color: #797974;
 }
 
 
-
-#sort-type-country, #project-related-indicators-link, #project-located-in-link, #project-related-projects-link, #project-share-embed{
+#sort-type-country, #project-related-indicators-link, #project-located-in-link, #project-related-projects-link, #motion-chart-name, #motion-chart-filter, #motion-chart-placeholder{
   display: none;
 }
 
@@ -1952,6 +1994,7 @@ label, input, button, select, textarea{
 .contact-label{
   width: 20%;
   float:left;
+  padding: 6px 0;
 }
 
 .contact-input{
@@ -1963,12 +2006,20 @@ label, input, button, select, textarea{
 }
 
 .contact-input-textarea{
-  width: 100%;
+  width: 80%;
   display: inline-block;
 }
 
 .contact-input-textarea textarea{
   width: 100%;
+}
+
+.unhabitat-page .wpcf7-form > p{
+  margin-bottom: 10px;
+}
+
+.unhabitat-page .wpcf7-form .wpcf7-submit{
+  margin-left: 20%;
 }
 
 .clearfix:after {
@@ -2374,7 +2425,42 @@ label, input, button, select, textarea{
 
 
   }
-    
+
+
+    /* Portrait tablet to landscape and desktop */
+    @media (max-width: 760px) { 
+
+
+
+    #year-1950{
+      width: 6px;
+    }
+
+    .slider-year-inner-left, .slider-year-inner-white{
+      width: 1px;
+    }
+
+    .slider-year{
+      width: 5px;
+    }
+
+    #map-timeline{
+      width: 506px;
+      left: 50%;
+      margin-left:-253px;
+    }
+
+    #timeline-left{
+      left:0;
+      margin-left:-253px;
+    }
+
+    #timeline-right{
+      right: 0;
+      margin-right:-253px;
+    }
+
+    }    
    
 
     /* Landscape phones and down */

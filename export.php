@@ -26,7 +26,7 @@ if(!empty($FILTER['id'])) {
 	if($FILTER['offset']<0) $FILTER['offset'] = 0;
 
 	$search_url = SEARCH_URL . "activities/?format=json&organisations=41120&limit={$FILTER['limit']}&offset={$FILTER['offset']}";
-
+	
 	if(!empty($FILTER['query'])) {
 		$search_url .= "&query={$FILTER['query']}";
 	}
@@ -60,7 +60,6 @@ if(!empty($FILTER['id'])) {
 	$activities = objectToArray($objects);
 	if(empty($activities)) exit;
 	generate_search_export($activities);
-	console.log("works");
 }
 
 function generate_activity_export($activity) {
