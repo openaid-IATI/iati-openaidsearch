@@ -1950,7 +1950,7 @@ label, input, button, select, textarea{
 }
 
 
-#sort-type-country, #project-related-indicators-link, #project-located-in-link, #project-related-projects-link, #motion-chart-name, #motion-chart-filter, #motion-chart-placeholder{
+#project-share-embed, #sort-type-country, #project-related-indicators-link, #project-located-in-link, #project-related-projects-link, #motion-chart-name, #motion-chart-filter, #motion-chart-placeholder{
   display: none;
 }
 
