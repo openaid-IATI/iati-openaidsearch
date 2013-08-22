@@ -490,7 +490,7 @@ function drawLineChart(){
           left: 100,
           top: 20
         },
-        backgroundColor: '#F1EEE8',
+        backgroundColor: 'transparent',
         interpolateNulls: true,
         fontName: 'HelveticaNeueW02-55Roma'
       }
