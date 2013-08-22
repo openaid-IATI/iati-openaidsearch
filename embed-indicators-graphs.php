@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Embed indicator map page
+Template Name: Embed indicator graph page
 */
 ?>
 
