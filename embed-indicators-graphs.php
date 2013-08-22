@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Embed indicator map page
+Template Name: Embed indicator graph page
 */
 ?>
 
@@ -35,7 +35,7 @@ Template Name: Embed indicator map page
 
     <?php wp_head(); ?>
 </head>
-<body style="background-color: #F1EEE8";>
+<body>
 <div id="map-wrapper" style="display:none">
     
 
