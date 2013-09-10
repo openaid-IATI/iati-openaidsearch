@@ -40,7 +40,7 @@
 	</div>
 </div>
 
-<script type="text/javascript">
+<script>
 var site = '<?php echo SITE_URL; ?>';
 var home_url = "<?php echo bloginfo("url"); ?>";
 var template_directory = "<?php echo bloginfo("template_url"); ?>";

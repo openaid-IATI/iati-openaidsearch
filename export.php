@@ -227,14 +227,23 @@ function generate_activity_export($activity) {
 	$row++;
 	
 	$objPHPExcel->setActiveSheetIndex(0);
-	header('Content-Type: application/vnd.ms-excel');
+	// header('Content-Type: application/vnd.ms-excel');
 
-	header('Content-Disposition: attachment;filename="'. $author.'.xls"');
+	// header('Content-Disposition: attachment;filename="'. $author.'.xls"');
 
-	header('Cache-Control: max-age=0');
-	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+	// header('Cache-Control: max-age=0');
+	// $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+
+    header('Content-Type: CSV');
+    header('Content-Disposition: attachment;filename="'. $author.'.csv"');
+    header('Cache-Control: max-age=0');
+
+	$objWriter = new PHPExcel_Writer_CSV($objPHPExcel);
+    $objWriter->setPreCalculateFormulas($precalculate);
+
 
 	$objWriter->save('php://output');
+
 	exit;
 }
 

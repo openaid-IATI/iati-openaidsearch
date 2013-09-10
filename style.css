@@ -145,10 +145,12 @@ button{
   float: right;
 }
 
-#header-search-text{
-  display: inline-block;
+.btn.header-btn-search{
+  background-image: url('images/search-icon.png');
+  background-repeat: no-repeat;
+  background-position: 5px 7px;
+  padding-left: 25px;
 }
-
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX HEADER + FOOTER ADJUSTMENTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 .navbar .brand { 
