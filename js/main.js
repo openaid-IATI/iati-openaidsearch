@@ -668,13 +668,7 @@ jQuery(function($){
   $("#project-share-bookmark").click(function(){
     var href = document.URL.toString().split("?")[0] + build_current_url();
     var title = $(this).attr('alt');
-<<<<<<< HEAD
-    title = "openaidNL - " + title.substring(9);
-    console.log(title);
-    console.log(href);
-=======
     title = site_title + " - " + title.substring(9);
->>>>>>> master
     bookmarksite(title, href);
     return false;
   });
@@ -692,12 +686,7 @@ function get_embed_url(type){
   width = '';
   height = '';
   if(type == 'projects-map'){
-<<<<<<< HEAD
-
-    baseurl = "http://open.unhabitat.org/embed-projects/";
-=======
     baseurl = home_url + "/embed-projects/";
->>>>>>> master
     width = '600';
     height = '290';
   } else if(type == 'indicator-map'){
