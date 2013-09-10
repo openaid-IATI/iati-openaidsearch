@@ -276,12 +276,14 @@ $activity = wp_get_activity($project_id);
 
 </script>
 
-<?php get_footer(); ?>
-
+<?php get_template_part('footer-scripts'); ?>
 <script>
   $(document).ready(function() {
       sanitize_project_url();
     });
 </script>
+<?php get_footer(); ?>
+
+
 	
 	

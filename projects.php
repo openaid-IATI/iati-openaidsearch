@@ -116,10 +116,8 @@ Template Name: Projects page
     <img src="<?php echo get_template_directory_uri(); ?>/images/ajax-loader.gif" alt="" />
 </div>
 
-<?php get_footer(); ?>
-
+<?php get_template_part('footer-scripts'); ?>
 <script>
-
     $(document).ready(function() {
       selected_type = "projects";
       query_string_to_selection();
@@ -127,7 +125,8 @@ Template Name: Projects page
       initialize_project_filter_options(fill_selection_box);
 
     });
-
 </script>
+<?php get_footer(); ?>
+
 
 
