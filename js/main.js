@@ -668,9 +668,7 @@ jQuery(function($){
   $("#project-share-bookmark").click(function(){
     var href = document.URL.toString().split("?")[0] + build_current_url();
     var title = $(this).attr('alt');
-    title = "Open UN-Habitat - " + title.substring(9);
-    console.log(title);
-    console.log(href);
+    title = site_title + " - " + title.substring(9);
     bookmarksite(title, href);
     return false;
   });
@@ -688,19 +686,19 @@ function get_embed_url(type){
   width = '';
   height = '';
   if(type == 'projects-map'){
-    baseurl = "http://open.unhabitat.org/embed-projects/";
+    baseurl = home_url + "/embed-projects/";
     width = '600';
     height = '290';
   } else if(type == 'indicator-map'){
-    baseurl = "http://open.unhabitat.org/embed-indicators-map/";
+    baseurl = home_url + "/embed-indicators-map/";
     width = '600';
     height = '350';
   } else if(type == 'line-graph'){
-    baseurl = "http://open.unhabitat.org/embed-indicator-line-graph/";
+    baseurl = home_url + "/embed-indicator-line-graph/";
     width = '600';
     height = '400';
   } else if(type == 'table-graph'){
-    baseurl = "http://open.unhabitat.org/embed-indicator-table-graph/";
+    baseurl = home_url + "/embed-indicator-table-graph/";
     width = '600';
     height = '400';
   }
