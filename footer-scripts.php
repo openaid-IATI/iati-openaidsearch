@@ -3,14 +3,15 @@
 var site = '<?php echo SITE_URL; ?>';
 var home_url = "<?php echo bloginfo("url"); ?>";
 var template_directory = "<?php echo bloginfo("template_url"); ?>";
+var site_title = "<?php echo wp_title(''); ?>";
 <?php
 global $_DEFAULT_ORGANISATION_ID;
-echo 'var organisation_id = "' . $_DEFAULT_ORGANISATION_ID . '"';
+echo 'var organisation_id = "' . $_DEFAULT_ORGANISATION_ID . '";';
 ?>
 
 </script>
 
-<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery-ui.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/leaflet.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/bootstrap.min.js"></script>
