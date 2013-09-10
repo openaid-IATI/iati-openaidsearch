@@ -16,8 +16,7 @@ $activity = wp_get_activity($project_id);
 		while(sRegExp.test(sValue)) {
 			sValue = sValue.replace(sRegExp, '$1'+sep+'$2');
 		}
-		// unhabitat ticket 276 says use , instead of .
-		sValue = sValue.replace(".", ",");
+		
 		return sValue;
 	}
 
