@@ -66,8 +66,8 @@ if (is_page('indicators') or is_page('city-prosperity')) { ?>
 
 	<script src="https://www.google.com/jsapi"></script>
 
-	<script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/rgbcolor.js"></script>
-    <script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script>
+	<script src="http://canvg.googlecode.com/svn/trunk/rgbcolor.js"></script>
+    <script src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/html2canvas.min.js"></script>
 	<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery.plugin.html2canvas.js"></script>
 
@@ -85,9 +85,9 @@ if (!is_page('indicators') and !is_page('city-prosperity')) {
 
 ?>
 
-<script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">
+<script>var switchTo5x=true;</script>
+<script src="http://w.sharethis.com/button/buttons.js"></script>
+<script>
 
 stLight.options({
 	publisher: "6315865b-353c-419f-8f1d-2ef900de2fd0",

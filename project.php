@@ -231,7 +231,7 @@ $activity = wp_get_activity($project_id);
 					<div class="row-fluid">
 						<div class="span7">
 							<div id="disqus_thread"></div>
-						    <script type="text/javascript">
+						    <script>
 						        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 						        var disqus_shortname = 'openunhabitat'; // required: replace example with your forum shortname
 						 		var disqus_identifier = '<?php echo $activity->iati_identifier; ?>';
@@ -258,7 +258,7 @@ $activity = wp_get_activity($project_id);
 	</div>
 </div>
 
-<script type="text/javascript">
+<script>
 
 // PREPARE COUNTRIES FOR SHOWING ON MAP
 

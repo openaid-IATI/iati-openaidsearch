@@ -89,7 +89,7 @@ Template Name: Indicators page
 
 <?php get_footer(); ?>
 
-<script type="text/javascript">
+<script>
 $(document).ready(function(){
   selected_type = "indicator";
   query_string_to_selection();

@@ -48,7 +48,7 @@ Template Name: Standard page
 </div>
 
 <?php get_footer(); ?>
-<script type="text/javascript">
+<script>
 
     $(document).ready(function() {
       selected_type = "projects";
