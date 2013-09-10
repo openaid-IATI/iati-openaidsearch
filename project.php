@@ -235,7 +235,7 @@ $activity = wp_get_activity($project_id);
 					<div class="row-fluid">
 						<div class="span7">
 							<div id="disqus_thread"></div>
-						    <script type="text/javascript">
+						    <script>
 						        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 						        var disqus_shortname = 'openaidnl'; // required: replace example with your forum shortname
 						 		var disqus_identifier = '<?php echo $activity->iati_identifier; ?>';
@@ -258,7 +258,7 @@ $activity = wp_get_activity($project_id);
 
 </div>
 
-<script type="text/javascript">
+<script>
 
 // PREPARE COUNTRIES FOR SHOWING ON MAP
 
@@ -275,12 +275,14 @@ $activity = wp_get_activity($project_id);
 	var project_countries = new Array(<?php echo $countries; ?>);
 </script>
 
-<?php get_footer(); ?>
-
+<?php get_template_part('footer-scripts'); ?>
 <script>
   $(document).ready(function() {
       sanitize_project_url();
     });
 </script>
+<?php get_footer(); ?>
+
+
 	
 	

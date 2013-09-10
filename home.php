@@ -90,9 +90,9 @@
 		</div>
 	</div>
 </div>
-<?php get_footer(); ?>
+<?php get_template_part('footer-scripts'); ?>
 
-<script type="text/javascript">
+<script>
 
     $(document).ready(function() {
       selected_type = "projects";
@@ -100,3 +100,4 @@
     });
 
 </script>
+<?php get_footer(); ?>

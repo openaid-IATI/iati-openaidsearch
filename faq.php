@@ -106,8 +106,7 @@ Template Name: FAQ page
 		</div>
 	</div>
 </div>
-
-<?php get_footer(); ?>
+<?php get_template_part('footer-scripts'); ?>
 
 <script type="text/javascript">
 
@@ -120,3 +119,4 @@ Template Name: FAQ page
     });
 
 </script>
+<?php get_footer(); ?>

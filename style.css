@@ -150,8 +150,11 @@ button{
   float: right;
 }
 
-#header-search-text{
-  display: inline-block;
+.btn.header-btn-search{
+  background-image: url('images/search-icon.png');
+  background-repeat: no-repeat;
+  background-position: 5px 7px;
+  padding-left: 25px;
 }
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX HEADER + FOOTER ADJUSTMENTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -1950,7 +1953,7 @@ label, input, button, select, textarea{
 }
 
 
-#project-share-embed, #sort-type-country, #project-related-indicators-link, #project-located-in-link, #project-related-projects-link, #motion-chart-name, #motion-chart-filter, #motion-chart-placeholder{
+#sort-type-country, #project-related-indicators-link, #project-located-in-link, #project-related-projects-link, #motion-chart-name, #motion-chart-filter, #motion-chart-placeholder{
   display: none;
 }
 

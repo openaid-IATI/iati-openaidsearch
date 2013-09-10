@@ -42,8 +42,7 @@ Template Name: Standard page
 		</div>
 	</div>
 </div>
-
-<?php get_footer(); ?>
+<?php get_template_part('footer-scripts'); ?>
 <script type="text/javascript">
 
     $(document).ready(function() {
@@ -55,3 +54,4 @@ Template Name: Standard page
     });
 
 </script>
+<?php get_footer(); ?>

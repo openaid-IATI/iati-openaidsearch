@@ -688,19 +688,20 @@ function get_embed_url(type){
   width = '';
   height = '';
   if(type == 'projects-map'){
-    baseurl = "http://www.open.unhabitat.org/embed-projects/";
+
+    baseurl = "http://open.unhabitat.org/embed-projects/";
     width = '600';
     height = '290';
   } else if(type == 'indicator-map'){
-    baseurl = "http://www.open.unhabitat.org/embed-indicators-map/";
+    baseurl = "http://open.unhabitat.org/embed-indicators-map/";
     width = '600';
     height = '350';
   } else if(type == 'line-graph'){
-    baseurl = "http://www.open.unhabitat.org/embed-indicator-line-graph/";
+    baseurl = "http://open.unhabitat.org/embed-indicator-line-graph/";
     width = '600';
     height = '400';
   } else if(type == 'table-graph'){
-    baseurl = "http://www.open.unhabitat.org/embed-indicator-table-graph/";
+    baseurl = "http://open.unhabitat.org/embed-indicator-table-graph/";
     width = '600';
     height = '400';
   }

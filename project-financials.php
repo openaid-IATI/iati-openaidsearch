@@ -16,6 +16,7 @@ $activity = wp_get_activity($project_id);
 		while(sRegExp.test(sValue)) {
 			sValue = sValue.replace(sRegExp, '$1'+sep+'$2');
 		}
+		
 		return sValue;
 	}
 
