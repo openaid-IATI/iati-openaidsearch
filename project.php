@@ -74,42 +74,39 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Countries:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->
-							recipient_country)) {
-					$sep = '';
-					$countries = "";
-					$cSep = "";
-					foreach($activity->recipient_country AS $country) {
-						echo  $sep . "
-							<a href='".get_bloginfo('url')."/projects/?countries={$country->iso}'>" . $country->name . "</a>
-							";
-						$countries .= $cSep . $country->iso;
-						$sep = ', ';
-						$cSep = '|';
-					}
-				}
-				?>
+						<?php 
+						if(!empty($activity->recipient_country)) {
+							$sep = '';
+							$countries = "";
+							$cSep = "";
+							foreach($activity->recipient_country AS $country) {
+								echo  $sep . "
+									<a href='".get_bloginfo('url')."/projects/?countries={$country->code}'>" . $country->name . "</a>
+									";
+								$countries .= $cSep . $country->code;
+								$sep = ', ';
+								$cSep = '|';
+							}		
+						}
+						?>
 						</div>
 
 						<div class="projects-project-divider"></div>
 
-						<div class="projects-project-spec-key">Principal sector:</div>
+						<div class="projects-project-spec-key">Principal sectors:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->
-							activity_sectors)) {
-					$sep = '';
-					foreach($activity->activity_sectors AS $sector) {
-						if($sector->name=='No information available') {
-							echo $sector->name;
-						} else {
-							echo  $sep . "
-							<a href='".get_bloginfo('url')."/projects/?sectors={$sector->code}'>" . $sector->name . "</a>
-							";
-						}
-							$sep = ', ';
-						}
-				} ?>
+						<?php 
+							if(!empty($activity->sectors)) {
+								$sep = '';
+								foreach($activity->sectors AS $sector) {
+									echo  $sector->name;
+									$sep = ', ';
+								}
+							} else {
+								echo "No information avaiable";
+							} ?>
+
 						</div>
 
 						<div class="projects-project-divider"></div>
@@ -135,18 +132,29 @@ $activity = wp_get_activity($project_id);
 
 						<div class="projects-project-spec-key">Reporting organisation:</div>
 						<div class="projects-project-spec-value">
+						
+						<?php 
+							if(!empty($activity->reporting_organisation->name)) { echo $activity->reporting_organisation->name; } else {
+							if(!empty($activity->reporting_organisation->code)){ echo $activity->reporting_organisation->code; } }
+						?>
 
-							<?php if(!empty($activity->
-							reporting_organisation->org_name)) { echo $activity->reporting_organisation->org_name; } ?>
 						</div>
 
 						<div class="projects-project-divider"></div>
 
-						<div class="projects-project-spec-key">Sector code:</div>
+						<div class="projects-project-spec-key">Sectors code(s):</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->
-							activity_sectors[0]->code)) { echo "<a href='".get_bloginfo('url')."/projects/?sectors={$sector->code}'>" . $activity->activity_sectors[0]->code . "</a>"; } ?>
+							<?php 
+							if(!empty($activity->sectors)) {
+								$sep = '';
+								foreach($activity->sectors AS $sector) {
+									echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->code . "</a>";
+									$sep = ', ';
+								}			
+							} else {
+								echo "No information avaiable";
+							} ?>
 						</div>
 
 						<div class="projects-project-divider"></div>
@@ -175,26 +183,29 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Activity status:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->
-							activity_status->name)) { echo $activity->activity_status->name; } ?>
+							<?php if(!empty($activity->activity_status->name)) { echo $activity->activity_status->name; } ?>
 						</div>
 
 						<div class="projects-project-divider"></div>
 
-						<div class="projects-project-spec-key">Name participating organisation:</div>
+						<div class="projects-project-spec-key">Participating organisations:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->
-							reporting_organisation->org_name)) { echo $activity->reporting_organisation->org_name; } ?>
-						</div>
+							<?php 
+							if(!empty($activity->participating_organisations)) {
+								$sep = '';
+								foreach($activity->participating_organisations AS $participating_organisation) {
+									if(empty($participating_organisation->name)) {
+										echo $participating_organisation->code;
+									} else {
+										echo  $participating_organisation->name . " (" . $participating_organisation->code . ")";
+									}
+										$sep = ', ';
+								}
+							} else {
+								echo "No information avaiable";
+							} ?>
 
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">Organisation reference code:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->
-							reporting_organisation->ref)) { echo $activity->reporting_organisation->ref; } ?>
 						</div>
 
 						<div class="projects-project-divider"></div>
@@ -206,7 +217,7 @@ $activity = wp_get_activity($project_id);
 								<div class="share-text">EXPORT</div>
 							</button>
 
-							<span class="st_sharethis" st_url="<?php bloginfo('url'); ?>/project/?id=<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?>" st_title="<?php echo $activity->titles[0]->title; ?>" displayText="SHARE"></span>
+							<span class="st_sharethis" st_url="<?php bloginfo('url'); ?>/project/?id=<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?>" st_title="<?php if (!empty($activity->titles)){ echo $activity->titles[0]->title; } else { echo "Unkown title"; }?>" displayText="SHARE"></span>
 
 							<button class="project-share-button hneue-bold project-share-bookmark">
 								<div class="share-icon"></div>

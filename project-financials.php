@@ -2,6 +2,9 @@
 <?php
 $project_id = $_REQUEST['id'];
 $activity = wp_get_activity($project_id);
+
+
+
 ?>
 <div id="project-financials">
 	<div id="financials-placeholder"></div>
@@ -33,7 +36,7 @@ $activity = wp_get_activity($project_id);
 
         <?php
 
-	foreach($activity->activity_transactions AS $at) {
+	foreach($activity->transactions AS $at) {
 		$type = '';
 		switch($at->transaction_type){
 			case 'C':
@@ -66,19 +69,26 @@ $activity = wp_get_activity($project_id);
 		$value = $at->value;
 		$value = str_replace(".00", "", $value);
 		$provider_org = '';
-		if(!empty($activity->reporting_organisation->org_name)) {
-			$provider_org = (string)$activity->reporting_organisation->org_name;
+		if(!empty($activity->provider_organisation->name)) {
+			$provider_org = (string)$activity->provider_organisation->name;
+		} else {
+			if(!empty($activity->provider_organisation->code)) {
+				$provider_org = (string)$activity->provider_organisation->code;
+			}
 		}
 		$receiver_org = '';
-		if(!empty($activity->participating_organisations)) {
-			$receiver_org = (string)$activity->participating_organisations[0]->org_name;
+		if(!empty($activity->receiver_organisation->name)) {
+			$receiver_org = (string)$activity->receiver_organisation->name;
+		} else {
+			if(!empty($activity->receiver_organisation->code)) {
+				$receiver_org = (string)$activity->receiver_organisation->code;
+			}
 		}
 
 		echo 'var stringvalue = "' . $currency . '" + DotFormattedProjectFinancials(' . $value . ');';
 		echo 'data.addRow(["' . $type . '", "' . $provider_org . '", "' . $receiver_org . '", {v: ' . $value . ', f: stringvalue }, "' . $at->transaction_date . '"]);';
      
 	}
-
 	
 	?>
 
