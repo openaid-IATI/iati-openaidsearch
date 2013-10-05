@@ -477,11 +477,11 @@ function create_api_url(){
   var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
 
   if (selected_type=='projects'){
-    return site + 'json-activities?organisations=' + organisation_id + '&sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
+    return search_url + 'country-geojson/?organisations=' + organisation_id + '&sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
   } else if (selected_type=='indicator'){
-    return site + 'json?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&city=' + str_city;
+    return search_url + 'indicator-data/?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&city=' + str_city;
   } else if (selected_type=='cpi'){
-    return site + 'json-city?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&city=' + str_city + '&indicator=' + str_indicator;
+    return search_url + 'indicator-data/?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&city=' + str_city + '&indicator=' + str_indicator;
   }
 }
 

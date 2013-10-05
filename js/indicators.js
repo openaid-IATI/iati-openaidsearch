@@ -93,10 +93,10 @@ function create_api_url_indicator(indicatorid){
   var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
 
   if (selected_type=='indicator'){
-    return site + 'json?countries=' + str_country + '&regions=' + str_region + '&city=' + str_city + '&indicator=' + indicatorid;
+    return search_url + 'indicator-country-data/?countries=' + str_country + '&regions=' + str_region + '&cities=' + str_city + '&indicators=' + indicatorid;
   } else if (selected_type=='cpi'){
 
-    return site + 'json-city?countries=' + str_country + '&regions=' + str_region + '&city=' + str_city + '&indicator=' + indicatorid;
+    return search_url + 'indicator-city-data/?countries=' + str_country + '&regions=' + str_region + '&cities=' + str_city + '&indicators=' + indicatorid;
   }
 }
 
@@ -200,6 +200,7 @@ function init_circles_by_country(data_indicators){
 
     $.each(data_indicators, function(key, value){
         if (key.length > 5 || value.longitude == null || value.latitude == null){return true;}
+
         try{
 
             // this shouldnt have to be done for every circle but with the current API call it is:
@@ -214,10 +215,8 @@ function init_circles_by_country(data_indicators){
               circles.indicators[value.indicator].type_data = "p";
             }
 
-            if (value.max_value){
-                circles.indicators[value.indicator].max_value = value.max_value;
-            }
-
+            circles.indicators[value.indicator].max_value = data_indicators.max_value;
+           
             // circle info
             if(!circles.countries[key]){circles.countries[key] = {};}
             if(!circles.countries[key][value.indicator]){circles.countries[key][value.indicator] = {};}
@@ -239,7 +238,7 @@ function init_circles_by_country(data_indicators){
             //circles.countries[key].countryregion = value.region;
           
 
-        }catch(err){
+        } catch(err){
 
             console.log(err);
         }
