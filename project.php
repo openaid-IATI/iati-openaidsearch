@@ -100,21 +100,7 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Principal sectors:</div>
 						<div class="projects-project-spec-value">
 
-<<<<<<< HEAD
-							<?php if(!empty($activity->activity_sectors)) {
-					$sep = '';
-					foreach($activity->activity_sectors AS $sector) {
-						if($sector->name=='No information available') {
-							echo $sector->name;
-						} else {
-							echo  $sep . "
-							<a href='".get_bloginfo('url')."/projects/?sectors={$sector->code}'>" . $sector->name . "</a>
-							";
-						}
-							$sep = ', ';
-						}
-				} ?>
-=======
+
 						<?php 
 							if(!empty($activity->sectors)) {
 								$sep = '';
@@ -126,7 +112,6 @@ $activity = wp_get_activity($project_id);
 								echo "No information avaiable";
 							} ?>
 
->>>>>>> master
 						</div>
 
 						<div class="projects-project-divider"></div>
@@ -156,10 +141,7 @@ $activity = wp_get_activity($project_id);
 							if(!empty($activity->reporting_organisation->code)){ echo $activity->reporting_organisation->code; } }
 						?>
 
-<<<<<<< HEAD
-							<?php if(!empty($activity->reporting_organisation->org_name)) { echo $activity->reporting_organisation->org_name; } ?>
-=======
->>>>>>> master
+
 						</div>
 
 						<div class="projects-project-divider"></div>
@@ -167,9 +149,7 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Sectors code(s):</div>
 						<div class="projects-project-spec-value">
 
-<<<<<<< HEAD
-							<?php if(!empty($activity->activity_sectors[0]->code)) { echo "<a href='".get_bloginfo('url')."/projects/?sectors={$sector->code}'>" . $activity->activity_sectors[0]->code . "</a>"; } ?>
-=======
+
 							<?php 
 							if(!empty($activity->sectors)) {
 								$sep = '';
@@ -180,7 +160,7 @@ $activity = wp_get_activity($project_id);
 							} else {
 								echo "No information avaiable";
 							} ?>
->>>>>>> master
+
 						</div>
 
 						<div class="projects-project-divider"></div>
@@ -217,17 +197,6 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Participating organisations:</div>
 						<div class="projects-project-spec-value">
 
-<<<<<<< HEAD
-							<?php if(!empty($activity->reporting_organisation->org_name)) { echo $activity->reporting_organisation->org_name; } ?>
-						</div>
-
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">Organisation reference code:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->reporting_organisation->ref)) { echo $activity->reporting_organisation->ref; } ?>
-=======
 							<?php 
 							if(!empty($activity->participating_organisations)) {
 								$sep = '';
@@ -243,7 +212,6 @@ $activity = wp_get_activity($project_id);
 								echo "No information avaiable";
 							} ?>
 
->>>>>>> master
 						</div>
 
 						<div class="projects-project-divider"></div>
