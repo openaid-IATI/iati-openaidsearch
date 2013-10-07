@@ -70,15 +70,6 @@ Template Name: Projects page
                             </div>
                         </div>
 
-                        <div id="sort-type-country" class="project-sort-type">
-                            <span class="project-sort-text hneue-bold">COUNTRY</span>
-                            <span class="project-sort-icon"></span>
-                            <div id="dropdown-project-country" class="dropdown-project">
-                                <a href="?order_by=countries" class="project-sort-item">ASCENDING</a>
-                                <a href="?order_by=-countries" class="project-sort-item">DESCENDING</a>
-                            </div>
-                        </div>
-
 					</div>
 				</div>
 			</div>

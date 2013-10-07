@@ -162,7 +162,7 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Last updated:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->date_updated)) { echo $activity->date_updated; } ?></div>
+							<?php if(!empty($activity->last_updated_datetime)) { echo $activity->last_updated_datetime; } ?></div>
 
 						<div class="projects-project-divider"></div>
 
@@ -193,15 +193,21 @@ $activity = wp_get_activity($project_id);
 
 							<?php 
 							if(!empty($activity->participating_organisations)) {
-								$sep = '';
+								$sep = ', ';
+								$part_org_text = '';
+
 								foreach($activity->participating_organisations AS $participating_organisation) {
 									if(empty($participating_organisation->name)) {
-										echo $participating_organisation->code;
+										$part_org_text .= $participating_organisation->code;
+
 									} else {
-										echo  $participating_organisation->name . " (" . $participating_organisation->code . ")";
+										$part_org_text .= $participating_organisation->name . " (" . $participating_organisation->code . ")";
 									}
-										$sep = ', ';
+									$part_org_text .= $sep;
 								}
+								
+								$part_org_text = substr($part_org_text, 0, -2);
+								echo $part_org_text;
 							} else {
 								echo "No information avaiable";
 							} ?>
@@ -277,7 +283,7 @@ $activity = wp_get_activity($project_id);
 		$sep = '';
 		$countries = "";
 		foreach($activity->recipient_country AS $country) {
-			$countries .=  $sep . '"' . $country->iso . '"';
+			$countries .=  $sep . '"' . $country->code . '"';
 			$sep = ', ';
 		}
 	}

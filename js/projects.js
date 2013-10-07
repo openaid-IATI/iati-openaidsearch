@@ -6,9 +6,7 @@ function initialize_project_filter_options(callback){
   //set loading gif in case call takes long
   var url = make_project_filter_options_url();
   get_project_filter_options(url, callback);
-  
 }
-
 
 function make_project_filter_options_url(){
   var dlmtr = ",";
@@ -22,8 +20,8 @@ function make_project_filter_options_url(){
 }
 
 function get_project_filter_options(url, callback){
+  
   $.support.cors = true; 
-
   var project_options;
   
   if(window.XDomainRequest){
@@ -95,6 +93,10 @@ function draw_project_options(options){
 function initialize_projects_map(url){
     selected_type = "projects";
     get_project_data(url);
+    initialize_project_filter_options();
+
+
+
 }
 
 function get_project_data(url){

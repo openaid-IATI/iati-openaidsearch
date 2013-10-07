@@ -54,8 +54,10 @@ foreach($objects AS $idx=>$project) {
 				<div class="projects-project-spec-key">Principal sector:</div>
 				<div class="projects-project-spec-value">
 
+
+
 					<?php 
-				if(!empty($activity->sectors)) {
+				if(!empty($project->sectors)) {
 					$sep = '';
 					foreach($project->sectors AS $sector) {
 						echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->name . "</a>";
@@ -137,7 +139,7 @@ foreach($objects AS $idx=>$project) {
 				<div class="projects-project-spec-value">
 				
 				<?php 
-				if(!empty($activity->sectors)) {
+				if(!empty($project->sectors)) {
 					$sep = '';
 					foreach($project->sectors AS $sector) {
 						echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->code . "</a>";
@@ -164,19 +166,26 @@ foreach($objects AS $idx=>$project) {
 				<div class="projects-project-spec-value">
 
 				<?php 
-				if(!empty($project->participating_organisations)) {
-					$sep = '';
-					foreach($project->participating_organisations AS $participating_organisation) {
-						if(empty($participating_organisation->name)) {
-							echo $participating_organisation->code;
-						} else {
-							echo  $participating_organisation->name . " (" . $participating_organisation->code . ")";
+					if(!empty($project->participating_organisations)) {
+						$sep = ', ';
+						$part_org_text = '';
+
+						foreach($project->participating_organisations AS $participating_organisation) {
+							if(empty($participating_organisation->name)) {
+								$part_org_text .= $participating_organisation->code;
+
+							} else {
+								$part_org_text .= $participating_organisation->name . " (" . $participating_organisation->code . ")";
+							}
+							$part_org_text .= $sep;
 						}
-							$sep = ', ';
-					}
-				} else {
-					echo "No information avaiable";
-				} ?>
+						
+						$part_org_text = substr($part_org_text, 0, -2);
+						echo $part_org_text;
+					} else {
+						echo "No information avaiable";
+					} 
+				?>
 
 				</div>
 
