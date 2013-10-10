@@ -85,11 +85,8 @@ Template Name: Indicators page
 		</div>
 	</div>
 </div>
-
-
-<?php get_footer(); ?>
-
-<script type="text/javascript">
+<?php get_template_part('footer-scripts'); ?>
+<script>
 $(document).ready(function(){
   selected_type = "indicator";
   query_string_to_selection();
@@ -102,3 +99,6 @@ $(document).ready(function(){
   initialize_filters(fill_selection_box, initialize_charts);
 });
 </script>
+<?php get_footer(); ?>
+
+

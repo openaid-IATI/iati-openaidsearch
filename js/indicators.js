@@ -5,7 +5,8 @@ var circles = {};
 var maxcirclearea = 2000000000000;
 
 
-// CIRCLE STRUCTURE IS AS FOLLOWS
+// CIRCLE STRUCTURE:
+
 // circles.indicators.<indicatorname>  this is the key of an indicator
 // circles.indicators.<indicatorname>.name
 // circles.indicators.<indicatorname>.description
@@ -71,17 +72,16 @@ function show_map(indicator_data){
       refresh_circles(2012);
     }
     
-
     // hide loader, show map
     $('#map').show(); 
     $('#map-loader').hide();
 
     //load filters depending on page
     if(selected_type=='cpi'){
-        set_filters_cpi(indicator_data);
+        get_indicator_filters(set_filters_cpi);
     }
     if (selected_type=='indicator'){
-        set_filters_indicator(indicator_data);
+        get_indicator_filters(set_filters_indicator);
     }
 }
 
@@ -93,10 +93,10 @@ function create_api_url_indicator(indicatorid){
   var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
 
   if (selected_type=='indicator'){
-    return site + 'json?countries=' + str_country + '&regions=' + str_region + '&city=' + str_city + '&indicator=' + indicatorid;
+    return search_url + 'indicator-country-data/?countries=' + str_country + '&regions=' + str_region + '&cities=' + str_city + '&indicators=' + indicatorid;
   } else if (selected_type=='cpi'){
 
-    return site + 'json-city?countries=' + str_country + '&regions=' + str_region + '&city=' + str_city + '&indicator=' + indicatorid;
+    return search_url + 'indicator-city-data/?countries=' + str_country + '&regions=' + str_region + '&cities=' + str_city + '&indicators=' + indicatorid;
   }
 }
 
@@ -127,6 +127,10 @@ function get_indicator_data(url, i, last){
        indicator_json_data = $.parseJSON(xdr.responseText);
        draw_available_data_blocks(indicator_json_data, i);
        init_circles(indicator_json_data);
+
+       if (last){
+          show_map(indicator_json_data);
+       }
     }
     setTimeout(function () {xdr.send();}, 0);
   } else {
@@ -200,6 +204,7 @@ function init_circles_by_country(data_indicators){
 
     $.each(data_indicators, function(key, value){
         if (key.length > 5 || value.longitude == null || value.latitude == null){return true;}
+
         try{
 
             // this shouldnt have to be done for every circle but with the current API call it is:
@@ -214,10 +219,8 @@ function init_circles_by_country(data_indicators){
               circles.indicators[value.indicator].type_data = "p";
             }
 
-            if (value.max_value){
-                circles.indicators[value.indicator].max_value = value.max_value;
-            }
-
+            circles.indicators[value.indicator].max_value = data_indicators.max_value;
+           
             // circle info
             if(!circles.countries[key]){circles.countries[key] = {};}
             if(!circles.countries[key][value.indicator]){circles.countries[key][value.indicator] = {};}
@@ -239,7 +242,7 @@ function init_circles_by_country(data_indicators){
             //circles.countries[key].countryregion = value.region;
           
 
-        }catch(err){
+        } catch(err){
 
             console.log(err);
         }
@@ -323,7 +326,16 @@ function slide_tooltip(){
 
 
 function set_filters_indicator(data){
-    
+
+    var indicator_filter_names = data['indicators'];
+    $.each(indicator_filter_names, function( key, value ) {
+
+       if(key.indexOf("cpi") != -1){
+          delete data['indicators'][key];
+       }
+
+    });
+
     region_html = create_filter_attributes(data['regions'], 4);
     $('#regions-filters').html(region_html);
 
@@ -337,7 +349,19 @@ function set_filters_indicator(data){
     $('#indicators-filters').html(indicator_html);
 }
 
+
+
 function set_filters_cpi(data){
+
+    var indicator_filter_names = data['indicators'];
+
+    $.each(indicator_filter_names, function( key, value ) {
+
+       if(key.indexOf("cpi") == -1){
+          delete data['indicators'][key];
+       }
+
+    });
 
     region_html = create_filter_attributes(data['regions'], 4);
     $('#regions-filters').html(region_html);
@@ -349,8 +373,40 @@ function set_filters_cpi(data){
     $('#cities-filters').html(city_html);
 
     indicator_html = create_filter_attributes(data['indicators'], 4);
-    $('#indicators-filters').html(indicator_html);
+    $('#indicators-filters').html(indicator_html); 
 }
+
+
+function get_indicator_filters(callback){
+
+  var url = search_url + 'indicator-city-filter-options/';
+  $.support.cors = true; 
+  var indicator_json_data = [];
+  
+  if(window.XDomainRequest){
+    var xdr = new XDomainRequest();
+    xdr.open("get", url);
+    xdr.onprogress = function () { };
+    xdr.ontimeout = function () { };
+    xdr.onerror = function () { };
+    xdr.onload = function() {
+       callback($.parseJSON(xdr.responseText));
+    }
+    setTimeout(function () {xdr.send();}, 0);
+  } else {
+    $.ajax({
+        type: 'GET',
+        url: url,
+        async: false,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function(data){
+            callback(data);
+        }
+    });
+  }
+}
+
 
 $(".slider-year").click(function() {
     var curId = $(this).attr('id');
@@ -371,8 +427,6 @@ $(".slider-year").click(function() {
 
 
   function drawTreemap() {
-
-
 
     // Create and populate the data table.
     var data = google.visualization.arrayToDataTable([
@@ -490,7 +544,7 @@ function drawLineChart(){
           left: 100,
           top: 20
         },
-        backgroundColor: '#F1EEE8',
+        backgroundColor: 'transparent',
         interpolateNulls: true,
         fontName: 'HelveticaNeueW02-55Roma'
       }

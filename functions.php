@@ -25,7 +25,7 @@ add_action( 'init', 'register_my_menus' );
 
 function unh_widgets_init() {
 	register_sidebar(array(
-		'name' => __( 'UN-Habitat page sidebar' ),
+		'name' => __( 'OIPA theme page sidebar' ),
 	  	'id' => 'unh-page-sidebar',
 	    'before_widget' => '<div class="drop-shadow postit page-sidebar-item">',
 	    'after_widget' => '</div>',

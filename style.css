@@ -145,10 +145,12 @@ button{
   float: right;
 }
 
-#header-search-text{
-  display: inline-block;
+.btn.header-btn-search{
+  background-image: url('images/search-icon.png');
+  background-repeat: no-repeat;
+  background-position: 5px 7px;
+  padding-left: 25px;
 }
-
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX HEADER + FOOTER ADJUSTMENTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 .navbar .brand { 
@@ -217,10 +219,23 @@ button{
     box-shadow: 0px 1px 3px #979791;
 }
 
+.btn.header-btn-search{
+  width: 70px;
+  height: 30px;
+  position: relative;
+}
 
 
 .btn.header-btn-search > img{
   margin: 0.2em 0.1em 0.3em 0.5em;
+  position: absolute;
+  left: 2px;
+  top: 6px;
+}
+.btn.header-btn-search #header-search-text{
+  position: absolute;
+  right: 7px;
+  top: 6px;
 }
 
 .navbar-static-top .input-large{
@@ -728,7 +743,7 @@ input[type=checkbox] {
 }
 
 #map-lightbox-text > p{
-  padding-bottom: 0.4em;
+  padding-bottom: 0.2em;
 }
 
 #map-lightbox a{

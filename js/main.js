@@ -89,8 +89,8 @@ function create_filter_attributes(objects, columns){
         } 
 
         var sortablename = sortable[i][1];
-        if (sortablename.length > 35 && columns == 4){
-          sortablename = sortablename.substr(0,33) + "...";
+        if (sortablename.length > 32 && columns == 4){
+          sortablename = sortablename.substr(0,30) + "...";
         }
 
         html += '<div class="squaredThree"><div>';
@@ -307,11 +307,6 @@ $(document).keyup(function(e) {
         show_map();
       }
 
-      // load the project filter options based on the current selection
-      if(selected_type == 'projects'){
-        initialize_project_filter_options();
-      }
-
       initialize_filters();
       $("#" + filterContainerName).show();
 
@@ -477,11 +472,11 @@ function create_api_url(){
   var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
 
   if (selected_type=='projects'){
-    return site + 'json-activities?organisations=' + organisation_id + '&sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
+    return search_url + 'country-geojson/?organisations=' + organisation_id + '&sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
   } else if (selected_type=='indicator'){
-    return site + 'json?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&city=' + str_city;
+    return search_url + 'indicator-country-data/?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&cities=' + str_city + '&indicators=' + str_indicator;
   } else if (selected_type=='cpi'){
-    return site + 'json-city?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&city=' + str_city + '&indicator=' + str_indicator;
+    return search_url + 'indicator-city-data/?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&cities=' + str_city + '&indicators=' + str_indicator;
   }
 }
 
@@ -668,9 +663,7 @@ jQuery(function($){
   $("#project-share-bookmark").click(function(){
     var href = document.URL.toString().split("?")[0] + build_current_url();
     var title = $(this).attr('alt');
-    title = "Open UN-Habitat - " + title.substring(9);
-    console.log(title);
-    console.log(href);
+    title = site_title + " - " + title.substring(9);
     bookmarksite(title, href);
     return false;
   });
@@ -688,19 +681,19 @@ function get_embed_url(type){
   width = '';
   height = '';
   if(type == 'projects-map'){
-    baseurl = "http://www.open.unhabitat.org/embed-projects/";
+    baseurl = home_url + "/embed-projects/";
     width = '600';
     height = '290';
   } else if(type == 'indicator-map'){
-    baseurl = "http://www.open.unhabitat.org/embed-indicators-map/";
+    baseurl = home_url + "/embed-indicators-map/";
     width = '600';
     height = '350';
   } else if(type == 'line-graph'){
-    baseurl = "http://www.open.unhabitat.org/embed-indicator-line-graph/";
+    baseurl = home_url + "/embed-indicator-line-graph/";
     width = '600';
     height = '400';
   } else if(type == 'table-graph'){
-    baseurl = "http://www.open.unhabitat.org/embed-indicator-table-graph/";
+    baseurl = home_url + "/embed-indicator-table-graph/";
     width = '600';
     height = '400';
   }

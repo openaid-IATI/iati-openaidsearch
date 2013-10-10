@@ -6,9 +6,7 @@ function initialize_project_filter_options(callback){
   //set loading gif in case call takes long
   var url = make_project_filter_options_url();
   get_project_filter_options(url, callback);
-  
 }
-
 
 function make_project_filter_options_url(){
   var dlmtr = ",";
@@ -17,13 +15,13 @@ function make_project_filter_options_url(){
   var str_sector = reload_map_prepare_parameter_string("sector", dlmtr);
   var str_budget = reload_map_prepare_parameter_string("budget", dlmtr);
 
-  var url = site + 'json-project-filters?organisations=' + organisation_id + '&sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
+  var url = search_url + 'activity-filter-options/?organisations=' + organisation_id + '&sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
   return url;
 }
 
 function get_project_filter_options(url, callback){
+  
   $.support.cors = true; 
-
   var project_options;
   
   if(window.XDomainRequest){
@@ -95,6 +93,10 @@ function draw_project_options(options){
 function initialize_projects_map(url){
     selected_type = "projects";
     get_project_data(url);
+    initialize_project_filter_options();
+
+
+
 }
 
 function get_project_data(url){

@@ -9,7 +9,13 @@ foreach($objects AS $idx=>$project) {
 	<div class="row-fluid projects-description <?php echo $project->iati_identifier; ?>">
 		<div class="span7">
 			<div class="projects-project-title">
-				<a href="<?php echo site_url() . '/project/?id=' . $project->iati_identifier; ?>" alt="See project details"><?php echo $project->titles[0]->title; ?></a>
+				<a href="<?php echo site_url() . '/project/?id=' . $project->iati_identifier; ?>" alt="See project details">
+					<?php if (!empty($project->titles)){ 
+						echo $project->titles[0]->title; 
+					} else {
+						echo "Unknown title";
+					}?>
+				</a>
 			</div>
 			<div class="projects-project-description <?php echo $project->iati_identifier; ?>">
 				<?php echo $project->descriptions[0]->description; ?>
@@ -33,8 +39,8 @@ foreach($objects AS $idx=>$project) {
 						$countries = "";
 						$cSep = "";
 						foreach($project->recipient_country AS $country) {
-							echo  $sep . "<a class='projects-description-link' href='?countries={$country->iso}'>" . $country->name . "</a>";
-							$countries .= $cSep . $country->iso;
+							echo  $sep . "<a class='projects-description-link' href='?countries={$country->code}'>" . $country->name . "</a>";
+							$countries .= $cSep . $country->code;
 							$sep = ', ';
 							$cSep = '|';
 						}
@@ -48,21 +54,23 @@ foreach($objects AS $idx=>$project) {
 				<div class="projects-project-spec-key">Principal sector:</div>
 				<div class="projects-project-spec-value">
 
-					<?php if(!empty($project->activity_sectors)) {
-						$sep = '';
-						foreach($project->activity_sectors AS $sector) {
-							if($sector->name=='No information available') {
-								echo $sector->name;
-							} else {
-								echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->name . "</a>";
-							}
-								$sep = ', ';
-							}
-					} ?>
+
+
+					<?php 
+				if(!empty($project->sectors)) {
+					$sep = '';
+					foreach($project->sectors AS $sector) {
+						echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->name . "</a>";
+						$sep = ', ';
+					}		
+				} else {
+					echo "No information avaiable";
+				} ?>
 				</div>
 
 				<div class="projects-project-divider"></div>
 
+				<?php /* 
 				<div class="projects-project-spec-key">Budget:</div>
 				<div class="projects-project-spec-value">
 
@@ -72,8 +80,10 @@ foreach($objects AS $idx=>$project) {
 
 				</div>
 
-				<div class="projects-project-divider"></div>
+				
 
+				<div class="projects-project-divider"></div>
+*/ ?>
 				<div class="projects-project-spec-key">IATI identifier:</div>
 				<div class="projects-project-spec-value">
 
@@ -98,7 +108,7 @@ foreach($objects AS $idx=>$project) {
 				<div class="projects-project-spec-key">Last updated:</div>
 				<div class="projects-project-spec-value">
 
-				<?php if(!empty($project->date_updated)) { echo $project->date_updated; } ?>
+				<?php if(!empty($project->last_updated_datetime)) { echo $project->last_updated_datetime; } ?>
 
 				</div>
 
@@ -116,16 +126,28 @@ foreach($objects AS $idx=>$project) {
 				<div class="projects-project-spec-key">Reporting organisation:</div>
 				<div class="projects-project-spec-value">
 
-					<?php if(!empty($project->reporting_organisation->org_name)) { echo $project->reporting_organisation->org_name; } ?>
+					<?php 
+						if(!empty($project->reporting_organisation->name)) { echo $project->reporting_organisation->name; } else {
+						if(!empty($project->reporting_organisation->code)){ echo $project->reporting_organisation->code; } }
+					?>
 
 				</div>
 
 				<div class="projects-project-divider"></div>
 
-				<div class="projects-project-spec-key">Sector code:</div>
+				<div class="projects-project-spec-key">Sector code(s):</div>
 				<div class="projects-project-spec-value">
-
-				<?php if(!empty($project->activity_sectors[0]->code)) { echo $project->activity_sectors[0]->code; } ?>
+				
+				<?php 
+				if(!empty($project->sectors)) {
+					$sep = '';
+					foreach($project->sectors AS $sector) {
+						echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->code . "</a>";
+						$sep = ', ';
+					}			
+				} else {
+					echo "No information avaiable";
+				} ?>			
 
 				</div>
 
@@ -140,19 +162,30 @@ foreach($objects AS $idx=>$project) {
 
 				<div class="projects-project-divider"></div>
 
-				<div class="projects-project-spec-key">Name participating organisation:</div>
+				<div class="projects-project-spec-key">Participating organisations:</div>
 				<div class="projects-project-spec-value">
 
-				<?php if(!empty($project->reporting_organisation->org_name)) { echo $project->reporting_organisation->org_name; } ?>
+				<?php 
+					if(!empty($project->participating_organisations)) {
+						$sep = ', ';
+						$part_org_text = '';
 
-				</div>
+						foreach($project->participating_organisations AS $participating_organisation) {
+							if(empty($participating_organisation->name)) {
+								$part_org_text .= $participating_organisation->code;
 
-				<div class="projects-project-divider"></div>
-
-				<div class="projects-project-spec-key">Organisation reference code:</div>
-				<div class="projects-project-spec-value">
-				
-				<?php if(!empty($project->reporting_organisation->ref)) { echo $project->reporting_organisation->ref; } ?>
+							} else {
+								$part_org_text .= $participating_organisation->name . " (" . $participating_organisation->code . ")";
+							}
+							$part_org_text .= $sep;
+						}
+						
+						$part_org_text = substr($part_org_text, 0, -2);
+						echo $part_org_text;
+					} else {
+						echo "No information avaiable";
+					} 
+				?>
 
 				</div>
 
@@ -165,7 +198,7 @@ foreach($objects AS $idx=>$project) {
 						<div class="share-text">EXPORT</div>
 					</button>
 
-					<span class="st_sharethis" st_url="<?php bloginfo('url'); ?>/project/?id=<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>" st_title="<?php echo $project->titles[0]->title; ?>" displayText="SHARE"></span>
+					<span ifclass="st_sharethis" st_url="<?php bloginfo('url'); ?>/project/?id=<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>" st_title="<?php if(!empty($project->titles)){echo $project->titles[0]->title;}  else{ echo "Unknown title"; }?>" displayText="SHARE"></span>
 
 					<button class="project-share-bookmark project-share-button hneue-bold">
 						<div class="share-icon"></div>
