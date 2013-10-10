@@ -3,8 +3,6 @@
 $project_id = $_REQUEST['id'];
 $activity = wp_get_activity($project_id);
 
-
-
 ?>
 <div id="project-financials">
 	<div id="financials-placeholder"></div>
@@ -36,7 +34,7 @@ $activity = wp_get_activity($project_id);
 
         <?php
 
-	foreach($activity->transactions AS $at) {
+	foreach($activity->transactions as $at) {
 		$type = '';
 		switch($at->transaction_type){
 			case 'C':
@@ -69,19 +67,19 @@ $activity = wp_get_activity($project_id);
 		$value = $at->value;
 		$value = str_replace(".00", "", $value);
 		$provider_org = '';
-		if(!empty($activity->provider_organisation->name)) {
-			$provider_org = (string)$activity->provider_organisation->name;
+		if(!empty($at->provider_organisation->name)) {
+			$provider_org = $at->provider_organisation->name;
 		} else {
-			if(!empty($activity->provider_organisation->code)) {
-				$provider_org = (string)$activity->provider_organisation->code;
+			if(!empty($at->provider_organisation->code)) {
+				$provider_org = $at->provider_organisation->code;
 			}
 		}
 		$receiver_org = '';
-		if(!empty($activity->receiver_organisation->name)) {
-			$receiver_org = (string)$activity->receiver_organisation->name;
+		if(!empty($at->receiver_organisation->name)) {
+			$receiver_org = $at->receiver_organisation->name;
 		} else {
-			if(!empty($activity->receiver_organisation->code)) {
-				$receiver_org = (string)$activity->receiver_organisation->code;
+			if(!empty($at->receiver_organisation->code)) {
+				$receiver_org = $at->receiver_organisation->code;
 			}
 		}
 

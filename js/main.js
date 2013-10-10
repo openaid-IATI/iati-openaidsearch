@@ -307,11 +307,6 @@ $(document).keyup(function(e) {
         show_map();
       }
 
-      // load the project filter options based on the current selection
-      if(selected_type == 'projects'){
-        initialize_project_filter_options();
-      }
-
       initialize_filters();
       $("#" + filterContainerName).show();
 
@@ -479,9 +474,9 @@ function create_api_url(){
   if (selected_type=='projects'){
     return search_url + 'country-geojson/?organisations=' + organisation_id + '&sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
   } else if (selected_type=='indicator'){
-    return search_url + 'indicator-data/?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&city=' + str_city;
+    return search_url + 'indicator-country-data/?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&cities=' + str_city + '&indicators=' + str_indicator;
   } else if (selected_type=='cpi'){
-    return search_url + 'indicator-data/?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&city=' + str_city + '&indicator=' + str_indicator;
+    return search_url + 'indicator-city-data/?sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region + '&cities=' + str_city + '&indicators=' + str_indicator;
   }
 }
 
