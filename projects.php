@@ -111,10 +111,7 @@ Template Name: Projects page
 <script>
     $(document).ready(function() {
       selected_type = "projects";
-      query_string_to_selection();
-      reload_map();
-      initialize_project_filter_options(fill_selection_box);
-
+      save_selection();
     });
 </script>
 <?php get_footer(); ?>
