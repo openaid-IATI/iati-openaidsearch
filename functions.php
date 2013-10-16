@@ -216,27 +216,27 @@ function my_request_filter( $query_vars ) {
 
 function wp_filter_request($search_url){
 
-    if(!empty($_REQUEST['countries'])) {
-		$countries = explode('|', trim($_REQUEST['countries']));
+    if(!empty($_REQUEST['countries__in'])) {
+		$countries = explode(',', trim($_REQUEST['countries__in']));
 		foreach($countries AS &$c) $c = trim($c);
-		$countries = implode('|', $countries);
-		$search_url .= "&countries={$countries}";
+		$countries = implode(',', $countries);
+		$search_url .= "&countries__in={$countries}";
 		$has_filter = true;
 		if(!empty($srch_countries)) {
-			$search_url .= "|{$srch_countries}";
+			$search_url .= ",{$srch_countries}";
 		}
 	} else {
 		if(!empty($srch_countries)) {
-			$search_url .= "&countries={$srch_countries}";
+			$search_url .= "&countries__in={$srch_countries}";
 			$has_filter = true;
 		}	
 	}
 	
-	if(!empty($_REQUEST['regions'])) {
-		$regions = explode('|', trim($_REQUEST['regions']));
+	if(!empty($_REQUEST['regions__in'])) {
+		$regions = explode(',', trim($_REQUEST['regions__in']));
 		foreach($regions AS &$c) $c = trim($c);
-		$regions = implode('|', $regions);
-		$search_url .= "&regions={$regions}";
+		$regions = implode(',', $regions);
+		$search_url .= "&regions__in={$regions}";
 		$has_filter = true;
 	}
 
@@ -250,16 +250,16 @@ function wp_filter_request($search_url){
 		$has_filter = false;
 	}
 	
-	if(!empty($_REQUEST['sectors'])) {
-		$sectors = explode('|', trim($_REQUEST['sectors']));
+	if(!empty($_REQUEST['sectors__in'])) {
+		$sectors = explode(',', trim($_REQUEST['sectors__in']));
 		foreach($sectors AS &$c) $c = trim($c);
-		$sectors = implode('|', $sectors);
-		$search_url .= "&sectors={$sectors}";
+		$sectors = implode(',', $sectors);
+		$search_url .= "&sectors__in={$sectors}";
 		$has_filter = true;
 	}
 	
-	if(!empty($_REQUEST['budgets'])) {
-		$budgets = explode('|', trim($_REQUEST['budgets']));
+	if(!empty($_REQUEST['budgets__in'])) {
+		$budgets = explode(',', trim($_REQUEST['budgets__in']));
 		//Get the lowest budget from filter and use this one, all the other are included in the range
 		ksort($budgets);
 		$search_url .= "&statistics__total_budget__gt={$budgets[0]}";

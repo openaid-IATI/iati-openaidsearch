@@ -81,15 +81,9 @@ $activity = wp_get_activity($project_id);
 						<?php 
 						if(!empty($activity->recipient_country)) {
 							$sep = '';
-							$countries = "";
-							$cSep = "";
 							foreach($activity->recipient_country AS $country) {
-								echo  $sep . "
-									<a href='".get_bloginfo('url')."/projects/?countries={$country->code}'>" . $country->name . "</a>
-									";
-								$countries .= $cSep . $country->code;
+								echo  $sep . "<a href='".get_bloginfo('url')."/projects/?countries__in={$country->code}'>" . $country->name . "</a>";
 								$sep = ', ';
-								$cSep = '|';
 							}		
 						}
 						?>
@@ -154,7 +148,7 @@ $activity = wp_get_activity($project_id);
 							if(!empty($activity->sectors)) {
 								$sep = '';
 								foreach($activity->sectors AS $sector) {
-									echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->code . "</a>";
+									echo  $sep . "<a class='projects-description-link' href='?sectors__in={$sector->code}'>" . $sector->code . "</a>";
 									$sep = ', ';
 								}			
 							} else {

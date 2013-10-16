@@ -34,18 +34,14 @@ foreach($objects AS $idx=>$project) {
 				<div class="projects-project-spec-key">Countries:</div>
 				<div class="projects-project-spec-value">
 
-					<?php if(!empty($project->recipient_country)) {
-						$sep = '';
-						$countries = "";
-						$cSep = "";
-						foreach($project->recipient_country AS $country) {
-							echo  $sep . "<a class='projects-description-link' href='?countries={$country->code}'>" . $country->name . "</a>";
-							$countries .= $cSep . $country->code;
-							$sep = ', ';
-							$cSep = '|';
-						}
+				<?php if(!empty($project->recipient_country)) {
+					$sep = '';
+					foreach($project->recipient_country AS $country) {
+						echo  $sep . "<a class='projects-description-link' href='?countries__in={$country->code}'>" . $country->name . "</a>";
+						$sep = ', ';
 					}
-					?>
+				}
+				?>
 
 				</div>
 
@@ -60,7 +56,7 @@ foreach($objects AS $idx=>$project) {
 				if(!empty($project->sectors)) {
 					$sep = '';
 					foreach($project->sectors AS $sector) {
-						echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->name . "</a>";
+						echo  $sep . "<a class='projects-description-link' href='?sectors__in={$sector->code}'>" . $sector->name . "</a>";
 						$sep = ', ';
 					}		
 				} else {
@@ -142,7 +138,7 @@ foreach($objects AS $idx=>$project) {
 				if(!empty($project->sectors)) {
 					$sep = '';
 					foreach($project->sectors AS $sector) {
-						echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->code . "</a>";
+						echo  $sep . "<a class='projects-description-link' href='?sectors__in={$sector->code}'>" . $sector->code . "</a>";
 						$sep = ', ';
 					}			
 				} else {

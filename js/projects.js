@@ -1,29 +1,15 @@
 // Global variables
 var geojson;
 
-// Project filter options
-function initialize_project_filter_options(callback){
-  //set loading gif in case call takes long
-  var url = make_project_filter_options_url();
-  get_project_filter_options(url, callback);
+// init/reload the map
+function initialize_projects_map(){
+    get_project_data(create_api_url("mapdata"));
 }
 
-function make_project_filter_options_url(){
-  var dlmtr = ",";
-  var str_country = reload_map_prepare_parameter_string("country", dlmtr);
-  var str_region = reload_map_prepare_parameter_string("region", dlmtr);
-  var str_sector = reload_map_prepare_parameter_string("sector", dlmtr);
-  var str_budget = reload_map_prepare_parameter_string("budget", dlmtr);
+function get_project_data(url){
+  $.support.cors = true;
+  var project_geojson = [];
 
-  var url = search_url + 'activity-filter-options/?organisations=' + organisation_id + '&sectors=' + str_sector + '&budgets=' + str_budget + '&countries=' + str_country + '&regions=' + str_region;
-  return url;
-}
-
-function get_project_filter_options(url, callback){
-  
-  $.support.cors = true; 
-  var project_options;
-  
   if(window.XDomainRequest){
     var xdr = new XDomainRequest();
     xdr.open("get", url);
@@ -31,109 +17,24 @@ function get_project_filter_options(url, callback){
     xdr.ontimeout = function () { };
     xdr.onerror = function () { };
     xdr.onload = function() {
-       var JSON = $.parseJSON(xdr.responseText);
-       if (JSON == null || typeof (JSON) == 'undefined')
+       var jsondata = $.parseJSON(xdr.responseText);
+       if (jsondata == null || typeof (jsondata) == 'undefined')
        {
-            JSON = $.parseJSON(data.firstChild.textContent);
+          jsondata = $.parseJSON(data.firstChild.textContent);
        }
-       project_options = JSON;
-       draw_project_options(project_options);
-
-       if(callback){
-        callback();
-       }
-    }
-    setTimeout(function () {xdr.send();}, 0);
-  } else {
-    $.ajax({
-          type: 'GET',
-           url: url,
-           async: false,
-           contentType: "application/json",
-           dataType: 'json',
-           success: function(data){
-
-
-            project_options = data;
-            draw_project_options(project_options);
-
-            if(callback){
-              callback();
-            }
-           }
-    });
-  }
-
-}
-
-function draw_project_options(options){
-
-  var budget_keys = {};
-  budget_keys['all'] = 'All';
-  budget_keys[''] = '> US$ 0';
-  budget_keys['10000'] = '> US$ 10.000';
-  budget_keys['50000'] = '> US$ 50.000';
-  budget_keys['100000'] = '> US$ 100.000';
-  budget_keys['500000'] = '> US$ 500.000';
-  budget_keys['1000000'] = '> US$ 1.000.000';
-
-  var country_html = create_filter_attributes(options.countries, 4);
-  $('#countries-filters').html(country_html);
-  var region_html = create_filter_attributes(options.regions, 4);
-  $('#regions-filters').html(region_html);
-  var sector_html = create_filter_attributes(options.sectors, 3);
-  $('#sectors-filters').html(sector_html);
-  var budget_html = create_filter_attributes(budget_keys, 4);
-  $('#budgets-filters').html(budget_html);
-}
-
-
-
-// init/reload the map
-function initialize_projects_map(url){
-    selected_type = "projects";
-    get_project_data(url);
-    initialize_project_filter_options();
-
-
-
-}
-
-function get_project_data(url){
-    $.support.cors = true; 
-    
-    var project_geojson = [];
-
-    
-
-    if(window.XDomainRequest){
-    var xdr = new XDomainRequest();
-    xdr.open("get", url);
-    xdr.onprogress = function () { };
-    xdr.ontimeout = function () { };
-    xdr.onerror = function () { };
-    xdr.onload = function() {
-       var JSON = $.parseJSON(xdr.responseText);
-       if (JSON == null || typeof (JSON) == 'undefined')
-       {
-            JSON = $.parseJSON(data.firstChild.textContent);
-       }
-       project_geojson = JSON;
        unload_project_map();
-       load_project_map(project_geojson);
+       load_project_map(jsondata);  
     }
     setTimeout(function () {xdr.send();}, 0);
   } else {
     $.ajax({
         type: 'GET',
          url: url,
-         async: false,
          contentType: "application/json",
          dataType: 'json',
          success: function(data){
-          project_geojson = data;
           unload_project_map();
-          load_project_map(project_geojson);
+          load_project_map(data);
          }
     });
   }
@@ -150,8 +51,6 @@ function unload_project_map(){
 
 
 // Map polygon styling
-
-
 function getColor(d) {
     return d > 40  ? '#E27724' :
            d > 10   ? '#F27730' :
@@ -162,10 +61,6 @@ function getColor(d) {
            //d > 220   ? '#2B8CBE' :
                       'transparent';
 }
-
-      // return d > 8  ? '#045A8D' :
-      //      d > 4   ? '#2476A2' :
-      //      d > 0   ? '#2B8CBE' :
 
 function getWeight(d) {
     return d > 0  ? 1 :
@@ -236,9 +131,6 @@ function load_project_map(project_geojson){
 }
 
 
-
-
-
   // load listeners at page initialisation:
   load_projects_listeners();
 
@@ -261,18 +153,15 @@ function load_project_map(project_geojson){
     $("#paginated-loader").hide();
     $('#page-wrapper').fadeIn(200, function(){
       load_projects_listeners();
-
    
    }); });
-   $('html,body').animate({
-     scrollTop: ($("#map-hide-show").offset().top - 250)},
-     'slow', function(){
-        if(reloadmap){
-          reload_map();
-          initialize_filters();
-          fill_selection_box();
-        }
-     });
+   // $('html,body').animate({
+   //   scrollTop: ($("#map-hide-show").offset().top - 250)},
+   //   'slow', function(){
+   //      if(reloadmap){
+   //        reload_map();
+   //      }
+   //   });
   }
 
 
@@ -317,16 +206,16 @@ function load_project_map(project_geojson){
      return false;
     });
 
-    $('.projects-description-link').click(function(){
-     var href = $(this).attr('href');
-     var splitted = href.split("=");
-     var parkey = splitted[0].substr(1);
-     var parval = splitted[1];
-     current_selection = new Object();
-     current_selection[parkey] = [{"id":parval, "name":"unnamed"}];
-     load_new_page(true, false);
-     return false;
-    });
+    // $('.projects-description-link').click(function(){
+    //  var href = $(this).attr('href');
+    //  var splitted = href.split("=");
+    //  var parkey = splitted[0].substr(1);
+    //  var parval = splitted[1];
+    //  current_selection = new Object();
+    //  current_selection[parkey] = [{"id":parval, "name":"unnamed"}];
+    //  load_new_page(true, false);
+    //  return false;
+    // });
 
 
     $("#project-share-embed").click(function(){

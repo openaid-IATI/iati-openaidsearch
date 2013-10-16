@@ -92,14 +92,7 @@ Template Name: Indicators page
 <script>
 $(document).ready(function(){
   selected_type = "indicator";
-  query_string_to_selection();
-
-  if (current_selection.indicators === undefined){
-  	current_selection.indicators = [];
-  	current_selection.indicators.push({"id":"population", "name":"Total population"});
-  }
-  reload_map();
-  initialize_filters(fill_selection_box, initialize_charts);
+  save_selection();
 });
 </script>
 <?php get_footer(); ?>
