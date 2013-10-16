@@ -79,15 +79,7 @@ Template Name: City prosperity page
 
 	$(document).ready(function(){
 	  selected_type = 'cpi';
-	  query_string_to_selection();
-
-	  if (current_selection.indicators === undefined){
-	  	current_selection.indicators = [];
-		current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"Five dimensions of city prosperity"});
-	  }
-	  reload_map();
-	  initialize_filters(fill_selection_box, initialize_cpi_charts);
-	  
+	  save_selection();
 	});
 
 </script>
