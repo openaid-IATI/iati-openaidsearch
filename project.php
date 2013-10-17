@@ -287,10 +287,10 @@ $activity = wp_get_activity($project_id);
 
 // PREPARE COUNTRIES FOR SHOWING ON MAP
 
-	<?php if(!empty($activity->recipient_country)) {
+	<?php if(!empty($activity->countries)) {
 		$sep = '';
 		$countries = "";
-		foreach($activity->recipient_country AS $country) {
+		foreach($activity->countries AS $country) {
 			$countries .=  $sep . '"' . $country->code . '"';
 			$sep = ', ';
 		}
