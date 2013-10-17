@@ -75,10 +75,26 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-value">
 
 						<?php 
-						if(!empty($activity->recipient_country)) {
+						if(!empty($activity->countries)) {
 							$sep = '';
-							foreach($activity->recipient_country AS $country) {
+							foreach($activity->countries AS $country) {
 								echo  $sep . "<a href='".get_bloginfo('url')."/projects/?countries={$country->code}'>" . $country->name . "</a>";
+								$sep = ', ';
+							}		
+						}
+						?>
+						</div>
+
+						<div class="projects-project-divider"></div>
+
+						<div class="projects-project-spec-key">Regions:</div>
+						<div class="projects-project-spec-value">
+
+						<?php 
+						if(!empty($activity->countries)) {
+							$sep = '';
+							foreach($activity->regions AS $region) {
+								echo  $sep . "<a href='".get_bloginfo('url')."/projects/?regions={$region->code}'>" . $region->name . "</a>";
 								$sep = ', ';
 							}		
 						}
