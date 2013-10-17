@@ -92,7 +92,7 @@ Template Name: Indicators page
 <script>
 $(document).ready(function(){
   selected_type = "indicator";
-  save_selection();
+  save_selection(true);
 });
 </script>
 <?php get_footer(); ?>

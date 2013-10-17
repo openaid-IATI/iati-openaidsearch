@@ -79,7 +79,7 @@ Template Name: City prosperity page
 
 	$(document).ready(function(){
 	  selected_type = 'cpi';
-	  save_selection();
+	  save_selection(true);
 	});
 
 </script>
