@@ -117,7 +117,7 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	$meta = $result->meta;
 	$objects = $result->objects;
 }
-
+	
 
 function wp_generate_paging($meta) {
 	global $_PER_PAGE;
@@ -216,8 +216,8 @@ function my_request_filter( $query_vars ) {
 
 function wp_filter_request($search_url){
 
-    if(!empty($_REQUEST['countries__in'])) {
-		$countries = explode(',', trim($_REQUEST['countries__in']));
+    if(!empty($_REQUEST['countries'])) {
+		$countries = explode(',', trim($_REQUEST['countries']));
 		foreach($countries AS &$c) $c = trim($c);
 		$countries = implode(',', $countries);
 		$search_url .= "&countries__in={$countries}";
@@ -232,8 +232,8 @@ function wp_filter_request($search_url){
 		}	
 	}
 	
-	if(!empty($_REQUEST['regions__in'])) {
-		$regions = explode(',', trim($_REQUEST['regions__in']));
+	if(!empty($_REQUEST['regions'])) {
+		$regions = explode(',', trim($_REQUEST['regions']));
 		foreach($regions AS &$c) $c = trim($c);
 		$regions = implode(',', $regions);
 		$search_url .= "&regions__in={$regions}";
@@ -250,16 +250,16 @@ function wp_filter_request($search_url){
 		$has_filter = false;
 	}
 	
-	if(!empty($_REQUEST['sectors__in'])) {
-		$sectors = explode(',', trim($_REQUEST['sectors__in']));
+	if(!empty($_REQUEST['sectors'])) {
+		$sectors = explode(',', trim($_REQUEST['sectors']));
 		foreach($sectors AS &$c) $c = trim($c);
 		$sectors = implode(',', $sectors);
 		$search_url .= "&sectors__in={$sectors}";
 		$has_filter = true;
 	}
 	
-	if(!empty($_REQUEST['budgets__in'])) {
-		$budgets = explode(',', trim($_REQUEST['budgets__in']));
+	if(!empty($_REQUEST['budgets'])) {
+		$budgets = explode(',', trim($_REQUEST['budgets']));
 		//Get the lowest budget from filter and use this one, all the other are included in the range
 		ksort($budgets);
 		$search_url .= "&statistics__total_budget__gt={$budgets[0]}";

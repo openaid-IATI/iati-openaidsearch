@@ -111,7 +111,7 @@ Template Name: Projects page
 <script>
     $(document).ready(function() {
       selected_type = "projects";
-      save_selection();
+      save_selection(true);
     });
 </script>
 <?php get_footer(); ?>

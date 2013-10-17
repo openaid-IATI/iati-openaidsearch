@@ -8,6 +8,7 @@ var standard_mapheight = '45em';
 
 // save current_selection
 function save_selection(newpage){
+  
   if (newpage){
     query_string_to_selection(save_selection_step_2);
   } else{
