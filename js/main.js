@@ -127,8 +127,8 @@ function build_current_url(){
   if (!(typeof current_selection.query === "undefined")) url += build_current_url_add_par("query", current_selection.query);
   if (url == '?p='){return '';}
   url = url.replace("?p=&", "?");
-  return url;
 
+  return url;
 }
 
 function build_current_url_add_par(name, arr, dlmtr){
@@ -151,7 +151,7 @@ function build_current_url_add_par(name, arr, dlmtr){
 // build current selection based on URL
 
 function query_string_to_selection(callback){
-
+  console.log("test");
   var query = window.location.search.substring(1);
   if(query != ''){
     var vars = query.split("&");
@@ -171,6 +171,7 @@ function query_string_to_selection(callback){
       
     }
   }
+  console.log("test2");
   callback();
 }
 
@@ -183,7 +184,7 @@ function create_filter_attributes(objects, columns){
     for (var key in objects){
       sortable.push([key, objects[key]]);
     }
-     
+    
     sortable.sort(function(a, b){
       var nameA=a[1].toString().toLowerCase(), nameB=b[1].toString().toLowerCase()
       if (nameA < nameB) //sort string ascending
