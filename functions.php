@@ -117,7 +117,6 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 
     $search_url = wp_filter_request($search_url);
 	$content = file_get_contents($search_url);
-
 	$result = json_decode($content);
 	$meta = $result->meta;
 	$objects = $result->objects;
@@ -395,6 +394,7 @@ function wp_get_cities($country) {
 	return objectToArray($objects);
 
 }
+
 function wp_get_indicator_results($region = '', $country = '', $year = ''){
     //        $search_url = SEARCH_URL . "indicators-country/?format=json&limit=6000&year=".$year."&region=".$region."&country=".$country;
         if (strlen($region)>0){
