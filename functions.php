@@ -109,8 +109,12 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	if(isset($_REQUEST['offset'])){	$activities_offset = rawurlencode($_REQUEST['offset']);	}
 	//if($offsetpar != ""){ $activities_offset = $offsetpar; }
 
-	$search_url = SEARCH_URL . "activities/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset."&reporting_organisation__in=".$_DEFAULT_ORGANISATION_ID;
+	$search_url = SEARCH_URL . "activities/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset;
     
+	if ($_DEFAULT_ORGANISATION_ID){
+		$search_url = $search_url . "&reporting_organisation__in=" . $_DEFAULT_ORGANISATION_ID;
+	}
+
     $search_url = wp_filter_request($search_url);
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
@@ -390,6 +394,7 @@ function wp_get_cities($country) {
 	return objectToArray($objects);
 
 }
+
 function wp_get_indicator_results($region = '', $country = '', $year = ''){
     //        $search_url = SEARCH_URL . "indicators-country/?format=json&limit=6000&year=".$year."&region=".$region."&country=".$country;
         if (strlen($region)>0){

@@ -109,7 +109,7 @@ function showPopup(e){
 
     var popup = L.popup()
     .setLatLng(pointToDraw)
-    .setContent('<div id="map-tip-header">' + layer.feature.properties.name + '</div><div id="map-tip-text">Total projects: '+ layer.feature.properties.project_amount + '</div><div id="map-tip-link"><a href="/projects/?s=&countries='+layer.feature.id+'">View projects</a></div>')
+    .setContent('<div id="map-tip-header">' + layer.feature.properties.name + '</div><div id="map-tip-text">Total projects: '+ layer.feature.properties.project_amount + '</div><div id="map-tip-link"><a href="/projects/?countries='+layer.feature.id+'">View projects</a></div>')
     .openOn(map);
 }
 
