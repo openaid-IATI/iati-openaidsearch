@@ -39,6 +39,7 @@ function save_selection_step_3(){
   $('#map-loader').hide();
 
   if(selected_type != "projects"){
+    // WERKT DIT? lijkt een async probleem te worden
     initialize_charts();
   }
 }
@@ -64,6 +65,7 @@ function load_filter_options(){
 }
 
 function process_filter_options(data){
+
   // uitzonderingen voor projects pagina
   if (selected_type == "projects"){
     var budget_keys = {};
@@ -151,7 +153,7 @@ function build_current_url_add_par(name, arr, dlmtr){
 // build current selection based on URL
 
 function query_string_to_selection(callback){
-  console.log("test");
+
   var query = window.location.search.substring(1);
   if(query != ''){
     var vars = query.split("&");
@@ -171,7 +173,6 @@ function query_string_to_selection(callback){
       
     }
   }
-  console.log("test2");
   callback();
 }
 
@@ -262,7 +263,7 @@ function comma_formatted(amount) {
 }
 
 function get_filter_data(url){
-  
+  console.log(url);
   $.support.cors = true; 
   
   if(window.XDomainRequest){
@@ -477,6 +478,8 @@ $(document).keyup(function(e) {
     if (!(typeof current_selection.regions === "undefined")) init_filters_loop(current_selection.regions);
     if (!(typeof current_selection.indicators === "undefined")) init_filters_loop(current_selection.indicators);
     if (!(typeof current_selection.cities === "undefined")) init_filters_loop(current_selection.cities);
+    
+    fill_selection_box();
   }
 
   function init_filters_loop(arr){

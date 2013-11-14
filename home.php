@@ -32,7 +32,7 @@
 				</a>
 				<?php endforeach; ?>
 
-					
+				
 
 				</div>
 				<div class="span4">

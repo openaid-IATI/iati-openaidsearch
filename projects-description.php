@@ -18,7 +18,13 @@ foreach($objects AS $idx=>$project) {
 				</a>
 			</div>
 			<div class="projects-project-description <?php echo $project->iati_identifier; ?>">
-				<?php echo $project->descriptions[0]->description; ?>
+
+			<?php if (!empty($project->descriptions)){ 
+					echo $project->descriptions[0]->description;
+				} else {
+					echo "No description given.";
+				}?>
+
 			</div>
 			
 		</div>
