@@ -18,7 +18,13 @@ foreach($objects AS $idx=>$project) {
 				</a>
 			</div>
 			<div class="projects-project-description <?php echo $project->iati_identifier; ?>">
-				<?php echo $project->descriptions[0]->description; ?>
+
+			<?php if (!empty($project->descriptions)){ 
+					echo $project->descriptions[0]->description;
+				} else {
+					echo "No description given.";
+				}?>
+
 			</div>
 			
 		</div>
@@ -68,12 +74,12 @@ foreach($objects AS $idx=>$project) {
 
 				<div class="projects-project-divider"></div>
 
-				<?php /* 
+				
 				<div class="projects-project-spec-key">Budget:</div>
 				<div class="projects-project-spec-value">
 
-					<?php if(!empty($project->statistics->total_budget)) {?>
-						US$ <?php echo format_custom_number($project->statistics->total_budget);  ?>
+					<?php if(!empty($project->total_budget)) {?>
+						US$ <?php echo format_custom_number($project->total_budget);  ?>
 					<?php } ?>
 
 				</div>
@@ -81,7 +87,7 @@ foreach($objects AS $idx=>$project) {
 				
 
 				<div class="projects-project-divider"></div>
-*/ ?>
+
 				<div class="projects-project-spec-key">IATI identifier:</div>
 				<div class="projects-project-spec-value">
 
