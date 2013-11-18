@@ -32,10 +32,7 @@
 				</a>
 				<?php endforeach; ?>
 
-<<<<<<< HEAD
-=======
-				
->>>>>>> master
+
 
 				</div>
 				<div class="span4">
