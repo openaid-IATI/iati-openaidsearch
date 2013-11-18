@@ -266,7 +266,7 @@ function wp_filter_request($search_url){
 		$budgets = explode(',', trim($_REQUEST['budgets']));
 		//Get the lowest budget from filter and use this one, all the other are included in the range
 		ksort($budgets);
-		$search_url .= "&statistics__total_budget__gt={$budgets[0]}";
+		$search_url .= "&total_budget__gt={$budgets[0]}";
 		$has_filter = true;
 	}
 
