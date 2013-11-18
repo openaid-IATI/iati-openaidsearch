@@ -125,22 +125,18 @@ $activity = wp_get_activity($project_id);
 						</div>
 
 						<div class="projects-project-divider"></div>
-	<?php /* 
+
 						<div class="projects-project-spec-key">Budget:</div>
 						<div class="projects-project-spec-value">
 
-<<<<<<< HEAD
-							<?php if(!empty($activity->statistics->total_budget)) {?>
-							US$
-							<?php echo format_custom_number($activity->statistics->total_budget);  ?>
-=======
+
 							<?php if(!empty($activity->total_budget)) {?>
 							<?php echo format_custom_number($activity->total_budget);  ?>
->>>>>>> master
+
 							<?php } ?></div>
 
 						<div class="projects-project-divider"></div>
-*/ ?>
+
 						<div class="projects-project-spec-key">IATI identifier:</div>
 						<div class="projects-project-spec-value">
 
