@@ -131,7 +131,7 @@ $activity = wp_get_activity($project_id);
 
 
 							<?php if(!empty($activity->total_budget)) {?>
-							<?php echo format_custom_number($activity->total_budget);  ?>
+							&euro; <?php echo format_custom_number($activity->total_budget);  ?>
 
 							<?php } ?></div>
 
