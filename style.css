@@ -1793,7 +1793,7 @@ label, input, button, select, textarea{
   background-position: -36px 0;
 }
 
-.project-share-button.project-share-whistleblower, .project-share-button.project-share-bookmark, .project-share-button.project-share-export, #page-share-whistleblower{
+.project-share-button.project-share-whistleblower, .project-share-button.project-share-bookmark, .project-share-button.project-share-export, .project-share-button#project-share-export, #page-share-whistleblower{
   display: none;
 }
 
