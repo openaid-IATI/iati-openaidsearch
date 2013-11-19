@@ -79,7 +79,9 @@ foreach($objects AS $idx=>$project) {
 				<div class="projects-project-spec-value">
 
 					<?php if(!empty($project->total_budget)) {?>
+
 						&euro; <?php echo format_custom_number($project->total_budget);  ?>
+
 					<?php } ?>
 
 				</div>
