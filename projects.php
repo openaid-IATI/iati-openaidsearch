@@ -56,8 +56,8 @@ Template Name: Projects page
                             <span class="project-sort-text hneue-bold">BUDGET</span>
                             <span class="project-sort-icon"></span>
                             <div id="dropdown-project-budget" class="dropdown-project">
-                                <a href="?order_by=statistics__total_budget" class="project-sort-item">ASCENDING</a>
-                                <a href="?order_by=-statistics__total_budget" class="project-sort-item">DESCENDING</a>
+                                <a href="?order_by=total_budget" class="project-sort-item">ASCENDING</a>
+                                <a href="?order_by=-total_budget" class="project-sort-item">DESCENDING</a>
                             </div>
                         </div>
 

@@ -173,7 +173,9 @@ function query_string_to_selection(callback){
       
     }
   }
-  callback();
+  if (callback){
+    callback();
+  }
 }
 
 // create filter options of one particular filter type, objects = the options, columns = amount of columns per filter page
