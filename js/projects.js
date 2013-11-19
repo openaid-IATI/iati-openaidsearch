@@ -85,7 +85,7 @@ function highlightFeature(e) {
         
         if (currently_selected_country != layer.feature.properties.name){
             set_currently_selected_country(layer.feature.properties.name);
-            showPopup(e);
+            
         }
 
         layer.setStyle({

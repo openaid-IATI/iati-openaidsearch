@@ -107,15 +107,16 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-value">
 
 						<?php 
-							if(!empty($activity->sectors)) {
-								$sep = '';
-								foreach($activity->sectors AS $sector) {
-									echo  $sector->name;
-									$sep = ', ';
-								}
-							} else {
-								echo "No information avaiable";
-							} ?>
+						if(!empty($activity->sectors)) {
+							$sep = '';
+							foreach($activity->sectors AS $sector) {
+								echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->name . "</a>";
+								$sep = ', ';
+							}		
+						} else {
+							echo "No information avaiable";
+						} ?>
+
 
 						</div>
 
@@ -124,16 +125,24 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Budget:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->total_budget)) {?>
-							<?php echo format_custom_number($activity->total_budget);  ?>
-							<?php } ?></div>
+							<?php if(!empty($activity->total_budget)) {
+								if(!empty($activity->default_currency)) { echo currencyCodeToSign($activity->default_currency->code); }
+								echo format_custom_number($activity->total_budget);
+							} else {
+								echo "-";
+							} ?>
+						</div>
 
 						<div class="projects-project-divider"></div>
 
 						<div class="projects-project-spec-key">IATI identifier:</div>
 						<div class="projects-project-spec-value">
 
+							<a href="<?php echo site_url() . '/project/?id=' . $activity->iati_identifier; ?>" alt="See project details">
 							<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?></div>
+							</a>
+
+							
 
 						<div class="projects-project-divider"></div>
 
@@ -141,7 +150,7 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-value">
 						
 						<?php 
-							if(!empty($activity->reporting_organisation->name)) { echo $activity->reporting_organisation->name; } else {
+							if(!empty($activity->reporting_organisation->name)){ echo $activity->reporting_organisation->name; } else {
 							if(!empty($activity->reporting_organisation->code)){ echo $activity->reporting_organisation->code; } }
 						?>
 
