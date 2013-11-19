@@ -266,10 +266,10 @@ $activity = wp_get_activity($project_id);
 							<div id="disqus_thread"></div>
 						    <script>
 						        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-						        var disqus_shortname = 'openunhabitat'; // required: replace example with your forum shortname
+						        var disqus_shortname = ''; // required: replace example with your forum shortname
 						 		var disqus_identifier = '<?php echo $activity->iati_identifier; ?>';
     							var disqus_title = '<?php echo $activity->titles[0]->title; ?>';
-    							var disqus_url = '<?php echo "http://open.unhabitat.org/project/?id=" . $activity->iati_identifier; ?>';
+    							var disqus_url = '<?php echo site_url() . "/project/?id=" . $activity->iati_identifier; ?>';
 
 						        /* * * DON'T EDIT BELOW THIS LINE * * */
 						        (function() {
