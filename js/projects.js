@@ -82,10 +82,7 @@ function highlightFeature(e) {
     
     if(typeof layer.feature.properties.project_amount != "undefined"){
         
-        if (currently_selected_country != layer.feature.properties.name){
-            set_currently_selected_country(layer.feature.properties.name);
-            
-        }
+       
 
         layer.setStyle({
             weight: 2,
