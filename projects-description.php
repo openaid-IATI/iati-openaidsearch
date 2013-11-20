@@ -206,7 +206,7 @@ foreach($objects AS $idx=>$project) {
 
 				<div class="project-share-container projects-share-spec">
 
-					<button id="project-share-export" class="project-share-button hneue-bold" name="<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>">
+					<button class="project-share-export project-share-button hneue-bold" name="<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>">
 						<div class="share-icon"></div>
 						<div class="share-text">EXPORT</div>
 					</button>

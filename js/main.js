@@ -690,23 +690,27 @@ function init_remove_filters_from_selection_box(){
     var arr = current_selection[filtername];
     for (var i = 0; i < arr.length;i++){
       if(arr[i].id == id){
-        arr.splice(i, 1);
+        // arr.splice(i, 1);
+        $('input[name="' + arr[i].name + '"]').attr('checked', false);
         break;
       }
     }
-    reload_page();
+    save_selection();
   });
 }
 
 $(".selection-clear-div").click(function(){
 
-  current_selection = new Object();
-  current_selection.indicators = [];
-  if(selected_type == 'indicators'){
-    current_selection.indicators.push({"id":"population", "name":"Total population"});
-  } else if(selected_type == 'cpi'){
-    current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"Five dimensions of city prosperity"});
-  }
+  $('input:checkbox').each(function(){
+    $(this).attr('checked', false);
+  });
+  // current_selection = new Object();
+  // current_selection.indicators = [];
+  // if(selected_type == 'indicators'){
+  //   current_selection.indicators.push({"id":"population", "name":"Total population"});
+  // } else if(selected_type == 'cpi'){
+  //   current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"Five dimensions of city prosperity"});
+  // }
   
   save_selection();
   
