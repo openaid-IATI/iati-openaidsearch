@@ -9,6 +9,6 @@ define( 'SITE_URL', 'http://dev.oipa.openaidsearch.org/');
 define( 'EMPTY_LABEL', 'No information available');
 
 $_DEFAULT_ORGANISATION_ID = '';
-$_PER_PAGE = 5;
+$_PER_PAGE = 25;
 define( 'DEFAULT_ORGANISATION_ID', $_DEFAULT_ORGANISATION_ID);
 ?>

@@ -55,7 +55,7 @@ body {
   color: #666;
   font-family:"HelveticaNeueW02-55Roma","Helvetica Neue",Helvetica,Arial,sans-serif;
   line-height: 100%;
-  background-color: #F1EEE8;
+  background-color: #FFF;
   font-size: 12px;
 }
 
@@ -1518,6 +1518,11 @@ label, input, button, select, textarea{
 .project-sort-text, #save-search-results, #sort-type-header{
   vertical-align: middle;
 }
+
+#save-search-results, #project-share-embed{
+  display: none;
+}
+
 .project-page#project-share-embed{
   padding-left:1.5em;
 }
