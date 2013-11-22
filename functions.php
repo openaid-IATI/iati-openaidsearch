@@ -368,10 +368,10 @@ function currencyCodeToSign($currency){
 	        return "DDK kr. ";
 	        break;
 	    case "EUR":
-	        return "€ ";
+	        return "EUR ";
 	        break;
 	    case "GBP":
-	        return "£ ";
+	        return "GBP £ ";
 	        break;
 	    case "INR":
 	        return "INR Rs ";
@@ -389,7 +389,7 @@ function currencyCodeToSign($currency){
 	        return "PKR Rs ";
 	        break;
 	    case "USD":
-	        return "$ ";
+	        return "US $ ";
 	        break;
 	    case "ZAR":
 	        return "Rand ";
