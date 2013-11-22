@@ -2,6 +2,7 @@
 wp_generate_results_v2($objects, $meta);
 
 foreach($objects AS $idx=>$project) {
+
 ?>
 
 <div class="projects-project-block">
@@ -78,11 +79,14 @@ foreach($objects AS $idx=>$project) {
 				<div class="projects-project-spec-key">Budget:</div>
 				<div class="projects-project-spec-value">
 
-					<?php if(!empty($project->total_budget)) {?>
 
-						&euro; <?php echo format_custom_number($project->total_budget);  ?>
+					<?php if(!empty($project->total_budget)) {
+						if(!empty($project->default_currency)) { echo currencyCodeToSign($project->default_currency->code); }
+						echo format_custom_number($project->total_budget);
+					} else {
+						echo "-";
+					} ?>
 
-					<?php } ?>
 
 				</div>
 
@@ -92,9 +96,9 @@ foreach($objects AS $idx=>$project) {
 
 				<div class="projects-project-spec-key">IATI identifier:</div>
 				<div class="projects-project-spec-value">
-
+				<a href="<?php echo site_url() . '/project/?id=' . $project->iati_identifier; ?>" alt="See project details">
 				<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>
-
+				</a>
 				</div>
 
 				<div class="projects-project-divider"></div>
@@ -133,8 +137,13 @@ foreach($objects AS $idx=>$project) {
 				<div class="projects-project-spec-value">
 
 					<?php 
-						if(!empty($project->reporting_organisation->name)) { echo $project->reporting_organisation->name; } else {
-						if(!empty($project->reporting_organisation->code)){ echo $project->reporting_organisation->code; } }
+						if(!empty($project->reporting_organisation->name)) { 
+							echo $project->reporting_organisation->name; 
+						} else {
+							if(!empty($project->reporting_organisation->code)){ 
+								echo $project->reporting_organisation->code; 
+							} 
+						}
 					?>
 
 				</div>
@@ -199,7 +208,7 @@ foreach($objects AS $idx=>$project) {
 
 				<div class="project-share-container projects-share-spec">
 
-					<button id="project-share-export" class="project-share-button hneue-bold" name="<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>">
+					<button class="project-share-export project-share-button hneue-bold" name="<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>">
 						<div class="share-icon"></div>
 						<div class="share-text">EXPORT</div>
 					</button>

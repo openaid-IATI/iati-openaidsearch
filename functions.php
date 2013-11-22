@@ -349,7 +349,9 @@ function format_custom_number($num) {
 			$ret .= "," . $s[1];
 		}
 	}
-	
+	if (substr($ret, 0, 1) == "."){
+		$ret = substr($ret, 1);
+	}
 	return $ret;
 }
 
@@ -357,7 +359,44 @@ function format_custom_number($num) {
 
 
 
+function currencyCodeToSign($currency){
+	switch ($currency) {
+	    case "CAD":
+	        return "CAD $ ";
+	        break;
+	    case "DDK":
+	        return "DDK kr. ";
+	        break;
+	    case "EUR":
+	        return "EUR ";
+	        break;
+	    case "GBP":
+	        return "GBP £ ";
+	        break;
+	    case "INR":
+	        return "INR Rs ";
+	        break;
+	    case "NOK":
+	        return "NOK kr. ";
+	        break;
+	    case "NPR":
+	        return "NPR Rs ";
+	        break;
+	    case "NZD":
+	        return "NZD $ ";
+	        break;
+	    case "PKR":
+	        return "PKR Rs ";
+	        break;
+	    case "USD":
+	        return "US $ ";
+	        break;
+	    case "ZAR":
+	        return "Rand ";
+	        break;
 
+    }
+}
 
 
 

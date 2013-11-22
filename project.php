@@ -112,15 +112,16 @@ $activity = wp_get_activity($project_id);
 
 
 						<?php 
-							if(!empty($activity->sectors)) {
-								$sep = '';
-								foreach($activity->sectors AS $sector) {
-									echo  $sector->name;
-									$sep = ', ';
-								}
-							} else {
-								echo "No information avaiable";
-							} ?>
+						if(!empty($activity->sectors)) {
+							$sep = '';
+							foreach($activity->sectors AS $sector) {
+								echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->name . "</a>";
+								$sep = ', ';
+							}		
+						} else {
+							echo "No information avaiable";
+						} ?>
+
 
 						</div>
 
@@ -130,17 +131,25 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-value">
 
 
-							<?php if(!empty($activity->total_budget)) {?>
-							&euro; <?php echo format_custom_number($activity->total_budget);  ?>
+							<?php if(!empty($activity->total_budget)) {
+								if(!empty($activity->default_currency)) { echo currencyCodeToSign($activity->default_currency->code); }
+								echo format_custom_number($activity->total_budget);
+							} else {
+								echo "-";
+							} ?>
+						</div>
 
-							<?php } ?></div>
 
 						<div class="projects-project-divider"></div>
 
 						<div class="projects-project-spec-key">IATI identifier:</div>
 						<div class="projects-project-spec-value">
 
+							<a href="<?php echo site_url() . '/project/?id=' . $activity->iati_identifier; ?>" alt="See project details">
 							<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?></div>
+							</a>
+
+							
 
 						<div class="projects-project-divider"></div>
 
@@ -148,7 +157,7 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-value">
 						
 						<?php 
-							if(!empty($activity->reporting_organisation->name)) { echo $activity->reporting_organisation->name; } else {
+							if(!empty($activity->reporting_organisation->name)){ echo $activity->reporting_organisation->name; } else {
 							if(!empty($activity->reporting_organisation->code)){ echo $activity->reporting_organisation->code; } }
 						?>
 
@@ -275,10 +284,12 @@ $activity = wp_get_activity($project_id);
 							<div id="disqus_thread"></div>
 						    <script>
 						        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+
 						        var disqus_shortname = 'openaidnl'; // required: replace example with your forum shortname
 						 		var disqus_identifier = '<?php echo $activity->iati_identifier; ?>';
     							var disqus_title = '<?php echo $activity->titles[0]->title; ?>';
-    							var disqus_url = '<?php echo "http://harmonia.openaid.nl/project/?id=" . $activity->iati_identifier; ?>';
+    							var disqus_url = '<?php echo site_url() . "/project/?id=" . $activity->iati_identifier; ?>';
+
 
 						        /* * * DON'T EDIT BELOW THIS LINE * * */
 						        (function() {
@@ -288,7 +299,6 @@ $activity = wp_get_activity($project_id);
 						        })();
 						    </script>
 						    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-						    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 						</div>
 					</div>
 				</div>
