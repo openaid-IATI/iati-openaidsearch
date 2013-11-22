@@ -84,7 +84,19 @@ function process_filter_options(data){
     });
   }
   // load filter html and implement it in the page
-  $.each(data, function( key, value ) {
+  if (selected_type == "projects"){
+    $.each(data, function( key, value ) {
+     if (!$.isEmptyObject(value)){
+       var columns = 4;
+       if ($.inArray(key, new Array("indicators", "sectors"))){ columns = 3};
+       var filter_html = create_project_filter_attributes(value, columns);
+       $('#' + key + '-filters').html(filter_html);
+     }
+  });
+    var filter_html = create_budget_filter_attributes();
+    $('#budgets-filters').html(filter_html);
+  } else {
+    $.each(data, function( key, value ) {
      if (!$.isEmptyObject(value)){
        var columns = 4;
        if ($.inArray(key, new Array("indicators", "sectors"))){ columns = 3};
@@ -92,11 +104,6 @@ function process_filter_options(data){
        $('#' + key + '-filters').html(filter_html);
      }
   });
-
-  // uitzonderingen voor projects pagina
-  if (selected_type == "projects"){
-    var filter_html = create_budget_filter_attributes();
-    $('#budgets-filters').html(filter_html);
   }
 
   // reload aangevinkte vakjes
@@ -176,6 +183,67 @@ function query_string_to_selection(callback){
 
 // create filter options of one particular filter type, objects = the options, columns = amount of columns per filter page
 function create_filter_attributes(objects, columns){
+    var html = '';
+    var per_col = 20;
+
+
+    var sortable = [];
+    for (var key in objects){
+      sortable.push([key, objects[key]]);
+    }
+    
+    sortable.sort(function(a, b){
+      var nameA=a[1].toString().toLowerCase(), nameB=b[1].toString().toLowerCase()
+      if (nameA < nameB) //sort string ascending
+        return -1 
+      if (nameA > nameB)
+        return 1
+      return 0 //default return value (no sorting)
+    });
+
+    var page_counter = 1;
+    html += '<div class="filter-page filter-page-1">'
+    
+    for (var i = 0;i < sortable.length;i++){
+
+      if (i%per_col == 0){
+          html += '<div class="span' + (12 / columns) + '">';
+      } 
+
+      var sortablename = sortable[i][1];
+      if (sortablename.length > 32 && columns == 4){
+        sortablename = sortablename.substr(0,30) + "...";
+      }
+
+      html += '<div class="squaredThree"><div>';
+      html += '<input type="checkbox" value="'+ sortable[i][0] +'" id="'+sortable[i][1].toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'" name="'+sortable[i][1]+'" />';
+      html += '<label class="map-filter-cb-value" for="'+sortable[i][1].toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'"></label>';
+      html += '</div><div class="squaredThree-fname"><span>'+sortablename+'</span></div></div>';
+      if (i%per_col == (per_col - 1)){
+        html += '</div>';
+      }
+      if ((i + 1) > ((page_counter * (per_col * columns))) - 1) { 
+        
+     
+        html += '</div>';
+        page_counter = page_counter + 1;
+        html += '<div class="filter-page filter-page-' + page_counter + '">';
+      }
+        
+    }
+
+    html += '<div class="filter-total-pages" name="' + page_counter + '"></div>';
+
+    /// if paginated, close the pagination.
+    if (page_counter > 1){
+      html += '</div>';
+    }
+
+    return html;
+}
+
+// create filter options of one particular filter type, objects = the options, columns = amount of columns per filter page
+function create_project_filter_attributes(objects, columns){
     var html = '';
     var per_col = 20;
 
@@ -355,77 +423,77 @@ jQuery(function($) {
       map.setZoom(2);
   }
 
-	$('#map-lightbox-close').click(function(){
-		$('#map-lightbox').hide();
-		$('#map-lightbox-bg').hide();
-	});
+  $('#map-lightbox-close').click(function(){
+    $('#map-lightbox').hide();
+    $('#map-lightbox-bg').hide();
+  });
 
-	$('#map-hide-show-button').click(function(){
-		if($(this).hasClass("map-show")){
-			if ($('#map-filter-overlay').is(":visible")){
-				$('#map-filter-overlay').hide('slow');
-			}
-			hide_map();
-		} else {
-			show_map();
-		}
-	});
+  $('#map-hide-show-button').click(function(){
+    if($(this).hasClass("map-show")){
+      if ($('#map-filter-overlay').is(":visible")){
+        $('#map-filter-overlay').hide('slow');
+      }
+      hide_map();
+    } else {
+      show_map();
+    }
+  });
 
-	function hide_map()
-	{
+  function hide_map()
+  {
     standard_mapheight = $('#map').css('height');
-  	$('#map-hide-show-button').removeClass('map-show');
-		$('#map-hide-show-button').addClass('map-hide');
-		$('#map-hide-show-text').html("SHOW MAP");
-		animate_map('13.5em');
-		hide_map_homepage();
-	}
+    $('#map-hide-show-button').removeClass('map-show');
+    $('#map-hide-show-button').addClass('map-hide');
+    $('#map-hide-show-text').html("SHOW MAP");
+    animate_map('13.5em');
+    hide_map_homepage();
+  }
 
-	function show_map(){
-  	$('#map-hide-show-button').removeClass('map-hide');
-		$('#map-hide-show-button').addClass('map-show');
-		$('#map-hide-show-text').html("HIDE MAP");
-		animate_map(standard_mapheight);
-		show_map_homepage();
-	}
+  function show_map(){
+    $('#map-hide-show-button').removeClass('map-hide');
+    $('#map-hide-show-button').addClass('map-show');
+    $('#map-hide-show-text').html("HIDE MAP");
+    animate_map(standard_mapheight);
+    show_map_homepage();
+  }
 
-	function animate_map(mapheight){
-		$('#map').animate({
-			height: mapheight
-		}, 1000, function() {
-		 map.invalidateSize();
-	});
-	}
+  function animate_map(mapheight){
+    $('#map').animate({
+      height: mapheight
+    }, 1000, function() {
+     map.invalidateSize();
+  });
+  }
 
-	function hide_map_homepage(){
-		$('#map-lightbox').animate({
-			fontSize: "0.7em",
-			top: "3em"
-		}, 1000, function() {
-		// Animation complete.
-	});
-	$('#map-lightbox-bg').animate({
-			fontSize: "0.7em",
-			top: "3em"
-		}, 1000, function() {
-		// Animation complete.
-	});
-	}
+  function hide_map_homepage(){
+    $('#map-lightbox').animate({
+      fontSize: "0.7em",
+      top: "3em"
+    }, 1000, function() {
+    // Animation complete.
+  });
+  $('#map-lightbox-bg').animate({
+      fontSize: "0.7em",
+      top: "3em"
+    }, 1000, function() {
+    // Animation complete.
+  });
+  }
 
-	function show_map_homepage(){
-		$('#map-lightbox').animate({
-			fontSize: "1em",
-			top: "10.5em"
-		}, 1000, function() {
-		// Animation complete.
-	});
-	$('#map-lightbox-bg').animate({
-			fontSize: "1em",
-			top: "10.5em"
-		}, 1000, function() {
-		// Animation complete.
-	});
-	}
+  function show_map_homepage(){
+    $('#map-lightbox').animate({
+      fontSize: "1em",
+      top: "10.5em"
+    }, 1000, function() {
+    // Animation complete.
+  });
+  $('#map-lightbox-bg').animate({
+      fontSize: "1em",
+      top: "10.5em"
+    }, 1000, function() {
+    // Animation complete.
+  });
+  }
 });
 
 
@@ -543,12 +611,12 @@ $(document).keyup(function(e) {
     $('#cities-filters').hide();
   }
 
-	$('#map-filter-cancel').click(function(){
+  $('#map-filter-cancel').click(function(){
     $('.filter-button.filter-selected').removeClass("filter-selected");
-		$('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
-	});
+    $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 1000);
+  });
 
-	$('#map-filter-save').click(function(){
+  $('#map-filter-save').click(function(){
     $('.filter-button.filter-selected').removeClass("filter-selected");
     save_selection();
   });
