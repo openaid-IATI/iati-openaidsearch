@@ -250,6 +250,9 @@ function create_project_filter_attributes(objects, columns){
 
     var sortable = [];
     for (var key in objects){
+      if (object[key][1].name == null){
+        object[key][1].name == "Unknown";
+      }
       sortable.push([key, objects[key]]);
     }
     
