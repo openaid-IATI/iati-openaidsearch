@@ -449,7 +449,7 @@ input[type="text"]{
 .filter-text{
   display: inline-block;
   vertical-align: middle;
-  padding-right:4em;
+  padding-right:2em;
 }
 
 .filter-button-icon{
@@ -2002,7 +2002,7 @@ label, input, button, select, textarea{
     }    
 
     .filter-text{
-      padding-right: 2.2em;
+      padding-right: 1em;
     }
 
     .project-sort-type, #sort-type-header{
@@ -2199,7 +2199,7 @@ label, input, button, select, textarea{
  
 
     .filter-text{
-      padding-right: 2.2em;
+      padding-right: 1em;
     }
 
     .project-sort-type, #sort-type-header{

@@ -126,6 +126,7 @@ function build_current_url(){
   if (!(typeof current_selection.regions === "undefined")) url += build_current_url_add_par("regions", current_selection.regions);
   if (!(typeof current_selection.indicators === "undefined")) url += build_current_url_add_par("indicators", current_selection.indicators);
   if (!(typeof current_selection.cities === "undefined")) url += build_current_url_add_par("cities", current_selection.cities);
+  if (!(typeof current_selection.reporting_organisations === "undefined")) url += build_current_url_add_par("reporting_organisations", current_selection.reporting_organisations);
   if (!(typeof current_selection.offset === "undefined")) url += build_current_url_add_par("offset", current_selection.offset);
   if (!(typeof current_selection.per_page === "undefined")) url += build_current_url_add_par("per_page", current_selection.per_page);
   if (!(typeof current_selection.order_by === "undefined")) url += build_current_url_add_par("order_by", current_selection.order_by);
@@ -250,7 +251,6 @@ function create_project_filter_attributes(objects, columns){
 
     var sortable = [];
     for (var key in objects){
-      console.log(objects[key].name);
       if (objects[key].name == null){
         objects[key].name = "Unknown";
       }
@@ -596,6 +596,7 @@ $(document).keyup(function(e) {
     if (!(typeof current_selection.regions === "undefined")) init_filters_loop(current_selection.regions);
     if (!(typeof current_selection.indicators === "undefined")) init_filters_loop(current_selection.indicators);
     if (!(typeof current_selection.cities === "undefined")) init_filters_loop(current_selection.cities);
+    if (!(typeof current_selection.reporting_organisations === "undefined")) init_filters_loop(current_selection.reporting_organisations);
     
     fill_selection_box();
   }
@@ -634,6 +635,7 @@ function save_current_selection(callback){
     new_selection.regions = [];
     new_selection.indicators = [];
     new_selection.cities = [];
+    new_selection.reporting_organisations = [];
 
     // set selection as filter and load results
     get_checked_by_filter("sectors", new_selection);
@@ -642,6 +644,7 @@ function save_current_selection(callback){
     get_checked_by_filter("regions", new_selection);
     get_checked_by_filter("indicators", new_selection);
     get_checked_by_filter("cities", new_selection);
+    get_checked_by_filter("reporting_organisations", new_selection);
 
     if(new_selection.indicators.length > 2){
         too_many_indicators_error(new_selection.indicators.length - 2);
@@ -703,11 +706,17 @@ function create_api_url(type, indicatorid){
   var str_region = reload_map_prepare_parameter_string("regions", dlmtr);
   var str_indicator = reload_map_prepare_parameter_string("indicators", dlmtr);
   var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
+  var str_reporting_organisation = reload_map_prepare_parameter_string("reporting_organisations", dlmtr);
 
   if (type == 'filter' && selected_type=='projects'){
     return search_url + 'activity-filter-options/?reporting_organisation__in=' + organisation_id;
   } else if (type == "mapdata" && selected_type=='projects'){
-    return search_url + 'country-geojson/?reporting_organisation__in=' + organisation_id + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
+    if(organisation_id){
+      return search_url + 'country-geojson/?reporting_organisation__in=' + organisation_id + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
+    } else{
+      return search_url + 'country-geojson/?reporting_organisation__in=' + str_reporting_organisation + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
+    }
+
   } else if (type == "listdata" && selected_type=='projects'){
     // TO DO: implement this
   } else if (type == 'filter' && selected_type=='indicator'){
@@ -764,6 +773,7 @@ function fill_selection_box(){
   if (!(typeof current_selection.regions === "undefined") && (current_selection.regions.length > 0)) html += fill_selection_box_single_filter("REGIONS", current_selection.regions);
   if (!(typeof current_selection.cities === "undefined") && (current_selection.cities.length > 0)) html += fill_selection_box_single_filter("CITIES", current_selection.cities);
   if (!(typeof current_selection.indicators === "undefined") && (current_selection.indicators.length > 0)) indicatorhtml = fill_selection_box_single_filter("INDICATORS", current_selection.indicators);
+  if (!(typeof current_selection.reporting_organisations === "undefined") && (current_selection.reporting_organisations.length > 0)) indicatorhtml = fill_selection_box_single_filter("REPORTING_ORGANISATIONS", current_selection.reporting_organisations);
   if (!(typeof current_selection.query === "undefined") && (current_selection.query.length > 0)) html += fill_selection_box_single_filter("QUERY", current_selection.query);
   $("#selection-box").html(html);
   $("#selection-box-indicators").html(indicatorhtml);
@@ -775,6 +785,7 @@ function fill_selection_box_single_filter(header, arr){
       html += '<div class="select-box-header">';
       if (header == "INDICATORS" && selected_type == "cpi"){ header = "DIMENSIONS";}
       if (header == "QUERY"){header = "SEARCH"}
+      if (header == "REPORTING_ORGANISATIONS"){header = "REPORTING ORGANISATIONS"}
       html += header;
       html += '</div>';
 
@@ -802,8 +813,10 @@ function init_remove_filters_from_selection_box(){
     var id = $(this).attr('id');
     id = id.replace("selected-", "");
     var filtername = $(this).parent().parent().attr('id');
+    console.log(filtername);
     filtername = filtername.replace("selected-", "");
     var arr = current_selection[filtername];
+    console.log(arr);
     for (var i = 0; i < arr.length;i++){
       if(arr[i].id == id){
         // arr.splice(i, 1);

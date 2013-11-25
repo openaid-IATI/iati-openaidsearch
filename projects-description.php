@@ -133,17 +133,15 @@ foreach($objects AS $idx=>$project) {
 
 				<div class="projects-project-spec-key">Reporting organisation:</div>
 				<div class="projects-project-spec-value">
-
+				<a href="?reporting_organisations=<?php echo $project->reporting_organisation->code; ?>">
 					<?php 
 						if(!empty($project->reporting_organisation->name)) { 
 							echo $project->reporting_organisation->name; 
 						} else {
-							if(!empty($project->reporting_organisation->code)){ 
-								echo $project->reporting_organisation->code; 
-							} 
+							echo $project->reporting_organisation->code; 
 						}
 					?>
-
+				</a>
 				</div>
 
 				<div class="projects-project-divider"></div>

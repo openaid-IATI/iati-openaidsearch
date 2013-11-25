@@ -140,9 +140,7 @@ function load_project_map(project_geojson){
    }
 
    var link = document.URL.toString().split("?")[0] + build_current_url();
-   if (history.pushState){
-    history.pushState(null, null, link);
-   }
+   console.log(link);
    $('#page-wrapper').fadeOut(100, function(){ //fade out the content area
    $("#paginated-loader").show();
    }).load(link + ' #page-wrapper', function(){ 
@@ -151,13 +149,6 @@ function load_project_map(project_geojson){
       load_projects_listeners();
    
    }); });
-   // $('html,body').animate({
-   //   scrollTop: ($("#map-hide-show").offset().top - 250)},
-   //   'slow', function(){
-   //      if(reloadmap){
-   //        reload_map();
-   //      }
-   //   });
   }
 
 

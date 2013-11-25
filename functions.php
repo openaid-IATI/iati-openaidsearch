@@ -261,6 +261,14 @@ function wp_filter_request($search_url){
 		$search_url .= "&sectors__in={$sectors}";
 		$has_filter = true;
 	}
+
+	if(!empty($_REQUEST['reporting_organisations'])) {
+		$reporting_organisations = explode(',', trim($_REQUEST['reporting_organisations']));
+		foreach($reporting_organisations AS &$c) $c = trim($c);
+		$reporting_organisations = implode(',', $reporting_organisations);
+		$search_url .= "&reporting_organisation__in={$reporting_organisations}";
+		$has_filter = true;
+	}
 	
 	if(!empty($_REQUEST['budgets'])) {
 		$budgets = explode(',', trim($_REQUEST['budgets']));
