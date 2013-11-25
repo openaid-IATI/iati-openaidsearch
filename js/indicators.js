@@ -927,19 +927,19 @@ $('#dropdown-embed-table-graph').click(function(){
 
 function show_embed_map(){
   embed_url = get_embed_url('indicator-map');
-  $('#dropdown-embed-url input').val(embed_url);
+  $('#dropdown-embed-url textarea').val(embed_url);
   $('#dropdown-embed-url').show();
 }
 
 function show_embed_linegraph(){
   embed_url = get_embed_url('line-graph');
-  $('#dropdown-embed-url input').val(embed_url);
+  $('#dropdown-embed-url textarea').val(embed_url);
   $('#dropdown-embed-url').show();
 }
 
 function show_embed_tablegraph(){
   embed_url = get_embed_url('table-graph');
-  $('#dropdown-embed-url input').val(embed_url);
+  $('#dropdown-embed-url textarea').val(embed_url);
   $('#dropdown-embed-url').show();
 }
 
