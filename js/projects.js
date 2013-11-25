@@ -208,7 +208,7 @@ function load_project_map(project_geojson){
     $("#project-share-embed").click(function(){
       if($('#dropdown-embed-url').is(":hidden")){
         embed_url = get_embed_url('projects-map');
-        $('#dropdown-embed-url input').val(embed_url);
+        $('#dropdown-embed-url textarea').val(embed_url);
         $('#dropdown-embed-url').show("blind", { direction: "vertical" }, 200);
       } 
 

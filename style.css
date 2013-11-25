@@ -1846,14 +1846,15 @@ label, input, button, select, textarea{
 #dropdown-embed-url{
   right: auto;
   left: 0;
-  width: 320px;
+  width: 400px;
   padding: 10px 6px;
 }
 
-#dropdown-embed-url input{
-  width: 300px;
+#dropdown-embed-url textarea{
+  width: 350px;
   margin-top: 8px;
   margin-bottom: 8px;
+  height: 15em;
 }
 
 #dropdown-embed-url-close{
