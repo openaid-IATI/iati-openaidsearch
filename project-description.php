@@ -1,8 +1,3 @@
-
-<?php
-$project_id = $_REQUEST['id'];
-$activity = wp_get_activity($project_id);
-?>
 <div id="project-description">
 	<div class="project-title">
 		<?php if (!empty($activity->titles)) { 

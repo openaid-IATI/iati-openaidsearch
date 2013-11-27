@@ -13,13 +13,13 @@ function save_selection(newpage){
   } else{
     save_current_selection(save_selection_step_2);
   }
+  set_defaults();
+  set_current_url();
+  if (selected_type == "projects" && !newpage){load_new_page(false);}
 }
 
 // set url, load the map, load the filter options
 function save_selection_step_2(){
-  set_defaults();
-  set_current_url();
-  if (selected_type == "projects"){load_new_page(false);}
   reload_map();
   load_filter_options();
 }
@@ -126,6 +126,7 @@ function build_current_url(){
   if (!(typeof current_selection.regions === "undefined")) url += build_current_url_add_par("regions", current_selection.regions);
   if (!(typeof current_selection.indicators === "undefined")) url += build_current_url_add_par("indicators", current_selection.indicators);
   if (!(typeof current_selection.cities === "undefined")) url += build_current_url_add_par("cities", current_selection.cities);
+  if (!(typeof current_selection.reporting_organisations === "undefined")) url += build_current_url_add_par("reporting_organisations", current_selection.reporting_organisations);
   if (!(typeof current_selection.offset === "undefined")) url += build_current_url_add_par("offset", current_selection.offset);
   if (!(typeof current_selection.per_page === "undefined")) url += build_current_url_add_par("per_page", current_selection.per_page);
   if (!(typeof current_selection.order_by === "undefined")) url += build_current_url_add_par("order_by", current_selection.order_by);
@@ -212,7 +213,7 @@ function create_filter_attributes(objects, columns){
 
       var sortablename = sortable[i][1];
       if (sortablename.length > 32 && columns == 4){
-        sortablename = sortablename.substr(0,30) + "...";
+        sortablename = sortablename.substr(0,28) + "...";
       }
 
       html += '<div class="squaredThree"><div>';
@@ -250,7 +251,6 @@ function create_project_filter_attributes(objects, columns){
 
     var sortable = [];
     for (var key in objects){
-      console.log(objects[key].name);
       if (objects[key].name == null){
         objects[key].name = "Unknown";
       }
@@ -315,40 +315,35 @@ function create_budget_filter_attributes(objects, columns){
     html += '<div class="span4">';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id="0" name="> US$ 0" />';
+    html += '<input type="checkbox" value="0" id="0" name="> US$ 0" />';
     html += '<label class="map-filter-cb-value" for="0"></label>';
     html += '</div><div class="squaredThree-fname"><span>> US$ 0</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id=">US$10.000" name="> US$ 10.000" />';
-    html += '<label class="map-filter-cb-value" for=">US$10.000"></label>';
+    html += '<input type="checkbox" value="10000" id="10000" name="> US$ 10.000" />';
+    html += '<label class="map-filter-cb-value" for="10000"></label>';
     html += '</div><div class="squaredThree-fname"><span>> US$ 10.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id=">US$50.000" name="> US$ 50.000" />';
-    html += '<label class="map-filter-cb-value" for=">US$50.000"></label>';
+    html += '<input type="checkbox" value="50000" id="50000" name="> US$ 50.000" />';
+    html += '<label class="map-filter-cb-value" for="50000"></label>';
     html += '</div><div class="squaredThree-fname"><span>> US$ 50.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id=">US$100.000" name="> US$ 100.000" />';
-    html += '<label class="map-filter-cb-value" for=">US$100.000"></label>';
+    html += '<input type="checkbox" value="100000" id="100000" name="> US$ 100.000" />';
+    html += '<label class="map-filter-cb-value" for="100000"></label>';
     html += '</div><div class="squaredThree-fname"><span>> US$ 100.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id=">US$500.000" name="> US$ 500.000" />';
-    html += '<label class="map-filter-cb-value" for=">US$500.000"></label>';
+    html += '<input type="checkbox" value="500000" id="500000" name="> US$ 500.000" />';
+    html += '<label class="map-filter-cb-value" for="500000"></label>';
     html += '</div><div class="squaredThree-fname"><span>> US$ 500.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id=">US$1.000.000" name="> US$ 1.000.000" />';
-    html += '<label class="map-filter-cb-value" for=">US$1.000.000"></label>';
+    html += '<input type="checkbox" value="1000000" id="1000000" name="> US$ 1.000.000" />';
+    html += '<label class="map-filter-cb-value" for="1000000"></label>';
     html += '</div><div class="squaredThree-fname"><span>> US$ 1.000.000</span></div></div>';
 
-    html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id="all" name="All" />';
-    html += '<label class="map-filter-cb-value" for="all"></label>';
-    html += '</div><div class="squaredThree-fname"><span>All</span></div></div>';
-    
     html += '</div></div>';
 
     return html;
@@ -381,7 +376,6 @@ function comma_formatted(amount) {
 }
 
 function get_filter_data(url){
-  console.log(url);
   $.support.cors = true; 
   
   if(window.XDomainRequest){
@@ -596,6 +590,7 @@ $(document).keyup(function(e) {
     if (!(typeof current_selection.regions === "undefined")) init_filters_loop(current_selection.regions);
     if (!(typeof current_selection.indicators === "undefined")) init_filters_loop(current_selection.indicators);
     if (!(typeof current_selection.cities === "undefined")) init_filters_loop(current_selection.cities);
+    if (!(typeof current_selection.reporting_organisations === "undefined")) init_filters_loop(current_selection.reporting_organisations);
     
     fill_selection_box();
   }
@@ -613,6 +608,7 @@ $(document).keyup(function(e) {
     $('#sectors-filters').hide();
     $('#indicators-filters').hide();
     $('#cities-filters').hide();
+    $('#reporting_organisations-filters').hide();
   }
 
   $('#map-filter-cancel').click(function(){
@@ -627,13 +623,14 @@ $(document).keyup(function(e) {
 
 
 function save_current_selection(callback){
-  var new_selection = new Object();
+    var new_selection = new Object();
     new_selection.sectors = [];
     new_selection.countries = [];
     new_selection.budgets = [];
     new_selection.regions = [];
     new_selection.indicators = [];
     new_selection.cities = [];
+    new_selection.reporting_organisations = [];
 
     // set selection as filter and load results
     get_checked_by_filter("sectors", new_selection);
@@ -642,16 +639,19 @@ function save_current_selection(callback){
     get_checked_by_filter("regions", new_selection);
     get_checked_by_filter("indicators", new_selection);
     get_checked_by_filter("cities", new_selection);
+    get_checked_by_filter("reporting_organisations", new_selection);
 
     if(new_selection.indicators.length > 2){
         too_many_indicators_error(new_selection.indicators.length - 2);
     } else {
+      current_selection = new_selection;
+
       // hide map show loader
       $('#map-loader').show();
       $('#map').hide();
 
       $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 400, function(){
-        current_selection = new_selection;
+        
         callback();
       });
     }
@@ -703,13 +703,25 @@ function create_api_url(type, indicatorid){
   var str_region = reload_map_prepare_parameter_string("regions", dlmtr);
   var str_indicator = reload_map_prepare_parameter_string("indicators", dlmtr);
   var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
+  var str_reporting_organisation = reload_map_prepare_parameter_string("reporting_organisations", dlmtr);
 
   if (type == 'filter' && selected_type=='projects'){
     return search_url + 'activity-filter-options/?reporting_organisation__in=' + organisation_id;
   } else if (type == "mapdata" && selected_type=='projects'){
-    return search_url + 'country-geojson/?reporting_organisation__in=' + organisation_id + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
+    if(organisation_id){
+      return search_url + 'country-geojson/?reporting_organisation__in=' + organisation_id + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
+    } else{
+      return search_url + 'country-geojson/?reporting_organisation__in=' + str_reporting_organisation + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
+    }
+
   } else if (type == "listdata" && selected_type=='projects'){
-    // TO DO: implement this
+    
+    if(organisation_id){
+      return search_url + 'activity-list/?reporting_organisation__in=' + organisation_id + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
+    } else{
+      return search_url + 'activity-list/?reporting_organisation__in=' + str_reporting_organisation + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
+    }
+
   } else if (type == 'filter' && selected_type=='indicator'){
     return search_url + 'indicator-country-filter-options/?countries__in=' + str_country + '&regions__in=' + str_region + '&cities__in=' + str_city + '&indicators__in=';
   } else if (type == 'mapdata' && selected_type=='indicator'){
@@ -764,6 +776,7 @@ function fill_selection_box(){
   if (!(typeof current_selection.regions === "undefined") && (current_selection.regions.length > 0)) html += fill_selection_box_single_filter("REGIONS", current_selection.regions);
   if (!(typeof current_selection.cities === "undefined") && (current_selection.cities.length > 0)) html += fill_selection_box_single_filter("CITIES", current_selection.cities);
   if (!(typeof current_selection.indicators === "undefined") && (current_selection.indicators.length > 0)) indicatorhtml = fill_selection_box_single_filter("INDICATORS", current_selection.indicators);
+  if (!(typeof current_selection.reporting_organisations === "undefined") && (current_selection.reporting_organisations.length > 0)) indicatorhtml = fill_selection_box_single_filter("REPORTING_ORGANISATIONS", current_selection.reporting_organisations);
   if (!(typeof current_selection.query === "undefined") && (current_selection.query.length > 0)) html += fill_selection_box_single_filter("QUERY", current_selection.query);
   $("#selection-box").html(html);
   $("#selection-box-indicators").html(indicatorhtml);
@@ -775,6 +788,7 @@ function fill_selection_box_single_filter(header, arr){
       html += '<div class="select-box-header">';
       if (header == "INDICATORS" && selected_type == "cpi"){ header = "DIMENSIONS";}
       if (header == "QUERY"){header = "SEARCH"}
+      if (header == "REPORTING_ORGANISATIONS"){header = "REPORTING ORGANISATIONS"}
       html += header;
       html += '</div>';
 
@@ -820,13 +834,13 @@ $(".selection-clear-div").click(function(){
   $('input:checkbox').each(function(){
     $(this).attr('checked', false);
   });
-  // current_selection = new Object();
-  // current_selection.indicators = [];
-  // if(selected_type == 'indicators'){
-  //   current_selection.indicators.push({"id":"population", "name":"Total population"});
-  // } else if(selected_type == 'cpi'){
-  //   current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"Five dimensions of city prosperity"});
-  // }
+  current_selection = new Object();
+  current_selection.indicators = [];
+  if(selected_type == 'indicators'){
+    current_selection.indicators.push({"id":"population", "name":"Total population"});
+  } else if(selected_type == 'cpi'){
+    current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"Five dimensions of city prosperity"});
+  }
   
   save_selection();
   
@@ -930,6 +944,23 @@ function get_embed_url(type){
 }
 
 
+
+
+
+function get_url_parameter_value(VarSearch, url){
+    var SearchString = window.location.search.substring(1);
+    if(url){
+      SearchString = url.split('?')[1];
+    }
+    var VariableArray = SearchString.split('&');
+    for(var i = 0; i < VariableArray.length; i++){
+        var KeyValuePair = VariableArray[i].split('=');
+        if(KeyValuePair[0] == VarSearch){
+            return KeyValuePair[1];
+        }
+    }
+    return null;
+}
 
 
 /***********************************************
