@@ -13,13 +13,13 @@ function save_selection(newpage){
   } else{
     save_current_selection(save_selection_step_2);
   }
+  set_defaults();
+  set_current_url();
+  if (selected_type == "projects" && !newpage){load_new_page(false);}
 }
 
 // set url, load the map, load the filter options
 function save_selection_step_2(){
-  set_defaults();
-  set_current_url();
-  if (selected_type == "projects"){load_new_page(false);}
   reload_map();
   load_filter_options();
 }
@@ -213,7 +213,7 @@ function create_filter_attributes(objects, columns){
 
       var sortablename = sortable[i][1];
       if (sortablename.length > 32 && columns == 4){
-        sortablename = sortablename.substr(0,30) + "...";
+        sortablename = sortablename.substr(0,28) + "...";
       }
 
       html += '<div class="squaredThree"><div>';
@@ -315,40 +315,35 @@ function create_budget_filter_attributes(objects, columns){
     html += '<div class="span4">';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id="0" name="> US$ 0" />';
+    html += '<input type="checkbox" value="0" id="0" name="> US$ 0" />';
     html += '<label class="map-filter-cb-value" for="0"></label>';
     html += '</div><div class="squaredThree-fname"><span>> US$ 0</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id=">US$10.000" name="> US$ 10.000" />';
-    html += '<label class="map-filter-cb-value" for=">US$10.000"></label>';
+    html += '<input type="checkbox" value="10000" id="10000" name="> US$ 10.000" />';
+    html += '<label class="map-filter-cb-value" for="10000"></label>';
     html += '</div><div class="squaredThree-fname"><span>> US$ 10.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id=">US$50.000" name="> US$ 50.000" />';
-    html += '<label class="map-filter-cb-value" for=">US$50.000"></label>';
+    html += '<input type="checkbox" value="50000" id="50000" name="> US$ 50.000" />';
+    html += '<label class="map-filter-cb-value" for="50000"></label>';
     html += '</div><div class="squaredThree-fname"><span>> US$ 50.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id=">US$100.000" name="> US$ 100.000" />';
-    html += '<label class="map-filter-cb-value" for=">US$100.000"></label>';
+    html += '<input type="checkbox" value="100000" id="100000" name="> US$ 100.000" />';
+    html += '<label class="map-filter-cb-value" for="100000"></label>';
     html += '</div><div class="squaredThree-fname"><span>> US$ 100.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id=">US$500.000" name="> US$ 500.000" />';
-    html += '<label class="map-filter-cb-value" for=">US$500.000"></label>';
+    html += '<input type="checkbox" value="500000" id="500000" name="> US$ 500.000" />';
+    html += '<label class="map-filter-cb-value" for="500000"></label>';
     html += '</div><div class="squaredThree-fname"><span>> US$ 500.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id=">US$1.000.000" name="> US$ 1.000.000" />';
-    html += '<label class="map-filter-cb-value" for=">US$1.000.000"></label>';
+    html += '<input type="checkbox" value="1000000" id="1000000" name="> US$ 1.000.000" />';
+    html += '<label class="map-filter-cb-value" for="1000000"></label>';
     html += '</div><div class="squaredThree-fname"><span>> US$ 1.000.000</span></div></div>';
 
-    html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="all" id="all" name="All" />';
-    html += '<label class="map-filter-cb-value" for="all"></label>';
-    html += '</div><div class="squaredThree-fname"><span>All</span></div></div>';
-    
     html += '</div></div>';
 
     return html;
@@ -381,7 +376,6 @@ function comma_formatted(amount) {
 }
 
 function get_filter_data(url){
-  console.log(url);
   $.support.cors = true; 
   
   if(window.XDomainRequest){
@@ -614,6 +608,7 @@ $(document).keyup(function(e) {
     $('#sectors-filters').hide();
     $('#indicators-filters').hide();
     $('#cities-filters').hide();
+    $('#reporting_organisations-filters').hide();
   }
 
   $('#map-filter-cancel').click(function(){
@@ -628,7 +623,7 @@ $(document).keyup(function(e) {
 
 
 function save_current_selection(callback){
-  var new_selection = new Object();
+    var new_selection = new Object();
     new_selection.sectors = [];
     new_selection.countries = [];
     new_selection.budgets = [];
@@ -649,12 +644,14 @@ function save_current_selection(callback){
     if(new_selection.indicators.length > 2){
         too_many_indicators_error(new_selection.indicators.length - 2);
     } else {
+      current_selection = new_selection;
+
       // hide map show loader
       $('#map-loader').show();
       $('#map').hide();
 
       $('#map-filter-overlay').hide("blind", { direction: "vertical" }, 400, function(){
-        current_selection = new_selection;
+        
         callback();
       });
     }
@@ -718,7 +715,13 @@ function create_api_url(type, indicatorid){
     }
 
   } else if (type == "listdata" && selected_type=='projects'){
-    // TO DO: implement this
+    
+    if(organisation_id){
+      return search_url + 'activity-list/?reporting_organisation__in=' + organisation_id + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
+    } else{
+      return search_url + 'activity-list/?reporting_organisation__in=' + str_reporting_organisation + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
+    }
+
   } else if (type == 'filter' && selected_type=='indicator'){
     return search_url + 'indicator-country-filter-options/?countries__in=' + str_country + '&regions__in=' + str_region + '&cities__in=' + str_city + '&indicators__in=';
   } else if (type == 'mapdata' && selected_type=='indicator'){
@@ -833,13 +836,13 @@ $(".selection-clear-div").click(function(){
   $('input:checkbox').each(function(){
     $(this).attr('checked', false);
   });
-  // current_selection = new Object();
-  // current_selection.indicators = [];
-  // if(selected_type == 'indicators'){
-  //   current_selection.indicators.push({"id":"population", "name":"Total population"});
-  // } else if(selected_type == 'cpi'){
-  //   current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"Five dimensions of city prosperity"});
-  // }
+  current_selection = new Object();
+  current_selection.indicators = [];
+  if(selected_type == 'indicators'){
+    current_selection.indicators.push({"id":"population", "name":"Total population"});
+  } else if(selected_type == 'cpi'){
+    current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"Five dimensions of city prosperity"});
+  }
   
   save_selection();
   
@@ -943,6 +946,23 @@ function get_embed_url(type){
 }
 
 
+
+
+
+function get_url_parameter_value(VarSearch, url){
+    var SearchString = window.location.search.substring(1);
+    if(url){
+      SearchString = url.split('?')[1];
+    }
+    var VariableArray = SearchString.split('&');
+    for(var i = 0; i < VariableArray.length; i++){
+        var KeyValuePair = VariableArray[i].split('=');
+        if(KeyValuePair[0] == VarSearch){
+            return KeyValuePair[1];
+        }
+    }
+    return null;
+}
 
 
 /***********************************************

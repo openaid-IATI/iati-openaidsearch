@@ -5,13 +5,11 @@ Template Name: Single project page
 ?>
 
 <?php get_header();
-
-$project_id = $_REQUEST['id'];
+$project_id = $_REQUEST['iati_id'];
 $activity = wp_get_activity($project_id);
+get_template_part( "map" ); 
 
 ?>
-
-<?php get_template_part( "map" ); ?>
 
 <div id="page-wrapper">
 
@@ -59,12 +57,15 @@ $activity = wp_get_activity($project_id);
 			<div class="row-fluid">
 				<div class="span7 project-tabs-wrapper">
 
-					<?php get_template_part( 'project', 'description' ); ?>
-					<?php get_template_part( 'project', 'financials' ); ?>
-					<?php get_template_part( 'project', 'documents' ); ?>
-					<?php get_template_part( 'project', 'related-indicators' ); ?>
-					<?php get_template_part( 'project', 'related-projects' ); ?>
-					<?php get_template_part( 'project', 'located-in' ); ?>
+					<?php 
+					include( TEMPLATEPATH .'/project-description.php' ); 
+					include( TEMPLATEPATH .'/project-financials.php' );
+					include( TEMPLATEPATH .'/project-documents.php' );
+					include( TEMPLATEPATH .'/project-related-indicators.php' );
+					include( TEMPLATEPATH .'/project-related-projects.php' );
+					include( TEMPLATEPATH .'/project-located-in.php' ); 
+					?>
+					
 				</div>
 				<div class="span5">
 					<div class="project-spec">
@@ -287,14 +288,14 @@ $activity = wp_get_activity($project_id);
 		</div>
 	</div>
 </div>
-
 <script>
 
 // PREPARE COUNTRIES FOR SHOWING ON MAP
-
-	<?php if(!empty($activity->countries)) {
+	
+	<?php 
+	$countries = "";
+	if(!empty($activity->countries)) {
 		$sep = '';
-		$countries = "";
 		foreach($activity->countries AS $country) {
 			$countries .=  $sep . '"' . $country->code . '"';
 			$sep = ', ';
