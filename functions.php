@@ -252,7 +252,7 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	if(isset($_REQUEST['offset'])){	$activities_offset = rawurlencode($_REQUEST['offset']);	}
 	//if($offsetpar != ""){ $activities_offset = $offsetpar; }
 
-	$search_url = SEARCH_URL . "activities/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset;
+	$search_url = SEARCH_URL . "activity-list/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset;
     
 	if ($_DEFAULT_ORGANISATION_ID){
 		$search_url = $search_url . "&reporting_organisation__in=" . $_DEFAULT_ORGANISATION_ID;
