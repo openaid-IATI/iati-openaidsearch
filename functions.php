@@ -265,24 +265,24 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	$objects = $result->objects;
 }
 
-function wp_generate_ajax_results($search_url, &$objects, &$meta, $offsetpar = ""){
+// function wp_generate_ajax_results($search_url, &$objects, &$meta, $offsetpar = ""){
 
-	$search_url = wp_filter_request($search_url);
-	// Create a stream
-	$opts = array(
-	  'http'=>array(
-	    'method'=>"GET",
-	    'header'=>"Content-Type : application/json" . 
-	              "Access-Control-Allow-Origin: *"
-	  )
-	);
-	$context = stream_context_create($opts);
-	$file = file_get_contents($search_url, false, $context);
-	$content = file_get_contents($search_url);
-	$result = json_decode($content);
-	$meta = $result->meta;
-	$objects = $result->objects;
-}
+// 	$search_url = wp_filter_request($search_url);
+// 	// Create a stream
+// 	$opts = array(
+// 	  'http'=>array(
+// 	    'method'=>"GET",
+// 	    'header'=>"Content-Type : application/json" . 
+// 	              "Access-Control-Allow-Origin: *"
+// 	  )
+// 	);
+// 	$context = stream_context_create($opts);
+// 	$file = file_get_contents($search_url, false, $context);
+// 	$content = file_get_contents($search_url);
+// 	$result = json_decode($content);
+// 	$meta = $result->meta;
+// 	$objects = $result->objects;
+// }
 
 function wp_generate_link_parameters(){
 	parse_str($_SERVER['QUERY_STRING'], $vars);

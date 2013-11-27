@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 define( 'SEARCH_URL', 'http://dev.oipa.openaidsearch.org/api/v3/');
-define( 'SITE_URL', 'http://www.openaidsearch.org');
+define( 'SITE_URL', 'http://localhost/unhabitat/');
 define( 'EMPTY_LABEL', 'No information available');
 define( 'AJAX_PROJECTS_URL', TEMPLATEPATH .'/functions-projects.php');
 
