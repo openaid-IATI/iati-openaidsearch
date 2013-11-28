@@ -265,27 +265,12 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	$objects = $result->objects;
 }
 
-// function wp_generate_ajax_results($search_url, &$objects, &$meta, $offsetpar = ""){
+function wp_generate_link_parameters($filter_to_unset=null){
 
-// 	$search_url = wp_filter_request($search_url);
-// 	// Create a stream
-// 	$opts = array(
-// 	  'http'=>array(
-// 	    'method'=>"GET",
-// 	    'header'=>"Content-Type : application/json" . 
-// 	              "Access-Control-Allow-Origin: *"
-// 	  )
-// 	);
-// 	$context = stream_context_create($opts);
-// 	$file = file_get_contents($search_url, false, $context);
-// 	$content = file_get_contents($search_url);
-// 	$result = json_decode($content);
-// 	$meta = $result->meta;
-// 	$objects = $result->objects;
-// }
-
-function wp_generate_link_parameters(){
 	parse_str($_SERVER['QUERY_STRING'], $vars);
+	if(isset($filter_to_unset)){
+		if(isset($_GET[$filter_to_unset])){ unset($vars[$filter_to_unset]); }
+	}
 	if(isset($_GET['offset'])){ unset($vars['offset']); }
 	if(isset($_GET['action'])){ unset($vars['action']); }
 	$parameters = http_build_query($vars);
