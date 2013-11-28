@@ -102,10 +102,11 @@ function showPopup(e){
     var center = layer.getBounds().getCenter();
     var heightToDraw = ((mostNorth - mostSouth) / 4) + center.lat;
     var pointToDraw = new L.LatLng(heightToDraw, center.lng);
-
+    var url_parameters = build_current_url(true);
+    url_parameters = url_parameters.replace("?", "&");
     var popup = L.popup()
     .setLatLng(pointToDraw)
-    .setContent('<div id="map-tip-header">' + layer.feature.properties.name + '</div><div id="map-tip-text">Total projects: '+ layer.feature.properties.project_amount + '</div><div id="map-tip-link"><a href="/projects/?countries='+layer.feature.id+'">View projects</a></div>')
+    .setContent('<div id="map-tip-header">' + layer.feature.properties.name + '</div><div id="map-tip-text">Total projects: '+ layer.feature.properties.project_amount + '</div><div id="map-tip-link"><a href="'+site+'/projects/?countries='+layer.feature.id+url_parameters+'">View projects</a></div>')
     .openOn(map);
 }
 

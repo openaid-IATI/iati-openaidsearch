@@ -117,11 +117,13 @@ function process_filter_options(data){
 
 // build current url based on selection made
 
-function build_current_url(){
+function build_current_url(exclude_countries){
 
   var url = '?p=';
   if (!(typeof current_selection.sectors === "undefined")) url += build_current_url_add_par("sectors", current_selection.sectors);
-  if (!(typeof current_selection.countries === "undefined")) url += build_current_url_add_par("countries", current_selection.countries);
+  if (!exclude_countries){
+    if (!(typeof current_selection.countries === "undefined")) url += build_current_url_add_par("countries", current_selection.countries);
+  }
   if (!(typeof current_selection.budgets === "undefined")) url += build_current_url_add_par("budgets", current_selection.budgets);
   if (!(typeof current_selection.regions === "undefined")) url += build_current_url_add_par("regions", current_selection.regions);
   if (!(typeof current_selection.indicators === "undefined")) url += build_current_url_add_par("indicators", current_selection.indicators);
@@ -203,7 +205,7 @@ function create_filter_attributes(objects, columns){
     });
 
     var page_counter = 1;
-    html += '<div class="filter-page filter-page-1">'
+    html += '<div class="filter-page filter-page-1">';
     
     for (var i = 0;i < sortable.length;i++){
 
