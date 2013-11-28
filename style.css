@@ -1604,7 +1604,7 @@ label, input, button, select, textarea{
 
 #paginated-loader{
   display: none;
-  height:89em;
+  height:40em;
   width:100%;
   text-align: center;
   background-color: #fff;
