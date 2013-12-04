@@ -2,7 +2,7 @@
 
     <?php if(is_page("projects")){ get_template_part( "map", "selection" ); } ?>
     
-    <?php if(is_home()){ get_template_part( "home", "lightbox" ); } ?>
+    <?php if(is_home() || is_page("projects")){ get_template_part( "home", "lightbox" ); } ?>
 
     <div id="map-filter-overlay">
         <div class="container">
