@@ -549,6 +549,9 @@ $(document).keyup(function(e) {
     $('.filter-page').hide();
     $('.filter-page-1').show();
 
+    $('#map-lightbox').hide();
+    $('#map-lightbox-bg').hide();
+
     var total_pages = $("#" + filterContainerName + " .filter-total-pages").attr("name");
     if (total_pages > 1){
       filter_pagination(total_pages, 1);
