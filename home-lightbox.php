@@ -1,4 +1,4 @@
-<?php if(count($_GET)) { ?>
+<?php if(!count($_GET)) { ?>
 
 
 <div id="lightbox-wrapper">
