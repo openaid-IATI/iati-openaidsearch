@@ -139,7 +139,7 @@ get_template_part( "map" );
 						<div class="projects-project-spec-key">IATI identifier:</div>
 						<div class="projects-project-spec-value">
 
-							<a href="<?php echo site_url() . '/project/?id=' . $activity->iati_identifier; ?>" alt="See project details">
+							<a href="<?php echo site_url() . '/project/' . $activity->iati_identifier . '/'; ?>" alt="See project details">
 							<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?></div>
 							</a>
 
