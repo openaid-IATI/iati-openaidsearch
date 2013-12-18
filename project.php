@@ -5,13 +5,11 @@ Template Name: Single project page
 ?>
 
 <?php get_header();
-
-$project_id = $_REQUEST['id'];
+$project_id = $_REQUEST['iati_id'];
 $activity = wp_get_activity($project_id);
+get_template_part( "map" ); 
 
 ?>
-
-<?php get_template_part( "map" ); ?>
 
 <div id="page-wrapper">
 
@@ -59,12 +57,15 @@ $activity = wp_get_activity($project_id);
 			<div class="row-fluid">
 				<div class="span7 project-tabs-wrapper">
 
-					<?php get_template_part( 'project', 'description' ); ?>
-					<?php get_template_part( 'project', 'financials' ); ?>
-					<?php get_template_part( 'project', 'documents' ); ?>
-					<?php get_template_part( 'project', 'related-indicators' ); ?>
-					<?php get_template_part( 'project', 'related-projects' ); ?>
-					<?php get_template_part( 'project', 'located-in' ); ?>
+					<?php 
+					include( TEMPLATEPATH .'/project-description.php' ); 
+					include( TEMPLATEPATH .'/project-financials.php' );
+					include( TEMPLATEPATH .'/project-documents.php' );
+					include( TEMPLATEPATH .'/project-related-indicators.php' );
+					include( TEMPLATEPATH .'/project-related-projects.php' );
+					include( TEMPLATEPATH .'/project-located-in.php' ); 
+					?>
+					
 				</div>
 				<div class="span5">
 					<div class="project-spec">
@@ -107,15 +108,16 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-value">
 
 						<?php 
-							if(!empty($activity->sectors)) {
-								$sep = '';
-								foreach($activity->sectors AS $sector) {
-									echo  $sector->name;
-									$sep = ', ';
-								}
-							} else {
-								echo "No information avaiable";
-							} ?>
+						if(!empty($activity->sectors)) {
+							$sep = '';
+							foreach($activity->sectors AS $sector) {
+								echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->name . "</a>";
+								$sep = ', ';
+							}		
+						} else {
+							echo "No information avaiable";
+						} ?>
+
 
 						</div>
 
@@ -124,19 +126,24 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-key">Budget:</div>
 						<div class="projects-project-spec-value">
 
-							<?php if(!empty($activity->
-							statistics->total_budget)) {?>
-							US$
-							<?php echo format_custom_number($activity->
-							statistics->total_budget);  ?>
-							<?php } ?></div>
+							<?php if(!empty($activity->total_budget)) {
+								if(!empty($activity->default_currency)) { echo currencyCodeToSign($activity->default_currency->code); }
+								echo format_custom_number($activity->total_budget);
+							} else {
+								echo "-";
+							} ?>
+						</div>
 
 						<div class="projects-project-divider"></div>
 
 						<div class="projects-project-spec-key">IATI identifier:</div>
 						<div class="projects-project-spec-value">
 
+							<a href="<?php echo site_url() . '/project/' . $activity->iati_identifier . '/'; ?>" alt="See project details">
 							<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?></div>
+							</a>
+
+							
 
 						<div class="projects-project-divider"></div>
 
@@ -144,7 +151,7 @@ $activity = wp_get_activity($project_id);
 						<div class="projects-project-spec-value">
 						
 						<?php 
-							if(!empty($activity->reporting_organisation->name)) { echo $activity->reporting_organisation->name; } else {
+							if(!empty($activity->reporting_organisation->name)){ echo $activity->reporting_organisation->name; } else {
 							if(!empty($activity->reporting_organisation->code)){ echo $activity->reporting_organisation->code; } }
 						?>
 
@@ -260,10 +267,10 @@ $activity = wp_get_activity($project_id);
 							<div id="disqus_thread"></div>
 						    <script>
 						        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-						        var disqus_shortname = 'openunhabitat'; // required: replace example with your forum shortname
+						        var disqus_shortname = ''; // required: replace example with your forum shortname
 						 		var disqus_identifier = '<?php echo $activity->iati_identifier; ?>';
     							var disqus_title = '<?php echo $activity->titles[0]->title; ?>';
-    							var disqus_url = '<?php echo "http://open.unhabitat.org/project/?id=" . $activity->iati_identifier; ?>';
+    							var disqus_url = '<?php echo site_url() . "/project/?id=" . $activity->iati_identifier; ?>';
 
 						        /* * * DON'T EDIT BELOW THIS LINE * * */
 						        (function() {
@@ -273,7 +280,6 @@ $activity = wp_get_activity($project_id);
 						        })();
 						    </script>
 						    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-						    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 						</div>
 					</div>
 				</div>
@@ -282,14 +288,14 @@ $activity = wp_get_activity($project_id);
 		</div>
 	</div>
 </div>
-
 <script>
 
 // PREPARE COUNTRIES FOR SHOWING ON MAP
-
-	<?php if(!empty($activity->countries)) {
+	
+	<?php 
+	$countries = "";
+	if(!empty($activity->countries)) {
 		$sep = '';
-		$countries = "";
 		foreach($activity->countries AS $country) {
 			$countries .=  $sep . '"' . $country->code . '"';
 			$sep = ', ';

@@ -5,10 +5,11 @@
  * and open the template in the editor.
  */
 define( 'SEARCH_URL', 'http://dev.oipa.openaidsearch.org/api/v3/');
-define( 'SITE_URL', 'http://dev.oipa.openaidsearch.org/');
+define( 'SITE_URL', 'http://dev.openaidsearch.org');
 define( 'EMPTY_LABEL', 'No information available');
+define( 'AJAX_PROJECTS_URL', TEMPLATEPATH .'/functions-projects.php');
 
 $_DEFAULT_ORGANISATION_ID = '';
-$_PER_PAGE = 5;
+$_PER_PAGE = 25;
 define( 'DEFAULT_ORGANISATION_ID', $_DEFAULT_ORGANISATION_ID);
 ?>
