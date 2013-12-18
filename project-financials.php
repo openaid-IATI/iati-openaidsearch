@@ -1,9 +1,3 @@
-
-<?php
-$project_id = $_REQUEST['id'];
-$activity = wp_get_activity($project_id);
-
-?>
 <div id="project-financials">
 	<div id="financials-placeholder"></div>
 	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
@@ -51,18 +45,7 @@ $activity = wp_get_activity($project_id);
 				break;
 		}
 
-		$currency = '';
-		switch($at->currency) {
-			case 'USD':
-				$currency = 'US$ ';
-				break;
-			case 'EUR':
-				$currency = '&euro; ';
-				break;
-			case 'GBP':
-				$currency = '£ ';
-				break;
-		}
+		$currency = currencyCodeToSign($at->currency);
 
 		$value = $at->value;
 		$value = str_replace(".00", "", $value);
@@ -74,6 +57,7 @@ $activity = wp_get_activity($project_id);
 				$provider_org = $at->provider_organisation->code;
 			}
 		}
+		
 		$receiver_org = '';
 		if(!empty($at->receiver_organisation->name)) {
 			$receiver_org = $at->receiver_organisation->name;

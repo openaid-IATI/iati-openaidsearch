@@ -1,6 +1,7 @@
 <?php get_header(); ?>
-
 <?php get_template_part( "map" ); ?>
+
+
 
 <div id="page-wrapper">
 	<div class="container">
@@ -32,7 +33,7 @@
 				</a>
 				<?php endforeach; ?>
 
-					
+				
 
 				</div>
 				<div class="span4">

@@ -1,8 +1,3 @@
-
-<?php
-$project_id = $_REQUEST['id'];
-$activity = wp_get_activity($project_id);
-?>
 <div id="project-description">
 	<div class="project-title">
 		<?php if (!empty($activity->titles)) { 
@@ -14,6 +9,11 @@ $activity = wp_get_activity($project_id);
 		?>
 	</div>
 	<div class="project-description-text">
-		<?php echo $activity->descriptions[0]->description; ?>
+	<?php 	if (!empty($activity->descriptions)) { 
+	 			echo $activity->descriptions[0]->description; 
+	 		} else {
+	 			echo "No description given.";
+	 		}
+	 		?>
 	</div>
 </div>

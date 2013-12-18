@@ -42,7 +42,7 @@
                 </a>
 
                 <a href="<?php echo site_url(); ?>" class="brand hneue-bold">
-                    <div id="brand-image"></div>
+                    <img id="brand-image" src="<?php echo get_template_directory_uri(); ?>/images/logo-980-1440.png" />
                     <div id="brand-beta">BETA VERSION</div>
                 </a>
 
@@ -56,7 +56,7 @@
                             );
                         wp_nav_menu($navmenargs);?>
 
-                    <form action='projects' method='GET' class="navbar-form pull-right">
+                    <form action='<?php echo site_url(); ?>/projects/' method='GET' class="navbar-form pull-right">
                         <input type="text" class="input-large" placeholder="What are you looking for?" name='query'>
                         <input type="submit" class="btn header-btn-search hneue-bold" value="Search">                  
                     </form>

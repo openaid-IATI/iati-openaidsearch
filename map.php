@@ -2,7 +2,7 @@
 
     <?php if(is_page("projects")){ get_template_part( "map", "selection" ); } ?>
     
-    <?php if(is_home()){ get_template_part( "home", "lightbox" ); } ?>
+    <?php if(is_home() || is_page("projects")){ get_template_part( "home", "lightbox" ); } ?>
 
     <div id="map-filter-overlay">
         <div class="container">
@@ -12,6 +12,7 @@
                     <div id="regions-filters"></div>
                     <div id="sectors-filters" class="ipad-newrow"></div>
                     <div id="budgets-filters"></div>
+                    <div id="reporting_organisations-filters"></div>
 
             </div>
         </div>

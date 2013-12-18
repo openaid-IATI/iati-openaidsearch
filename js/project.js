@@ -2,25 +2,13 @@
 // XXXXXXX PROJECT DETAIL PAGE XXXXXXXXXXX
 
 function sanitize_project_url(){
-  var parameters = new Object();
-  var query = window.location.search.substring(1);
-  //console.log(window.location.search.substring(1));
-  if(query != ''){
-    var vars = query.split("&");
-    for (var i=0;i<vars.length;i++) {
-      var pair = vars[i].split("=");
-      var vals = pair[1].split(",");
 
-      parameters[pair[0]] = [];
-      for(var y=0;y<vals.length;y++){
-        parameters[pair[0]] = vals[y];
-      }
-      
-    } 
-  }
-  var link = home_url + "/project/?id=" + parameters["id"];
-  if (!(parameters["backlink"] === undefined)){
-  	$("#project-back-button").attr("href", decodeURIComponent(parameters["backlink"]));
+  var parameters = new Object();
+  var backlink = get_url_parameter_value("backlink");
+  console.log(window.location);
+  var link = window.location.origin + window.location.pathname;
+  if (backlink){
+  	$("#project-back-button").attr("href", decodeURIComponent(home_url + "/projects/" + backlink));
   }
   if (history.pushState){
   	history.pushState(null, null, link);
