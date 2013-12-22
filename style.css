@@ -1257,11 +1257,14 @@ label, input, button, select, textarea{
   display: inline-block;
   padding: 0.6em 1.6em 0.6em 0;
   font-size: 1.1em;
+  width: 7em;
 }
 
 #filter-next-page, #filter-previous-page{
   cursor: pointer;
 }
+
+
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX INDICATOR PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
@@ -2362,6 +2365,10 @@ label, input, button, select, textarea{
 
     #selection-box-wrapper{
       left: 2em;
+    }
+
+    #filter-next-page, #filter-previous-page, #filter-pagination-overview{
+      width: 5em;
     }
 
 

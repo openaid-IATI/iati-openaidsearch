@@ -18,7 +18,7 @@
         <div id="map-filters-buttons">
             <div class="container">
                 <div class="row-fluid">
-                    <div class="span8">
+                    <div class="span7">
 
                         <button id="map-filter-save" class="hneue-bold">SAVE</button>
                         <button id="map-filter-cancel" class="hneue-bold">CANCEL</button>
@@ -26,7 +26,7 @@
                         
 
                     </div>
-                    <div class="span3 hneue-bold">
+                    <div class="span4 hneue-bold">
                         <div class="row" id="map-filter-pagination">
 
                         </div>
