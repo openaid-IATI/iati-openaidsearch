@@ -189,7 +189,6 @@ function create_filter_attributes(objects, columns){
     var html = '';
     var per_col = 20;
 
-
     var sortable = [];
     for (var key in objects){
       sortable.push([key, objects[key]]);
@@ -214,9 +213,12 @@ function create_filter_attributes(objects, columns){
       } 
 
       var sortablename = sortable[i][1];
-      if (sortablename.length > 32 && columns == 4){
+      if (columns == 4 && sortablename.length > 32){
         sortablename = sortablename.substr(0,28) + "...";
+      } else if (columns == 3 && sortablename.length > 40){
+        sortablename = sortablename.substr(0,36) + "...";
       }
+
 
       html += '<div class="squaredThree"><div>';
       html += '<input type="checkbox" value="'+ sortable[i][0] +'" id="'+sortable[i][1].toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'" name="'+sortable[i][1]+'" />';
@@ -278,8 +280,10 @@ function create_project_filter_attributes(objects, columns){
       } 
 
       var sortablename = sortable[i][1].name;
-      if (sortablename.length > 32 && columns == 4){
-        sortablename = sortablename.substr(0,30) + "...";
+      if (columns == 4 && sortablename.length > 32){
+        sortablename = sortablename.substr(0,28) + "...";
+      } else if (columns == 3 && sortablename.length > 46){
+        sortablename = sortablename.substr(0,42) + "...";
       }
       var sortableamount = sortable[i][1].total.toString();
 
@@ -501,21 +505,20 @@ jQuery(function($) {
 
 // MAP FILTER FUNCTIONS
   function filter_pagination(total, curpage){
-    var text = '<div class="span4 hneue-bold">';
-
+    var text = '';
 
     if (curpage > 1){
       text += '<div id="filter-previous-page">Previous page</div>';
+    } else {
+      text += '<div id="filter-previous-page"></div>';
     }
-
-    text += '</div><div class="span3 hneue-bold">';
 
     if (curpage < total){
       text += '<div id="filter-next-page">Next page</div>';
+    } else {
+      text += '<div id="filter-next-page"></div>';
     }
-    text += '</div><div class="span4 hneue-bold">';
     text += '<div id="filter-pagination-overview">Page ' + curpage + ' / ' + total + '</div>';
-    text += '</div>';
 
     $('#map-filter-pagination').html(text);
 
