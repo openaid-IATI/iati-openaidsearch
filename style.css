@@ -1236,9 +1236,8 @@ label, input, button, select, textarea{
 }
 
 #map-filter-pagination{
-  display: inline-block;
   color: #DEDEDE;
-  margin: 0.5em 0.5em 0.5em 0;
+  margin-top: 0.5em;
 }
 
 #filter-next-page, #filter-previous-page, #filter-pagination-overview{

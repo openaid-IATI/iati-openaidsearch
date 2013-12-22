@@ -19,13 +19,9 @@
 
     
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/leaflet.ie.css" />
-     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/ie-8-and-down.css" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/leaflet.ie.css" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/ie-8-and-down.css" />
     <![endif]-->
-
-    
-
-    
 
 
     <?php wp_head(); ?>

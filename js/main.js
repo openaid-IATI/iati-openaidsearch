@@ -317,34 +317,36 @@ function create_budget_filter_attributes(objects, columns){
     html += '<div class="span4">';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="0" id="0" name="> US$ 0" />';
+
+    html += '<input type="checkbox" value="0" id="0" name="> 0" />';
     html += '<label class="map-filter-cb-value" for="0"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> US$ 0</span></div></div>';
+    html += '</div><div class="squaredThree-fname"><span>> 0</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="10000" id="10000" name="> US$ 10.000" />';
+    html += '<input type="checkbox" value="10000" id="10000" name="> 10.000" />';
     html += '<label class="map-filter-cb-value" for="10000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> US$ 10.000</span></div></div>';
+    html += '</div><div class="squaredThree-fname"><span>> 10.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="50000" id="50000" name="> US$ 50.000" />';
+    html += '<input type="checkbox" value="50000" id="50000" name="> 50.000" />';
     html += '<label class="map-filter-cb-value" for="50000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> US$ 50.000</span></div></div>';
+    html += '</div><div class="squaredThree-fname"><span>> 50.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="100000" id="100000" name="> US$ 100.000" />';
+    html += '<input type="checkbox" value="100000" id="100000" name="> 100.000" />';
     html += '<label class="map-filter-cb-value" for="100000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> US$ 100.000</span></div></div>';
+    html += '</div><div class="squaredThree-fname"><span>> 100.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="500000" id="500000" name="> US$ 500.000" />';
+    html += '<input type="checkbox" value="500000" id="500000" name="> 500.000" />';
     html += '<label class="map-filter-cb-value" for="500000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> US$ 500.000</span></div></div>';
+    html += '</div><div class="squaredThree-fname"><span>> 500.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="1000000" id="1000000" name="> US$ 1.000.000" />';
+    html += '<input type="checkbox" value="1000000" id="1000000" name="> 1.000.000" />';
     html += '<label class="map-filter-cb-value" for="1000000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> US$ 1.000.000</span></div></div>';
+    html += '</div><div class="squaredThree-fname"><span>> 1.000.000</span></div></div>';
+
 
     html += '</div></div>';
 
@@ -499,14 +501,21 @@ jQuery(function($) {
 
 // MAP FILTER FUNCTIONS
   function filter_pagination(total, curpage){
-    var text = '';
+    var text = '<div class="span4 hneue-bold">';
+
+
     if (curpage > 1){
       text += '<div id="filter-previous-page">Previous page</div>';
     }
+
+    text += '</div><div class="span3 hneue-bold">';
+
     if (curpage < total){
       text += '<div id="filter-next-page">Next page</div>';
     }
+    text += '</div><div class="span4 hneue-bold">';
     text += '<div id="filter-pagination-overview">Page ' + curpage + ' / ' + total + '</div>';
+    text += '</div>';
 
     $('#map-filter-pagination').html(text);
 

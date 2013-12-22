@@ -5,6 +5,11 @@ Template Name: Single project page
 ?>
 
 <?php get_header();
+
+
+//var_dump($_REQUEST);
+
+
 $project_id = $_REQUEST['iati_id'];
 $activity = wp_get_activity($project_id);
 get_template_part( "map" ); 
