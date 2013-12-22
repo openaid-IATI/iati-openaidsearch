@@ -9,21 +9,67 @@ add_theme_support( 'automatic-feed-links' );
 
 
 
-add_action( 'generate_rewrite_rules', 'add_oipa_tags');
-// add_action( 'init', 'generate_rewrite_rules' );  
-function add_oipa_tags() { 
-	add_rewrite_tag('%iati_id%','([^&]+)');
-	add_rewrite_tag('%backlink%','([^&]+)');
-}
+// add_action( 'rewrite_rules_array', 'add_oipa_tags');
+// // add_action( 'init', 'generate_rewrite_rules' );  
+// function add_oipa_tags(  ) { 
+	
+	
+// 	// add_rewrite_rule('project/([^/]+)/?$','index.php?pagename=project&iati_id=$matches[2]','top');
+// }
 
-function add_rewrite_rules( $wp_rewrite ) 
-{
-	$new_rules = array(
-		'project/([^/]+)/?$' => 'index.php?pagename=project&iati_id='.$wp_rewrite->preg_index(1)
-	);
-	$wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
-}
-add_action('generate_rewrite_rules', 'add_rewrite_rules');
+
+
+
+// add_filter( 'rewrite_rules_array','my_insert_rewrite_rules' );
+// add_filter( 'query_vars','my_insert_query_vars' );
+// add_action( 'wp_loaded','my_flush_rules' );
+
+// flush_rules() if our rules are not yet included
+// function my_flush_rules(){
+// 	$rules = get_option( 'rewrite_rules' );
+
+// 	//if ( ! isset( $rules['(project)/([^/]+)/'] ) ) {
+// 		global $wp_rewrite;
+// 	   	$wp_rewrite->flush_rules();
+// 	//}
+// }
+
+// Adding a new rule
+// function my_insert_rewrite_rules( $rules )
+// {	
+
+// 	add_rewrite_tag('%iati_id%','([^&]+)');
+// 	add_rewrite_tag('%backlink%','([^&]+)');
+// 	$newrules = array();
+// 	$newrules['(project)/([^/]+)/?$'] = 'index.php?pagename=$matches[1]&id=$matches[2]';
+// 	global $wp_rewrite;
+// 	var_dump($wp_rewrite);
+// 	return $newrules + $rules;
+// }
+
+// // Adding the id var so that WP recognizes it
+// function my_insert_query_vars( $vars )
+// {
+//     array_push($vars, 'iati_id');
+//     return $vars;
+// }
+
+
+
+
+
+
+// function add_rewrite_rules( $wp_rewrite ) 
+// {
+// 	$new_rules = array(
+// 		'project/([^/]+)/?' => 'index.php?pagename=project&iati_id=$matches[1]'
+// 	);
+
+// 	$wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
+// 	var_dump($wp_rewrite->rules);
+// 	var_dump("test");
+// }
+// add_action('generate_rewrite_rules', 'add_rewrite_rules');
 
 
 function projects_list() {
