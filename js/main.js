@@ -508,7 +508,7 @@ jQuery(function($) {
     if (curpage > 1){
       text += '<div id="filter-previous-page">Previous page</div>';
     } else {
-      text += '<div id="filter-previous-page"></div>';
+      text += '<div id="filter-previous-page-empty"></div>';
     }
 
     if (curpage < total){
