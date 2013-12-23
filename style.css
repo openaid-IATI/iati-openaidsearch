@@ -1253,7 +1253,7 @@ label, input, button, select, textarea{
   margin-top: 0.5em;
 }
 
-#filter-next-page, #filter-previous-page, #filter-pagination-overview{
+#filter-next-page, #filter-previous-page, #filter-pagination-overview, #filter-previous-page-empty, #filter-next-page-empty{
   display: inline-block;
   padding: 0.6em 1.6em 0.6em 0;
   font-size: 1.1em;
@@ -1262,6 +1262,10 @@ label, input, button, select, textarea{
 
 #filter-next-page, #filter-previous-page{
   cursor: pointer;
+}
+
+#filter-previous-page-empty, #filter-next-page-empty{
+  cursor: default;
 }
 
 
@@ -2367,7 +2371,7 @@ label, input, button, select, textarea{
       left: 2em;
     }
 
-    #filter-next-page, #filter-previous-page, #filter-pagination-overview{
+    #filter-next-page, #filter-previous-page, #filter-pagination-overview, #filter-previous-page-empty, #filter-next-page-empty{
       width: 5em;
     }
 
