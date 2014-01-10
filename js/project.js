@@ -1,20 +1,6 @@
 
 // XXXXXXX PROJECT DETAIL PAGE XXXXXXXXXXX
 
-function sanitize_project_url(){
-
-  var parameters = new Object();
-  var backlink = get_url_parameter_value("backlink");
-  console.log(window.location);
-  var link = window.location.origin + window.location.pathname;
-  if (backlink){
-  	$("#project-back-button").attr("href", decodeURIComponent(home_url + "/projects/" + backlink));
-  }
-  if (history.pushState){
-  	history.pushState(null, null, link);
-  }
-}
-
 
 jQuery(function($) {
 
@@ -23,6 +9,8 @@ jQuery(function($) {
 
   	// hide all tab content
   	$(".project-tabs-wrapper > div").hide();
+  	$("#project-rsr").hide();
+  	$(".main-page-content").show();
   	// remove active tab
   	$(".nav-pills > li").removeClass("active");
   	// make link of current tab active
@@ -63,6 +51,14 @@ jQuery(function($) {
 
   $("#project-located-in-link").click(function(){
 	  change_tab(this, "located-in");
+	  return false;
+  });
+
+  $("#project-rsr-link").click(function(){
+
+	  change_tab(this, "rsr");
+	  $(".project-detail-block").hide();
+	  $(".main-page-content").hide();
 	  return false;
   });
 
@@ -114,52 +110,36 @@ L.geoJson(geocountries, {
 
 });
 
-/*
-var locarray = Array();
-var sqltext = '';
-var counter = 0;
-for (var i = 0;i < city_database.length;i++){
 
-	for(var y = 0;y < city_locations.features.length; y++){
-		
-		if(city_database[i].Name == city_locations.features[y].properties.nameascii || city_database[i].Name == city_locations.features[y].properties.namealt || city_database[i].Name == city_locations.features[y].properties.name){
-		
-			if(city_database[i].iso2 == city_locations.features[y].properties.iso_a2){
-				counter++;
-				
-				sqltext += "update data_city set latitude='"+ city_locations.features[y].properties.longitude +"', longitude='" +city_locations.features[y].properties.latitude+"' where id = "+city_database[i].id+";";
-				
-			}
-		}		
-	}
+
+
+function refresh_rsr_projects(iati_id){
+
+  url = site + "/wp-admin/admin-ajax.php?action=rsr_call&iati_id=" + iati_id;
+  $.support.cors = true;
+
+  if(window.XDomainRequest){
+    var xdr = new XDomainRequest();
+    xdr.open("get", url);
+    xdr.onprogress = function () { };
+    xdr.ontimeout = function () { };
+    xdr.onerror = function () { };
+    xdr.onload = function() {
+      $("#project-rsr").html(xdr.responseText);
+    }
+    setTimeout(function () {xdr.send();}, 0);
+  } else {
+    $.ajax({
+        type: 'GET',
+         url: url,
+         contentType: "html",
+         dataType: 'html',
+         success: function(data){
+          $("#project-rsr").html(data);
+         }
+    });
+  }
 }
-console.log(sqltext);
 
-double or 2 cities in same country with same name:
-Fuyang
-Teresina
-Natal
-Jining
-Liantungang
-Pingxiang
-Suzhou
-Yichun
-Yulin
-Aurangabad
-Bandar Lampung 
-Padang
-Windhoek
-Denpasar
-Columbus
-Aurora
-Jacksonville
-Kansas City
-Las vegas
-Portland
-Richmond
-Rochester
-
-
-*/
 
 

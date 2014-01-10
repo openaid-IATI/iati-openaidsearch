@@ -153,22 +153,6 @@ function load_project_map(project_geojson){
 
   function load_projects_listeners(){
 
-    $('.projects-project-title a').click(function(e){
-      var link = $(this).attr("href");
-      var backlink = build_current_url();
-      var newlink = link + "?backlink=" + encodeURIComponent(backlink);
-      window.location = newlink;
-      return false;
-    });
-
-    $('.projects-project-spec-title a').click(function(e){
-      var link = $(this).attr("href");
-      var backlink = build_current_url();
-      var newlink = link + "?backlink=" + encodeURIComponent(backlink);
-      window.location = newlink;
-      return false;
-    });
-
 
 
     $(".project-share-whistleblower").click(function(){

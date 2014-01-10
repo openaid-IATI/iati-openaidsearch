@@ -22,10 +22,10 @@ add_theme_support( 'automatic-feed-links' );
 
 
 // add_filter( 'rewrite_rules_array','my_insert_rewrite_rules' );
-// add_filter( 'query_vars','my_insert_query_vars' );
+// // add_filter( 'query_vars','my_insert_query_vars' );
 // add_action( 'wp_loaded','my_flush_rules' );
 
-// flush_rules() if our rules are not yet included
+// // flush_rules() if our rules are not yet included
 // function my_flush_rules(){
 // 	$rules = get_option( 'rewrite_rules' );
 
@@ -35,18 +35,19 @@ add_theme_support( 'automatic-feed-links' );
 // 	//}
 // }
 
-// Adding a new rule
+// // Adding a new rule
 // function my_insert_rewrite_rules( $rules )
 // {	
 
-// 	add_rewrite_tag('%iati_id%','([^&]+)');
-// 	add_rewrite_tag('%backlink%','([^&]+)');
+// 	add_rewrite_tag('%iati_id%','(.*)');
+// 	add_rewrite_tag('%backlink%','(.*)');
 // 	$newrules = array();
 // 	$newrules['(project)/([^/]+)/?$'] = 'index.php?pagename=$matches[1]&id=$matches[2]';
 // 	global $wp_rewrite;
 // 	var_dump($wp_rewrite);
 // 	return $newrules + $rules;
 // }
+
 
 // // Adding the id var so that WP recognizes it
 // function my_insert_query_vars( $vars )
@@ -78,8 +79,19 @@ function projects_list() {
 	include( TEMPLATEPATH .'/ajax-projects-list.php' );
 	die();
 }
+
+function rsr_call() {
+	$iati_id = "";
+	if (isset($_REQUEST['iati_id'])){
+		$iati_id = $_REQUEST['iati_id'];
+	}
+	include( TEMPLATEPATH .'/project-rsr-ajax.php' );
+	die();
+}
 add_action('wp_ajax_projects_list', 'projects_list');
 add_action('wp_ajax_nopriv_projects_list', 'projects_list');
+add_action('wp_ajax_rsr_call', 'rsr_call');
+add_action('wp_ajax_nopriv_rsr_call', 'rsr_call');
 
 
 function my_function_admin_bar(){ return false; }
@@ -199,15 +211,12 @@ function add_popular_search($query){
 function wp_get_activity($identifier) {
 	if(empty($identifier)) return null;
 	$search_url = SEARCH_URL . "activities/{$identifier}/?format=json";
-	
+
 	$content = file_get_contents($search_url);
+	if (!$content) { return false; }
 	$activity = json_decode($content);
 	return $activity;
-
 }
-
-
-
 
 function objectToArray($d) {
 	if (is_object($d)) {
@@ -310,6 +319,15 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
 	$meta = $result->meta;
+	$objects = $result->objects;
+}
+
+function wp_generate_rsr_projects(&$objects, $iati_id){
+	
+	$search_url = "http://rsr.akvo.org/api/v1/project/?format=json&partnerships__iati_activity_id=" . $iati_id . "&distinct=True&limit=100&depth=1";
+	$search_url = wp_filter_request($search_url);
+	$content = file_get_contents($search_url);
+	$result = json_decode($content);
 	$objects = $result->objects;
 }
 
