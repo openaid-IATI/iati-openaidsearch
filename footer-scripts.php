@@ -39,7 +39,8 @@ if (is_page('indicators') or is_page('city-prosperity')) { ?>
 if (is_page('project') or is_page('explore')) {
 	echo '<script src="' . get_template_directory_uri() . '/js/dependencies/countries.js"></script>';
 	echo '<script src="' . get_template_directory_uri() . '/js/project.js"></script>';
-
+	?>
+	<?php
 }
 if (!is_page('indicators') and !is_page('city-prosperity')) {
 	echo '<script src="' . get_template_directory_uri() . '/js/projects.js"></script>';

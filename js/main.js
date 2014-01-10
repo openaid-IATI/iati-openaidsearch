@@ -189,7 +189,6 @@ function create_filter_attributes(objects, columns){
     var html = '';
     var per_col = 20;
 
-
     var sortable = [];
     for (var key in objects){
       sortable.push([key, objects[key]]);
@@ -214,9 +213,12 @@ function create_filter_attributes(objects, columns){
       } 
 
       var sortablename = sortable[i][1];
-      if (sortablename.length > 32 && columns == 4){
+      if (columns == 4 && sortablename.length > 32){
         sortablename = sortablename.substr(0,28) + "...";
+      } else if (columns == 3 && sortablename.length > 40){
+        sortablename = sortablename.substr(0,36) + "...";
       }
+
 
       html += '<div class="squaredThree"><div>';
       html += '<input type="checkbox" value="'+ sortable[i][0] +'" id="'+sortable[i][1].toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'" name="'+sortable[i][1]+'" />';
@@ -278,14 +280,16 @@ function create_project_filter_attributes(objects, columns){
       } 
 
       var sortablename = sortable[i][1].name;
-      if (sortablename.length > 32 && columns == 4){
-        sortablename = sortablename.substr(0,30) + "...";
+      if (columns == 4 && sortablename.length > 32){
+        sortablename = sortablename.substr(0,28) + "...";
+      } else if (columns == 3 && sortablename.length > 46){
+        sortablename = sortablename.substr(0,42) + "...";
       }
       var sortableamount = sortable[i][1].total.toString();
 
       html += '<div class="squaredThree"><div>';
-      html += '<input type="checkbox" value="'+ sortable[i][0] +'" id="'+sortable[i][1].name.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'" name="'+sortable[i][1].name+'" />';
-      html += '<label class="map-filter-cb-value" for="'+sortable[i][1].name.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'"></label>';
+      html += '<input type="checkbox" value="'+ sortable[i][0] +'" id="'+sortable[i][0]+sortable[i][1].name.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'" name="'+sortable[i][1].name+'" />';
+      html += '<label class="map-filter-cb-value" for="'+sortable[i][0]+sortable[i][1].name.toString().replace(/ /g,'').replace(',', '').replace('&', '').replace('%', 'perc')+'"></label>';
       html += '</div><div class="squaredThree-fname"><span>'+sortablename+' (' + sortableamount + ')</span></div></div>';
       if (i%per_col == (per_col - 1)){
         html += '</div>';
@@ -317,34 +321,34 @@ function create_budget_filter_attributes(objects, columns){
     html += '<div class="span4">';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="0" id="0" name="> US$ 0" />';
+    html += '<input type="checkbox" value="0" id="0" name="> 0" />';
     html += '<label class="map-filter-cb-value" for="0"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> US$ 0</span></div></div>';
+    html += '</div><div class="squaredThree-fname"><span>> 0</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="10000" id="10000" name="> US$ 10.000" />';
+    html += '<input type="checkbox" value="10000" id="10000" name="> 10.000" />';
     html += '<label class="map-filter-cb-value" for="10000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> US$ 10.000</span></div></div>';
+    html += '</div><div class="squaredThree-fname"><span>> 10.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="50000" id="50000" name="> US$ 50.000" />';
+    html += '<input type="checkbox" value="50000" id="50000" name="> 50.000" />';
     html += '<label class="map-filter-cb-value" for="50000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> US$ 50.000</span></div></div>';
+    html += '</div><div class="squaredThree-fname"><span>> 50.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="100000" id="100000" name="> US$ 100.000" />';
+    html += '<input type="checkbox" value="100000" id="100000" name="> 100.000" />';
     html += '<label class="map-filter-cb-value" for="100000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> US$ 100.000</span></div></div>';
+    html += '</div><div class="squaredThree-fname"><span>> 100.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="500000" id="500000" name="> US$ 500.000" />';
+    html += '<input type="checkbox" value="500000" id="500000" name="> 500.000" />';
     html += '<label class="map-filter-cb-value" for="500000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> US$ 500.000</span></div></div>';
+    html += '</div><div class="squaredThree-fname"><span>> 500.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="1000000" id="1000000" name="> US$ 1.000.000" />';
+    html += '<input type="checkbox" value="1000000" id="1000000" name="> 1.000.000" />';
     html += '<label class="map-filter-cb-value" for="1000000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> US$ 1.000.000</span></div></div>';
+    html += '</div><div class="squaredThree-fname"><span>> 1.000.000</span></div></div>';
 
     html += '</div></div>';
 
@@ -500,11 +504,17 @@ jQuery(function($) {
 // MAP FILTER FUNCTIONS
   function filter_pagination(total, curpage){
     var text = '';
+
     if (curpage > 1){
       text += '<div id="filter-previous-page">Previous page</div>';
+    } else {
+      text += '<div id="filter-previous-page-empty"></div>';
     }
+
     if (curpage < total){
       text += '<div id="filter-next-page">Next page</div>';
+    } else {
+      text += '<div id="filter-next-page"></div>';
     }
     text += '<div id="filter-pagination-overview">Page ' + curpage + ' / ' + total + '</div>';
 

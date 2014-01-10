@@ -4,8 +4,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-define( 'SEARCH_URL', 'http://dev.oipa.openaidsearch.org/api/v3/');
-define( 'SITE_URL', 'http://dev.openaidsearch.org');
+define( 'SEARCH_URL', 'http://staging.oipa.openaidsearch.org/api/v3/');
+define( 'SITE_URL', site_url());
 define( 'EMPTY_LABEL', 'No information available');
 define( 'AJAX_PROJECTS_URL', TEMPLATEPATH .'/functions-projects.php');
 

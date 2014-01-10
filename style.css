@@ -1236,20 +1236,26 @@ label, input, button, select, textarea{
 }
 
 #map-filter-pagination{
-  display: inline-block;
   color: #DEDEDE;
-  margin: 0.5em 0.5em 0.5em 0;
+  margin-top: 0.5em;
 }
 
-#filter-next-page, #filter-previous-page, #filter-pagination-overview{
+#filter-next-page, #filter-previous-page, #filter-pagination-overview, #filter-previous-page-empty, #filter-next-page-empty{
   display: inline-block;
   padding: 0.6em 1.6em 0.6em 0;
   font-size: 1.1em;
+  width: 7em;
 }
 
 #filter-next-page, #filter-previous-page{
   cursor: pointer;
 }
+
+#filter-previous-page-empty, #filter-next-page-empty{
+  cursor: default;
+}
+
+
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX INDICATOR PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
@@ -1674,7 +1680,7 @@ label, input, button, select, textarea{
   padding-top: 0.4em;
 }
 
-#project-financials, #project-documents, #project-related-projects, #project-related-indicators, #project-located-in{
+#project-financials, #project-documents, #project-related-projects, #project-related-indicators, #project-located-in, #project-rsr{
   display: none;
 }
 
@@ -1872,6 +1878,42 @@ label, input, button, select, textarea{
 
 .dropdown-menu-page-header button:hover, .dropdown-menu-page-header button.active{
   text-decoration: underline;
+}
+
+
+/* RSR */
+
+.rsr-title{
+  font-size: 1.5em;
+  padding-bottom: 0.6em;
+  line-height: 1.2em;
+}
+
+.rsr-description{
+  font-size: 1.2em;
+  line-height: 1.2em;
+  padding-right: 1em;
+}
+
+.rsr-project-block{
+  padding-top: 1.2em;
+  padding-bottom: 1.7em;
+}
+
+.rsr-project-block-header{
+  padding-top:1em;
+  font-size: 1.2em;
+}
+
+.rsr-project-block .span2{
+  padding-top: 2.2em;
+  font-size: 1.2em;
+  line-height: 1.2em;
+}
+
+#project-rsr{
+  min-height:30em;
+  padding-top:1em;
 }
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAQ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -2351,6 +2393,10 @@ label, input, button, select, textarea{
 
     #selection-box-wrapper{
       left: 2em;
+    }
+
+    #filter-next-page, #filter-previous-page, #filter-pagination-overview, #filter-previous-page-empty, #filter-next-page-empty{
+      width: 5em;
     }
 
 
