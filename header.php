@@ -52,7 +52,7 @@
                             );
                         wp_nav_menu($navmenargs);?>
 
-                    <form action='projects' method='GET' class="navbar-form pull-right">
+                    <form action='<?php echo site_url(); ?>/projects/' method='GET' class="navbar-form pull-right">
                         <input type="text" class="input-large" placeholder="What are you looking for?" name='query'>
                         <input type="submit" class="btn header-btn-search hneue-bold" value="Search">                  
                     </form>
