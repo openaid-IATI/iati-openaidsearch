@@ -25,35 +25,30 @@ if(!empty($FILTER['id'])) {
 	$FILTER['offset'] = intval($FILTER['offset']);
 	if($FILTER['offset']<0) $FILTER['offset'] = 0;
 
-	$search_url = SEARCH_URL . "activities/?format=json&organisations=41120&limit={$FILTER['limit']}&offset={$FILTER['offset']}";
+	$rep_org_str = "";
+	if (DEFAULT_ORGANISATION_ID){ $rep_org_str = "&reporting_organisation__in=" . DEFAULT_ORGANISATION_ID; }
+	$search_url = SEARCH_URL . "activities/?format=json" . $rep_org_str . "&limit={$FILTER['limit']}&offset={$FILTER['offset']}";
 	
 	if(!empty($FILTER['query'])) {
 		$search_url .= "&query={$FILTER['query']}";
 	}
 
 	if(!empty($FILTER['countries'])) {
-		$search_url .= "&countries={$FILTER['countries']}";
+		$search_url .= "&countries__in={$FILTER['countries']}";
 	}
 
 	if(!empty($FILTER['regions'])) {
-		$search_url .= "&regions={$FILTER['regions']}";
+		$search_url .= "&regions__in={$FILTER['regions']}";
 	}
 
 	if(!empty($FILTER['sectors'])) {
-		$search_url .= "&sectors={$FILTER['sectors']}";
-	}
-
-	if(!empty($FILTER['budgets'])) {
-		$budgets = explode('|', trim($_REQUEST['budgets']));
-		//Get the lowest budget from filter and use this one, all the other are included in the range
-		ksort($budgets);
-		$search_url .= "&statistics__total_budget__gt={$budgets[0]}";
+		$search_url .= "&sectors__in={$FILTER['sectors']}";
 	}
 
 	if(!empty($FILTER['order_by'])) {
 		$search_url .= "&order_by={$FILTER['order_by']}";
 	}
-
+	
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
 	$objects = $result->objects;
@@ -63,7 +58,7 @@ if(!empty($FILTER['id'])) {
 }
 
 function generate_activity_export($activity) {
-
+	
 	$objPHPExcel = new PHPExcel();
 
 	$author = $_REQUEST['author'];
@@ -256,83 +251,101 @@ function generate_search_export($activities) {
 	$objPHPExcel->getProperties()->setCreator( $author );
 	$objPHPExcel->getProperties()->setLastModifiedBy( $author );
 	$objPHPExcel->getProperties()->setTitle("Search results");
-	$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(35);
-	$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(12);
-	$row=1;
+
+	$objPHPExcel->getActiveSheet()->setCellValue("A1", "Iati identifier");
+	$objPHPExcel->getActiveSheet()->setCellValue("B1", "Title");
+	$objPHPExcel->getActiveSheet()->setCellValue("C1", "Description");
+	$objPHPExcel->getActiveSheet()->setCellValue("D1", "Countries");
+	$objPHPExcel->getActiveSheet()->setCellValue("E1", "Regions");
+	$objPHPExcel->getActiveSheet()->setCellValue("F1", "sectors");
+	$objPHPExcel->getActiveSheet()->setCellValue("G1", "Start planned");
+	$objPHPExcel->getActiveSheet()->setCellValue("H1", "End planned");
+	$objPHPExcel->getActiveSheet()->setCellValue("I1", "Start actual");
+	$objPHPExcel->getActiveSheet()->setCellValue("J1", "End actual");
+	$objPHPExcel->getActiveSheet()->setCellValue("K1", "Last_updated");
+	$objPHPExcel->getActiveSheet()->setCellValue("L1", "Collaboration type");
+	$objPHPExcel->getActiveSheet()->setCellValue("M1", "Default flow type");
+	$objPHPExcel->getActiveSheet()->setCellValue("N1", "Default aid type");
+	$objPHPExcel->getActiveSheet()->setCellValue("O1", "Tied status");
+	$objPHPExcel->getActiveSheet()->setCellValue("P1", "Activity status");
+	$objPHPExcel->getActiveSheet()->setCellValue("Q1", "Participating organisations");
+	$objPHPExcel->getActiveSheet()->setCellValue("R1", "Reporting organisation");
+
+	$row=2;
 
 	foreach($activities AS $a) {
-		$objPHPExcel->getActiveSheet()->mergeCells("A{$row}:D{$row}");
-		$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", $a['titles'][0]['title']);
-		$fill = array('type' => PHPExcel_Style_Fill::FILL_SOLID, 'startcolor' => array('rgb' => 'DADADA') );
-		$objPHPExcel->getActiveSheet()->getStyle("A{$row}")->getFill()->applyFromArray($fill);
-		$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setSize(14);
-		$objPHPExcel->getActiveSheet()->getStyle("A{$row}:D{$row}")->getAlignment()->setWrapText(true);
-		$objPHPExcel->getActiveSheet()->getStyle("A{$row}:D{$row}")->getFont()->setBold(true);
-		$row++;
-		$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Countries:');
-		$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
 		$sep = '';
 		$countries = '';
-		if(empty($a['recipient_country'])) {
+		if(empty($a['countries'])) {
 			$countries = EMPTY_LABEL;
 		} else {
-			foreach($a['recipient_country'] AS $country) {
+			foreach($a['countries'] AS $country) {
 				$countries .= $sep . $country['name'];
 				$sep = ', ';
 			}
 		}
-		$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $countries);
-		$row++;
-		$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Subject:');
-		$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
-		if(empty($a['titles'][0]['title'])) $a['titles'][0]['title'] = EMPTY_LABEL;
-		$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $a['titles'][0]['title']);
-		$row++;
-		$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Budget:');
-		$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
-		$budget = '';
-		if(empty($a['statistics']['total_budget'])) {
-			$budget = EMPTY_LABEL;
+
+		$sep = '';
+		$regions = '';
+		if(empty($a['regions'])) {
+			$regions = EMPTY_LABEL;
 		} else {
-			$budget = "US$ " . format_custom_number($a['statistics']['total_budget']);
+			foreach($a['regions'] AS $region) {
+				$regions .= $sep . $region['name'];
+				$sep = ', ';
+			}
 		}
-		$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $budget);
-		$row++;
-		$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Sector:');
-		$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
+
 		$sep = '';
 		$sectors = '';
-		if(empty($a['activity_sectors'])) {
+		if(empty($a['sectors'])) {
 			$sectors = EMPTY_LABEL;
 		} else {
-			foreach($a['activity_sectors'] AS $sector) {
+			foreach($a['sectors'] AS $sector) {
 				$sectors .= $sep . $sector['name'];
 				$sep = ', ';
 			}
 		}
-		$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $sectors);
+
+		$sep = '';
+		$participating_organisations = '';
+		if(empty($a['participating_organisations'])) {
+			$participating_organisations = EMPTY_LABEL;
+		} else {
+			foreach($a['participating_organisations'] AS $participating_organisation) {
+				$participating_organisations .= $sep . $participating_organisation['name'];
+				$sep = ', ';
+			}
+		}	
+
+		if (!empty($a['iati_identifier'])){ $objPHPExcel->getActiveSheet()->setCellValue("A{$row}", $a['iati_identifier']); } 
+		if (!empty($a['titles'][0]['title'])){ $objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $a['titles'][0]['title']); }
+		if (!empty($a['descriptions'][0]['description'])){ $objPHPExcel->getActiveSheet()->setCellValue("C{$row}", $a['descriptions'][0]['description']); }
+		$objPHPExcel->getActiveSheet()->setCellValue("D{$row}", $countries);
+		$objPHPExcel->getActiveSheet()->setCellValue("E{$row}", $regions);
+		$objPHPExcel->getActiveSheet()->setCellValue("F{$row}", $sectors);
+		if (!empty($a['start_planned'])){ $objPHPExcel->getActiveSheet()->setCellValue("G{$row}", $a['start_planned']); }
+		if (!empty($a['end_planned'])){ $objPHPExcel->getActiveSheet()->setCellValue("H{$row}", $a['end_planned']); }
+		if (!empty($a['start_actual'])){ $objPHPExcel->getActiveSheet()->setCellValue("I{$row}", $a['start_actual']); }
+		if (!empty($a['end_actual'])){ $objPHPExcel->getActiveSheet()->setCellValue("J{$row}", $a['end_actual']); }
+		if (!empty($a['last_updated_datetime'])){ $objPHPExcel->getActiveSheet()->setCellValue("K{$row}", $a['last_updated_datetime']); }
+		if (!empty($a['collaboration_type']['name'])){ $objPHPExcel->getActiveSheet()->setCellValue("L{$row}", $a['collaboration_type']['name']); }
+		if (!empty($a['default_flow_type']['name'])){ $objPHPExcel->getActiveSheet()->setCellValue("M{$row}", $a['default_flow_type']['name']); }
+		if (!empty($a['default_aid_type']['name'])){ $objPHPExcel->getActiveSheet()->setCellValue("N{$row}", $a['default_aid_type']['name']); }
+		if (!empty($a['default_tied_status']['name'])){ $objPHPExcel->getActiveSheet()->setCellValue("O{$row}", $a['default_tied_status']['name']); }
+		if (!empty($a['activity_status']['name'])){ $objPHPExcel->getActiveSheet()->setCellValue("P{$row}", $a['activity_status']['name']); }
+		$objPHPExcel->getActiveSheet()->setCellValue("Q{$row}", $participating_organisations);
+		if (!empty($a['reporting_organisation'][0]['name'])){ $objPHPExcel->getActiveSheet()->setCellValue("R{$row}", $a['reporting_organisation'][0]['name']); }
+		
 		$row++;
-		
-		$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Description:');
-		$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
-		$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
-		$objPHPExcel->getActiveSheet()->getStyle("B{$row}")->getAlignment()->setWrapText(true);
-		$objPHPExcel->getActiveSheet()->getStyle('B'.$row)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_TOP);
-		$objPHPExcel->getActiveSheet()->getRowDimension($row)->setRowHeight(100);
-		if(empty($a['descriptions'][0]['description'])) $a['descriptions'][0]['description'] = EMPTY_LABEL;
-		$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $a['descriptions'][0]['description']);
-		
-		$row+=2;
 	}
+
 
 	$objPHPExcel->setActiveSheetIndex(0);
 	header('Content-Type: application/vnd.ms-excel');
-
 	header('Content-Disposition: attachment;filename="'. $author.'.xls"');
-
 	header('Cache-Control: max-age=0');
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-
 	$objWriter->save('php://output');
 	exit;
 }

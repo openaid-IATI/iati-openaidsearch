@@ -19,13 +19,9 @@
 
     
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/leaflet.ie.css" />
-     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/ie-8-and-down.css" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/leaflet.ie.css" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/ie-8-and-down.css" />
     <![endif]-->
-
-    
-
-    
 
 
     <?php wp_head(); ?>
@@ -56,7 +52,7 @@
                             );
                         wp_nav_menu($navmenargs);?>
 
-                    <form action='projects' method='GET' class="navbar-form pull-right">
+                    <form action='<?php echo site_url(); ?>/projects/' method='GET' class="navbar-form pull-right">
                         <input type="text" class="input-large" placeholder="What are you looking for?" name='query'>
                         <input type="submit" class="btn header-btn-search hneue-bold" value="Search">                  
                     </form>
