@@ -4,14 +4,37 @@ Template Name: Single project page
 */
 ?>
 
-<?php get_header();
+<?php 
 
-$project_id = $_REQUEST['id'];
-$activity = wp_get_activity($project_id);
+get_header();
+
+
+$found = false;
+
+if (isset($_REQUEST['iati_id'])){
+	$iati_id = $_REQUEST['iati_id'];
+	$activity = wp_get_activity($iati_id);
+	get_template_part( "map" );
+	if ($activity){
+		$found = true;
+	}
+}
+
+if (!$found){
+?>
+
+<div id="page-wrapper">
+	<div class="page-content">
+		<div id="no-projects-found">Activity not found.</div>
+		</div>
+	</div>
+</div>
+
+<?
+} else {
 
 ?>
 
-<?php get_template_part( "map" ); ?>
 
 <div id="page-wrapper">
 
@@ -47,6 +70,9 @@ $activity = wp_get_activity($project_id);
 					<li>
 						<a id="project-located-in-link" href="#project-located-in">Located in</a>
 					</li>
+					<li>
+						<a id="project-rsr-link" href="#project-rsr">RSR / Local projects</a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -55,218 +81,79 @@ $activity = wp_get_activity($project_id);
 	<div class="page-full-width-line"></div>
 
 	<div class="container">
-		<div class="page-content project-page-content">
+		<div class="page-content project-page-content main-page-content">
 			<div class="row-fluid">
 				<div class="span7 project-tabs-wrapper">
 
-					<?php get_template_part( 'project', 'description' ); ?>
-					<?php get_template_part( 'project', 'financials' ); ?>
-					<?php get_template_part( 'project', 'documents' ); ?>
-					<?php get_template_part( 'project', 'related-indicators' ); ?>
-					<?php get_template_part( 'project', 'related-projects' ); ?>
-					<?php get_template_part( 'project', 'located-in' ); ?>
+					<?php 
+					include( TEMPLATEPATH .'/project-description.php' ); 
+					include( TEMPLATEPATH .'/project-financials.php' );
+					include( TEMPLATEPATH .'/project-documents.php' );
+					include( TEMPLATEPATH .'/project-related-indicators.php' );
+					include( TEMPLATEPATH .'/project-related-projects.php' );
+					include( TEMPLATEPATH .'/project-located-in.php' ); 
+
+					$rsr_loaded = false;
+					?>
+					
+					
 				</div>
 				<div class="span5">
-					<div class="project-spec">
-
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">Countries:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->
-							recipient_country)) {
-					$sep = '';
-					$countries = "";
-					$cSep = "";
-					foreach($activity->recipient_country AS $country) {
-						echo  $sep . "
-							<a href='".get_bloginfo('url')."/projects/?countries={$country->iso}'>" . $country->name . "</a>
-							";
-						$countries .= $cSep . $country->iso;
-						$sep = ', ';
-						$cSep = '|';
-					}
-				}
-				?>
-						</div>
-
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">Principal sector:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->
-							activity_sectors)) {
-					$sep = '';
-					foreach($activity->activity_sectors AS $sector) {
-						if($sector->name=='No information available') {
-							echo $sector->name;
-						} else {
-							echo  $sep . "
-							<a href='".get_bloginfo('url')."/projects/?sectors={$sector->code}'>" . $sector->name . "</a>
-							";
-						}
-							$sep = ', ';
-						}
-				} ?>
-						</div>
-
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">Budget:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->
-							statistics->total_budget)) {?>
-							US$
-							<?php echo format_custom_number($activity->
-							statistics->total_budget);  ?>
-							<?php } ?></div>
-
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">IATI identifier:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?></div>
-
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">Reporting organisation:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->
-							reporting_organisation->org_name)) { echo $activity->reporting_organisation->org_name; } ?>
-						</div>
-
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">Sector code:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->
-							activity_sectors[0]->code)) { echo "<a href='".get_bloginfo('url')."/projects/?sectors={$sector->code}'>" . $activity->activity_sectors[0]->code . "</a>"; } ?>
-						</div>
-
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">Last updated:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->date_updated)) { echo $activity->date_updated; } ?></div>
-
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">Start date planned:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->start_planned)) { echo $activity->start_planned; } ?></div>
-
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">End date planned:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->end_planned)) { echo $activity->end_planned; } ?></div>
-
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">Activity status:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->
-							activity_status->name)) { echo $activity->activity_status->name; } ?>
-						</div>
-
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">Name participating organisation:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->
-							reporting_organisation->org_name)) { echo $activity->reporting_organisation->org_name; } ?>
-						</div>
-
-						<div class="projects-project-divider"></div>
-
-						<div class="projects-project-spec-key">Organisation reference code:</div>
-						<div class="projects-project-spec-value">
-
-							<?php if(!empty($activity->
-							reporting_organisation->ref)) { echo $activity->reporting_organisation->ref; } ?>
-						</div>
-
-						<div class="projects-project-divider"></div>
-
-						<div class="project-share-container projects-share-spec">
-
-							<button id="project-share-export" class="project-share-button hneue-bold" name="<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?>">
-								<div class="share-icon"></div>
-								<div class="share-text">EXPORT</div>
-							</button>
-
-							<span class="st_sharethis" st_url="<?php bloginfo('url'); ?>/project/?id=<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?>" st_title="<?php echo $activity->titles[0]->title; ?>" displayText="SHARE"></span>
-
-							<button class="project-share-button hneue-bold project-share-bookmark">
-								<div class="share-icon"></div>
-								<div class="share-text">BOOKMARK</div>
-							</button>
-							<button class="project-share-button hneue-bold project-share-whistleblower" name="<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?>">
-								<div class="share-icon"></div>
-								<div class="share-text">WHISTLEBLOWER</div>
-							</button>
-
-						</div>
-					</div>
+					<?php 
+					include( TEMPLATEPATH .'/project-sidebar.php' ); 
+					?>
 				</div>
 
 			</div>
-
-			<div class="page-full-width-line"></div>
-
-
-			<div class="container">
-				<div class="page-content project-page-content">
-					<div class="row-fluid">
-						<div class="span7">
-							<div id="disqus_thread"></div>
-						    <script type="text/javascript">
-						        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-						        var disqus_shortname = 'openunhabitat'; // required: replace example with your forum shortname
-						 		var disqus_identifier = '<?php echo $activity->iati_identifier; ?>';
-    							var disqus_title = '<?php echo $activity->titles[0]->title; ?>';
-    							var disqus_url = '<?php echo "http://open.unhabitat.org/project/?id=" . $activity->iati_identifier; ?>';
-
-						        /* * * DON'T EDIT BELOW THIS LINE * * */
-						        (function() {
-						            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-						            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-						            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-						        })();
-						    </script>
-						    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-						    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
 
 		</div>
 	</div>
-</div>
 
-<script type="text/javascript">
+	<div id="project-rsr">
+		<?php
+		include( TEMPLATEPATH .'/project-rsr.php' ); 
+		?>
+	</div>
+
+	<div class="page-full-width-line"></div>
+
+
+	<div class="container">
+		<div class="page-content project-page-content">
+			<div class="row-fluid">
+				<div class="span7">
+					<div id="disqus_thread"></div>
+				    <script>
+				        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+				        var disqus_shortname = ''; // required: replace example with your forum shortname
+				 		var disqus_identifier = '<?php echo $activity->iati_identifier; ?>';
+						var disqus_title = '<?php echo $activity->titles[0]->title; ?>';
+						var disqus_url = '<?php echo site_url() . "/project/?id=" . $activity->iati_identifier; ?>';
+
+				        /* * * DON'T EDIT BELOW THIS LINE * * */
+				        (function() {
+				            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+				            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				        })();
+				    </script>
+				    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<script>
 
 // PREPARE COUNTRIES FOR SHOWING ON MAP
-
-	<?php if(!empty($activity->recipient_country)) {
+	
+	<?php 
+	$countries = "";
+	if(!empty($activity->countries)) {
 		$sep = '';
-		$countries = "";
-		foreach($activity->recipient_country AS $country) {
-			$countries .=  $sep . '"' . $country->iso . '"';
+		foreach($activity->countries AS $country) {
+			$countries .=  $sep . '"' . $country->code . '"';
 			$sep = ', ';
 		}
 	}
@@ -275,13 +162,11 @@ $activity = wp_get_activity($project_id);
 	var project_countries = new Array(<?php echo $countries; ?>);
 
 </script>
-
+<?php } ?>
+<?php get_template_part('footer-scripts'); ?>
+<script> refresh_rsr_projects("<?php echo $iati_id; ?>"); </script>
 <?php get_footer(); ?>
 
-<script>
-  $(document).ready(function() {
-      sanitize_project_url();
-    });
-</script>
+
 	
 	

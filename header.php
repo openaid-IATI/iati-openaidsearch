@@ -4,7 +4,7 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Open UN-Habitat</title>
+    <title><?php wp_title(''); ?></title>
    
 
     <!-- Bootstrap -->
@@ -19,13 +19,10 @@
 
     
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/leaflet.ie.css" />
-     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/ie-8-and-down.css" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/leaflet.ie.css" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/ie-8-and-down.css" />
     <![endif]-->
 
-    
-
-    
 <?php wp_head(); ?>
 
 </head>
@@ -54,14 +51,13 @@
                             'menu_class' => 'nav',
                             );
                         wp_nav_menu($navmenargs);?>
-                    <div style="display:none;">
-                    <form action='projects' method='GET' class="navbar-form pull-right">
+
+                        <form action='<?php echo site_url(); ?>/projects/' method='GET' class="navbar-form pull-right">
+
                         <input type="text" class="input-large" placeholder="What are you looking for?" name='query'>
-                        <button type="submit" class="btn header-btn-search hneue-bold"><img src="<?php echo get_template_directory_uri(); ?>/images/search-icon.png" alt="" /><div id="header-search-text"> Search</div></button>                   
+                        <input type="submit" class="btn header-btn-search hneue-bold" value="Search">                  
                     </form>
                 </div>
-                </div>
-
             </div>
         </div>
     </div>

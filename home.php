@@ -2,6 +2,9 @@
 
 <?php get_template_part( "indicator", "map" ); ?>
 
+
+
+
 <div id="page-wrapper">
 	<div class="container">
 		<div class="page-content">
@@ -32,7 +35,7 @@
 				</a>
 				<?php endforeach; ?>
 
-					
+				
 
 				</div>
 				<div class="span4">
@@ -91,7 +94,7 @@
 		</div>
 	</div>
 </div>
-<?php get_footer(); ?>
+<?php get_template_part('footer-scripts'); ?>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -107,3 +110,4 @@ $(document).ready(function(){
   initialize_filters(fill_selection_box);
 });
 </script>
+<?php get_footer(); ?>

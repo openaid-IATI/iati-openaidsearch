@@ -44,7 +44,7 @@ Template Name: Indicators page
 							</div>
 							<div id="dropdown-embed-url" class="dropdown-menu-page-header">
 								Code to embed: <br>
-								<input type="text" name="embed-url" value="">
+								<textarea name="embed-url"></textarea>
 								<div id="project-share-embed-close">close</div>
 							</div>
 						</a>
@@ -85,20 +85,13 @@ Template Name: Indicators page
 		</div>
 	</div>
 </div>
-
-
-<?php get_footer(); ?>
-
-<script type="text/javascript">
+<?php get_template_part('footer-scripts'); ?>
+<script>
 $(document).ready(function(){
   selected_type = "indicator";
-  query_string_to_selection();
-
-  if (current_selection.indicators === undefined){
-  	current_selection.indicators = [];
-  	current_selection.indicators.push({"id":"population", "name":"Total population"});
-  }
-  reload_map();
-  initialize_filters(fill_selection_box, initialize_charts);
+  save_selection(true);
 });
 </script>
+<?php get_footer(); ?>
+
+

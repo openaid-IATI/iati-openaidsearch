@@ -11,7 +11,7 @@ Template Name: Embed project map page
     <meta charset="<?php bloginfo( 'charset' ); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Open UN-Habitat</title>
+    <title><?php wp_title(''); ?></title>
    
 
     <!-- Bootstrap -->
@@ -80,9 +80,7 @@ echo 'var organisation_id = "' . $_DEFAULT_ORGANISATION_ID . '"';
 
     $(document).ready(function() {
       selected_type = "projects";
-      query_string_to_selection();
-      reload_map();
-      initialize_project_filter_options(fill_selection_box);
+      save_selection(true);
       map.setZoom(2);
       map.options.minZoom = 1;
     });
