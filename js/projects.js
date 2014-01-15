@@ -52,14 +52,16 @@ function unload_project_map(){
 
 // Map polygon styling
 function getColor(d) {
-    return d > 5000 ? '#0f567c' :
-           d > 2500  ? '#045A8D' :
-           d > 1000  ? '#176792' :
-           d > 500   ? '#2476A2' :
-           d > 20   ? '#2B8CBE' :
-           d > 0    ? '#65a8cf' :
+    return d > 6  ? '#045A8D' :
+           d > 1   ? '#2476A2' :
+           d > 0   ? '#2B8CBE' :
+    // return d > 8  ? '#FE6305' :
+    //        d > 4   ? '#FE7421' :
+    //        d > 0   ? '#FE8236' :
+           //d > 220   ? '#2B8CBE' :
                       'transparent';
 }
+
 
 function getWeight(d) {
     return d > 0  ? 1 :
