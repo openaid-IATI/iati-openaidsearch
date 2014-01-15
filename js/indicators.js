@@ -68,10 +68,6 @@ function initialize_indicators_map(callback){
 }
 
 function show_map(indicator_data){
-    if(selected_type == "cpi"){
-      refresh_circles(2012);
-    }
-
     save_selection_step_3();
 }
 
