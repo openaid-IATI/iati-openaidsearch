@@ -24,11 +24,16 @@ Template Name: City prosperity page
 								<button id="dropdown-csv">AS CSV</button>
 							</div>
 						</a>
-						<a id="project-share-embed" class="project-share-button hneue-bold">
+						<a href="#" id="project-share-embed" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
 							<div class="share-text">EMBED</div>
+							<div id="dropdown-embed-url" class="dropdown-menu-page-header">
+								Code to embed: <br>
+								<textarea name="embed-url"></textarea>
+								<div id="project-share-embed-close">close</div>
+							</div>
 						</a>
-						
+
 					</div>
 				</div>
 				<?php get_template_part("global", "page-navbar-right"); ?>

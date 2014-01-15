@@ -44,7 +44,7 @@ Template Name: Indicators page
 							</div>
 							<div id="dropdown-embed-url" class="dropdown-menu-page-header">
 								Code to embed: <br>
-								<input type="text" name="embed-url" value="">
+								<textarea name="embed-url"></textarea>
 								<div id="project-share-embed-close">close</div>
 							</div>
 						</a>

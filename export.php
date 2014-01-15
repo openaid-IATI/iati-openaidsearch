@@ -25,28 +25,30 @@ if(!empty($FILTER['id'])) {
 	$FILTER['offset'] = intval($FILTER['offset']);
 	if($FILTER['offset']<0) $FILTER['offset'] = 0;
 
-	$search_url = SEARCH_URL . "activities/?format=json&reporting_organisation=" . DEFAULT_ORGANISATION_ID . "&limit={$FILTER['limit']}&offset={$FILTER['offset']}";
+	$rep_org_str = "";
+	if (DEFAULT_ORGANISATION_ID){ $rep_org_str = "&reporting_organisation__in=" . DEFAULT_ORGANISATION_ID; }
+	$search_url = SEARCH_URL . "activities/?format=json" . $rep_org_str . "&limit={$FILTER['limit']}&offset={$FILTER['offset']}";
 	
 	if(!empty($FILTER['query'])) {
 		$search_url .= "&query={$FILTER['query']}";
 	}
 
 	if(!empty($FILTER['countries'])) {
-		$search_url .= "&countries_all={$FILTER['countries']}";
+		$search_url .= "&countries__in={$FILTER['countries']}";
 	}
 
 	if(!empty($FILTER['regions'])) {
-		$search_url .= "&regions_all={$FILTER['regions']}";
+		$search_url .= "&regions__in={$FILTER['regions']}";
 	}
 
 	if(!empty($FILTER['sectors'])) {
-		$search_url .= "&sectors_all={$FILTER['sectors']}";
+		$search_url .= "&sectors__in={$FILTER['sectors']}";
 	}
 
 	if(!empty($FILTER['order_by'])) {
 		$search_url .= "&order_by={$FILTER['order_by']}";
 	}
-
+	
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
 	$objects = $result->objects;
