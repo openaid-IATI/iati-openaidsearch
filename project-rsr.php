@@ -1,19 +1,19 @@
-<div id="project-rsr">
 
 <?php
-    
-$iati_id = $_REQUEST['id'];
-$search_url = "http://rsr.akvo.org/api/v1/project/?format=json&partnerships__iati_activity_id=" . $iati_id . "&distinct=True&limit=100&depth=1";
-    
-$search_url = wp_filter_request($search_url);
-$content = file_get_contents($search_url);
 
+if ($rsr_loaded == false){
+	?> 
+	<div class="container rsr-project-block">
+		<div class="row-fluid">
+			<div class="span12">
+				Loading RSR projects...
+			</div>
+		</div>
+	</div>
+	<?php
+} else {
 
-$rsr_project_count = 0;
-for($i = 0;$i < 6;$i++){
-
-	$result = json_decode($content);
-	$objects = $result->objects;
+	$rsr_project_count = 0;
 
 	foreach($objects AS $idx=>$rsr_project) {
 
@@ -58,10 +58,11 @@ for($i = 0;$i < 6;$i++){
 				<div class="container rsr-project-block">
 						<div class="row-fluid">
 							<div class="span1">
-								<img src="http://www.akvo.org<?php echo $rsr_project->current_image->thumbnails->map_thumb; ?>" width="120" height="90" />
+
+								<img src="http://rsr.akvo.org<?php echo $rsr_project->current_image->thumbnails->map_thumb; ?>" width="120" height="90" />
 							</div>
 							<div class="span3">
-								<a target="_blank" href="http://www.akvo.org<?php echo $rsr_project->absolute_url; ?>"><div class="rsr-title"><?php echo $rsr_project->title; ?></div></a>
+								<a target="_blank" href="http://rsr.akvo.org<?php echo $rsr_project->absolute_url; ?>"><div class="rsr-title"><?php echo $rsr_project->title; ?></div></a>
 								<div class="rsr-description"><?php echo $rsr_project->project_plan_summary; ?></div>
 							</div>
 
@@ -139,19 +140,20 @@ for($i = 0;$i < 6;$i++){
 			}		
 		}
 	}
-}
 
-if($rsr_project_count == 0){
-?>
-	<div class="container rsr-project-block">
-		<div class="row-fluid">
-			<div class="span12">
-				No RSR project data found.
+
+
+
+	if($rsr_project_count == 0){
+	?>
+		<div class="container rsr-project-block">
+			<div class="row-fluid">
+				<div class="span12">
+					No RSR project data found.
+				</div>
 			</div>
 		</div>
-	</div>
-<?php
+	<?php
+	}
 }
 ?>
-
-</div>

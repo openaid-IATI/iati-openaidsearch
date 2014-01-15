@@ -15,8 +15,8 @@
     <link href="<?php echo get_template_directory_uri(); ?>/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/leaflet.css" />
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>
-    /css/leaflet.ie.css" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/leaflet.ie.css" />
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/ie-8-and-down.css" />
     <![endif]-->
 
     <link href="<?php echo get_template_directory_uri(); ?>/style.css" rel="stylesheet" media="screen">
@@ -55,7 +55,8 @@
                         wp_nav_menu($navmenargs);
                         ?>
 
-                    <form action='projects' method='GET' class="navbar-form pull-right">
+
+                    <form action='<?php echo site_url(); ?>/projects/' method='GET' class="navbar-form pull-right">
 
                         <input type="text" class="input-large" placeholder="What are you looking for?" name='query'>
 
