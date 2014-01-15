@@ -13,13 +13,14 @@ function save_selection(newpage){
   } else{
     save_current_selection(save_selection_step_2);
   }
-  set_defaults();
-  set_current_url();
+  
   if (selected_type == "projects" && !newpage){load_new_page(false);}
 }
 
 // set url, load the map, load the filter options
 function save_selection_step_2(){
+  set_defaults();
+  set_current_url();
   reload_map();
   load_filter_options();
 }
@@ -39,7 +40,6 @@ function save_selection_step_3(){
   $('#map-loader').hide();
 
   if(selected_type != "projects"){
-    // WERKT DIT? lijkt een async probleem te worden
     initialize_charts();
   }
 }
@@ -857,6 +857,7 @@ $(".selection-clear-div").click(function(){
     current_selection.indicators.push({"id":"population", "name":"Total population"});
   } else if(selected_type == 'cpi'){
     current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"Five dimensions of city prosperity"});
+
   }
   
   save_selection();
