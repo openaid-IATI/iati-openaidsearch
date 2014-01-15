@@ -1,7 +1,7 @@
 /*
-Theme Name: Open UN-Habitat v2
-Theme URI: http://open.unhabitat.org/
-Description: Version 2 of the Open UN-Habitat theme
+Theme Name: OIPA theme
+Theme URI: http://oipa.openaidsearch.org/
+Description: Version 2.1 of the OIPA theme
 Author: Zimmerman & Zimmerman
 Author URI: http://www.zimmermanzimmerman.nl
 Version: 1.0
@@ -145,6 +145,12 @@ button{
   float: right;
 }
 
+.btn.header-btn-search{
+  background-image: url('images/search-icon.png');
+  background-repeat: no-repeat;
+  background-position: 5px 7px;
+  padding-left: 25px;
+}
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX HEADER + FOOTER ADJUSTMENTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
 .navbar .brand { 
@@ -213,10 +219,23 @@ button{
     box-shadow: 0px 1px 3px #979791;
 }
 
+.btn.header-btn-search{
+  width: 70px;
+  height: 30px;
+  position: relative;
+}
 
 
 .btn.header-btn-search > img{
   margin: 0.2em 0.1em 0.3em 0.5em;
+  position: absolute;
+  left: 2px;
+  top: 6px;
+}
+.btn.header-btn-search #header-search-text{
+  position: absolute;
+  right: 7px;
+  top: 6px;
 }
 
 .navbar-static-top .input-large{
@@ -724,7 +743,7 @@ input[type=checkbox] {
 }
 
 #map-lightbox-text > p{
-  padding-bottom: 0.4em;
+  padding-bottom: 0.2em;
 }
 
 #map-lightbox a{
@@ -1230,20 +1249,26 @@ label, input, button, select, textarea{
 }
 
 #map-filter-pagination{
-  display: inline-block;
   color: #DEDEDE;
-  margin: 0.5em 0.5em 0.5em 0;
+  margin-top: 0.5em;
 }
 
-#filter-next-page, #filter-previous-page, #filter-pagination-overview{
+#filter-next-page, #filter-previous-page, #filter-pagination-overview, #filter-previous-page-empty, #filter-next-page-empty{
   display: inline-block;
   padding: 0.6em 1.6em 0.6em 0;
   font-size: 1.1em;
+  width: 7em;
 }
 
 #filter-next-page, #filter-previous-page{
   cursor: pointer;
 }
+
+#filter-previous-page-empty, #filter-next-page-empty{
+  cursor: default;
+}
+
+
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX INDICATOR PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 
@@ -1593,7 +1618,7 @@ label, input, button, select, textarea{
 
 #paginated-loader{
   display: none;
-  height:89em;
+  height:40em;
   width:100%;
   text-align: center;
   background-color: #F1EEE8;
@@ -1660,7 +1685,7 @@ label, input, button, select, textarea{
   padding-top: 0.4em;
 }
 
-#project-financials, #project-documents, #project-related-projects, #project-related-indicators, #project-located-in{
+#project-financials, #project-documents, #project-related-projects, #project-related-indicators, #project-located-in, #project-rsr{
   display: none;
 }
 
@@ -1827,14 +1852,15 @@ label, input, button, select, textarea{
 #dropdown-embed-url{
   right: auto;
   left: 0;
-  width: 320px;
+  width: 400px;
   padding: 10px 6px;
 }
 
-#dropdown-embed-url input{
-  width: 300px;
+#dropdown-embed-url textarea{
+  width: 350px;
   margin-top: 8px;
   margin-bottom: 8px;
+  height: 15em;
 }
 
 #dropdown-embed-url-close{
@@ -1852,6 +1878,42 @@ label, input, button, select, textarea{
 
 .dropdown-menu-page-header button:hover, .dropdown-menu-page-header button.active{
   text-decoration: underline;
+}
+
+
+/* RSR */
+
+.rsr-title{
+  font-size: 1.5em;
+  padding-bottom: 0.6em;
+  line-height: 1.2em;
+}
+
+.rsr-description{
+  font-size: 1.2em;
+  line-height: 1.2em;
+  padding-right: 1em;
+}
+
+.rsr-project-block{
+  padding-top: 1.2em;
+  padding-bottom: 1.7em;
+}
+
+.rsr-project-block-header{
+  padding-top:1em;
+  font-size: 1.2em;
+}
+
+.rsr-project-block .span2{
+  padding-top: 2.2em;
+  font-size: 1.2em;
+  line-height: 1.2em;
+}
+
+#project-rsr{
+  min-height:30em;
+  padding-top:1em;
 }
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAQ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -1908,6 +1970,7 @@ label, input, button, select, textarea{
 .contact-label{
   width: 20%;
   float:left;
+  padding: 6px 0;
 }
 
 .contact-input{
@@ -1919,12 +1982,20 @@ label, input, button, select, textarea{
 }
 
 .contact-input-textarea{
-  width: 100%;
+  width: 80%;
   display: inline-block;
 }
 
 .contact-input-textarea textarea{
   width: 100%;
+}
+
+.unhabitat-page .wpcf7-form > p{
+  margin-bottom: 10px;
+}
+
+.unhabitat-page .wpcf7-form .wpcf7-submit{
+  margin-left: 20%;
 }
 
 .clearfix:after {
@@ -2334,6 +2405,10 @@ label, input, button, select, textarea{
 
     #selection-box-wrapper{
       left: 2em;
+    }
+
+    #filter-next-page, #filter-previous-page, #filter-pagination-overview, #filter-previous-page-empty, #filter-next-page-empty{
+      width: 5em;
     }
 
 

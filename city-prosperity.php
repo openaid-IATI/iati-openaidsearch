@@ -24,11 +24,16 @@ Template Name: City prosperity page
 								<button id="dropdown-csv">AS CSV</button>
 							</div>
 						</a>
-						<a id="project-share-embed" class="project-share-button hneue-bold">
+						<a href="#" id="project-share-embed" class="project-share-button hneue-bold">
 							<div class="share-icon"></div>
 							<div class="share-text">EMBED</div>
+							<div id="dropdown-embed-url" class="dropdown-menu-page-header">
+								Code to embed: <br>
+								<textarea name="embed-url"></textarea>
+								<div id="project-share-embed-close">close</div>
+							</div>
 						</a>
-						
+
 					</div>
 				</div>
 				<?php get_template_part("global", "page-navbar-right"); ?>
@@ -74,21 +79,13 @@ Template Name: City prosperity page
 		</div>
 	</div>
 </div>
-
-<?php get_footer(); ?>
+<?php get_template_part('footer-scripts'); ?>
 <script type="text/javascript">
 
 	$(document).ready(function(){
 	  selected_type = 'cpi';
-	  query_string_to_selection();
-
-	  if (current_selection.indicators === undefined){
-	  	current_selection.indicators = [];
-		current_selection.indicators.push({"id":"cpi_5_dimensions", "name":"Five dimensions of city prosperity"});
-	  }
-	  reload_map();
-	  initialize_filters(fill_selection_box, initialize_cpi_charts);
-	  
+	  save_selection(true);
 	});
 
 </script>
+<?php get_footer(); ?>

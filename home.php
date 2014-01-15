@@ -1,6 +1,7 @@
 <?php get_header(); ?>
-
 <?php get_template_part( "map" ); ?>
+
+
 
 <div id="page-wrapper">
 	<div class="container">
@@ -32,7 +33,7 @@
 				</a>
 				<?php endforeach; ?>
 
-					
+				
 
 				</div>
 				<div class="span4">
@@ -91,9 +92,9 @@
 		</div>
 	</div>
 </div>
-<?php get_footer(); ?>
+<?php get_template_part('footer-scripts'); ?>
 
-<script type="text/javascript">
+<script>
 
     $(document).ready(function() {
       selected_type = "projects";
@@ -101,3 +102,4 @@
     });
 
 </script>
+<?php get_footer(); ?>

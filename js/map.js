@@ -3,7 +3,8 @@ var map = L.map('map', {
     scrollWheelZoom: false,
     zoom: 3,
     minZoom: 2,
-    maxZoom:6
+    maxZoom:6,
+    continuousWorld: 'true'
 }).setView([10.505, 25.09], 3);
 
 L.tileLayer('http://{s}.tile.cloudmade.com/07c00b1d0e4c4bed9a926bdca23d2232/90076/256/{z}/{x}/{y}.png', {
