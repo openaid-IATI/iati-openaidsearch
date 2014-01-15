@@ -1,14 +1,96 @@
 <?php 
-
 include( TEMPLATEPATH .'/constants.php' );
-	
-// Add RSS links to <head> section
-add_theme_support( 'automatic-feed-links' );
 
 // WORDPRESS THEME FUNCTIONS
 add_theme_support( 'menus' );
-
 add_theme_support( 'post-thumbnails' );
+add_theme_support( 'automatic-feed-links' );
+
+
+
+
+// add_action( 'rewrite_rules_array', 'add_oipa_tags');
+// // add_action( 'init', 'generate_rewrite_rules' );  
+// function add_oipa_tags(  ) { 
+	
+	
+// 	// add_rewrite_rule('project/([^/]+)/?$','index.php?pagename=project&iati_id=$matches[2]','top');
+// }
+
+
+
+
+// add_filter( 'rewrite_rules_array','my_insert_rewrite_rules' );
+// // add_filter( 'query_vars','my_insert_query_vars' );
+// add_action( 'wp_loaded','my_flush_rules' );
+
+// // flush_rules() if our rules are not yet included
+// function my_flush_rules(){
+// 	$rules = get_option( 'rewrite_rules' );
+
+// 	//if ( ! isset( $rules['(project)/([^/]+)/'] ) ) {
+// 		global $wp_rewrite;
+// 	   	$wp_rewrite->flush_rules();
+// 	//}
+// }
+
+// // Adding a new rule
+// function my_insert_rewrite_rules( $rules )
+// {	
+
+// 	add_rewrite_tag('%iati_id%','(.*)');
+// 	add_rewrite_tag('%backlink%','(.*)');
+// 	$newrules = array();
+// 	$newrules['(project)/([^/]+)/?$'] = 'index.php?pagename=$matches[1]&id=$matches[2]';
+// 	global $wp_rewrite;
+// 	var_dump($wp_rewrite);
+// 	return $newrules + $rules;
+// }
+
+
+// // Adding the id var so that WP recognizes it
+// function my_insert_query_vars( $vars )
+// {
+//     array_push($vars, 'iati_id');
+//     return $vars;
+// }
+
+
+
+
+
+
+// function add_rewrite_rules( $wp_rewrite ) 
+// {
+// 	$new_rules = array(
+// 		'project/([^/]+)/?' => 'index.php?pagename=project&iati_id=$matches[1]'
+// 	);
+
+// 	$wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
+// 	var_dump($wp_rewrite->rules);
+// 	var_dump("test");
+// }
+// add_action('generate_rewrite_rules', 'add_rewrite_rules');
+
+
+function projects_list() {
+	include( TEMPLATEPATH .'/ajax-projects-list.php' );
+	die();
+}
+
+function rsr_call() {
+	$iati_id = "";
+	if (isset($_REQUEST['iati_id'])){
+		$iati_id = $_REQUEST['iati_id'];
+	}
+	include( TEMPLATEPATH .'/project-rsr-ajax.php' );
+	die();
+}
+add_action('wp_ajax_projects_list', 'projects_list');
+add_action('wp_ajax_nopriv_projects_list', 'projects_list');
+add_action('wp_ajax_rsr_call', 'rsr_call');
+add_action('wp_ajax_nopriv_rsr_call', 'rsr_call');
+
 
 function my_function_admin_bar(){ return false; }
 add_filter( 'show_admin_bar' , 'my_function_admin_bar');
@@ -96,7 +178,123 @@ add_action( 'init', 'faq_items_post_type' );
 
 
 
+function add_popular_search($query){
+	global $wpdb;
+	$table_name = $wpdb->prefix . "popular_searches";
+	$alreadyasked = $wpdb->get_row($wpdb->prepare("SELECT phrase, count FROM {$table_name} WHERE phrase = %s", $query));
+	if ($alreadyasked){
+		$newcount = $alreadyasked->count + 1;
+
+		$wpdb->update( 
+			$table_name, 
+			array( 
+				'count' => $newcount	// integer (number) 
+			), 
+			array( 'phrase' => $query ), 
+			array( '%d' ), 
+			array( '%s' ) 
+		);
+	} else{
+
+		$wpdb->insert( 
+			$table_name, 
+			array( 
+				'phrase' => $query, 
+				'count' => 1 
+			)
+		);
+	}
+}
+
+function wp_get_activity($identifier) {
+	if(empty($identifier)) return null;
+	$search_url = SEARCH_URL . "activities/{$identifier}/?format=json";
+
+	$content = file_get_contents($search_url);
+	if (!$content) { return false; }
+	$activity = json_decode($content);
+	return $activity;
+}
+
+function objectToArray($d) {
+	if (is_object($d)) {
+		// Gets the properties of the given object
+		// with get_object_vars function
+		$d = get_object_vars($d);
+	}
+
+	if (is_array($d)) {
+		/*
+		* Return array converted to object
+		* Using __FUNCTION__ (Magic constant)
+		* for recursive call
+		*/
+		return array_map(__FUNCTION__, $d);
+	}
+	else {
+		// Return array
+		return $d;
+	}
+}
+
+add_filter( 'request', 'my_request_filter' );
+function my_request_filter( $query_vars ) {
+	if( isset( $_GET['s'] ) && empty( $_GET['s'] ) ) {
+		$query_vars['s'] = " ";
+	}
+	return $query_vars;
+}
+
+
+
+class PopularSearchWidget extends WP_Widget {
+
+	function PopularSearchWidget() {
+		// Instantiate the parent object
+		parent::__construct( false, 'Popular Search widget' );
+	}
+
+	function widget( $args, $instance ) {
+		
+		global $wpdb;
+		
+		$table_name = $wpdb->prefix . "popular_searches";
+		$popularsearches = $wpdb->get_results( 
+			"
+			SELECT * 
+			FROM {$table_name}
+			ORDER BY count desc
+			LIMIT 5
+			"
+		);
+
+		echo '<div class="drop-shadow postit page-sidebar-item"><div class="postit-title hneue-light">Popular searches</div><div class="textwidget">';
+		echo '<div class="postit-text">';
+		foreach ( $popularsearches as $popularsearch ) 
+		{	
+			echo '<div class="popular-search-item"><div class="pop-search-icon"></div><div><a href="/projects/?query=' . $popularsearch->phrase . '">' . $popularsearch->phrase . '</a></div></div>';
+		}
+
+		echo '</div></div></div>';
+	}
+
+	function update( $new_instance, $old_instance ) {
+		// Save widget options
+	}
+
+	function form( $instance ) {
+		// Output admin widget options form
+	}
+}
+
+function myplugin_register_widgets() {
+	register_widget( 'PopularSearchWidget' );
+}
+
+add_action( 'widgets_init', 'myplugin_register_widgets' );
+
 function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
+	
 	global $_PER_PAGE;
 	global $_DEFAULT_ORGANISATION_ID;
 
@@ -109,7 +307,7 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	if(isset($_REQUEST['offset'])){	$activities_offset = rawurlencode($_REQUEST['offset']);	}
 	//if($offsetpar != ""){ $activities_offset = $offsetpar; }
 
-	$search_url = SEARCH_URL . "activities/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset;
+	$search_url = SEARCH_URL . "activity-list/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset;
     
 	if ($_DEFAULT_ORGANISATION_ID){
 		$search_url = $search_url . "&reporting_organisation__in=" . $_DEFAULT_ORGANISATION_ID;
@@ -121,15 +319,41 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	$meta = $result->meta;
 	$objects = $result->objects;
 }
-	
 
+
+function wp_generate_rsr_projects(&$objects, $iati_id){
+	
+	$search_url = "http://rsr.akvo.org/api/v1/project/?format=json&partnerships__iati_activity_id=" . $iati_id . "&distinct=True&limit=100&depth=1";
+	$search_url = wp_filter_request($search_url);
+	$content = file_get_contents($search_url);
+	$result = json_decode($content);
+	$objects = $result->objects;
+}
+
+function wp_generate_link_parameters($filter_to_unset=null){
+
+	parse_str($_SERVER['QUERY_STRING'], $vars);
+	if(isset($filter_to_unset)){
+		if(isset($_GET[$filter_to_unset])){ unset($vars[$filter_to_unset]); }
+	}
+	if(isset($_GET['offset'])){ unset($vars['offset']); }
+	if(isset($_GET['action'])){ unset($vars['action']); }
+	$parameters = http_build_query($vars);
+	$parameters = str_replace("%2C", ",", $parameters);
+	if ($parameters){ $parameters = "&" . $parameters; }
+	return $parameters;
+}
 function wp_generate_paging($meta) {
+
 	global $_PER_PAGE;
+	$per_page = $_PER_PAGE;
+	if(isset($_GET['per_page'])){ $per_page = $_GET['per_page']; }
+	
+	$parameters = wp_generate_link_parameters();
 	$total_count = $meta->total_count;
 	$offset = $meta->offset;
 	$limit = $meta->limit;
-	$per_page = $_PER_PAGE;
-	if(isset($_GET['per_page'])){ $per_page = $_GET['per_page']; }
+	
 	$total_pages = ceil($total_count/$limit);
 	$cur_page = $offset/$limit + 1;
 
@@ -149,12 +373,12 @@ function wp_generate_paging($meta) {
 	   $prevpage = $cur_page - 1;
 	   // show < link to go back to 1 page
 	   //$params['offset'] = $offset - $limit;
-	   $paging_block .= "<li><a href='?offset=" . ($offset - $limit) . "' class='limitstart'><span>&larr; </span></a></li>";
+	   $paging_block .= "<li><a href='?offset=" . ($offset - $limit) . $parameters . "' class='limitstart'><span>&larr; </span></a></li>";
 	} // end if 
 
 	if ($cur_page > (1 + $range)){
 	   //$params['offset'] = 0;
-	   $paging_block .= "<li><a href='?offset=0' class='page'><span>1</span></a></li>";
+	   $paging_block .= "<li><a href='?offset=0" . $parameters . "' class='page'><span>1</span></a></li>";
 	}
 
 	if ($cur_page > (2 + $range)){
@@ -173,7 +397,7 @@ function wp_generate_paging($meta) {
 	      } else {
 	         // make it a link
 	      	 //$params['offset'] = ($x*$per_page) - $per_page;
-	      	 $paging_block .= "<li><a href='?offset=" . (($x*$per_page) - $per_page) . "' class='page'><span>$x</span></a></li>";
+	      	 $paging_block .= "<li><a href='?offset=" . (($x*$per_page) - $per_page) . $parameters . "' class='page'><span>$x</span></a></li>";
 	      } // end else
 	   } // end if 
 	} // end for
@@ -184,7 +408,7 @@ function wp_generate_paging($meta) {
 
 	if($cur_page < ($total_pages - $range)){
 	   //$params['offset'] = $total_count - ($total_count % $per_page);
-	   $paging_block .= "<li><a href='?offset=" . ($total_count - ($total_count % $per_page)) . "' class='page'><span>$total_pages</span></a></li>";
+	   $paging_block .= "<li><a href='?offset=" . ($total_count - ($total_count % $per_page)) . $parameters . "' class='page'><span>$total_pages</span></a></li>";
 	}
 	               
 	// if not on last page, show forward and last page links        
@@ -194,10 +418,10 @@ function wp_generate_paging($meta) {
 	   $nextpage = $cur_page + 1;
 	    // echo forward link for next page 
 	   //$params['offset'] = $offset + $limit;
-	   $paging_block .= "<li><a href='?offset=" . ($offset + $limit) . "' class='endmilit'><span>&rarr; </span></a></li>";
+	   $paging_block .= "<li><a href='?offset=" . ($offset + $limit) . $parameters . "' class='endmilit'><span>&rarr; </span></a></li>";
 	   //http_build_query($params)
 	   //$params['offset'] = $total_count - ($total_count % $per_page);
-	   $paging_block .= "<li><a href='?offset=" . ($total_count - ($total_count % $per_page)) . "' class='end'><span>&raquo;</span></a></li>";
+	   $paging_block .= "<li><a href='?offset=" . ($total_count - ($total_count % $per_page)) . $parameters . "' class='end'><span>&raquo;</span></a></li>";
 	} // end if
 	/****** end build pagination links ******/
 
@@ -206,15 +430,6 @@ function wp_generate_paging($meta) {
 
 
 	echo $paging_block; 
-}
-
-	
-add_filter( 'request', 'my_request_filter' );
-function my_request_filter( $query_vars ) {
-	if( isset( $_GET['s'] ) && empty( $_GET['s'] ) ) {
-		$query_vars['s'] = " ";
-	}
-	return $query_vars;
 }
 
 
@@ -261,6 +476,14 @@ function wp_filter_request($search_url){
 		$search_url .= "&sectors__in={$sectors}";
 		$has_filter = true;
 	}
+
+	if(!empty($_REQUEST['reporting_organisations'])) {
+		$reporting_organisations = explode(',', trim($_REQUEST['reporting_organisations']));
+		foreach($reporting_organisations AS &$c) $c = trim($c);
+		$reporting_organisations = implode(',', $reporting_organisations);
+		$search_url .= "&reporting_organisation__in={$reporting_organisations}";
+		$has_filter = true;
+	}
 	
 	if(!empty($_REQUEST['budgets'])) {
 		$budgets = explode(',', trim($_REQUEST['budgets']));
@@ -278,43 +501,7 @@ function wp_filter_request($search_url){
     return $search_url;
 }
 
-function add_popular_search($query){
-	global $wpdb;
-	$table_name = $wpdb->prefix . "popular_searches";
-	$alreadyasked = $wpdb->get_row($wpdb->prepare("SELECT phrase, count FROM {$table_name} WHERE phrase = %s", $query));
-	if ($alreadyasked){
-		$newcount = $alreadyasked->count + 1;
 
-		$wpdb->update( 
-			$table_name, 
-			array( 
-				'count' => $newcount	// integer (number) 
-			), 
-			array( 'phrase' => $query ), 
-			array( '%d' ), 
-			array( '%s' ) 
-		);
-	} else{
-
-		$wpdb->insert( 
-			$table_name, 
-			array( 
-				'phrase' => $query, 
-				'count' => 1 
-			)
-		);
-	}
-}
-
-function wp_get_activity($identifier) {
-	if(empty($identifier)) return null;
-	$search_url = SEARCH_URL . "activities/{$identifier}/?format=json";
-	
-	$content = file_get_contents($search_url);
-	$activity = json_decode($content);
-	return $activity;
-
-}
 
 function format_custom_number($num) {
 	
@@ -398,75 +585,6 @@ function currencyCodeToSign($currency){
     }
 }
 
-
-
-function objectToArray($d) {
-	if (is_object($d)) {
-		// Gets the properties of the given object
-		// with get_object_vars function
-		$d = get_object_vars($d);
-	}
-
-	if (is_array($d)) {
-		/*
-		* Return array converted to object
-		* Using __FUNCTION__ (Magic constant)
-		* for recursive call
-		*/
-		return array_map(__FUNCTION__, $d);
-	}
-	else {
-		// Return array
-		return $d;
-	}
-}
-
-
-class PopularSearchWidget extends WP_Widget {
-
-	function PopularSearchWidget() {
-		// Instantiate the parent object
-		parent::__construct( false, 'Popular Search widget' );
-	}
-
-	function widget( $args, $instance ) {
-		
-		global $wpdb;
-		
-		$table_name = $wpdb->prefix . "popular_searches";
-		$popularsearches = $wpdb->get_results( 
-			"
-			SELECT * 
-			FROM {$table_name}
-			ORDER BY count desc
-			LIMIT 5
-			"
-		);
-
-		echo '<div class="drop-shadow postit page-sidebar-item"><div class="postit-title hneue-light">Popular searches</div><div class="textwidget">';
-		echo '<div class="postit-text">';
-		foreach ( $popularsearches as $popularsearch ) 
-		{	
-			echo '<div class="popular-search-item"><div class="pop-search-icon"></div><div><a href="/projects/?query=' . $popularsearch->phrase . '">' . $popularsearch->phrase . '</a></div></div>';
-		}
-
-		echo '</div></div></div>';
-	}
-
-	function update( $new_instance, $old_instance ) {
-		// Save widget options
-	}
-
-	function form( $instance ) {
-		// Output admin widget options form
-	}
-}
-
-function myplugin_register_widgets() {
-	register_widget( 'PopularSearchWidget' );
-}
-
-add_action( 'widgets_init', 'myplugin_register_widgets' );
 
 
 ?>

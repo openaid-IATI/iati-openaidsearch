@@ -2,6 +2,7 @@
 <script>
 var site = '<?php echo SITE_URL; ?>';
 var search_url = '<?php echo SEARCH_URL; ?>';
+var ajax_projects_url = '<?php echo AJAX_PROJECTS_URL; ?>';
 var home_url = "<?php echo bloginfo("url"); ?>";
 var template_directory = "<?php echo bloginfo("template_url"); ?>";
 var site_title = "<?php echo wp_title(''); ?>";
@@ -12,7 +13,7 @@ echo 'var organisation_id = "' . $_DEFAULT_ORGANISATION_ID . '";';
 
 </script>
 
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery-ui.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/leaflet.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/bootstrap.min.js"></script>
@@ -38,7 +39,8 @@ if (is_page('indicators') or is_page('city-prosperity')) { ?>
 if (is_page('project') or is_page('explore')) {
 	echo '<script src="' . get_template_directory_uri() . '/js/dependencies/countries.js"></script>';
 	echo '<script src="' . get_template_directory_uri() . '/js/project.js"></script>';
-
+	?>
+	<?php
 }
 if (!is_page('indicators') and !is_page('city-prosperity')) {
 	echo '<script src="' . get_template_directory_uri() . '/js/projects.js"></script>';
