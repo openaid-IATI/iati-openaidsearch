@@ -10,10 +10,19 @@
 	</div>
 	<div class="project-description-text">
 	<?php 	if (!empty($activity->descriptions)) { 
-	 			echo $activity->descriptions[0]->description; 
+
+
+				foreach($activity->descriptions AS $description) {
+					echo  $description->description; #$description->$description;
+					echo '<br>&nbsp;<br>';
+				}
 	 		} else {
 	 			echo "No description given.";
 	 		}
+
+
+
+
 	 		?>
 	</div>
 </div>
