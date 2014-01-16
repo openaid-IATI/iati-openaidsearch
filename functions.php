@@ -212,8 +212,8 @@ function wp_get_activity($identifier) {
 	if(empty($identifier)) return null;
 	$search_url = SEARCH_URL . "activities/{$identifier}/?format=json";
 
-	$content = file_get_contents($search_url);
-	if (!$content) { return false; }
+	$content = @file_get_contents($search_url);
+	if ($content === false) { return false; }
 	$activity = json_decode($content);
 	return $activity;
 }
