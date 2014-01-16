@@ -646,6 +646,8 @@ function save_current_selection(callback){
     new_selection.indicators = [];
     new_selection.cities = [];
     new_selection.reporting_organisations = [];
+    new_selection.order_by = [];
+    new_selection["order_by"].push({"id":"-total_budget", "name":"noname"});
 
     // set selection as filter and load results
     get_checked_by_filter("sectors", new_selection);
@@ -655,6 +657,7 @@ function save_current_selection(callback){
     get_checked_by_filter("indicators", new_selection);
     get_checked_by_filter("cities", new_selection);
     get_checked_by_filter("reporting_organisations", new_selection);
+
 
     if(new_selection.indicators.length > 2){
         too_many_indicators_error(new_selection.indicators.length - 2);
