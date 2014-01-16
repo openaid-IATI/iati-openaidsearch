@@ -495,6 +495,8 @@ function wp_filter_request($search_url){
 	if(!empty($_REQUEST['order_by'])){
 		$orderby = trim($_REQUEST['order_by']);
 		$search_url .= "&order_by={$orderby}";
+	} else {
+		$search_url .= "&order_by=-total_budget";
 	}
 
     return $search_url;
