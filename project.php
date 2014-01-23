@@ -18,6 +18,13 @@ if (isset($_REQUEST['iati_id'])){
 	if ($activity){
 		$found = true;
 	}
+} else if (isset($_REQUEST['id'])){
+		$iati_id = $_REQUEST['id'];
+	$activity = wp_get_activity($iati_id);
+	get_template_part( "map" );
+	if ($activity){
+		$found = true;
+	}
 }
 
 if (!$found){
