@@ -69,12 +69,8 @@
 						<div class="projects-project-spec-key">IATI identifier:</div>
 						<div class="projects-project-spec-value">
 
-							<a href="<?php echo site_url() . '/project/?id=' . $activity->iati_identifier; ?>" alt="See project details">
 							<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?></div>
-							</a>
-
 							
-
 						<div class="projects-project-divider"></div>
 
 						<div class="projects-project-spec-key">Reporting organisation:</div>
