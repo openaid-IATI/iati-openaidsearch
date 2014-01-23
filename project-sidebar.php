@@ -22,7 +22,7 @@
 						<div class="projects-project-spec-value">
 
 						<?php 
-						if(!empty($activity->countries)) {
+						if(!empty($activity->regions)) {
 							$sep = '';
 							foreach($activity->regions AS $region) {
 								echo  $sep . "<a href='".get_bloginfo('url')."/projects/?regions={$region->code}'>" . $region->name . "</a>";
