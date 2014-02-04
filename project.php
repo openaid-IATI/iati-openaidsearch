@@ -9,16 +9,12 @@ Template Name: Single project page
 get_header();
 
 
-$found = false;
-
-if (isset($_REQUEST['iati_id'])){
-	$iati_id = $_REQUEST['iati_id'];
-	$activity = wp_get_activity($iati_id);
+	$found = false;
+	$activity = wp_get_activity();
 	get_template_part( "map" );
 	if ($activity){
 		$found = true;
 	}
-}
 
 if (!$found){
 ?>
@@ -160,11 +156,10 @@ if (!$found){
 	?>
 
 	var project_countries = new Array(<?php echo $countries; ?>);
-
 </script>
 <?php } ?>
 <?php get_template_part('footer-scripts'); ?>
-<script> refresh_rsr_projects("<?php echo $iati_id; ?>"); </script>
+<script> refresh_rsr_projects("<?php if (isset($_REQUEST['iati_id'])){ echo $_REQUEST['iati_id'];} ?>"); </script>
 <?php get_footer(); ?>
 
 

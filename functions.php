@@ -206,7 +206,11 @@ function add_popular_search($query){
 	}
 }
 
-function wp_get_activity($identifier) {
+function wp_get_activity() {
+	$identifier = null;
+	if (isset($_REQUEST['iati_id'])){
+		$identifier = $_REQUEST['iati_id'];
+	}
 	if(empty($identifier)) return null;
 	$search_url = SEARCH_URL . "activities/{$identifier}/?format=json";
 
@@ -323,7 +327,6 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 function wp_generate_rsr_projects(&$objects, $iati_id){
 	
 	$search_url = "http://rsr.akvo.org/api/v1/project/?format=json&partnerships__iati_activity_id=" . $iati_id . "&distinct=True&limit=100&depth=1";
-	$search_url = wp_filter_request($search_url);
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
 	$objects = $result->objects;

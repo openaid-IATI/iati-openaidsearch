@@ -4,7 +4,19 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?php wp_title(''); ?></title>
+    <title>
+        <?php 
+        $activity = wp_get_activity();
+        
+        if ($activity != null && !empty($activity->titles)) { 
+            echo $activity->titles[0]->title; 
+        } else {
+            echo "Unknown title";
+        }
+
+
+        wp_title(''); ?>
+    </title>
    
 
     <!-- Bootstrap -->
