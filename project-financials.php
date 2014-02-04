@@ -80,7 +80,9 @@
 	    dataTable: data,
 	    options: {
 	      showRowNumber: false,
-	      cssClassNames: {headerRow: 'unh-table-header', tableRow: 'unh-table-cells'}
+	      cssClassNames: {headerRow: 'unh-table-header', tableRow: 'unh-table-cells'},
+	      sortColumn: 4,
+	      sortAscending: true
 	    }
 	  });
 
