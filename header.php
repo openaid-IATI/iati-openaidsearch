@@ -11,7 +11,7 @@
         if ($activity != null && !empty($activity->titles)) { 
             echo $activity->titles[0]->title; 
         } else {
-            echo "Unknown title";
+            echo "Open aid search - ";
         }
 
 
