@@ -11,8 +11,16 @@ get_header();
 
 $found = false;
 
+
 if (isset($_REQUEST['iati_id'])){
 	$iati_id = $_REQUEST['iati_id'];
+	$activity = wp_get_activity($iati_id);
+	get_template_part( "map" );
+	if ($activity){
+		$found = true;
+	}
+} else if (isset($_REQUEST['id'])){
+	$iati_id = $_REQUEST['id'];
 	$activity = wp_get_activity($iati_id);
 	get_template_part( "map" );
 	if ($activity){
