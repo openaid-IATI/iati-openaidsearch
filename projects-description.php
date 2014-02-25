@@ -72,6 +72,7 @@ if ($meta->total_count > 0){
 foreach($objects AS $idx=>$project) {
 ?>
 <div class="projects-project-block">
+	<?php var_dump($project); ?>
 	<div class="container">
 		<div class="row-fluid projects-description <?php echo $project->id; ?>">
 			<div class="span7">

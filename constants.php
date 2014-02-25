@@ -5,7 +5,9 @@
  * and open the template in the editor.
  */
 define( 'SEARCH_URL', 'http://staging.oipa.openaidsearch.org/api/v3/');
-define( 'SITE_URL', site_url());
+if (function_exists(site_url)){
+	define( 'SITE_URL', site_url());
+}
 define( 'EMPTY_LABEL', 'No information available');
 define( 'AJAX_PROJECTS_URL', TEMPLATEPATH .'/functions-projects.php');
 
