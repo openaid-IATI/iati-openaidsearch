@@ -253,7 +253,7 @@ function load_project_map(project_geojson){
       return false;
     }); 
     
-    $('.projects-share-spec #project-share-export').click(function(){
+    $('.projects-share-spec .project-share-export').click(function(){
       var id = $(this).attr('name');
       generate_download_file(id);
       return false;
