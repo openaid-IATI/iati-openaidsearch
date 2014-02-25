@@ -22,7 +22,7 @@
 						<div class="projects-project-spec-value">
 
 						<?php 
-						if(!empty($activity->countries)) {
+						if(!empty($activity->regions)) {
 							$sep = '';
 							foreach($activity->regions AS $region) {
 								echo  $sep . "<a href='".get_bloginfo('url')."/projects/?regions={$region->code}'>" . $region->name . "</a>";
@@ -45,7 +45,7 @@
 								$sep = ', ';
 							}		
 						} else {
-							echo "No information avaiable";
+							echo "No information available";
 						} ?>
 
 
@@ -69,12 +69,8 @@
 						<div class="projects-project-spec-key">IATI identifier:</div>
 						<div class="projects-project-spec-value">
 
-							<a href="<?php echo site_url() . '/project/?id=' . $activity->iati_identifier; ?>" alt="See project details">
 							<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?></div>
-							</a>
-
 							
-
 						<div class="projects-project-divider"></div>
 
 						<div class="projects-project-spec-key">Reporting organisation:</div>
@@ -100,7 +96,7 @@
 									$sep = ', ';
 								}			
 							} else {
-								echo "No information avaiable";
+								echo "No information available";
 							} ?>
 						</div>
 
@@ -156,7 +152,7 @@
 								$part_org_text = substr($part_org_text, 0, -2);
 								echo $part_org_text;
 							} else {
-								echo "No information avaiable";
+								echo "No information available";
 							} ?>
 
 						</div>
@@ -180,7 +176,7 @@
 								$part_website_text = substr($part_website_text, 0, -2);
 								echo $part_website_text;
 							} else {
-								echo "No information avaiable";
+								echo "No information available";
 							} ?>
 
 						</div>
