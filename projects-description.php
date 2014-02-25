@@ -72,13 +72,11 @@ if ($meta->total_count > 0){
 foreach($objects AS $idx=>$project) {
 ?>
 <div class="projects-project-block">
-	<?php var_dump($project); ?>
 	<div class="container">
-		<div class="row-fluid projects-description <?php echo $project->id; ?>">
+		<div class="row-fluid projects-description <?php echo $project->iati_identifier; ?>">
 			<div class="span7">
 				<div class="projects-project-title">
-					<a href="<?php echo SITE_URL . '/project/?iati_id=' . $project->id; ?>" alt="See project details">
-
+					<a href="<?php echo SITE_URL . '/project/?iati_id=' . $project->iati_identifier; ?>" alt="See project details">
 						<?php if (!empty($project->titles)){ 
 							echo $project->titles[0]->title; 
 						} else {
@@ -86,7 +84,7 @@ foreach($objects AS $idx=>$project) {
 						}?>
 					</a>
 				</div>
-				<div class="projects-project-description <?php echo $project->id; ?>">
+				<div class="projects-project-description <?php echo $project->iati_identifier; ?>">
 
 				<?php if (!empty($project->descriptions)){ 
 						echo $project->descriptions[0]->description;
@@ -99,7 +97,7 @@ foreach($objects AS $idx=>$project) {
 			</div>
 
 			<div class="span5">
-				<button id="<?php echo $project->id; ?>" class="project-expand-button expand-plus" title="Show more"></button>
+				<button id="<?php echo $project->iati_identifier; ?>" class="project-expand-button expand-plus" title="Show more"></button>
 
 				<div class="projects-project-spec">
 
@@ -163,8 +161,8 @@ foreach($objects AS $idx=>$project) {
 
 					<div class="projects-project-spec-key">IATI identifier:</div>
 					<div class="projects-project-spec-value projects-project-spec-title">
-						
-					<a href="<?php echo SITE_URL . '/project/?iati_id=' . $project->id; ?>" alt="See project details">
+
+					<a href="<?php echo SITE_URL . '/project/?iati_id=' . $project->iati_identifier; ?>" alt="See project details">
 
 					<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>
 					</a>
@@ -181,7 +179,7 @@ foreach($objects AS $idx=>$project) {
 
 					<div class="projects-project-divider"></div>
 
-					<div class="project-project-spec-hidden <?php echo $project->id; ?>">
+					<div class="project-project-spec-hidden <?php echo $project->iati_identifier; ?>">
 
 
 					<div class="projects-project-spec-key">Last updated:</div>
@@ -275,18 +273,18 @@ foreach($objects AS $idx=>$project) {
 
 					<div class="project-share-container projects-share-spec">
 
-						<button class="project-share-export project-share-button hneue-bold" name="<?php if(!empty($project->id)) { echo $project->id; } ?>">
+						<button class="project-share-export project-share-button hneue-bold" name="<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>">
 							<div class="share-icon"></div>
 							<div class="share-text">EXPORT</div>
 						</button>
 
-						<span ifclass="st_sharethis" st_url="<?php echo SITE_URL; ?>/project/?id=<?php if(!empty($project->id)) { echo $project->id; } ?>" st_title="<?php if(!empty($project->titles)){echo $project->titles[0]->title;}  else{ echo "Unknown title"; }?>" displayText="SHARE"></span>
+						<span ifclass="st_sharethis" st_url="<?php echo SITE_URL; ?>/project/?id=<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>" st_title="<?php if(!empty($project->titles)){echo $project->titles[0]->title;}  else{ echo "Unknown title"; }?>" displayText="SHARE"></span>
 
 						<button class="project-share-bookmark project-share-button hneue-bold">
 							<div class="share-icon"></div>
 							<div class="share-text">BOOKMARK</div>
 						</button>
-						<button class="project-share-whistleblower project-share-button hneue-bold" name="<?php if(!empty($project->id)) { echo $project->id; } ?>">
+						<button class="project-share-whistleblower project-share-button hneue-bold" name="<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>">
 							<div class="share-icon"></div>
 							<div class="share-text">WHISTLEBLOWER</div>
 						</button>

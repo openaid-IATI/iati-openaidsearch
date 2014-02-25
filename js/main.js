@@ -728,11 +728,11 @@ function create_api_url(type, indicatorid){
   } else if (type == 'filter' && selected_type=='indicator'){
     return_url = search_url + 'indicator-country-filter-options/?format=json' + str_country + str_region + str_city;
   } else if (type == 'mapdata' && selected_type=='indicator'){
-    return_url = search_url + 'indicator-country-data/?format=json' + str_country + str_region + str_city + indicatorid;
+    return_url = search_url + 'indicator-country-data/?format=json' + str_country + str_region + str_city + '&indicators__in=' + indicatorid;
   } else if (type == 'filter' && selected_type=='cpi'){
     return_url = search_url + 'indicator-city-filter-options/?format=json' + str_country + str_region + str_city;
   } else if (type == 'mapdata' && selected_type=='cpi'){
-    return_url = search_url + 'indicator-city-data/?format=json' + str_country + str_region + str_city + indicatorid;
+    return_url = search_url + 'indicator-city-data/?format=json' + str_country + str_region + str_city + '&indicators__in=' + indicatorid;
   } 
   // else if (type == "listdata" && selected_type=='projects'){
   //   if(organisation_id){
