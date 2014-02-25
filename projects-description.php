@@ -77,7 +77,7 @@ foreach($objects AS $idx=>$project) {
 		<div class="row-fluid projects-description <?php echo $project->id; ?>">
 			<div class="span7">
 				<div class="projects-project-title">
-					<a href="<?php echo SITE_URL . '/project/?iati_id=' . $project->iati_identifier; ?>" alt="See project details">
+					<a href="<?php echo SITE_URL . '/project/?iati_id=' . $project->id; ?>" alt="See project details">
 
 						<?php if (!empty($project->titles)){ 
 							echo $project->titles[0]->title; 
@@ -163,11 +163,9 @@ foreach($objects AS $idx=>$project) {
 
 					<div class="projects-project-spec-key">IATI identifier:</div>
 					<div class="projects-project-spec-value projects-project-spec-title">
-<<<<<<< HEAD
-					<a href="<?php echo SITE_URL . '/project/?iati_id=' . $project->iati_identifier; ?>" alt="See project details">
-=======
+						
 					<a href="<?php echo SITE_URL . '/project/?iati_id=' . $project->id; ?>" alt="See project details">
->>>>>>> UN-Habitat-dev
+
 					<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>
 					</a>
 					</div>
