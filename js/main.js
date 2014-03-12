@@ -724,21 +724,21 @@ function create_api_url(type, indicatorid){
   var str_reporting_organisation = reload_map_prepare_parameter_string("reporting_organisations", dlmtr);
 
   if (type == 'filter' && selected_type=='projects'){
-    return_url = search_url + 'activity-filter-options/?' + organisation_id;
+    return_url = search_url + 'activity-filter-options/?reporting_organisation__in=' + organisation_id;
   } else if (type == "mapdata" && selected_type=='projects'){
     if(organisation_id){
-      return_url = search_url + 'country-geojson/?format=json' + organisation_id + str_sector + str_budget + str_country + str_region;
+      return_url = search_url + 'country-geojson/?format=json&reporting_organisation__in=' + organisation_id + str_sector + str_budget + str_country + str_region;
     } else{
       return_url = search_url + 'country-geojson/?format=json' + str_reporting_organisation + str_sector + str_budget + str_country + str_region;
     }
   } else if (type == 'filter' && selected_type=='indicator'){
     return_url = search_url + 'indicator-country-filter-options/?format=json' + str_country + str_region + str_city;
   } else if (type == 'mapdata' && selected_type=='indicator'){
-    return_url = search_url + 'indicator-country-data/?format=json' + str_country + str_region + str_city + indicatorid;
+    return_url = search_url + 'indicator-country-data/?format=json' + str_country + str_region + str_city + '&indicators__in=' + indicatorid;
   } else if (type == 'filter' && selected_type=='cpi'){
     return_url = search_url + 'indicator-city-filter-options/?format=json' + str_country + str_region + str_city;
   } else if (type == 'mapdata' && selected_type=='cpi'){
-    return_url = search_url + 'indicator-city-data/?format=json' + str_country + str_region + str_city + indicatorid;
+    return_url = search_url + 'indicator-city-data/?format=json' + str_country + str_region + str_city + '&indicators__in=' + indicatorid;
   } 
   // else if (type == "listdata" && selected_type=='projects'){
   //   if(organisation_id){
