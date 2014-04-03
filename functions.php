@@ -486,10 +486,28 @@ function wp_filter_request($search_url){
 	}
 	
 	if(!empty($_REQUEST['budgets'])) {
+		$budget_gte = 99999999999;
+		$budget_lte = 0;
 		$budgets = explode(',', trim($_REQUEST['budgets']));
-		//Get the lowest budget from filter and use this one, all the other are included in the range
-		ksort($budgets);
-		$search_url .= "&total_budget__gt={$budgets[0]}";
+		foreach ($budgets as &$budget) {
+		    $lower_higher = explode('-', $budget);
+		    if($lower_higher[0] < $budget_gte){
+		    	$budget_gte = $lower_higher[0];
+		    }
+		    if (sizeof($lower_higher) > 1) {
+		    	
+		    	if($lower_higher[1] > $budget_lte){
+		    		$budget_lte = $lower_higher[1];
+		    	}
+		    }
+		}
+
+		if ($budget_gte != 99999999999){
+			$search_url .= "&total_budget__gte={$budget_gte}";
+		}
+		if ($budget_lte != 0){
+			$search_url .= "&total_budget__lte={$budget_lte}";
+		}
 		$has_filter = true;
 	}
 
