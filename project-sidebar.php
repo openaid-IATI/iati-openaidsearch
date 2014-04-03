@@ -45,7 +45,7 @@
 								$sep = ', ';
 							}		
 						} else {
-							echo "No information avaiable";
+							echo "No information available";
 						} ?>
 
 
@@ -96,7 +96,7 @@
 									$sep = ', ';
 								}			
 							} else {
-								echo "No information avaiable";
+								echo "No information available";
 							} ?>
 						</div>
 
@@ -144,7 +144,8 @@
 										$part_org_text .= $participating_organisation->code;
 
 									} else {
-										$part_org_text .= $participating_organisation->name . " (" . $participating_organisation->code . ")";
+										$part_org_text .= $participating_organisation->name;
+										if(!empty($participating_organisation->original_ref)){ $part_org_text .= " (" . $participating_organisation->original_ref . ")"; }
 									}
 									$part_org_text .= $sep;
 								}
@@ -152,7 +153,7 @@
 								$part_org_text = substr($part_org_text, 0, -2);
 								echo $part_org_text;
 							} else {
-								echo "No information avaiable";
+								echo "No information available";
 							} ?>
 
 						</div>
@@ -176,7 +177,7 @@
 								$part_website_text = substr($part_website_text, 0, -2);
 								echo $part_website_text;
 							} else {
-								echo "No information avaiable";
+								echo "No information available";
 							} ?>
 
 						</div>

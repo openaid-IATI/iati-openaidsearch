@@ -132,7 +132,7 @@ if (!$found){
 				        var disqus_shortname = ''; // required: replace example with your forum shortname
 				 		var disqus_identifier = '<?php echo $activity->iati_identifier; ?>';
 						var disqus_title = '<?php echo $activity->titles[0]->title; ?>';
-						var disqus_url = '<?php echo site_url() . "/project/?id=" . $activity->iati_identifier; ?>';
+						var disqus_url = '<?php echo site_url() . "/project/?iati_id=" . $activity->iati_identifier; ?>';
 
 				        /* * * DON'T EDIT BELOW THIS LINE * * */
 				        (function() {

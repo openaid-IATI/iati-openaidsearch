@@ -52,19 +52,19 @@
 		$provider_org = '';
 		if(!empty($at->provider_organisation->name)) {
 			$provider_org = $at->provider_organisation->name;
-		} else {
-			if(!empty($at->provider_organisation->code)) {
+		} elseif (!empty($at->provider_organisation_name)) {
+			$provider_org = $at->provider_organisation_name;
+		} elseif(!empty($at->provider_organisation->code)) {
 				$provider_org = $at->provider_organisation->code;
-			}
 		}
 		
 		$receiver_org = '';
 		if(!empty($at->receiver_organisation->name)) {
 			$receiver_org = $at->receiver_organisation->name;
-		} else {
-			if(!empty($at->receiver_organisation->code)) {
+		} elseif (!empty($at->receiver_organisation_name)) {
+			$provider_org = $at->receiver_organisation_name;
+		} elseif(!empty($at->receiver_organisation->code)) {
 				$receiver_org = $at->receiver_organisation->code;
-			}
 		}
 
 		echo 'var stringvalue = "' . $currency . '" + DotFormattedProjectFinancials(' . $value . ');';
@@ -74,8 +74,20 @@
 	
 	?>
 
-    
-	var test = {}
+
+	var tableChart = new google.visualization.ChartWrapper({
+	    chartType: 'Table',
+	    containerId: 'financials-placeholder',
+	    dataTable: data,
+	    options: {
+	      showRowNumber: false,
+	      cssClassNames: {headerRow: 'unh-table-header', tableRow: 'unh-table-cells'},
+	      sortColumn: 4,
+	      sortAscending: true
+	    }
+	  });
+
+	  tableChart.draw();
 
     var table = new google.visualization.Table(document.getElementById('financials-placeholder'));
     table.draw(data, {showRowNumber: false});
