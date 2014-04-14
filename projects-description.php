@@ -76,7 +76,7 @@ foreach($objects AS $idx=>$project) {
 		<div class="row-fluid projects-description <?php echo $project->iati_identifier; ?>">
 			<div class="span7">
 				<div class="projects-project-title">
-					<a href="<?php echo SITE_URL . '/project/' . $project->iati_identifier . '/'; ?>" alt="See project details">
+					<a href="<?php echo SITE_URL . '/project/?iati_id=' . $project->iati_identifier; ?>" alt="See project details">
 						<?php if (!empty($project->titles)){ 
 							echo $project->titles[0]->title; 
 						} else {
@@ -161,7 +161,7 @@ foreach($objects AS $idx=>$project) {
 
 					<div class="projects-project-spec-key">IATI identifier:</div>
 					<div class="projects-project-spec-value projects-project-spec-title">
-					<a href="<?php echo SITE_URL . '/project/' . $project->iati_identifier . '/'; ?>" alt="See project details">
+					<a href="<?php echo SITE_URL . '/project/?iati_id=' . $project->iati_identifier; ?>" alt="See project details">
 					<?php if(!empty($project->iati_identifier)) { echo $project->iati_identifier; } ?>
 					</a>
 					</div>
@@ -250,10 +250,12 @@ foreach($objects AS $idx=>$project) {
 
 							foreach($project->participating_organisations AS $participating_organisation) {
 								if(empty($participating_organisation->name)) {
+									
 									$part_org_text .= $participating_organisation->code;
 
 								} else {
-									$part_org_text .= $participating_organisation->name . " (" . $participating_organisation->code . ")";
+									$part_org_text .= $participating_organisation->name;
+									if(!empty($participating_organisation->original_ref)){ $part_org_text .= " (" . $participating_organisation->original_ref . ")"; }
 								}
 								$part_org_text .= $sep;
 							}

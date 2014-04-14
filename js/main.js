@@ -68,7 +68,7 @@ function load_filter_options(){
 function process_filter_options(data){
 
   
-  // uitzonderingen voor indicator pagina
+  // exceptions for indicator page
   if (selected_type == "indicator"){
     $.each(data['indicators'], function( key, value ) {
        if(key.indexOf("cpi") != -1){
@@ -76,7 +76,7 @@ function process_filter_options(data){
        }
     });
   }
-  // uitzonderingen voor cpi pagina
+  // exceptions for cpi page
   if (selected_type == "cpi"){
     $.each(data['indicators'], function( key, value ) {
        if(key.indexOf("cpi") == -1){
@@ -322,34 +322,34 @@ function create_budget_filter_attributes(objects, columns){
     html += '<div class="span4">';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="0" id="0" name="> 0" />';
-    html += '<label class="map-filter-cb-value" for="0"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> 0</span></div></div>';
+    html += '<input type="checkbox" value="0-10000" id="0-10000" name="0 - 10.000" />';
+    html += '<label class="map-filter-cb-value" for="0-10000"></label>';
+    html += '</div><div class="squaredThree-fname"><span>0 - 10.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="10000" id="10000" name="> 10.000" />';
-    html += '<label class="map-filter-cb-value" for="10000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> 10.000</span></div></div>';
+    html += '<input type="checkbox" value="10000-100000" id="10000-100000" name="10.000 - 100.000" />';
+    html += '<label class="map-filter-cb-value" for="10000-100000"></label>';
+    html += '</div><div class="squaredThree-fname"><span>10.000 - 100.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="50000" id="50000" name="> 50.000" />';
-    html += '<label class="map-filter-cb-value" for="50000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> 50.000</span></div></div>';
+    html += '<input type="checkbox" value="100000-1000000" id="100000-1000000" name="100.000 - 1.000.000" />';
+    html += '<label class="map-filter-cb-value" for="100000-1000000"></label>';
+    html += '</div><div class="squaredThree-fname"><span>100.000 - 1.000.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="100000" id="100000" name="> 100.000" />';
-    html += '<label class="map-filter-cb-value" for="100000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> 100.000</span></div></div>';
+    html += '<input type="checkbox" value="1000000-10000000" id="1000000-10000000" name="1.000.000 - 10.000.000" />';
+    html += '<label class="map-filter-cb-value" for="1000000-10000000"></label>';
+    html += '</div><div class="squaredThree-fname"><span>1.000.000 - 10.000.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="500000" id="500000" name="> 500.000" />';
-    html += '<label class="map-filter-cb-value" for="500000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> 500.000</span></div></div>';
+    html += '<input type="checkbox" value="10000000-50000000" id="10000000-50000000" name="10.000.000-50.000.000" />';
+    html += '<label class="map-filter-cb-value" for="10000000-50000000"></label>';
+    html += '</div><div class="squaredThree-fname"><span>10.000.000 - 50.000.000</span></div></div>';
 
     html += '<div class="squaredThree"><div>';
-    html += '<input type="checkbox" value="1000000" id="1000000" name="> 1.000.000" />';
-    html += '<label class="map-filter-cb-value" for="1000000"></label>';
-    html += '</div><div class="squaredThree-fname"><span>> 1.000.000</span></div></div>';
+    html += '<input type="checkbox" value="50000000" id="50000000" name="50.000.000 +" />';
+    html += '<label class="map-filter-cb-value" for="50000000"></label>';
+    html += '</div><div class="squaredThree-fname"><span>50.000.000 +</span></div></div>';
 
     html += '</div></div>';
 
@@ -709,7 +709,7 @@ function get_checked_by_filter(filtername, new_selection){
 
 function reload_map(){
 
-  var url = create_api_url();
+  var url = create_api_url("mapdata");
 
   if (selected_type=='projects'){
     initialize_projects_map();
@@ -729,43 +729,44 @@ function create_api_url(type, indicatorid){
   var dlmtr = ',';
   var str_sector = reload_map_prepare_parameter_string("sectors", dlmtr);
   var str_country = reload_map_prepare_parameter_string("countries", dlmtr);
-  var str_budget = reload_map_prepare_parameter_string("budgets", dlmtr);
+  var str_budget = reload_map_prepare_budget_parameter_string("budgets", dlmtr);
   var str_region = reload_map_prepare_parameter_string("regions", dlmtr);
   var str_indicator = reload_map_prepare_parameter_string("indicators", dlmtr);
   var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
   var str_reporting_organisation = reload_map_prepare_parameter_string("reporting_organisations", dlmtr);
 
   if (type == 'filter' && selected_type=='projects'){
-    return search_url + 'activity-filter-options/?reporting_organisation__in=' + organisation_id;
+    return_url = search_url + 'activity-filter-options/?reporting_organisation__in=' + organisation_id;
   } else if (type == "mapdata" && selected_type=='projects'){
     if(organisation_id){
-      return search_url + 'country-geojson/?reporting_organisation__in=' + organisation_id + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
+      return_url = search_url + 'country-geojson/?format=json&reporting_organisation__in=' + organisation_id + str_sector + str_budget + str_country + str_region;
     } else{
-      return search_url + 'country-geojson/?reporting_organisation__in=' + str_reporting_organisation + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
+      return_url = search_url + 'country-geojson/?format=json' + str_reporting_organisation + str_sector + str_budget + str_country + str_region;
     }
-
-  } else if (type == "listdata" && selected_type=='projects'){
-    
-    if(organisation_id){
-      return search_url + 'activity-list/?reporting_organisation__in=' + organisation_id + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
-    } else{
-      return search_url + 'activity-list/?reporting_organisation__in=' + str_reporting_organisation + '&sectors__in=' + str_sector + '&budgets__in=' + str_budget + '&countries__in=' + str_country + '&regions__in=' + str_region;
-    }
-
   } else if (type == 'filter' && selected_type=='indicator'){
-    return search_url + 'indicator-country-filter-options/?countries__in=' + str_country + '&regions__in=' + str_region + '&cities__in=' + str_city + '&indicators__in=';
+    return_url = search_url + 'indicator-country-filter-options/?format=json' + str_country + str_region + str_city;
   } else if (type == 'mapdata' && selected_type=='indicator'){
-    return search_url + 'indicator-country-data/?countries__in=' + str_country + '&regions__in=' + str_region + '&cities__in=' + str_city + '&indicators__in=' + indicatorid;
+    return_url = search_url + 'indicator-country-data/?format=json' + str_country + str_region + str_city + '&indicators__in=' + indicatorid;
   } else if (type == 'filter' && selected_type=='cpi'){
-    return search_url + 'indicator-city-filter-options/?countries__in=' + str_country + '&regions__in=' + str_region + '&cities__in=' + str_city;
+    return_url = search_url + 'indicator-city-filter-options/?format=json' + str_country + str_region + str_city;
   } else if (type == 'mapdata' && selected_type=='cpi'){
-    return search_url + 'indicator-city-data/?countries__in=' + str_country + '&regions__in=' + str_region + '&cities__in=' + str_city + '&indicators__in=' + indicatorid;
-  }
+    return_url = search_url + 'indicator-city-data/?format=json' + str_country + str_region + str_city + '&indicators__in=' + indicatorid;
+  } 
+  // else if (type == "listdata" && selected_type=='projects'){
+  //   if(organisation_id){
+  //     return_url = search_url + 'activity-list/?format=json' + organisation_id + str_sector + str_budget + str_country + str_region;
+  //   } else{
+  //     return_url = search_url + 'activity-list/?format=json' + str_reporting_organisation + str_sector + str_budget + str_country + str_region;
+  //   }
+  // } 
+  return return_url;
 }
 
 function reload_map_prepare_parameter_string(filtername, dlmtr){
+  if(filtername == "reporting_organisations"){ filtername = "reporting_organisation"}
   var str = '';
   if(!(typeof current_selection[filtername] === 'undefined')){
+    str = '&' + filtername + '__in=';
     var arr = current_selection[filtername];
     if(arr.length > 0){
       for(var i = 0; i < arr.length; i++){
@@ -774,6 +775,41 @@ function reload_map_prepare_parameter_string(filtername, dlmtr){
       str = str.substring(0, str.length-1);
     }
   }
+  return str;
+}
+
+function reload_map_prepare_budget_parameter_string(filtername, dlmtr){
+  var gte = '';
+  var lte = '';
+  var str = '';
+  if(!(typeof current_selection[filtername] === 'undefined')){
+    var arr = current_selection[filtername];
+    if(arr.length > 0){
+      gte = '99999999999';
+      lte = '0';
+      for(var i = 0; i < arr.length; i++){
+        curid = arr[i].id;
+        lower_higher = curid.split('-');
+
+        if(lower_higher[0] < gte){
+          gte = lower_higher[0];
+        }
+
+        if(lower_higher.length > 1){
+          if(lower_higher[1] > lte){
+            lte = lower_higher[1];
+          }
+        }
+      }
+    }
+  }
+  if (gte != '' && gte != '99999999999'){
+    str += '&total_budget__gte=' + gte;
+  }
+  if (lte != '' && lte != '0'){
+    str += '&total_budget__lte=' + lte;
+  }
+
   return str;
 }
 

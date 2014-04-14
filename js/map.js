@@ -7,7 +7,7 @@ var map = L.map('map', {
     continuousWorld: 'true'
 }).setView([10.505, 25.09], 3);
 
-L.tileLayer('http://{s}.tile.cloudmade.com/07c00b1d0e4c4bed9a926bdca23d2232/90076/256/{z}/{x}/{y}.png', {
+L.tileLayer('https://{s}.tiles.mapbox.com/v3/zimmerman2014.hmj09g6h/{z}/{x}/{y}.png', {
     maxZoom: 6
 }).addTo(map);
 
