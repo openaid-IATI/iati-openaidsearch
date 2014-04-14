@@ -52,19 +52,19 @@
 		$provider_org = '';
 		if(!empty($at->provider_organisation->name)) {
 			$provider_org = $at->provider_organisation->name;
-		} else {
-			if(!empty($at->provider_organisation->code)) {
+		} elseif (!empty($at->provider_organisation_name)) {
+			$provider_org = $at->provider_organisation_name;
+		} elseif(!empty($at->provider_organisation->code)) {
 				$provider_org = $at->provider_organisation->code;
-			}
 		}
 		
 		$receiver_org = '';
 		if(!empty($at->receiver_organisation->name)) {
 			$receiver_org = $at->receiver_organisation->name;
-		} else {
-			if(!empty($at->receiver_organisation->code)) {
+		} elseif (!empty($at->receiver_organisation_name)) {
+			$provider_org = $at->receiver_organisation_name;
+		} elseif(!empty($at->receiver_organisation->code)) {
 				$receiver_org = $at->receiver_organisation->code;
-			}
 		}
 
 		echo 'var stringvalue = "' . $currency . '" + DotFormattedProjectFinancials(' . $value . ');';
