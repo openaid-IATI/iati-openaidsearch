@@ -82,10 +82,10 @@ function generate_activity_export($activity) {
 	$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
 	$sep = '';
 	$countries = '';
-	if(empty($activity['recipient_country'])) {
+	if(empty($activity['countries'])) {
 		$countries = EMPTY_LABEL;
 	} else {
-		foreach($activity['recipient_country'] AS $country) {
+		foreach($activity['countries'] AS $country) {
 			$countries .= $sep . $country['name'];
 			$sep = ', ';
 		}
@@ -96,10 +96,10 @@ function generate_activity_export($activity) {
 	$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
 	$sep = '';
 	$sectors = '';
-	if(empty($activity['activity_sectors'])) {
+	if(empty($activity['sectors'])) {
 		$sectors = EMPTY_LABEL;
 	} else {
-		foreach($activity['activity_sectors'] AS $sector) {
+		foreach($activity['sectors'] AS $sector) {
 			$sectors .= $sep . $sector['name'];
 			$sep = ', ';
 		}
@@ -113,8 +113,8 @@ function generate_activity_export($activity) {
 	$row++;
 	$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Reporting organisation:');
 	$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
-	if(empty($activity['reporting_organisation']['org_name'])) $activity['reporting_organisation']['org_name'] = EMPTY_LABEL;
-	$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $activity['reporting_organisation']['org_name']);
+	if(empty($activity['reporting_organisation']['name'])) $activity['reporting_organisation']['name'] = EMPTY_LABEL;
+	$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $activity['reporting_organisation']['name']);
 	$row++;
 	$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Start-date:');
 	$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
@@ -123,14 +123,14 @@ function generate_activity_export($activity) {
 	$row++;
 	$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Sector code:');
 	$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
-	if(empty($activity['activity_sectors'])) $activity['activity_sectors'][0]['code'] = EMPTY_LABEL;
-	$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $activity['activity_sectors'][0]['code']);
+	if(empty($activity['sectors'])) $activity['sectors'][0]['code'] = EMPTY_LABEL;
+	$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $activity['sectors'][0]['code']);
 	$objPHPExcel->getActiveSheet()->getStyle('B'.$row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 	$row++;
 	$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Last updated:');
 	$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
-	if(empty($activity['date_updated'])) $activity['date_updated'] = EMPTY_LABEL;
-	$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $activity['date_updated']);
+	if(empty($activity['last_updated_datetime'])) $activity['last_updated_datetime'] = EMPTY_LABEL;
+	$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $activity['last_updated_datetime']);
 	$row++;
 	$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Start date planned:');
 	$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
@@ -184,8 +184,8 @@ function generate_activity_export($activity) {
 	$row++;
 	$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Tying status:');
 	$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
-	if(empty($activity['default_tied_status_type']['name'])) $activity['default_tied_status_type']['name'] = EMPTY_LABEL;
-	$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $activity['default_tied_status_type']['name']);
+	if(empty($activity['default_tied_status']['name'])) $activity['default_tied_status']['name'] = EMPTY_LABEL;
+	$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $activity['default_tied_status']['name']);
 	$row++;
 	$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Activity status:');
 	$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
@@ -212,14 +212,14 @@ function generate_activity_export($activity) {
 	if(empty($activity['descriptions'][0]['description'])) $activity['descriptions'][0]['description'] = EMPTY_LABEL;
 	$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", $activity['descriptions'][0]['description']);
 	$row++;
-	$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Documents:');
-	$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
-	$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", EMPTY_LABEL);
-	$row++;
-	$objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Commitments:');
-	$objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
-	$objPHPExcel->getActiveSheet()->setCellValue("B{$row}", EMPTY_LABEL);
-	$row++;
+	// $objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Documents:');
+	// $objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
+	// $objPHPExcel->getActiveSheet()->setCellValue("B{$row}", EMPTY_LABEL);
+	// $row++;
+	// $objPHPExcel->getActiveSheet()->setCellValue("A{$row}", 'Commitments:');
+	// $objPHPExcel->getActiveSheet()->getStyle('A'.$row)->getFont()->setBold(true);
+	// $objPHPExcel->getActiveSheet()->setCellValue("B{$row}", EMPTY_LABEL);
+	// $row++;
 	
 	$objPHPExcel->setActiveSheetIndex(0);
 	// header('Content-Type: application/vnd.ms-excel');
