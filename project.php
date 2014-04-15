@@ -10,16 +10,12 @@ Template Name: Single project page
 get_header();
 
 
-$found = false;
-
-if (isset($_REQUEST['iati_id'])){
-	$iati_id = $_REQUEST['iati_id'];
-	$activity = wp_get_activity($iati_id);
+	$found = false;
+	$activity = wp_get_activity();
 	get_template_part( "map" );
 	if ($activity){
 		$found = true;
 	}
-}
 
 if (!$found){
 ?>
@@ -129,7 +125,7 @@ if (!$found){
 				        var disqus_shortname = ''; // required: replace example with your forum shortname
 				 		var disqus_identifier = '<?php echo $activity->iati_identifier; ?>';
 						var disqus_title = '<?php echo $activity->titles[0]->title; ?>';
-						var disqus_url = '<?php echo site_url() . "/project/?id=" . $activity->iati_identifier; ?>';
+						var disqus_url = '<?php echo site_url() . "/project/?iati_id=" . $activity->iati_identifier; ?>';
 
 				        /* * * DON'T EDIT BELOW THIS LINE * * */
 				        (function() {
@@ -161,11 +157,10 @@ if (!$found){
 	?>
 
 	var project_countries = new Array(<?php echo $countries; ?>);
-
 </script>
 <?php } ?>
 <?php get_template_part('footer-scripts'); ?>
-<script> refresh_rsr_projects("<?php echo $iati_id; ?>"); </script>
+<script> refresh_rsr_projects("<?php if (isset($_REQUEST['iati_id'])){ echo $_REQUEST['iati_id'];} ?>"); </script>
 <?php get_footer(); ?>
 
 

@@ -208,7 +208,11 @@ function add_popular_search($query){
 	}
 }
 
-function wp_get_activity($identifier) {
+function wp_get_activity() {
+	$identifier = null;
+	if (isset($_REQUEST['iati_id'])){
+		$identifier = $_REQUEST['iati_id'];
+	}
 	if(empty($identifier)) return null;
 	$search_url = SEARCH_URL . "activities/{$identifier}/?format=json";
 
@@ -325,7 +329,6 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 function wp_generate_rsr_projects(&$objects, $iati_id){
 	
 	$search_url = "http://rsr.akvo.org/api/v1/project/?format=json&partnerships__iati_activity_id=" . $iati_id . "&distinct=True&limit=100&depth=1";
-	$search_url = wp_filter_request($search_url);
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
 	$objects = $result->objects;
@@ -487,16 +490,36 @@ function wp_filter_request($search_url){
 	}
 	
 	if(!empty($_REQUEST['budgets'])) {
+		$budget_gte = 99999999999;
+		$budget_lte = 0;
 		$budgets = explode(',', trim($_REQUEST['budgets']));
-		//Get the lowest budget from filter and use this one, all the other are included in the range
-		ksort($budgets);
-		$search_url .= "&total_budget__gt={$budgets[0]}";
+		foreach ($budgets as &$budget) {
+		    $lower_higher = explode('-', $budget);
+		    if($lower_higher[0] < $budget_gte){
+		    	$budget_gte = $lower_higher[0];
+		    }
+		    if (sizeof($lower_higher) > 1) {
+		    	
+		    	if($lower_higher[1] > $budget_lte){
+		    		$budget_lte = $lower_higher[1];
+		    	}
+		    }
+		}
+
+		if ($budget_gte != 99999999999){
+			$search_url .= "&total_budget__gte={$budget_gte}";
+		}
+		if ($budget_lte != 0){
+			$search_url .= "&total_budget__lte={$budget_lte}";
+		}
 		$has_filter = true;
 	}
 
 	if(!empty($_REQUEST['order_by'])){
 		$orderby = trim($_REQUEST['order_by']);
 		$search_url .= "&order_by={$orderby}";
+	} else {
+		$search_url .= "&order_by=-total_budget";
 	}
 
     return $search_url;

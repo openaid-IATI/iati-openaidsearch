@@ -251,10 +251,12 @@ foreach($objects AS $idx=>$project) {
 
 							foreach($project->participating_organisations AS $participating_organisation) {
 								if(empty($participating_organisation->name)) {
+									
 									$part_org_text .= $participating_organisation->code;
 
 								} else {
-									$part_org_text .= $participating_organisation->name . " (" . $participating_organisation->code . ")";
+									$part_org_text .= $participating_organisation->name;
+									if(!empty($participating_organisation->original_ref)){ $part_org_text .= " (" . $participating_organisation->original_ref . ")"; }
 								}
 								$part_org_text .= $sep;
 							}
