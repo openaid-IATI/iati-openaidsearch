@@ -67,7 +67,7 @@ function load_filter_options(){
 function process_filter_options(data){
 
   
-  // uitzonderingen voor indicator pagina
+  // exceptions for indicator page
   if (selected_type == "indicator"){
     $.each(data['indicators'], function( key, value ) {
        if(key.indexOf("cpi") != -1){
@@ -75,7 +75,7 @@ function process_filter_options(data){
        }
     });
   }
-  // uitzonderingen voor cpi pagina
+  // exceptions for cpi page
   if (selected_type == "cpi"){
     $.each(data['indicators'], function( key, value ) {
        if(key.indexOf("cpi") == -1){

@@ -10,15 +10,12 @@
                     <div id="map-lightbox-text">
                         <?php 
 
-                        $cat_obj = get_category_by_slug('lightbox'); 
-                        $row_cat_id = $cat_obj->term_id;
-
                         $args = array(
-                        'posts_per_page'  => 15,
-                        'numberposts'     => 15,
-                        'category'        => $row_cat_id,
+                        'posts_per_page'  => 1,
+                        'numberposts'     => 1,
                         'order'           => 'ASC',
                         'post_type'       => 'homepage-item',
+                        'category_name'   => 'lightbox'
                         );
 
                         $row1_posts_array = get_posts( $args );
