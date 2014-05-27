@@ -991,7 +991,7 @@ function get_embed_url(type){
     height = '400';
   }
   iframeurl = baseurl + build_current_url();
-  iframecode = '<script type="text/javascript" src="http://localhost/unhabitat/wp-content/themes/unhabitat/js/embed.js"></script> \n';
+  iframecode = '<script type="text/javascript" src="' + template_directory + '/js/embed.js"></script> \n';
   iframecode += '<script>\n oipa_embed.options(\n    url = ' + iframeurl + ',\n    width = ' + width + ',\n    height = ' + height + '\n);\n</script>';
 
   return iframecode;
