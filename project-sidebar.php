@@ -57,7 +57,7 @@
 	<div class="projects-project-spec-value">
 
 		<?php if(!empty($activity->total_budget)) {
-			// if(!empty($activity->default_currency)) { echo currencyCodeToSign($activity->default_currency->code); }
+			if(!empty($activity->default_currency)) { echo currencyCodeToSign($activity->default_currency->code); }
 			echo format_custom_number($activity->total_budget);
 		} else {
 			echo "-";
