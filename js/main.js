@@ -718,6 +718,9 @@ function create_api_url(type, indicatorid){
   var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
   var str_reporting_organisation = reload_map_prepare_parameter_string("reporting_organisations", dlmtr);
 
+  console.log(current_selection);
+
+
   if (type == 'filter' && selected_type=='projects'){
     return_url = search_url + 'activity-filter-options/?format=json&reporting_organisation__in=' + organisation_id;
   } else if (type == "mapdata" && selected_type=='projects'){
@@ -734,7 +737,7 @@ function create_api_url(type, indicatorid){
     return_url = search_url + 'indicator-city-filter-options/?format=json' + str_country + str_region + str_city;
   } else if (type == 'mapdata' && selected_type=='cpi'){
     return_url = search_url + 'indicator-city-data/?format=json' + str_country + str_region + str_city + '&indicators__in=' + indicatorid;
-  } 
+  }
   // else if (type == "listdata" && selected_type=='projects'){
   //   if(organisation_id){
   //     return_url = search_url + 'activity-list/?format=json' + organisation_id + str_sector + str_budget + str_country + str_region;
@@ -746,10 +749,12 @@ function create_api_url(type, indicatorid){
 }
 
 function reload_map_prepare_parameter_string(filtername, dlmtr){
-  if(filtername == "reporting_organisations"){ filtername = "reporting_organisation"}
   var str = '';
   if(!(typeof current_selection[filtername] === 'undefined')){
+
     str = '&' + filtername + '__in=';
+    if(filtername == "reporting_organisations"){ str = "&reporting_organisation__in="; }
+
     var arr = current_selection[filtername];
     if(arr.length > 0){
       for(var i = 0; i < arr.length; i++){
@@ -987,7 +992,7 @@ function get_embed_url(type){
     height = '400';
   }
   iframeurl = baseurl + build_current_url();
-  iframecode = '<script type="text/javascript" src="http://localhost/unhabitat/wp-content/themes/unhabitat/js/embed.js"></script> \n';
+  iframecode = '<script type="text/javascript" src="' + template_directory + '/js/embed.js"></script> \n';
   iframecode += '<script>\n oipa_embed.options(\n    url = ' + iframeurl + ',\n    width = ' + width + ',\n    height = ' + height + '\n);\n</script>';
 
   return iframecode;
