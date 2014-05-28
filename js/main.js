@@ -718,7 +718,6 @@ function create_api_url(type, indicatorid){
   var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
   var str_reporting_organisation = reload_map_prepare_parameter_string("reporting_organisations", dlmtr);
 
-  console.log(current_selection);
 
 
   if (type == 'filter' && selected_type=='projects'){
