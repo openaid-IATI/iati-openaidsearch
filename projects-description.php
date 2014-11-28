@@ -146,8 +146,7 @@ foreach($objects AS $idx=>$project) {
 					<div class="projects-project-spec-value">
 
 						<?php if(!empty($project->total_budget)) {
-							if(!empty($project->default_currency)) { 
-								echo currencyCodeToSign($project->default_currency->code); }
+							//if(!empty($project->default_currency)) { echo currencyCodeToSign($project->default_currency->code); }
 								echo format_custom_number($project->total_budget);
 						} else {
 							echo "-";
