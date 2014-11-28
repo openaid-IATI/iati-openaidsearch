@@ -244,12 +244,12 @@ foreach($objects AS $idx=>$project) {
 					<?php 
 						if(!empty($project->participating_organisations)) {
 							$sep = ', ';
-							$part_org_text = '';
+							$part_org_texts = array();
 
 							foreach($project->participating_organisations AS $participating_organisation) {
-								?>
-								<a href="?participating_organisations=<?php echo $participating_organisation->code; ?>">
-									<?php 
+								
+								$part_org_text = '<a href="' . home_url() . '/projects/?participating_organisations=' . $participating_organisation->code . '">';
+									
 									if(empty($participating_organisation->name)) {
 										
 										$part_org_text .= $participating_organisation->code;
@@ -257,14 +257,12 @@ foreach($objects AS $idx=>$project) {
 									} else {
 										$part_org_text .= $participating_organisation->name;
 									}
-									$part_org_text .= $sep;
-									?>
-								</a>
-								<?php
+								
+								$part_org_text .= '</a>';
+								array_push($part_org_texts, $part_org_text);
 							}
 							
-							$part_org_text = substr($part_org_text, 0, -2);
-							echo $part_org_text;
+							echo implode(", ", $part_org_texts);
 						} else {
 							echo "No information available";
 						} 
