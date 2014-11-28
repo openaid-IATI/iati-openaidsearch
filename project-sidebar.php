@@ -53,11 +53,11 @@
 
 	<div class="projects-project-divider"></div>
 
-	<div class="projects-project-spec-key">Budget:</div>
+	<div class="projects-project-spec-key">Total budget:</div>
 	<div class="projects-project-spec-value">
 
 		<?php if(!empty($activity->total_budget)) {
-			// if(!empty($activity->default_currency)) { echo currencyCodeToSign($activity->default_currency->code); }
+			if(!empty($activity->default_currency)) { echo currencyCodeToSign($activity->default_currency->code); }
 			echo format_custom_number($activity->total_budget);
 		} else {
 			echo "-";
