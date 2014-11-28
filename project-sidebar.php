@@ -75,12 +75,12 @@
 
 	<div class="projects-project-spec-key">Reporting organisation:</div>
 	<div class="projects-project-spec-value">
-	
+	<a href="?reporting_organisations=<?php echo $project->reporting_organisation->code; ?>">			
 	<?php 
 		if(!empty($activity->reporting_organisation->name)){ echo $activity->reporting_organisation->name; } else {
 		if(!empty($activity->reporting_organisation->code)){ echo $activity->reporting_organisation->code; } }
 	?>
-
+	</a>
 	</div>
 
 	<div class="projects-project-divider"></div>
@@ -135,26 +135,33 @@
 	<div class="projects-project-spec-value">
 
 		<?php 
-		if(!empty($activity->participating_organisations)) {
-			$sep = ', ';
-			$part_org_text = '';
+			if(!empty($project->participating_organisations)) {
+				$sep = ', ';
+				$part_org_text = '';
 
-			foreach($activity->participating_organisations AS $participating_organisation) {
-				if(empty($participating_organisation->name)) {
-					$part_org_text .= $participating_organisation->code;
+				foreach($project->participating_organisations AS $participating_organisation) {
+					?>
+					<a href="?participating_organisations=<?php echo $participating_organisation->code; ?>">
+						<?php 
+						if(empty($participating_organisation->name)) {
+							
+							$part_org_text .= $participating_organisation->code;
 
-				} else {
-					$part_org_text .= $participating_organisation->name;
-					if(!empty($participating_organisation->original_ref)){ $part_org_text .= " (" . $participating_organisation->original_ref . ")"; }
+						} else {
+							$part_org_text .= $participating_organisation->name;
+						}
+						$part_org_text .= $sep;
+						?>
+					</a>
+					<?php
 				}
-				$part_org_text .= $sep;
-			}
-			
-			$part_org_text = substr($part_org_text, 0, -2);
-			echo $part_org_text;
-		} else {
-			echo "No information available";
-		} ?>
+				
+				$part_org_text = substr($part_org_text, 0, -2);
+				echo $part_org_text;
+			} else {
+				echo "No information available";
+			} 
+		?>
 
 	</div>
 

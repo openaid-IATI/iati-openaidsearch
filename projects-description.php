@@ -247,15 +247,20 @@ foreach($objects AS $idx=>$project) {
 							$part_org_text = '';
 
 							foreach($project->participating_organisations AS $participating_organisation) {
-								if(empty($participating_organisation->name)) {
-									
-									$part_org_text .= $participating_organisation->code;
+								?>
+								<a href="?participating_organisations=<?php echo $participating_organisation->code; ?>">
+									<?php 
+									if(empty($participating_organisation->name)) {
+										
+										$part_org_text .= $participating_organisation->code;
 
-								} else {
-									$part_org_text .= $participating_organisation->name;
-									if(!empty($participating_organisation->original_ref)){ $part_org_text .= " (" . $participating_organisation->original_ref . ")"; }
-								}
-								$part_org_text .= $sep;
+									} else {
+										$part_org_text .= $participating_organisation->name;
+									}
+									$part_org_text .= $sep;
+									?>
+								</a>
+								<?php
 							}
 							
 							$part_org_text = substr($part_org_text, 0, -2);
