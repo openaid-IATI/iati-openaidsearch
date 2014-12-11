@@ -485,6 +485,11 @@ function wp_filter_request($search_url){
 		$search_url .= "&participating_organisations__organisation__code__in=" . $_REQUEST['participating_organisations'];;
 		$has_filter = true;
 	}
+
+	if(!empty($_REQUEST['xml_source_ref__in'])) {
+		$search_url .= "&xml_source_ref__in=" . $_REQUEST['xml_source_ref__in'];;
+		$has_filter = true;
+	}
 	
 	if(!empty($_REQUEST['budgets'])) {
 		$budget_gte = 99999999999;
