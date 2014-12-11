@@ -1,3 +1,6 @@
+<?php if(!count($_GET)) { ?>
+
+
 <div id="lightbox-wrapper">
     <div class="container">
         <div class="row-fluid">
@@ -29,3 +32,5 @@
         </div>
     </div>
 </div>
+
+<?php } ?>

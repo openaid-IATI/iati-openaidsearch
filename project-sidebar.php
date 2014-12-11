@@ -53,11 +53,11 @@
 
 	<div class="projects-project-divider"></div>
 
-	<div class="projects-project-spec-key">Budget:</div>
+	<div class="projects-project-spec-key">Total budget:</div>
 	<div class="projects-project-spec-value">
 
 		<?php if(!empty($activity->total_budget)) {
-			// if(!empty($activity->default_currency)) { echo currencyCodeToSign($activity->default_currency->code); }
+			if(!empty($activity->default_currency)) { echo currencyCodeToSign($activity->default_currency->code); }
 			echo format_custom_number($activity->total_budget);
 		} else {
 			echo "-";
@@ -75,12 +75,12 @@
 
 	<div class="projects-project-spec-key">Reporting organisation:</div>
 	<div class="projects-project-spec-value">
-	
+	<a href="<?php echo home_url(); ?>/projects/?reporting_organisations=<?php echo $activity->reporting_organisation->code; ?>">			
 	<?php 
 		if(!empty($activity->reporting_organisation->name)){ echo $activity->reporting_organisation->name; } else {
 		if(!empty($activity->reporting_organisation->code)){ echo $activity->reporting_organisation->code; } }
 	?>
-
+	</a>
 	</div>
 
 	<div class="projects-project-divider"></div>
@@ -135,26 +135,31 @@
 	<div class="projects-project-spec-value">
 
 		<?php 
-		if(!empty($activity->participating_organisations)) {
-			$sep = ', ';
-			$part_org_text = '';
+			if(!empty($activity->participating_organisations)) {
+				$sep = ', ';
+				$part_org_texts = array();
 
-			foreach($activity->participating_organisations AS $participating_organisation) {
-				if(empty($participating_organisation->name)) {
-					$part_org_text .= $participating_organisation->code;
+				foreach($activity->participating_organisations AS $participating_organisation) {
+					
+					$part_org_text = '<a href="' . home_url() . '/projects/?participating_organisations=' . $participating_organisation->code . '">';
+						
+						if(empty($participating_organisation->name)) {
+							
+							$part_org_text .= $participating_organisation->code;
 
-				} else {
-					$part_org_text .= $participating_organisation->name;
-					if(!empty($participating_organisation->original_ref)){ $part_org_text .= " (" . $participating_organisation->original_ref . ")"; }
+						} else {
+							$part_org_text .= $participating_organisation->name;
+						}
+					
+					$part_org_text .= '</a>';
+					array_push($part_org_texts, $part_org_text);
 				}
-				$part_org_text .= $sep;
-			}
-			
-			$part_org_text = substr($part_org_text, 0, -2);
-			echo $part_org_text;
-		} else {
-			echo "No information available";
-		} ?>
+				
+				echo implode(", ", $part_org_texts);
+			} else {
+				echo "No information available";
+			} 
+		?>
 
 	</div>
 
