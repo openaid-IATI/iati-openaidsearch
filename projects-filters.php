@@ -33,6 +33,14 @@
 						<div class="filter-button-icon"></div>
 					</button>
 				</div>
+
+				<div class="filter-by">
+					<div class="filter-name hneue-bold">BY REPORTING ORGANISATION: </div>
+					<button id="reporting_organisations-filters-button" class="filter-button">
+						<div class="filter-text">PLEASE SELECT..</div>	 
+						<div class="filter-button-icon"></div>
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -52,12 +52,12 @@ function unload_project_map(){
 
 // Map polygon styling
 function getColor(d) {
-    return d > 5000 ? '#0f567c' :
-           d > 2500  ? '#045A8D' :
-           d > 1000  ? '#176792' :
-           d > 500   ? '#2476A2' :
-           d > 20   ? '#2B8CBE' :
-           d > 0    ? '#65a8cf' :
+    return d > 5000 ? '#333' :
+           d > 2500  ? '#555' :
+           d > 1000  ? '#666' :
+           d > 500   ? '#777' :
+           d > 20   ? '#888' :
+           d > 0    ? '#999' :
                       'transparent';
 }
 
@@ -142,6 +142,7 @@ function load_project_map(project_geojson){
       
     }
     set_current_url();
+
 
     $('#page-wrapper').fadeOut(100, function(){ //fade out the content area
       $("#paginated-loader").show();
