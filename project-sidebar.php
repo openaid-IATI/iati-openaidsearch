@@ -1,5 +1,5 @@
 <div class="project-spec">
-
+	<a class="btn pull-right" href="http://aidstream.zz-clients.net/activity/view-activity-info/?activity_id=<?php echo $activity->aidstream_id?>">edit</a>
 	<div class="projects-project-divider"></div>
 
 	<div class="projects-project-spec-key">Countries:</div>

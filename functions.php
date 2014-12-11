@@ -312,6 +312,7 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	}
 
     $search_url = wp_filter_request($search_url);
+	var_dump($search_url);
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
 	$meta = $result->meta;
