@@ -9,16 +9,6 @@ add_theme_support( 'automatic-feed-links' );
 
 
 
-// add_action( 'rewrite_rules_array', 'add_oipa_tags');
-// // add_action( 'init', 'generate_rewrite_rules' );  
-// function add_oipa_tags(  ) { 
-	
-	
-// 	// add_rewrite_rule('project/([^/]+)/?$','index.php?pagename=project&iati_id=$matches[2]','top');
-// }
-
-
-
 
 // add_filter( 'rewrite_rules_array','my_insert_rewrite_rules' );
 // // add_filter( 'query_vars','my_insert_query_vars' );
@@ -609,4 +599,14 @@ function currencyCodeToSign($currency){
 
 
 
-?>
+
+function add_rewrite_rules( $wp_rewrite ) 
+{
+  $new_rules = array(
+    'project/([^/]+)/?$' => 'index.php?pagename=project&iati_id='.$wp_rewrite->preg_index(1),
+    'embed/([^/]+)/?$' => 'index.php?pagename=embed&iati_id='.$wp_rewrite->preg_index(1),
+  );
+  $wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
+}
+add_action('generate_rewrite_rules', 'add_rewrite_rules');
+
