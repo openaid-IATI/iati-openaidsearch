@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 
+
 define( 'SEARCH_URL', 'http://149.210.188.79/api/v3/');
 
 if (function_exists("site_url")){
