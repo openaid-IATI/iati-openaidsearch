@@ -1725,6 +1725,14 @@ label, input, button, select, textarea{
   display: none;
 }
 
+.google-visualization-table{
+  width: auto !important;
+}
+
+.google-visualization-table th{
+  font-weight: normal;
+}
+
 .projects-project-title{
   font-size: 1.5em;
   color: #008CCB;
