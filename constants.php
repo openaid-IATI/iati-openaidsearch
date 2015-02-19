@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-define( 'SEARCH_URL', 'http://staging.oipa.org/api/v3/');
+define( 'SEARCH_URL', 'http://staging.oipa.nl/api/v3/');
 
 if (function_exists("site_url")){
 	define( 'SITE_URL', site_url());
