@@ -4,14 +4,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-define( 'SEARCH_URL', 'http://oipa.openaidsearch.org/api/v3/');
+// define( 'OIPA_URL', 'http://oipa.murrx.me/api/');
+define( 'OIPA_URL', 'http://localhost:8000/api/');
 if (function_exists("site_url")){
 	define( 'SITE_URL', site_url());
 }
 define( 'EMPTY_LABEL', 'No information available');
-define( 'AJAX_PROJECTS_URL', TEMPLATEPATH .'/functions-projects.php');
+define( 'DEFAULT_ORGANISATION_ID', '');
+define( 'DEFAULT_ORGANISATION_NAME', '');
+define( 'OIPA_PER_PAGE', 25);
+define( 'GOOGLE_ANALYTICS_CODE', '');
 
-$_DEFAULT_ORGANISATION_ID = '';
-$_PER_PAGE = 5;
-define( 'DEFAULT_ORGANISATION_ID', $_DEFAULT_ORGANISATION_ID);
-?>
+include( TEMPLATEPATH . '/codelists.php' ); 

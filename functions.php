@@ -1,85 +1,28 @@
 <?php 
 include( TEMPLATEPATH .'/constants.php' );
 
+// Register Custom Navigation Walker
+require_once('wp_bootstrap_navwalker.php');
+
 // WORDPRESS THEME FUNCTIONS
 add_theme_support( 'menus' );
 add_theme_support( 'post-thumbnails' );
 add_theme_support( 'automatic-feed-links' );
 
-
-
-
-
-// add_filter( 'rewrite_rules_array','my_insert_rewrite_rules' );
-// // add_filter( 'query_vars','my_insert_query_vars' );
-// add_action( 'wp_loaded','my_flush_rules' );
-
-// // flush_rules() if our rules are not yet included
-// function my_flush_rules(){
-// 	$rules = get_option( 'rewrite_rules' );
-
-// 	//if ( ! isset( $rules['(project)/([^/]+)/'] ) ) {
-// 		global $wp_rewrite;
-// 	   	$wp_rewrite->flush_rules();
-// 	//}
-// }
-
-// // Adding a new rule
-// function my_insert_rewrite_rules( $rules )
-// {	
-
-// 	add_rewrite_tag('%iati_id%','(.*)');
-// 	add_rewrite_tag('%backlink%','(.*)');
-// 	$newrules = array();
-// 	$newrules['(project)/([^/]+)/?$'] = 'index.php?pagename=$matches[1]&id=$matches[2]';
-// 	global $wp_rewrite;
-// 	var_dump($wp_rewrite);
-// 	return $newrules + $rules;
-// }
-
-
-// // Adding the id var so that WP recognizes it
-// function my_insert_query_vars( $vars )
-// {
-//     array_push($vars, 'iati_id');
-//     return $vars;
-// }
-
-
-
-
-
-
-// function add_rewrite_rules( $wp_rewrite ) 
-// {
-// 	$new_rules = array(
-// 		'project/([^/]+)/?' => 'index.php?pagename=project&iati_id=$matches[1]'
-// 	);
-
-// 	$wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
-// 	var_dump($wp_rewrite->rules);
-// 	var_dump("test");
-// }
-// add_action('generate_rewrite_rules', 'add_rewrite_rules');
-
-
-function projects_list() {
-	include( TEMPLATEPATH .'/ajax-projects-list.php' );
-	die();
+function add_rewrite_rules( $wp_rewrite ) 
+{
+  $new_rules = array(
+    'project/([^/]+)/?$' => 'index.php?pagename=project&iati_id='.$wp_rewrite->preg_index(1),
+    'country/([^/]+)/?$' => 'index.php?pagename=country&country_id='.$wp_rewrite->preg_index(1),
+    'donor/([^/]+)/?$' => 'index.php?pagename=donor&donor_id='.$wp_rewrite->preg_index(1),
+    'embed/([^/]+)/?$' => 'index.php?pagename=embed&iati_id='.$wp_rewrite->preg_index(1),
+  );
+  $wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
 }
+add_action('generate_rewrite_rules', 'add_rewrite_rules');
 
-function rsr_call() {
-	$iati_id = "";
-	if (isset($_REQUEST['iati_id'])){
-		$iati_id = $_REQUEST['iati_id'];
-	}
-	include( TEMPLATEPATH .'/project-rsr-ajax.php' );
-	die();
-}
-add_action('wp_ajax_projects_list', 'projects_list');
-add_action('wp_ajax_nopriv_projects_list', 'projects_list');
-add_action('wp_ajax_rsr_call', 'rsr_call');
-add_action('wp_ajax_nopriv_rsr_call', 'rsr_call');
+
+
 
 
 function my_function_admin_bar(){ return false; }
@@ -95,7 +38,7 @@ function register_my_menus() {
 }
 add_action( 'init', 'register_my_menus' );
 
-function unh_widgets_init() {
+function oipa_widgets_init() {
 	register_sidebar(array(
 		'name' => __( 'OIPA theme page sidebar' ),
 	  	'id' => 'unh-page-sidebar',
@@ -104,8 +47,17 @@ function unh_widgets_init() {
 	    'before_title' => '<div class="postit-title hneue-light">',
 	    'after_title' => '</div>',
 	));
+
+	register_sidebar(array(
+		'name' => __( 'Footer sidebar' ),
+	  	'id' => 'footer-sidebar',
+	    'before_widget' => '',
+	    'after_widget' => '',
+	    'before_title' => '',
+	    'after_title' => '',
+	));
 }
-add_action( 'widgets_init', 'unh_widgets_init' );
+add_action( 'widgets_init', 'oipa_widgets_init' );
 
 function homepage_items_post_type() {
 	$labels = array(
@@ -166,8 +118,6 @@ function faq_items_post_type() {
 add_action( 'init', 'faq_items_post_type' );
 
 
-
-
 function add_popular_search($query){
 	global $wpdb;
 	$table_name = $wpdb->prefix . "popular_searches";
@@ -196,37 +146,6 @@ function add_popular_search($query){
 	}
 }
 
-function wp_get_activity($identifier) {
-	if(empty($identifier)) return null;
-	$search_url = SEARCH_URL . "activities/{$identifier}/?format=json";
-
-	$content = @file_get_contents($search_url);
-	if ($content === false) { return false; }
-	$activity = json_decode($content);
-	return $activity;
-}
-
-function objectToArray($d) {
-	if (is_object($d)) {
-		// Gets the properties of the given object
-		// with get_object_vars function
-		$d = get_object_vars($d);
-	}
-
-	if (is_array($d)) {
-		/*
-		* Return array converted to object
-		* Using __FUNCTION__ (Magic constant)
-		* for recursive call
-		*/
-		return array_map(__FUNCTION__, $d);
-	}
-	else {
-		// Return array
-		return $d;
-	}
-}
-
 add_filter( 'request', 'my_request_filter' );
 function my_request_filter( $query_vars ) {
 	if( isset( $_GET['s'] ) && empty( $_GET['s'] ) ) {
@@ -234,8 +153,6 @@ function my_request_filter( $query_vars ) {
 	}
 	return $query_vars;
 }
-
-
 
 class PopularSearchWidget extends WP_Widget {
 
@@ -283,41 +200,27 @@ function myplugin_register_widgets() {
 
 add_action( 'widgets_init', 'myplugin_register_widgets' );
 
-function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
-	
-	global $_PER_PAGE;
-	global $_DEFAULT_ORGANISATION_ID;
 
-	// get amount of activities per page
-	$activities_per_page = $_PER_PAGE;
-	if(isset($_GET['per_page'])){	$activities_per_page = $_GET['per_page']; }
 
-	// get offset
-	$activities_offset = 0;
-	if(isset($_REQUEST['offset'])){	$activities_offset = rawurlencode($_REQUEST['offset']);	}
-	//if($offsetpar != ""){ $activities_offset = $offsetpar; }
 
-	$search_url = SEARCH_URL . "activity-list/?format=json&limit=" . $activities_per_page;
 
-	if($activities_offset != 0){
-		$search_url = $search_url . "&offset=" . $activities_offset;
+function rsr_call() {
+	$iati_id = "";
+	if (isset($_REQUEST['iati_id'])){
+		$iati_id = $_REQUEST['iati_id'];
 	}
-
-	if ($_DEFAULT_ORGANISATION_ID){
-		$search_url = $search_url . "&reporting_organisation__in=" . $_DEFAULT_ORGANISATION_ID;
-	}
-
-    $search_url = wp_filter_request($search_url);
-	$content = file_get_contents($search_url);
-	$result = json_decode($content);
-	$meta = $result->meta;
-	$objects = $result->objects;
+	include( TEMPLATEPATH .'/project-rsr-ajax.php' );
+	die();
 }
+add_action('wp_ajax_projects_list', 'projects_list');
+add_action('wp_ajax_nopriv_projects_list', 'projects_list');
+add_action('wp_ajax_rsr_call', 'rsr_call');
+add_action('wp_ajax_nopriv_rsr_call', 'rsr_call');
 
 function wp_generate_rsr_projects(&$objects, $iati_id){
 	
 	$search_url = "http://rsr.akvo.org/api/v1/project/?format=json&partnerships__iati_activity_id=" . $iati_id . "&distinct=True&limit=100&depth=1";
-	$search_url = wp_filter_request($search_url);
+	$search_url = oipa_filter_request($search_url);
 	$content = file_get_contents($search_url);
 	$result = json_decode($content);
 	$objects = $result->objects;
@@ -336,276 +239,101 @@ function wp_generate_link_parameters($filter_to_unset=null){
 	if ($parameters){ $parameters = "&" . $parameters; }
 	return $parameters;
 }
-function wp_generate_paging($meta) {
-
-	global $_PER_PAGE;
-	$per_page = $_PER_PAGE;
-	if(isset($_GET['per_page'])){ $per_page = $_GET['per_page']; }
-	
-	$parameters = wp_generate_link_parameters();
-	$total_count = $meta->total_count;
-	$offset = $meta->offset;
-	$limit = $meta->limit;
-	
-	$total_pages = ceil($total_count/$limit);
-	$cur_page = $offset/$limit + 1;
-
-	// range of num links to show
-	$range = 2;
-
-	$params = $_GET;
-
-	$paging_block = "<ul class='menu pagination'>";
-
-	// if not on page 1, don't show back links
-	if ($cur_page > 1) {
-	   // show << link to go back to page 1
-	   //$params['offset'] = 0;
-	   $paging_block .=  "<li><a href='?offset=0' class='start'><span>&laquo;</span></a></li>";
-	   // get previous page num
-	   $prevpage = $cur_page - 1;
-	   // show < link to go back to 1 page
-	   //$params['offset'] = $offset - $limit;
-	   $paging_block .= "<li><a href='?offset=" . ($offset - $limit) . $parameters . "' class='limitstart'><span>&larr; </span></a></li>";
-	} // end if 
-
-	if ($cur_page > (1 + $range)){
-	   //$params['offset'] = 0;
-	   $paging_block .= "<li><a href='?offset=0" . $parameters . "' class='page'><span>1</span></a></li>";
-	}
-
-	if ($cur_page > (2 + $range)){
-	   $paging_block .= "<li>...</li>";
-	}
-
-	// loop to show links to range of pages around current page
-	for ($x = ($cur_page - $range); $x < (($cur_page + $range) + 1); $x++) {
-	   // if it's a valid page number...
-	   if (($x > 0) && ($x <= $total_pages)) {
-	      // if we're on current page...
-	      if ($x == $cur_page) {
-	         // 'highlight' it but don't make a link
-	         $paging_block .= "<li><a class='active'>$x</a></li>";
-	      // if not current page...
-	      } else {
-	         // make it a link
-	      	 //$params['offset'] = ($x*$per_page) - $per_page;
-	      	 $paging_block .= "<li><a href='?offset=" . (($x*$per_page) - $per_page) . $parameters . "' class='page'><span>$x</span></a></li>";
-	      } // end else
-	   } // end if 
-	} // end for
-
-	if($cur_page < ($total_pages - (1 + $range))){
-	    $paging_block .= "<li>...</li>";
-	}
-
-	if($cur_page < ($total_pages - $range)){
-	   //$params['offset'] = $total_count - ($total_count % $per_page);
-	   $paging_block .= "<li><a href='?offset=" . ($total_count - ($total_count % $per_page)) . $parameters . "' class='page'><span>$total_pages</span></a></li>";
-	}
-	               
-	// if not on last page, show forward and last page links        
-	if ($cur_page != $total_pages) {
-
-	   // get next page
-	   $nextpage = $cur_page + 1;
-	    // echo forward link for next page 
-	   //$params['offset'] = $offset + $limit;
-	   $paging_block .= "<li><a href='?offset=" . ($offset + $limit) . $parameters . "' class='endmilit'><span>&rarr; </span></a></li>";
-	   //http_build_query($params)
-	   //$params['offset'] = $total_count - ($total_count % $per_page);
-	   $paging_block .= "<li><a href='?offset=" . ($total_count - ($total_count % $per_page)) . $parameters . "' class='end'><span>&raquo;</span></a></li>";
-	} // end if
-	/****** end build pagination links ******/
 
 
-	$paging_block .= "</ul>";
+function oipa_get_data_for_url($url) {
 
-
-	echo $paging_block; 
+  $search_url = OIPA_URL . $url;
+  $content = @file_get_contents($search_url);
+  if ($content === false) { return false; }
+  return $content;
 }
 
 
-function wp_filter_request($search_url){
+/**
+ * AJAX calls to OIPA
+ */
+function refresh_elements() {
+ 
 
-    if(!empty($_REQUEST['countries'])) {
-		$countries = explode(',', trim($_REQUEST['countries']));
-		foreach($countries AS &$c) $c = trim($c);
-		$countries = implode(',', $countries);
-		$search_url .= "&countries__in={$countries}";
-		$has_filter = true;
-		if(!empty($srch_countries)) {
-			$search_url .= ",{$srch_countries}";
-		}
-	} else {
-		if(!empty($srch_countries)) {
-			$search_url .= "&countries__in={$srch_countries}";
-			$has_filter = true;
-		}	
-	}
-	
-	if(!empty($_REQUEST['regions'])) {
-		$regions = explode(',', trim($_REQUEST['regions']));
-		foreach($regions AS &$c) $c = trim($c);
-		$regions = implode(',', $regions);
-		$search_url .= "&regions__in={$regions}";
-		$has_filter = true;
-	}
+	$type = $_GET['call'];
+	include( TEMPLATEPATH . '/oipa-functions.php' ); 
 
-	if(!empty($_REQUEST['query'])) {
-		// $regions = explode('|', trim($_REQUEST['regions']));
-		// foreach($regions AS &$c) $c = trim($c);
-		// $regions = implode('|', $regions);
-		$search_url .= "&query=".$_REQUEST['query'];
-		$curquery = $_REQUEST['query'];
-		add_popular_search($curquery);
-		$has_filter = false;
-	}
-	
-	if(!empty($_REQUEST['sectors'])) {
-		$sectors = explode(',', trim($_REQUEST['sectors']));
-		foreach($sectors AS &$c) $c = trim($c);
-		$sectors = implode(',', $sectors);
-		$search_url .= "&sectors__in={$sectors}";
-		$has_filter = true;
-	}
+  if ($type === 'projects'){
+  	include( TEMPLATEPATH . '/ajax/project-list-ajax.php' );
+  } else if ($type === 'projects-on-detail'){
+    include( TEMPLATEPATH . '/ajax/project-list-ajax.php');
+  } else if ($type === 'countries'){
+  	include( TEMPLATEPATH . '/ajax/country-list-ajax.php' );
+  } else if ($type === 'regions'){
+  	include( TEMPLATEPATH . '/ajax/ajax-list-regions.php' );
+  } else if ($type === 'sectors'){
+  	include( TEMPLATEPATH . '/ajax/ajax-list-sectors.php' );
+  } else if ($type === 'donors'){
+  	include( TEMPLATEPATH . '/ajax/donor-list-ajax.php' );
+  } else if ($type === 'total-projects'){
 
-	if(!empty($_REQUEST['reporting_organisations'])) {
-		$reporting_organisations = explode(',', trim($_REQUEST['reporting_organisations']));
-		foreach($reporting_organisations AS &$c) $c = trim($c);
-		$reporting_organisations = implode(',', $reporting_organisations);
-		$search_url .= "&reporting_organisation__in={$reporting_organisations}";
-		$has_filter = true;
-	}
-	
-	if(!empty($_REQUEST['budgets'])) {
-		$budget_gte = 99999999999;
-		$budget_lte = 0;
-		$budgets = explode(',', trim($_REQUEST['budgets']));
-		foreach ($budgets as &$budget) {
-		    $lower_higher = explode('-', $budget);
-		    if($lower_higher[0] < $budget_gte){
-		    	$budget_gte = $lower_higher[0];
-		    }
-		    if (sizeof($lower_higher) > 1) {
-		    	
-		    	if($lower_higher[1] > $budget_lte){
-		    		$budget_lte = $lower_higher[1];
-		    	}
-		    }
-		}
-
-		if ($budget_gte != 99999999999){
-			$search_url .= "&total_budget__gte={$budget_gte}";
-		}
-		if ($budget_lte != 0){
-			$search_url .= "&total_budget__lte={$budget_lte}";
-		}
-		$has_filter = true;
-	}
-
-	if(!empty($_REQUEST['order_by'])){
-		$orderby = trim($_REQUEST['order_by']);
-		$search_url .= "&order_by={$orderby}";
-	}
-
-    return $search_url;
-}
-
-
-
-function format_custom_number($num) {
-	
-	$s = explode('.', $num);
-
-	$parts = "";
-	if(strlen($s[0])>3) {
-		$parts = "." . substr($s[0], strlen($s[0])-3, 3);
-		$s[0] = substr($s[0], 0, strlen($s[0])-3);
-		
-		if(strlen($s[0])>3) {
-			$parts = "." . substr($s[0], strlen($s[0])-3, 3) . $parts;
-			$s[0] = substr($s[0], 0, strlen($s[0])-3);
-			if(strlen($s[0])>3) {
-				$parts = "." . substr($s[0], strlen($s[0])-3, 3) . $parts;
-				$s[0] = substr($s[0], 0, strlen($s[0])-3);
-			} else {
-				$parts = $s[0] . $parts;
-			}
-		} else {
-			$parts = $s[0] . $parts;
-		}
-	} else {
-		$parts = $s[0] . $parts;
-	}
-	
-	
-	$ret = $parts;
-	
-	if(isset($s[1])) {
-		if($s[1]!="00") {
-			$ret .= "," . $s[1];
-		}
-	}
-	if (substr($ret, 0, 1) == "."){
-		$ret = substr($ret, 1);
-	}
-	return $ret;
-}
-
-
-
-
-
-function currencyCodeToSign($currency){
-	switch ($currency) {
-	    case "CAD":
-	        return "CAD $ ";
-	        break;
-	    case "DDK":
-	        return "DDK kr. ";
-	        break;
-	    case "EUR":
-	        return "EUR ";
-	        break;
-	    case "GBP":
-	        return "GBP £ ";
-	        break;
-	    case "INR":
-	        return "INR Rs ";
-	        break;
-	    case "NOK":
-	        return "NOK kr. ";
-	        break;
-	    case "NPR":
-	        return "NPR Rs ";
-	        break;
-	    case "NZD":
-	        return "NZD $ ";
-	        break;
-	    case "PKR":
-	        return "PKR Rs ";
-	        break;
-	    case "USD":
-	        return "US $ ";
-	        break;
-	    case "ZAR":
-	        return "Rand ";
-	        break;
-
+    $url_add = "";
+    $org = DEFAULT_ORGANISATION_ID;
+    if (!empty($org)){
+      $url_add = "&reporting_organisation__in=" . DEFAULT_ORGANISATION_ID;
     }
+
+    echo oipa_get_data_for_url('activity-aggregate-any/?format=json&group_by=reporting-org' . $url_add );
+  } else if ($type === 'total-donors'){
+
+    $url_add = "";
+    $org = DEFAULT_ORGANISATION_ID;
+    if (!empty($org)){
+      $url_add = "&reporting_organisation__in=" . DEFAULT_ORGANISATION_ID;
+    }
+
+    echo oipa_get_data_for_url('donor-activities/?format=json&limit=1' . $url_add );
+  } else if ($type === 'total-countries'){
+
+    $url_add = "";
+    $org = DEFAULT_ORGANISATION_ID;
+    if (!empty($org)){
+      $url_add = "&reporting_organisation__in=" . DEFAULT_ORGANISATION_ID;
+    }
+
+    echo oipa_get_data_for_url('country-activities/?format=json&limit=1' . $url_add );
+  } else if ($type === 'homepage-total-budget'){
+    echo oipa_get_data_for_url('activity-aggregate-any/?format=json&group_by=reporting-org&aggregation_key=total-budget&reporting_organisation__in=' . DEFAULT_ORGANISATION_ID);
+  } else if ($type === 'homepage-total-expenditure'){
+    echo oipa_get_data_for_url('activity-aggregate-any/?format=json&group_by=reporting-org&aggregation_key=expenditure&reporting_organisation__in=' . DEFAULT_ORGANISATION_ID);
+  }else if ($type === 'homepage-major-programmes'){
+    echo oipa_get_data_for_url('sector-activities/?format=json&sectors__in=1,2,3,4,5');
+  } else if ($type === 'region'){
+    echo oipa_get_data_for_url('regions/' . $_REQUEST["region"] . '/?format=json');
+  } else if ($type === 'country'){
+    echo oipa_get_data_for_url('countries/' . $_REQUEST["country"] . '/?format=json');
+  }else if (in_array($type, array(
+    'country-geojson',
+    'activities',
+    'country-activities',
+    'region-activities',
+    'global-activities',
+    'activity-filter-options',
+    'activity-list',
+    'sector-activities',
+    'donor-activities',
+    'donors',
+    'regions',
+    'countries',
+    'sectors'
+    ))){
+    echo oipa_get_data_for_url($type . '/?' . $_SERVER["QUERY_STRING"]);
+  } else {
+  	return 'Something went wrong. The call was not foud.';
+  }
+  
+  exit();
+
 }
 
+add_action('wp_ajax_refresh_elements', 'refresh_elements');
+add_action('wp_ajax_nopriv_refresh_elements', 'refresh_elements');
 
 
-
-function add_rewrite_rules( $wp_rewrite ) 
-{
-  $new_rules = array(
-    'project/([^/]+)/?$' => 'index.php?pagename=project&iati_id='.$wp_rewrite->preg_index(1),
-    'embed/([^/]+)/?$' => 'index.php?pagename=embed&iati_id='.$wp_rewrite->preg_index(1),
-  );
-  $wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
-}
-add_action('generate_rewrite_rules', 'add_rewrite_rules');
 

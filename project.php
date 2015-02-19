@@ -2,25 +2,11 @@
 /*
 Template Name: Single project page
 */
-?>
-
-<?php 
 
 get_header();
-
-
-$found = false;
-
-if (isset($_REQUEST['iati_id'])){
-	$iati_id = $_REQUEST['iati_id'];
-	$activity = wp_get_activity($iati_id);
-	get_template_part( "map" );
-	if ($activity){
-		$found = true;
-	}
-}
-
-if (!$found){
+$id = get_activity_id_in_wp();
+$activity = oipa_get_activity($id);
+if (!$activity):
 ?>
 
 <div id="page-wrapper">
@@ -29,49 +15,35 @@ if (!$found){
 		</div>
 	</div>
 </div>
-
 <?
-} else {
+else:
 
+get_template_part( "map" );
 ?>
-
-
 <div id="page-wrapper">
-
 	<div class="container">
-		<div class="row-fluid">
-			<div class="span12">
+		<div class="row">
+			<div class="col-md-12">
 				<a href="<?php echo bloginfo('url'); ?>/projects/" id="project-back-button">BACK TO SEARCH RESULTS</a>
 			</div>
 		</div>
 	</div>
-
 	<div class="page-full-width-line"></div>
-
 	<div class="container">
-		<div class="row-fluid">
-			<div class="span12 project-navbar">
+		<div class="row">
+			<div class="col-md-12 project-navbar">
 				<ul class="nav nav-pills">
 					<li class="active">
-						<a id="project-description-link" href="#project-description">Description</a>
+						<a data-target-div="project-description" href="javascript:void(0)">Description</a>
 					</li>
 					<li>
-						<a id="project-financials-link" href="#project-financials">Financials</a>
+						<a data-target-div="project-financials" href="javascript:void(0)">Financials</a>
 					</li>
 					<li>
-						<a id="project-documents-link" href="#project-documents">Documents</a>
+						<a data-target-div="project-documents" href="javascript:void(0)">Documents</a>
 					</li>
 					<li>
-						<a id="project-related-projects-link" href="#project-related-projects">Related projects</a>
-					</li>
-					<li>
-						<a id="project-related-indicators-link" href="#project-related-indicators">Related indicators</a>
-					</li>
-					<li>
-						<a id="project-located-in-link" href="#project-located-in">Located in</a>
-					</li>
-					<li>
-						<a id="project-rsr-link" href="#project-rsr">RSR / Local projects</a>
+						<a data-target-div="project-rsr" href="javascript:void(0)">RSR / Local projects</a>
 					</li>
 				</ul>
 			</div>
@@ -82,30 +54,21 @@ if (!$found){
 
 	<div class="container">
 		<div class="page-content project-page-content main-page-content">
-			<div class="row-fluid">
-				<div class="span7 project-tabs-wrapper">
-
+			<div class="row">
+				<div class="col-md-7 project-tabs-wrapper">
 					<?php 
 					include( TEMPLATEPATH .'/project-description.php' ); 
 					include( TEMPLATEPATH .'/project-financials.php' );
 					include( TEMPLATEPATH .'/project-documents.php' );
-					include( TEMPLATEPATH .'/project-related-indicators.php' );
-					include( TEMPLATEPATH .'/project-related-projects.php' );
-					include( TEMPLATEPATH .'/project-located-in.php' ); 
-
-					$rsr_loaded = false;
 					?>
-					
-					
 				</div>
-				<div class="span5">
+				<div class="col-md-5">
 					<?php 
+					$rsr_loaded = false;
 					include( TEMPLATEPATH .'/project-sidebar.php' ); 
 					?>
 				</div>
-
 			</div>
-
 		</div>
 	</div>
 
@@ -117,17 +80,16 @@ if (!$found){
 
 	<div class="page-full-width-line"></div>
 
-
 	<div class="container">
 		<div class="page-content project-page-content">
-			<div class="row-fluid">
-				<div class="span7">
+			<div class="row">
+				<div class="col-md-7">
 					<div id="disqus_thread"></div>
 				    <script>
 				        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 				        var disqus_shortname = ''; // required: replace example with your forum shortname
 				 		var disqus_identifier = '<?php echo $activity->iati_identifier; ?>';
-						var disqus_title = '<?php echo $activity->titles[0]->title; ?>';
+						var disqus_title = '<?php echo $project_title; ?>';
 						var disqus_url = '<?php echo site_url() . "/project/?iati_id=" . $activity->iati_identifier; ?>';
 
 				        /* * * DON'T EDIT BELOW THIS LINE * * */
@@ -144,27 +106,66 @@ if (!$found){
 	</div>
 
 </div>
+<?php get_template_part('footer-scripts'); ?>
+<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/countries.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/project.js"></script>
 <script>
 
 // PREPARE COUNTRIES FOR SHOWING ON MAP
 	
 	<?php 
-	$countries = "";
-	if(!empty($activity->countries)) {
-		$sep = '';
-		foreach($activity->countries AS $country) {
-			$countries .=  $sep . '"' . $country->code . '"';
-			$sep = ', ';
+	$recipient_countries_string = "";
+	if(!empty($activity->recipient_countries)) {
+		foreach($activity->recipient_countries AS $recipient_country) {
+			$recipient_countries_arr[] = $recipient_country->country->code;
 		}
+		$recipient_countries_string = join(",", $recipient_countries_arr);
+
 	}
 	?>
 
-	var project_countries = new Array(<?php echo $countries; ?>);
+	var project_countries = new Array("<?php echo $recipient_countries_string; ?>");
+
+    var map = new OipaMap();
+    map.set_map("map", "topright");
+    map.selection = Oipa.mainSelection;
+    map.selection.group_by = "country";
+    Oipa.maps.push(map);
+
+    var geocountries = {"type":"FeatureCollection","features":[]};
+
+	for(var i = 0; i < countryData.features.length; i++){	
+
+		if(jQuery.inArray(countryData.features[i].properties.iso2, project_countries) != -1){
+			var geocountry = {
+			    "type": "Feature",
+			    "geometry": {
+			        "type": "Polygon",
+			        "coordinates": countryData.features[i].geometry.coordinates
+			    }
+			}
+			geocountries.features.push(geocountry);
+		}
+	}
+
+	var geojson = L.geoJson(geocountries, {
+	    style: function(feature) {
+	        	return {color: "orange"};
+	        	return {fillColor: "orange"};
+	    }
+	});
+
+	console.log(geocountries);
+	console.log(geojson);
+	geojson.addTo(map.map);
+
+
+
 
 </script>
-<?php } ?>
-<?php get_template_part('footer-scripts'); ?>
-<script> refresh_rsr_projects("<?php echo $iati_id; ?>"); </script>
+<?php endif; ?>
+
+<script> refresh_rsr_projects("<?php echo $id; ?>"); </script>
 <?php get_footer(); ?>
 
 

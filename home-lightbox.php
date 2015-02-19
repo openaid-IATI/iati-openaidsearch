@@ -1,7 +1,7 @@
 <div id="lightbox-wrapper">
     <div class="container">
-        <div class="row-fluid">
-            <div class="span12">
+        <div class="row">
+            <div class="col-md-12">
                 <div id="map-lightbox-bg"></div>
                 <div id="map-lightbox" class="hneue-light">
                     <div id="map-lightbox-text">

@@ -1,52 +1,32 @@
 
 <script>
-var site = '<?php echo SITE_URL; ?>';
-var search_url = '<?php echo SEARCH_URL; ?>';
-var ajax_projects_url = '<?php echo AJAX_PROJECTS_URL; ?>';
+var search_url = '<?php echo OIPA_URL; ?>';
 var home_url = "<?php echo bloginfo("url"); ?>";
+var site_url = home_url;
 var template_directory = "<?php echo bloginfo("template_url"); ?>";
 var site_title = "<?php echo wp_title(''); ?>";
-<?php
-global $_DEFAULT_ORGANISATION_ID;
-echo 'var organisation_id = "' . $_DEFAULT_ORGANISATION_ID . '";';
-?>
-
+var standard_basemap = "zimmerman2014.hmpkg505";
+var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
+var ajax_path = "/wp-admin/admin-ajax.php?action=refresh_elements";
+var theme_path = "<?php echo get_stylesheet_directory_uri(); ?>";
 </script>
 
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery-ui.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/leaflet.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/bootstrap.min.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/map.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/main.js"></script>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery.bootpag.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/country_polygons.js"></script>
 
-<?php 
+<script src="<?php echo get_template_directory_uri(); ?>/js/oipa.selection.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/oipa.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/oipa.selectionbox.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/oipa.filters.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/oipa.map.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/oipa.list.js"></script>
 
-if (is_page('indicators') or is_page('city-prosperity')) { ?>
-
-	<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery.nouislider.min.js"></script>
-
-	<script src="https://www.google.com/jsapi"></script>
-
-	<script src="http://canvg.googlecode.com/svn/trunk/rgbcolor.js"></script>
-    <script src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script>
-    <script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/html2canvas.min.js"></script>
-	<script src="<?php echo get_template_directory_uri(); ?>/js/dependencies/jquery.plugin.html2canvas.js"></script>
-
-	<script src="<?php echo get_template_directory_uri(); ?>/js/indicators.js"></script>
-	<?php
-}
-if (is_page('project') or is_page('explore')) {
-	echo '<script src="' . get_template_directory_uri() . '/js/dependencies/countries.js"></script>';
-	echo '<script src="' . get_template_directory_uri() . '/js/project.js"></script>';
-	?>
-	<?php
-}
-if (!is_page('indicators') and !is_page('city-prosperity')) {
-	echo '<script src="' . get_template_directory_uri() . '/js/projects.js"></script>';
-}
-
-?>
+<script src="<?php echo get_template_directory_uri(); ?>/js/scripts.js"></script>
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <script>var switchTo5x=true;</script>
 <script src="http://w.sharethis.com/button/buttons.js"></script>

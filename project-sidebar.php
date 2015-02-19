@@ -1,151 +1,152 @@
 <div class="project-spec">
-
+	
 	<div class="projects-project-divider"></div>
-
 	<div class="projects-project-spec-key">Countries:</div>
 	<div class="projects-project-spec-value">
-
 	<?php 
-	if(!empty($activity->countries)) {
-		$sep = '';
-		foreach($activity->countries AS $country) {
-			echo  $sep . "<a href='".get_bloginfo('url')."/projects/?countries={$country->code}'>" . $country->name . "</a>";
-			$sep = ', ';
-		}		
+	if(!empty($activity->recipient_countries)) {
+		foreach($activity->recipient_countries AS $recipient_country) {
+			$recipient_countries[] = "<a class='projects-description-link' href='?countries={$recipient_country->country->code}'>" . $recipient_country->country->name . "</a>";
+		}
+		echo join(",", $recipient_countries);
+	} else {
+		echo "-";
 	}
 	?>
 	</div>
 
 	<div class="projects-project-divider"></div>
-
 	<div class="projects-project-spec-key">Regions:</div>
 	<div class="projects-project-spec-value">
-
 	<?php 
-	if(!empty($activity->regions)) {
+	if(!empty($activity->recipient_regions)) {
 		$sep = '';
-		foreach($activity->regions AS $region) {
-			echo  $sep . "<a href='".get_bloginfo('url')."/projects/?regions={$region->code}'>" . $region->name . "</a>";
+		foreach($activity->recipient_regions AS $recipient_region) {
+			echo  $sep . "<a class='projects-description-link' href='?regions={$recipient_region->region->code}'>" . $recipient_region->region->name . "</a>";
 			$sep = ', ';
-		}		
+		}
+	} else {
+		echo "-";
 	}
 	?>
 	</div>
 
 	<div class="projects-project-divider"></div>
-
-	<div class="projects-project-spec-key">Principal sectors:</div>
+	<div class="projects-project-spec-key">Sector(s):</div>
 	<div class="projects-project-spec-value">
 
-	<?php 
-	if(!empty($activity->sectors)) {
-		$sep = '';
-		foreach($activity->sectors AS $sector) {
-			echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->name . "</a>";
-			$sep = ', ';
-		}		
-	} else {
-		echo "No information available";
-	} ?>
-
-
+	<?php
+	$sectors = array();
+	foreach($activity->sectors as $recipient_sector) {
+		if(!empty($recipient_sector->sector)){
+			$sectors[] = "<a class='projects-description-link' href='?sectors={$recipient_sector->sector->code}'>" . $recipient_sector->sector->name . "</a>";
+		}
+	}
+	if(count($sectors) > 0){
+		echo join(",", $sectors);	
+	} else{
+		echo "-";
+	}
+	?>
 	</div>
 
 	<div class="projects-project-divider"></div>
-
+	
 	<div class="projects-project-spec-key">Budget:</div>
 	<div class="projects-project-spec-value">
 
-		<?php if(!empty($activity->total_budget)) {
-			// if(!empty($activity->default_currency)) { echo currencyCodeToSign($activity->default_currency->code); }
-			echo format_custom_number($activity->total_budget);
+		<?php 
+		if(!empty($activity->total_budget)) {
+			if(!empty($activity->total_budget->value)) { 
+				if(!empty($activity->total_budget->currency)){
+					echo currencyCodeToSign($activity->total_budget->currency->code); 
+				}
+			}
+			echo number_format($activity->total_budget->value, 0, ".", ".");
 		} else {
 			echo "-";
-		} ?>
+		}
+		?>
 	</div>
 
 	<div class="projects-project-divider"></div>
-
 	<div class="projects-project-spec-key">IATI identifier:</div>
-	<div class="projects-project-spec-value">
-
-		<?php if(!empty($activity->iati_identifier)) { echo $activity->iati_identifier; } ?></div>
-		
-	<div class="projects-project-divider"></div>
-
-	<div class="projects-project-spec-key">Reporting organisation:</div>
-	<div class="projects-project-spec-value">
-	
-	<?php 
-		if(!empty($activity->reporting_organisation->name)){ echo $activity->reporting_organisation->name; } else {
-		if(!empty($activity->reporting_organisation->code)){ echo $activity->reporting_organisation->code; } }
-	?>
-
+	<div class="projects-project-spec-value projects-project-spec-title">
+	<a href="<?php echo SITE_URL . '/project/' . $activity->id . '/'; ?>" alt="See project details">
+	<?php echo get_oipa_field($activity->iati_identifier); ?>
+	</a>
 	</div>
 
 	<div class="projects-project-divider"></div>
-
-	<div class="projects-project-spec-key">Sectors code(s):</div>
-	<div class="projects-project-spec-value">
-
-		<?php 
-		if(!empty($activity->sectors)) {
-			$sep = '';
-			foreach($activity->sectors AS $sector) {
-				echo  $sep . "<a class='projects-description-link' href='?sectors={$sector->code}'>" . $sector->code . "</a>";
-				$sep = ', ';
-			}			
-		} else {
-			echo "No information available";
-		} ?>
-	</div>
-
-	<div class="projects-project-divider"></div>
-
 	<div class="projects-project-spec-key">Last updated:</div>
 	<div class="projects-project-spec-value">
-
-		<?php if(!empty($activity->last_updated_datetime)) { echo $activity->last_updated_datetime; } ?></div>
-
-	<div class="projects-project-divider"></div>
-
-	<div class="projects-project-spec-key">Start date planned:</div>
-	<div class="projects-project-spec-value">
-
-		<?php if(!empty($activity->start_planned)) { echo $activity->start_planned; } ?></div>
-
-	<div class="projects-project-divider"></div>
-
-	<div class="projects-project-spec-key">End date planned:</div>
-	<div class="projects-project-spec-value">
-
-		<?php if(!empty($activity->end_planned)) { echo $activity->end_planned; } ?></div>
-
-	<div class="projects-project-divider"></div>
-
-	<div class="projects-project-spec-key">Activity status:</div>
-	<div class="projects-project-spec-value">
-
-		<?php if(!empty($activity->activity_status->name)) { echo $activity->activity_status->name; } ?>
+	<?php echo get_oipa_field($activity->last_updated_datetime); ?>
 	</div>
 
 	<div class="projects-project-divider"></div>
+	<div class="projects-project-spec-key">Start date planned:</div>
+	<div class="projects-project-spec-value">
+	<?php echo get_oipa_field($activity->activity_dates->start_planned); ?>
+	</div>
 
+	<div class="projects-project-divider"></div>
+	<div class="projects-project-spec-key">End date planned:</div>
+	<div class="projects-project-spec-value">
+	<?php echo get_oipa_field($activity->activity_dates->end_planned); ?>
+	</div>
+
+	<div class="projects-project-divider"></div>
+	<div class="projects-project-spec-key">Start date actual:</div>
+	<div class="projects-project-spec-value">
+	<?php echo get_oipa_field($activity->activity_dates->start_actual); ?>
+	</div>
+
+	<div class="projects-project-divider"></div>
+	<div class="projects-project-spec-key">End date actual:</div>
+	<div class="projects-project-spec-value">
+	<?php echo get_oipa_field($activity->activity_dates->end_actual); ?>
+	</div>
+
+	<div class="projects-project-divider"></div>
+	<div class="projects-project-spec-key">Reporting organisation:</div>
+	<div class="projects-project-spec-value">
+		
+		<a href="?reporting_organisations=<?php echo $activity->reporting_organisation->organisation->code; ?>">
+			<?php 
+				if(!empty($activity->reporting_organisation->organisation->name)) { 
+					echo $activity->reporting_organisation->organisation->name->narratives[0]->text; 
+				} else {
+					echo $activity->reporting_organisation->organisation->code; 
+				}
+			?>
+		</a>
+	</div>
+
+	<div class="projects-project-divider"></div>
+	<div class="projects-project-spec-key">Activity status:</div>
+	<div class="projects-project-spec-value">
+	<?php 
+	if(!empty($activity->activity_status) && isset($activity_status[$activity->activity_status->code])) {
+		echo $activity_status[$activity->activity_status->code];
+	}
+	?>
+	</div>
+
+	<div class="projects-project-divider"></div>
 	<div class="projects-project-spec-key">Participating organisations:</div>
 	<div class="projects-project-spec-value">
-
-		<?php 
+	<?php 
 		if(!empty($activity->participating_organisations)) {
 			$sep = ', ';
 			$part_org_text = '';
 
 			foreach($activity->participating_organisations AS $participating_organisation) {
-				if(empty($participating_organisation->name)) {
-					$part_org_text .= $participating_organisation->code;
+				if(empty($participating_organisation->organisation->name)) {
+					
+					$part_org_text .= $participating_organisation->organisation->code;
 
 				} else {
-					$part_org_text .= $participating_organisation->name;
-					if(!empty($participating_organisation->original_ref)){ $part_org_text .= " (" . $participating_organisation->original_ref . ")"; }
+					$part_org_text .= $participating_organisation->organisation->name->narratives[0]->text;
 				}
 				$part_org_text .= $sep;
 			}
@@ -154,57 +155,15 @@
 			echo $part_org_text;
 		} else {
 			echo "No information available";
-		} ?>
-
+		} 
+	?>
 	</div>
-
-	<div class="projects-project-divider"></div>
-
-
-	<div class="projects-project-spec-key">Websites:</div>
-	<div class="projects-project-spec-value">
-
-		<?php 
-		if(!empty($activity->websites)) {
-			$sep = ', ';
-			$part_website_text = '';
-
-			foreach($activity->websites AS $website) {
-				$part_website_text .= '<a href="'. $website->url .'" target="_blank">link</a>';
-				$part_website_text .= $sep;
-			}
-			
-			$part_website_text = substr($part_website_text, 0, -2);
-			echo $part_website_text;
-		} else {
-			echo "No information available";
-		} ?>
-
-	</div>
-
-	<div class="projects-project-divider"></div>
-
-
-
-
 
 	<div class="project-share-container projects-share-spec">
-
 		<button id="project-share-export" class="project-share-button hneue-bold" name="<?php if(!empty($activity->id)) { echo $activity->id; } ?>">
 			<div class="share-icon"></div>
 			<div class="share-text">EXPORT</div>
 		</button>
-
 		<span class="st_sharethis" st_url="<?php bloginfo('url'); ?>/project/?id=<?php if(!empty($activity->id)) { echo $activity->id; } ?>" st_title="<?php if (!empty($activity->titles)){ echo $activity->titles[0]->title; } else { echo "Unkown title"; }?>" displayText="SHARE"></span>
-
-		<button class="project-share-button hneue-bold project-share-bookmark">
-			<div class="share-icon"></div>
-			<div class="share-text">BOOKMARK</div>
-		</button>
-		<button class="project-share-button hneue-bold project-share-whistleblower" name="<?php if(!empty($activity->id)) { echo $activity->id; } ?>">
-			<div class="share-icon"></div>
-			<div class="share-text">WHISTLEBLOWER</div>
-		</button>
-
 	</div>
 </div>

@@ -2,19 +2,13 @@
 /*
 Template Name: Projects page
 */
-?>
 
-<?php wp_generate_results_v2($objects, $meta); ?>
+get_header();
 
-<?php get_header(); ?>
-<?php get_template_part( "projects", "filters" ); ?>
-<?php get_template_part( "map" ); ?>
+include( TEMPLATEPATH .'/projects-filters.php' );
+include( TEMPLATEPATH .'/map.php' ); 
+include( TEMPLATEPATH .'/projects-list.php' ); ?>
 
-<div id="page-wrapper">
-		
-<?php include( TEMPLATEPATH .'/projects-description.php' ); ?>
-
-</div>
 <div id="paginated-loader">
     <div id="paginated-text">Loading projects</div>
     <img src="<?php echo get_template_directory_uri(); ?>/images/ajax-loader.gif" alt="" />
@@ -22,12 +16,38 @@ Template Name: Projects page
 
 <?php get_template_part('footer-scripts'); ?>
 <script>
+
+	var projectlist = null;
+	var filters = null;
+
     $(document).ready(function() {
-      selected_type = "projects";
-      save_selection(true);
+
+	    Oipa.pageType = "activities";
+
+	    var selection = new OipaSelection(1, 1);
+	    Oipa.mainSelection = selection;
+
+    	filters = new OipaFilters();
+    	filters.selection = Oipa.mainSelection;
+    	filters.init();
+    	Oipa.mainFilter = filters;
+
+    	projectlist = new OipaProjectList();
+	    projectlist.list_div = "#project-list-wrapper";
+	    projectlist.pagination_div = "#project-list-pagination";
+	    projectlist.activity_count_div = "#page-total-count";
+	    projectlist.per_page = 25;
+	    projectlist.selection = Oipa.mainSelection;
+	    Oipa.lists.push(projectlist);
+	    projectlist.init();
+
+	    var map = new OipaMap();
+	    map.set_map("map", "topright");
+	    map.selection = Oipa.mainSelection;
+	    map.selection.group_by = "country";
+	    Oipa.maps.push(map);
+	    map.refresh();
+
     });
 </script>
-<?php get_footer(); ?>
-
-
-
+<?php get_footer();

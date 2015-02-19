@@ -1,19 +1,23 @@
 <div id="project-description">
 	<div class="project-title">
-		<?php if (!empty($activity->titles)) { 
-			echo $activity->titles[0]->title; 
-			} else {
-				echo "Unknown title";
-			}
+		<?php 
 
+		// set var, so this can be used later as disqus title
+		$project_title = "No title";
+		if (!empty($activity->title)){ 
+			$project_title = $activity->title->narratives[0]->text; 
+		}
+		echo $project_title; 
 		?>
 	</div>
 	<div class="project-description-text">
-	<?php 	if (!empty($activity->descriptions)) { 
-	 			echo $activity->descriptions[0]->description; 
-	 		} else {
-	 			echo "No description given.";
-	 		}
-	 		?>
+	<?php
+	if (!empty($activity->descriptions)){ 
+		foreach($activity->descriptions as $key => $description){
+			echo $description->narratives->text;
+		}
+	} else {
+		echo "No description given.";
+	} ?>
 	</div>
 </div>

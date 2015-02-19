@@ -12,8 +12,8 @@ Template Name: Standard page
 <div id="page-wrapper">
 	<div class="page-header">
 		<div class="container">
-			<div class="row-fluid">
-				<div class="span8"></div>
+			<div class="row">
+				<div class="col-md-8"></div>
 				<?php get_template_part("global", "page-navbar-right"); ?>
 			</div>
 		</div>
@@ -23,8 +23,8 @@ Template Name: Standard page
 
 	<div class="container">
 		<div class="page-content">
-			<div class="row-fluid">
-				<div class="span8">
+			<div class="row">
+				<div class="col-md-8">
 					
 					<div class="drop-shadow unhabitat-page">
 						

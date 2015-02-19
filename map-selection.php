@@ -1,11 +1,9 @@
 <div id="selection-hide-show">
 	<div class="container">
-		<div class="row-fluid">
-			<div class="span12">
+		<div class="row">
+			<div class="col-md-12">
 				<div id="selection-box-wrapper">
-          <div id="selection-box">
-
-            
+          <div id="selection-box">            
             
           </div>
           <div id="selection-box-indicators"></div>

@@ -6,8 +6,8 @@
 <div id="page-wrapper">
 	<div class="container">
 		<div class="page-content">
-			<div class="row-fluid postit-page home-page">
-				<div class="span4">
+			<div class="row postit-page home-page">
+				<div class="col-md-4">
 				<?php 
 
 				$cat_obj = get_category_by_slug('row-1'); 
@@ -36,7 +36,7 @@
 				
 
 				</div>
-				<div class="span4">
+				<div class="col-md-4">
 							<?php 
 
 				$cat_obj = get_category_by_slug('row-2'); 
@@ -62,7 +62,7 @@
 				</a>
 				<?php endforeach; ?>
 				</div>
-				<div class="span4">
+				<div class="col-md-4">
 							<?php 
 
 				$cat_obj = get_category_by_slug('row-3'); 
@@ -97,9 +97,24 @@
 <script>
 
     $(document).ready(function() {
-      selected_type = "projects";
-      reload_map();
+
+	    Oipa.pageType = "activities";
+
+	    var selection = new OipaSelection(1, 1);
+	    Oipa.mainSelection = selection;
+
+    	var filters = new OipaFilters();
+    	filters.init();
+    	Oipa.mainFilter = filters;
+
+	    var map = new OipaMap();
+	    map.set_map("map", "topright");
+	    map.selection = Oipa.mainSelection;
+	    map.selection.group_by = "country";
+	    Oipa.maps.push(map);
+	    map.refresh();
+
     });
 
 </script>
-<?php get_footer(); ?>
+<?php get_footer(); 
