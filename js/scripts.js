@@ -80,39 +80,19 @@ jQuery(function($) {
     });
   }
 
-
-  $(".project-share-whistleblower").click(function(){
-    var id = $(this).attr("name");
-    var url = "/whistleblower/?referrer=" + encodeURIComponent(home_url + "/project/?id=" + id);
-    window.location = url;
-    return false;
-  });
-  
   // Reload projects on pagination container click
   $('#pagination a').click(function(){ 
     var url = $(this).attr("href");
     var offset = get_url_parameter_value("offset", url);
-    current_selection["offset"] = [{"id":offset, "name":"unnamed"}];
+    Oipa.lists[0].offset = [{"id":offset, "name":"unnamed"}];
     load_new_page(false, true);
     return false;
   });
 
-  // Reload projects on sort type click
-  $('#sort-type-budget a').click(function(){ 
-    var url = $(this).attr("href");
-    var order_by = get_url_parameter_value("order_by", url);
-    current_selection["order_by"] = [{"id":order_by, "name":"unnamed"}];
-    load_new_page(false, false);
-    return false;
-  });
-
-  // Reload projects on sort type click
-  $('#sort-type-startdate a').click(function(){ 
-    var url = $(this).attr("href");
-    var order_by = get_url_parameter_value("order_by", url);
-    current_selection["order_by"] = [{"id":order_by, "name":"unnamed"}];
-    load_new_page(false, false);
-    return false;
+  $('.project-sort-item').click(function(){
+    var order_by = $(this).data('order-key');
+    var asc_desc = $(this).data('order-by');
+    Oipa.lists[0].order_by = asc_desc + order_by;
   });
 
   // sort-type-amount 
@@ -155,9 +135,7 @@ jQuery(function($) {
 
 
   // plus - min button in project description 
-
   $('.project-expand-button').click(function(e){
-    
 
     var currentId = $(this).attr('id');
 
@@ -172,7 +150,6 @@ jQuery(function($) {
         $(this).removeClass('expand-min');
         $(this).addClass('expand-plus');
       }
-      
     });
 
     $('#save-search-results').click(function(){
@@ -194,46 +171,6 @@ jQuery(function($) {
 
 });
 
-
-// MAP FILTER FUNCTIONS
-  function filter_pagination(total, curpage){
-    var text = '';
-
-    if (curpage > 1){
-      text += '<div id="filter-previous-page">Previous page</div>';
-    } else {
-      text += '<div id="filter-previous-page-empty"></div>';
-    }
-
-    if (curpage < total){
-      text += '<div id="filter-next-page">Next page</div>';
-    } else {
-      text += '<div id="filter-next-page"></div>';
-    }
-    text += '<div id="filter-pagination-overview">Page ' + curpage + ' / ' + total + '</div>';
-
-    $('#map-filter-pagination').html(text);
-
-    $('#filter-next-page').click(function(){
-
-      var total_pages = parseInt($("#filter-pagination-overview").text().substr(9,1));
-      var nextpage = parseInt($("#filter-pagination-overview").text().substr(5,1)) + 1;
-      filter_pagination(total_pages, nextpage);
-      $('.filter-page').hide();
-      $('.filter-page-'+nextpage).show();
-      
-    });
-
-    $('#filter-previous-page').click(function(){
-
-      var total_pages = parseInt($("#filter-pagination-overview").text().substr(9,1));
-      var nextpage = parseInt($("#filter-pagination-overview").text().substr(5,1)) - 1;
-      filter_pagination(total_pages, nextpage);
-      $('.filter-page').hide();
-      $('.filter-page-'+nextpage).show();
-    });
-
-  }
 
   $(document).keyup(function(e) {
     if (e.keyCode == 27) { 
@@ -277,15 +214,6 @@ $(".selection-clear-div").click(function(){
   
 });
 
-
-// XXXXXXXXX Ajax wordpress simple pagination XXXXXXXX
-jQuery(function($){
-
-  // IE: prevent focus on internet explorer
-  var _preventDefault = function(evt) { evt.preventDefault(); };
-  $("#map-slider-tooltip div").bind("dragstart", _preventDefault).bind("selectstart", _preventDefault);
-
-});
 
 
 

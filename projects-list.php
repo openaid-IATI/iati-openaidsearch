@@ -42,8 +42,8 @@
                             <span class="project-sort-text hneue-bold">BUDGET</span>
                             <span class="project-sort-icon"></span>
                             <div id="dropdown-project-budget" class="dropdown-project">
-                                <a href="?order_by=total_budget<?php echo wp_generate_link_parameters("order_by"); ?>" class="project-sort-item">ASCENDING</a>
-                                <a href="?order_by=-total_budget<?php echo wp_generate_link_parameters("order_by"); ?>" class="project-sort-item">DESCENDING</a>
+                                <a data-order-key="total_budget" data-order-by="" href="#" class="project-sort-item">ASCENDING</a>
+                                <a data-order-key="total_budget" data-order-by="-" href="#" class="project-sort-item">DESCENDING</a>
                             </div>
                         </div>
 
@@ -51,8 +51,8 @@
                             <span class="project-sort-text hneue-bold">START DATE</span>
                             <span class="project-sort-icon"></span>
                             <div id="dropdown-project-startdate" class="dropdown-project">
-                                <a href="?order_by=start_planned<?php echo wp_generate_link_parameters("order_by"); ?>" class="project-sort-item">ASCENDING</a>
-                                <a href="?order_by=-start_planned<?php echo wp_generate_link_parameters("order_by"); ?>" class="project-sort-item">DESCENDING</a>
+                                <a data-order-key="start_actual" data-order-by="" href="#" class="project-sort-item">ASCENDING</a>
+                                <a data-order-key="start_actual" data-order-by="-" href="#" class="project-sort-item">DESCENDING</a>
                             </div>
                         </div>
 

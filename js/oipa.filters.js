@@ -35,7 +35,7 @@ OipaFilters.prototype.get_url_by_filter = function(filter_name){
 	} else if (filter_name == "sectors"){
 		return search_url + "sectors?page_size=999&format=json&fields=code,name&fields[aggregations]=count";
 	} else if (filter_name == "reporting_organisations"){
-		// return search_url + "reporting_organisations?page_size=999&format=json&fields=code,name&fields[aggregations]=count";
+		return search_url + "organisations?page_size=999&format=json&reporting_organisations";
 	}
 }
 
@@ -207,17 +207,29 @@ OipaFilters.prototype.create_filter_attributes = function(objects, columns, attr
 	var html = '';
 	var per_col = 10;
 	var sortable = [];
-
-	for (var i = 0;i < objects.results.length;i++){
-		if(objects.results[i].aggregations.count > 0){
+	if(attribute_type == "reporting_organisations"){
+		columns = 3;
+		for (var i = 0;i < objects.results.length;i++){
 			sortable.push(
 				[objects.results[i].code, {
-					"name": objects.results[i].name, 
-					"count": objects.results[i].aggregations.count
+					"name": objects.results[i].name.narratives[0].text, 
+					"count": "-"
 				}]
 			);
 		}
+	} else {
+		for (var i = 0;i < objects.results.length;i++){
+			if(objects.results[i].aggregations.count > 0){
+				sortable.push(
+					[objects.results[i].code, {
+						"name": objects.results[i].name, 
+						"count": objects.results[i].aggregations.count
+					}]
+				);
+			}
+		}
 	}
+	
 
 	sortable.sort(function(a, b){
 		var nameA=a[1].name.toString(), nameB=b[1].name.toString();
@@ -340,14 +352,13 @@ OipaFilters.prototype.load_paginate_listeners = function(){
 
 		} else if(filter_wrapper.is(":visible")){
 		    // that.save();
-		  } else {
-		    $(this).addClass("filter-selected");
-		    hide_all_filters();
-		    filter_wrapper.show();
-		  }
+		} else {
+			$(this).addClass("filter-selected");
+			hide_all_filters();
+			filter_wrapper.show();
 		}
 	});
-
+};
 
 	// // load pagination filters
 	// jQuery("#"+attribute_type+"-pagination ul a").click(function(e){
@@ -376,7 +387,7 @@ OipaFilters.prototype.load_paginate_listeners = function(){
 	// 	Oipa.mainFilter.load_paginate_listeners(attribute_type, total_pages);
 	// });
 	
-};
+
 
 OipaFilters.prototype.load_paginate_page = function(attribute_type, page_number){
 	// hide all pages
@@ -395,51 +406,3 @@ OipaFilters.prototype.reset_filters = function(){
 	Oipa.mainFilter.selection.region = "";
 	Oipa.mainFilter.save();
 }
-
-// OipaFilters.prototype.reload_specific_filter = function(filter_name, data){
-
-// 	if (!data){
-// 		filters = this;
-
-// 		// get selection
-// 		selection = this.get_selection_object();
-
-// 		// get data
-// 		if (filter_name === "left-cities") { var url = this.get_url(null, "&indicators__in=" + get_parameters_from_selection(selection.indicators) + "&countries__in=" + get_parameters_from_selection(selection.left.countries) ); }
-// 		if (filter_name === "right-cities") { var url = this.get_url(null, "&indicators__in=" + get_parameters_from_selection(selection.indicators) + "&countries__in=" + get_parameters_from_selection(selection.right.countries) ); }
-// 		if (filter_name === "indicators") { var url = this.get_url(null, "&regions__in=" + get_parameters_from_selection(selection.regions) + "&countries__in=" + get_parameters_from_selection(selection.countries) + "&cities__in=" + get_parameters_from_selection(selection.cities) ); }
-// 		if (filter_name === "regions") { var url = this.get_url(null, "&indicators__in=" + get_parameters_from_selection(selection.indicators) ); }
-// 		if (filter_name === "countries") { var url = this.get_url(null, "&indicators__in=" + get_parameters_from_selection(selection.indicators) + "&regions__in=" + get_parameters_from_selection(selection.regions) ); }
-// 		if (filter_name === "cities") { var url = this.get_url(null, "&indicators__in=" + get_parameters_from_selection(selection.indicators) + "&regions__in=" + get_parameters_from_selection(selection.regions) + "&countries__in=" + get_parameters_from_selection(selection.countries) ); }
-
-
-// 		jQuery.ajax({
-// 			type: 'GET',
-// 			url: url,
-// 			contentType: "application/json",
-// 			dataType: 'json',
-// 			success: function(data){
-// 				filters.reload_specific_filter(filter_name, data);
-// 			}
-// 		});
-		
-
-// 	} else {
-// 		// reload filters
-// 		columns = 4;
-// 		if (filter_name === "left-cities") { this.create_filter_attributes(data.cities, columns, 'left-cities'); }
-// 		if (filter_name === "right-cities") { this.create_filter_attributes(data.cities, columns, 'right-cities'); }
-// 		if (filter_name === "indicators" && Oipa.pageType == "compare") { 
-// 			this.create_filter_attributes(data.countries, columns, 'left-countries');
-// 			this.create_filter_attributes(data.countries, columns, 'right-countries');
-// 			this.create_filter_attributes(data.cities, columns, 'left-cities');
-// 			this.create_filter_attributes(data.cities, columns, 'left-cities');
-// 		}
-// 		if (filter_name === "regions") { this.create_filter_attributes(data.regions, 2, 'regions'); }
-// 		if (filter_name === "countries") { this.create_filter_attributes(data.countries, columns, 'countries'); }
-// 		if (filter_name === "cities") { this.create_filter_attributes(data.cities, columns, 'cities'); }
-// 		if (filter_name === "indicators" && Oipa.pageType == "indicators") { this.create_filter_attributes(data.indicators, 2, 'indicators'); }
-
-// 		this.initialize_filters(selection);
-// 	}
-// };

@@ -4,7 +4,6 @@ function OipaList(){
 	this.per_page = 10;
 	this.amount = 0;
 	this.order_by = null;
-	this.order_asc_desc = null;
 	this.selection = null;
 	this.api_resource = "activity-list";
 
@@ -56,7 +55,6 @@ OipaList.prototype.reset_pars = function(){
 	this.per_page = 10;
 	this.amount = 0;
 	this.order_by = null;
-	this.order_asc_desc = null;
 	this.refresh();
 }
 
@@ -152,8 +150,7 @@ function OipaProjectList(){
 		else if(this.only_global == true){ extra_par = "&activity_scope=1"; }
 		else if(this.only_other == true){ extra_par = "&regions=None&countries=None&activity_scope=None"; }
 
-		if(this.order_asc_desc == "desc"){ desc = "-"; }
-		if(this.order_by){ extra_par += "&order_by=" + desc + this.order_by; }
+		if(this.order_by){ extra_par += "&order_by=" + this.order_by; }
 		var url = site_url + ajax_path + "&format=json&per_page=" + this.per_page + "&page=" + this.page + parameters + extra_par + "&call=" + project_path;
 		url = replaceAll(url, " ", "%20");
 		url = replaceAll(url, "start_planned__in", "start_year_planned__in");
@@ -171,7 +168,6 @@ function OipaCountryList(){
 		var parameters = this.selection.get_parameters();
 		var extra_par = "";
 		if(this.order_by){ extra_par += "&order_by=" + this.order_by; }
-		if(this.order_asc_desc){ extra_par += "&order_asc_desc=" + this.order_asc_desc; }
 		return site_url + ajax_path + "&call=countries&format=json&per_page=" + this.per_page + "&page=" + this.page + parameters + extra_par;
 	};
 
@@ -216,7 +212,6 @@ function OipaRegionList(){
 		var parameters = this.selection.get_parameters();
 		var extra_par = "";
 		if(this.order_by){ extra_par += "&order_by=" + this.order_by; }
-		if(this.order_asc_desc){ extra_par += "&order_asc_desc=" + this.order_asc_desc; }
 		return site_url + ajax_path + "&call=regions&format=json&per_page=" + this.per_page + "&page=" + this.page + parameters + extra_par;
 	};
 }
@@ -229,7 +224,6 @@ function OipaSectorList(){
 		var parameters = this.selection.get_parameters();
 		var extra_par = "";
 		if(this.order_by){ extra_par += "&order_by=" + this.order_by; }
-		if(this.order_asc_desc){ extra_par += "&order_asc_desc=" + this.order_asc_desc; }
 		return site_url + ajax_path + "&call=sectors&format=json&per_page=" + this.per_page + "&page=" + this.page + parameters + extra_par;
 	};
 }
@@ -242,7 +236,6 @@ function OipaDonorList(){
 		var parameters = this.selection.get_parameters();
 		var extra_par = "";
 		if(this.order_by){ extra_par += "&order_by=" + this.order_by; }
-		if(this.order_asc_desc){ extra_par += "&order_asc_desc=" + this.order_asc_desc; }
 		if(this.query) {extra_par += "&query=" + this.query; }
 		return site_url + ajax_path + "&call=donors&format=json&per_page=" + this.per_page + "&page=" + this.page + parameters + extra_par;
 	};

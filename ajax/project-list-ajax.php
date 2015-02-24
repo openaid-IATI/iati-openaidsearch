@@ -19,7 +19,7 @@ foreach($activities AS $idx=>$activity) {
 				<div class="projects-project-description <?php echo $activity->id; ?>">
 					<?php
 					if (!empty($activity->descriptions)){ 
-						echo $activity->descriptions[0]->narratives->text;
+						echo $activity->descriptions[0]->narratives[0]->text;
 					} else {
 						echo "No description given.";
 					} ?>
