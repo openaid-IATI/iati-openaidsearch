@@ -142,12 +142,11 @@ foreach($objects AS $idx=>$project) {
 					<div class="projects-project-divider"></div>
 
 					
-					<div class="projects-project-spec-key">Budget:</div>
+					<div class="projects-project-spec-key">Total budget:</div>
 					<div class="projects-project-spec-value">
 
 						<?php if(!empty($project->total_budget)) {
-							if(!empty($project->default_currency)) { 
-								echo currencyCodeToSign($project->default_currency->code); }
+							if(!empty($project->default_currency)) { echo currencyCodeToSign($project->default_currency->code); }
 								echo format_custom_number($project->total_budget);
 						} else {
 							echo "-";
@@ -245,22 +244,25 @@ foreach($objects AS $idx=>$project) {
 					<?php 
 						if(!empty($project->participating_organisations)) {
 							$sep = ', ';
-							$part_org_text = '';
+							$part_org_texts = array();
 
 							foreach($project->participating_organisations AS $participating_organisation) {
-								if(empty($participating_organisation->name)) {
+								
+								$part_org_text = '<a href="' . home_url() . '/projects/?participating_organisations=' . $participating_organisation->code . '">';
 									
-									$part_org_text .= $participating_organisation->code;
+									if(empty($participating_organisation->name)) {
+										
+										$part_org_text .= $participating_organisation->code;
 
-								} else {
-									$part_org_text .= $participating_organisation->name;
-									if(!empty($participating_organisation->original_ref)){ $part_org_text .= " (" . $participating_organisation->original_ref . ")"; }
-								}
-								$part_org_text .= $sep;
+									} else {
+										$part_org_text .= $participating_organisation->name;
+									}
+								
+								$part_org_text .= '</a>';
+								array_push($part_org_texts, $part_org_text);
 							}
 							
-							$part_org_text = substr($part_org_text, 0, -2);
-							echo $part_org_text;
+							echo implode(", ", $part_org_texts);
 						} else {
 							echo "No information available";
 						} 

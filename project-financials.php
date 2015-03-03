@@ -62,7 +62,7 @@
 		if(!empty($at->receiver_organisation->name)) {
 			$receiver_org = $at->receiver_organisation->name;
 		} elseif (!empty($at->receiver_organisation_name)) {
-			$provider_org = $at->receiver_organisation_name;
+			$receiver_org = $at->receiver_organisation_name;
 		} elseif(!empty($at->receiver_organisation->code)) {
 				$receiver_org = $at->receiver_organisation->code;
 		}

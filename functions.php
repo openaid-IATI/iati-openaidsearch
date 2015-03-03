@@ -7,9 +7,6 @@ add_theme_support( 'post-thumbnails' );
 add_theme_support( 'automatic-feed-links' );
 
 
-
-
-
 // add_action( 'rewrite_rules_array', 'add_oipa_tags');
 // // add_action( 'init', 'generate_rewrite_rules' );  
 // function add_oipa_tags(  ) { 
@@ -17,7 +14,6 @@ add_theme_support( 'automatic-feed-links' );
 	
 // 	// add_rewrite_rule('project/([^/]+)/?$','index.php?pagename=project&iati_id=$matches[2]','top');
 // }
-
 
 
 
@@ -313,8 +309,12 @@ function wp_generate_results_v2(&$objects, &$meta, $offsetpar = ""){
 	if(isset($_REQUEST['offset'])){	$activities_offset = rawurlencode($_REQUEST['offset']);	}
 	//if($offsetpar != ""){ $activities_offset = $offsetpar; }
 
-	$search_url = SEARCH_URL . "activity-list/?format=json&limit=" . $activities_per_page . "&offset=" . $activities_offset;
-    
+	$search_url = SEARCH_URL . "activity-list/?format=json&limit=" . $activities_per_page;
+
+	if($activities_offset != 0){
+		$search_url = $search_url . "&offset=" . $activities_offset;
+	}
+
 	if ($_DEFAULT_ORGANISATION_ID){
 		$search_url = $search_url . "&reporting_organisation__in=" . $_DEFAULT_ORGANISATION_ID;
 	}
@@ -488,6 +488,11 @@ function wp_filter_request($search_url){
 		$search_url .= "&reporting_organisation__in={$reporting_organisations}";
 		$has_filter = true;
 	}
+
+	if(!empty($_REQUEST['participating_organisations'])) {
+		$search_url .= "&participating_organisations__organisation__code__in=" . $_REQUEST['participating_organisations'];;
+		$has_filter = true;
+	}
 	
 	if(!empty($_REQUEST['budgets'])) {
 		$budget_gte = 99999999999;
@@ -613,4 +618,14 @@ function currencyCodeToSign($currency){
 
 
 
-?>
+
+function add_rewrite_rules( $wp_rewrite ) 
+{
+  $new_rules = array(
+    'project/([^/]+)/?$' => 'index.php?pagename=project&iati_id='.$wp_rewrite->preg_index(1),
+    'embed/([^/]+)/?$' => 'index.php?pagename=embed&iati_id='.$wp_rewrite->preg_index(1),
+  );
+  $wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
+}
+add_action('generate_rewrite_rules', 'add_rewrite_rules');
+

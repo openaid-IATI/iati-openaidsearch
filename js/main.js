@@ -89,7 +89,7 @@ function process_filter_options(data){
      if (!$.isEmptyObject(value)){
        var columns = 4;
        if ($.inArray(key, new Array("indicators", "sectors"))){ columns = 3};
-       var filter_html = create_project_filter_attributes(value, columns);
+       var filter_html = create_project_filter_attributes(value, columns, key);
        $('#' + key + '-filters').html(filter_html);
      }
   });
@@ -248,12 +248,18 @@ function create_filter_attributes(objects, columns){
 }
 
 // create filter options of one particular filter type, objects = the options, columns = amount of columns per filter page
-function create_project_filter_attributes(objects, columns){
+function create_project_filter_attributes(objects, columns, filter_name){
     var html = '';
     var per_col = 20;
-
-
     var sortable = [];
+    if(filter_name == "sectors"){
+      for (var key in objects){
+        if (key < 1000){
+          delete objects[key];
+        }
+      }
+    }
+    
     for (var key in objects){
       if (objects[key].name == null){
         objects[key].name = "Unknown";
@@ -725,7 +731,6 @@ function create_api_url(type, indicatorid){
   var str_city = reload_map_prepare_parameter_string("cities", dlmtr);
   var str_reporting_organisation = reload_map_prepare_parameter_string("reporting_organisations", dlmtr);
 
-  console.log(current_selection);
 
 
   if (type == 'filter' && selected_type=='projects'){
@@ -1001,7 +1006,7 @@ function get_embed_url(type){
     height = '400';
   }
   iframeurl = baseurl + build_current_url();
-  iframecode = '<script type="text/javascript" src="http://localhost/unhabitat/wp-content/themes/unhabitat/js/embed.js"></script> \n';
+  iframecode = '<script type="text/javascript" src="' + template_directory + '/js/embed.js"></script> \n';
   iframecode += '<script>\n oipa_embed.options(\n    url = ' + iframeurl + ',\n    width = ' + width + ',\n    height = ' + height + '\n);\n</script>';
 
   return iframecode;
