@@ -89,7 +89,7 @@ function process_filter_options(data){
      if (!$.isEmptyObject(value)){
        var columns = 4;
        if ($.inArray(key, new Array("indicators", "sectors"))){ columns = 3};
-       var filter_html = create_project_filter_attributes(value, columns);
+       var filter_html = create_project_filter_attributes(value, columns, key);
        $('#' + key + '-filters').html(filter_html);
      }
   });
@@ -248,12 +248,18 @@ function create_filter_attributes(objects, columns){
 }
 
 // create filter options of one particular filter type, objects = the options, columns = amount of columns per filter page
-function create_project_filter_attributes(objects, columns){
+function create_project_filter_attributes(objects, columns, filter_name){
     var html = '';
     var per_col = 20;
-
-
     var sortable = [];
+    if(filter_name == "sectors"){
+      for (var key in objects){
+        if (key < 1000){
+          delete objects[key];
+        }
+      }
+    }
+    
     for (var key in objects){
       if (objects[key].name == null){
         objects[key].name = "Unknown";
