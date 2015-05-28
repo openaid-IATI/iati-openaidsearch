@@ -37,6 +37,9 @@
                     <span class="icon-bar"></span>
                 </a>
 
+                <a target="_blank" href="http://beta.openaid.nl" class="btn-new-beta btn-new-beta-collapsed btn-navbar"><img src="<?php echo get_template_directory_uri(); ?>/images/nieuwe-openaid-beta.png" /></a>
+
+
                 <a href="<?php echo site_url(); ?>" class="brand hneue-bold">
                     <div id="brand-image"></div>
                     <div id="brand-beta">BETA VERSION</div>
@@ -56,6 +59,7 @@
                         ?>
 
 
+
                     <form action='<?php echo site_url(); ?>/projects/' method='GET' class="navbar-form pull-right">
 
                         <input type="text" class="input-large" placeholder="What are you looking for?" name='query'>
@@ -63,7 +67,10 @@
                         <input type="submit" class="btn header-btn-search hneue-bold" value="Search">                  
 
                     </form>
+                    <a target="_blank" href="http://beta.openaid.nl" class="btn-new-beta"><img src="<?php echo get_template_directory_uri(); ?>/images/nieuwe-openaid-beta.png" /></a>
+
                 </div>
+
                 <?php        
                     //wp_nav_menu( array('menu' =>'header-menu', 'container' => 'div', 'container_class' => 'nav-collapse collapse','menu_class' => 'menu','items_wrap' => '<ul class="nav pull-left">%3$s</ul>') ); 
                 ?>
