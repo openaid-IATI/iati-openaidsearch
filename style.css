@@ -53,18 +53,23 @@ src:url("Fonts/0b3a3fca-0fad-402b-bd38-fdcbad1ef776.eot?#iefix") format("eot"),u
 }
 
 @media (max-width: 968px) {
-  .navbar .btn-new-beta.btn-new-beta{
-    display: none;
-  }
-
   .navbar .btn-new-beta.btn-new-beta.btn-new-beta-collapsed{
     display: inline-block;
   }
+}
+
+@media (max-width: 1439px) {
+  .navbar .btn-new-beta.btn-new-beta{
+    display: none;
+  }
+}
+
+.navbar .btn-new-beta.btn-new-beta{
+  background: transparent;
 
 }
 
-
-.navbar .btn-new-beta.btn-new-beta{
+.navbar .btn-new-beta.btn-new-beta:hover{
   background: transparent;
 }
 
